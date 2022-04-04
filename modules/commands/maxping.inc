@@ -1,0 +1,29 @@
+#if defined _attdef_cmd_maxping
+	#endinput
+#endif
+#define _attdef_cmd_maxping
+
+YCMD: maxping(playerid, params[], help)
+{
+	/*if (Player[playerid][Level] < 1 && !IsPlayerAdmin(playerid))
+		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
+	if (help)
+		return SendCommandHelpMessage(playerid, "set maximum ping limit.");
+	if (isnull(params) || !IsNumeric(params))
+		return SendUsageMessage(playerid, "/maxping [Maximum Ping]");
+
+	new iPacket = strval(params);
+	if (iPacket <= 0 || iPacket > 500)
+		return SendErrorMessage(playerid, "Ping limit can be between 0 and 500 maximum.");
+
+	Max_Ping = iPacket;
+
+	new iString[128];
+	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Maximum Ping'", Max_Ping);
+	db_free_result(db_query(sqliteconnection, iString));
+
+	LogAdminCommand("maxping", playerid, INVALID_PLAYER_ID);
+
+	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed maximum ping limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
+	return SendClientMessageToAll(-1, iString);
+}

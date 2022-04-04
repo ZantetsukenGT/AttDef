@@ -1,0 +1,29 @@
+#if defined _attdef_cmd_minfps
+	#endinput
+#endif
+#define _attdef_cmd_minfps
+
+YCMD: minfps(playerid, params[], help)
+{
+	/*if (Player[playerid][Level] < 1 && !IsPlayerAdmin(playerid))
+		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
+	if (help)
+		return SendCommandHelpMessage(playerid, "set minimum FPS limit.");
+	if (isnull(params) || !IsNumeric(params))
+		return SendUsageMessage(playerid, "/minfps [Minimum FPS]");
+
+	new iPacket = strval(params);
+	if (iPacket < 20 || iPacket > 90)
+		return SendErrorMessage(playerid, "FPS limit can be between 20 and 90 maximum.");
+
+	Min_FPS = iPacket;
+
+	new iString[128];
+	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Minimum FPS'", Min_FPS);
+	db_free_result(db_query(sqliteconnection, iString));
+
+	LogAdminCommand("minfps", playerid, INVALID_PLAYER_ID);
+
+	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed minimum FPS limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
+	return SendClientMessageToAll(-1, iString);
+}

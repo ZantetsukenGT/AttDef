@@ -1,0 +1,8 @@
+{
+	"editor.defaultFormatter": "xaver.clang-format",
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.tabSize": 4,
+	"search.useIgnoreFiles": false,
+	"files.insertFinalNewline": true,
+}

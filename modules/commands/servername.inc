@@ -1,0 +1,21 @@
+#if defined _attdef_cmd_servername
+	#endinput
+#endif
+#define _attdef_cmd_servername
+
+YCMD: servername(playerid, params[], help)
+{
+	if (help)
+		return SendCommandHelpMessage(playerid, "changes the server name used for the welcome message");
+	new svname[51 + 1];
+	if (sscanf(params, "s[51]", svname))
+		return SendUsageMessage(playerid, "/servername [Server Name]");
+	if (strlen(svname) > 50)
+		return SendErrorMessage(playerid, "This server name exceeds the maximum character limit (50 characters).");
+
+	ServerName[0] = EOS;
+	strcat(ServerName, svname);
+	db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = '%q' WHERE Option = 'Server Name'", ServerName)));
+
+	return SendClientMessageToAll(-1, va_return("%s" COL_PRIM " has changed the server name to {FFFFFF}%s", Player[playerid][Name], ServerName));
+}

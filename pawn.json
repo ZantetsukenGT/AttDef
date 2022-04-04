@@ -1,0 +1,92 @@
+{
+	"user": "ZantetsukenGT",
+	"repo": "AttDef",
+	"entry": "gamemodes/attdef.pwn",
+	"output": "gamemodes/attdef.amx",
+	"dependencies": [
+		"Southclaws/progress2",
+		"Southclaws/samp-geoip",
+		"bmisiak/samp-precise-timers",
+		"NexiusTailer/MapFix",
+		"oscar-broman/strlib",
+		"pawn-lang/YSI-Includes@5.x",
+		"pawn-lang/sa-mp-fixes",
+		"sampctl/samp-stdlib",
+		"Southclaws/pawn-requests",
+		"Sreyas-Sreelal/samp-bcrypt",
+		"Y-Less/sscanf"
+	],
+	"local": true,
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"rcon_password": "changeme",
+		"port": 36543,
+		"hostname": ".: [] My Clan :.",
+		"maxplayers": 50,
+		"language": "English",
+		"mapname": "San Andreas",
+		"weburl": "discord.gg/MbQbr9BKFs",
+		"gamemodetext": "Unknown",
+		"announce": true,
+		"lanmode": false,
+		"query": true,
+		"rcon": false,
+		"logqueries": false,
+		"sleep": 1,
+		"maxnpc": 0,
+		"stream_rate": 500,
+		"stream_distance": 400,
+		"onfoot_rate": 1,
+		"incar_rate": 1,
+		"weapon_rate": 1,
+		"chatlogging": true,
+		"timestamp": true,
+		"logtimeformat": "[%d/%m/%Y %H:%M:%S]",
+		"messageholelimit": 3000,
+		"messageslimit": 500,
+		"ackslimit": 3000,
+		"playertimeout": 4000,
+		"minconnectiontime": 0,
+		"lagcompmode": 0,
+		"connseedtime": 300000,
+		"db_logging": false,
+		"db_log_queries": false,
+		"conncookies": true,
+		"cookielogging": false,
+		"output": true
+	},
+	"builds": [
+		{
+			"name": "dev",
+			"args": [
+				"-;+",
+				"-(+",
+				"-\\+",
+				"-d3",
+				"-Z+"
+			],
+			"includes": [
+				"legacy",
+				"modules"
+			],
+			"compiler": {}
+		},
+		{
+			"name": "main",
+			"args": [
+				"-;+",
+				"-(+",
+				"-\\+",
+				"-d0",
+				"-O1",
+				"-Z+"
+			],
+			"includes": [
+				"legacy",
+				"modules"
+			],
+			"compiler": {}
+		}
+	]
+}
