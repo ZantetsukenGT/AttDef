@@ -5,4 +5,9 @@
 	"editor.tabSize": 4,
 	"search.useIgnoreFiles": false,
 	"files.insertFinalNewline": true,
+	"files.associations": {
+		"*.inc": "cpp",
+		"*.pwn": "cpp",
+		"*.pawn": "cpp"
+	}
 }
