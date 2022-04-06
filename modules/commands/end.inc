@@ -37,10 +37,12 @@ YCMD: end(playerid, params[], help)
 	if (CPZone)
 	{
 		GangZoneDestroy(CPZone);
+		CPZone = 0;
 	}
 	if (ArenaZone)
 	{
 		GangZoneDestroy(ArenaZone);
+		ArenaZone = 0;
 	}
 
 	RoundPaused			   = false;
@@ -105,10 +107,12 @@ YCMD: end(playerid, params[], help)
 	if (CPZone)
 	{
 		GangZoneDestroy(CPZone);
+		CPZone = 0;
 	}
 	if (ArenaZone)
 	{
 		GangZoneDestroy(ArenaZone);
+		ArenaZone = 0;
 	}
 	ResetTeamLeaders();
 	Iter_Clear(PlayersInRound);

@@ -103,10 +103,12 @@ PlayerVoteRestartRound(playerid)
 			if (CPZone)
 			{
 				GangZoneDestroy(CPZone);
+				CPZone = 0;
 			}
 			if (ArenaZone)
 			{
 				GangZoneDestroy(ArenaZone);
+				ArenaZone = 0;
 			}
 			TextDrawHideForAll(EN_CheckPoint);
 			TextDrawHideForAll(CheckpointWarningBox);
