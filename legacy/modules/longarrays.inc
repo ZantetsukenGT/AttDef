@@ -62,8 +62,9 @@ new const WeaponNames[55][]	   = { { "Punch" },
 								   { "Helicopter Blades" },
 								   { "Explosion" },
 								   { "" },
-								   { "Suicide" },
-								   { "Collision" } };
+								   { "Drowning" },
+								   { "Collision" },
+								   { "Suicide" } }; //this last one doesn't exist but will be used instead of filling extra 200+ empty cells
 
 new const aVehicleNames[212][] = { { "Landstalker" },
 								   { "Bravura" },

@@ -211,29 +211,25 @@ public OnPlayerDeath(playerid, killerid, reason)
 		return 1;
 	}
 
-	// case: died while diving with a parachute?
-	if (reason == WEAPON_PARACHUTE)
+	switch (reason)
 	{
-		ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_PARACHUTE);
-		return 1;
+		case WEAPON_PARACHUTE: // case: died while diving with a parachute?
+		{
+			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_PARACHUTE);
+		}
+		case WEAPON_COLLISION: // case: fell down
+		{
+			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_COLLISION);
+		}
+		case 255: // case: weird suicide
+		{
+			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_COLLISION + 1);
+		}
+		default: // unknown cases
+		{
+			SendClientMessageToAll(-1, va_return("DEBUG:Client:OnPlayerDeath(playerid:%d, killerid:%d, reason:%d)", playerid, killerid, reason));
+			ServerOnPlayerDeath(playerid, killerid, reason);
+		}
 	}
-
-	// case: fell down
-	if (reason == 54)
-	{
-		ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, 54);
-		return 1;
-	}
-
-	// case: suicide
-	if (reason == 255)
-	{
-		ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, 255);
-		return 1;
-	}
-
-	// unknown cases
-	SendClientMessageToAll(-1, va_return("DEBUG:Client:OnPlayerDeath(playerid:%d, killerid:%d, reason:%d)", playerid, killerid, reason));
-	ServerOnPlayerDeath(playerid, killerid, reason);
 	return 1;
 }
