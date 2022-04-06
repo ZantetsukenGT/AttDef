@@ -41,10 +41,17 @@ public OnScriptUpdate()
 	{
 		foreach (new i : PlayersInVehicles)
 		{
-			new vID, Float: vHealth;
-			vID = GetPlayerVehicleID(i);
-			GetVehicleHealth(vID, vHealth);
-			PlayerTextDrawSetString(i, VInfo[i], va_return("~w~%s ~r~%.0f%%", aVehicleNames[GetVehicleModel(vID) - 400], vHealth / 10));
+			new vID = GetPlayerVehicleID(i);
+			if (vID) //race condition: if the player is indeed in a vehicle
+			{
+				new vModelID = GetVehicleModel(vID);
+				if (vModelID) //race condition: does the vehicle still exist? this check is probably not needed
+				{
+					new Float: vHealth;
+					GetVehicleHealth(vID, vHealth);
+					PlayerTextDrawSetString(i, VInfo[i], va_return("~w~%s ~r~%.0f%%", aVehicleNames[vModelID - 400], vHealth / 10));
+				}
+			}
 		}
 	}
 
