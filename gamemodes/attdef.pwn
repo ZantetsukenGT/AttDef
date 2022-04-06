@@ -1,4 +1,6 @@
 
+#pragma dynamic 3500000
+#define CGEN_MEMORY 40000
 #define MAX_PLAYERS 50
 #define YSI_NO_HEAP_MALLOC
 
