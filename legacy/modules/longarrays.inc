@@ -9,7 +9,7 @@
 
 // - Big ass arrays down there...
 
-new const WeaponNames[55][]	   = { { "Punch" },
+new const WeaponNames[56][]	   = { { "Punch" },
 								   { "Brass Knuckles" },
 								   { "Golf Club" },
 								   { "Nite Stick" },
