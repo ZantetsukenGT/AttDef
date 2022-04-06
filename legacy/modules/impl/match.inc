@@ -3060,7 +3060,7 @@ public WarEnded()
 
 	iString = "";
 
-	if (topAccID >= 0)
+	if (topkillID >= 0)
 		format(iString, sizeof(iString), "~w~~h~Most Kills: %s~h~~h~%s ~w~~h~%d_____", TDC[playerScores[topkillID][player_Team]], names[topkillID], topkill);
 	else
 		format(iString, sizeof(iString), "~w~~h~Most Kills: None_____");
