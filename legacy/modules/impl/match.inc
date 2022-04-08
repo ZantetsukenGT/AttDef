@@ -2520,10 +2520,12 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	if (CPZone)
 	{
 		GangZoneDestroy(CPZone);
+		CPZone = 0;
 	}
 	if (ArenaZone)
 	{
 		GangZoneDestroy(ArenaZone);
+		ArenaZone = 0;
 	}
 
 	ResetBackupRequests();
