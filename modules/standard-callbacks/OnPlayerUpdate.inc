@@ -16,5 +16,27 @@ public OnPlayerUpdate(playerid)
 		ProcessFreeCameraMovement(playerid);
 		return 0;
 	}
+
+	//remove parachute functions
+	if (GetPlayerWeapon(playerid) == WEAPON_PARACHUTE)
+	{
+		new Weapons[10][2];
+		for (new i = 0; i < 10; i++) { GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]); }
+		switch (YHash(Player[playerid][pAnimName]))
+		{
+			case _H<RUN_PLAYER>:
+			{
+				ResetPlayerWeapons(playerid);
+				for (new i = 0; i < 10; i++) { GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]); }
+			}
+			case _H<PARA_OPEN>:
+			{
+				ResetPlayerWeapons(playerid);
+				for (new i = 0; i < 10; i++) { GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]); }
+				SetPlayerVelocity(playerid, 0, 0, 0);
+				ClearAnimations(playerid);
+			}
+		}
+	}
 	return 1;
 }
