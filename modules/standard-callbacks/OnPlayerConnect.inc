@@ -38,17 +38,15 @@ public OnGeoDataReady(playerid)
 	new IPBlock;
 	GetPlayerCountryName(playerid, CountryName);
 	GetPlayerIPBlock(playerid, IPBlock);
-	SendClientMessageToAll(-1, va_return("{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s{CCCCCC}]", Player[playerid][Name], playerid, CountryName));
 	switch (IPBlock)
 	{
-		case 0: SendClientMessageToAll(-1, va_return("{FFFFFF}%s" COL_PRIM "'s IP Type: {66FF66}Good IP " COL_PRIM "(Residential or business IP)", Player[playerid][Name]));
+		case 0: va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 		case 1:
 		{
-			SendClientMessageToAll(-1, va_return("{FFFFFF}%s" COL_PRIM "'s IP Type: {FF6666}Proxy" COL_PRIM " (VPN, hosting provider, proxy, etc.)", Player[playerid][Name]));
+			va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {FF6666}Proxy{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 			SetPreciseTimer("_BanPlayerDelayed", GetPlayerPing(playerid), false, "i", playerid);
 		}
-		case 2: SendClientMessageToAll(-1, va_return("{FFFFFF}%s" COL_PRIM "'s IP Type: {AAAA00}Proxy" COL_PRIM " (probably a false positive)", Player[playerid][Name]));
+		case 2: va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {AAAA00}Proxy?{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 	}
 	return 1;
 }
-
