@@ -17,12 +17,18 @@ public OnPlayerUpdate(playerid)
 		return 0;
 	}
 
+	new animLib[32], animName[32];
+	new pAnimIndex = GetPlayerAnimationIndex(playerid);
+	if (pAnimIndex)
+        GetAnimationName(pAnimIndex, animLib, sizeof animLib, animName, sizeof animName);
+	new pAnimNameHash = YHash(animName);
+	//new pAnimLibHash = YHash(animLib);
 	//remove parachute functions
 	if (GetPlayerWeapon(playerid) == WEAPON_PARACHUTE)
 	{
 		new Weapons[10][2];
 		for (new i = 0; i < 10; i++) { GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]); }
-		switch (YHash(Player[playerid][pAnimName]))
+		switch (pAnimNameHash)
 		{
 			case _H<RUN_PLAYER>:
 			{
