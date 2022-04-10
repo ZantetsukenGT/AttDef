@@ -11,21 +11,18 @@ YCMD: roundtime(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "set the round time.");
 	if (Current != -1)
 		return SendErrorMessage(playerid, "Can't use the command while round is on.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/roundtime [Mints (1 - 30)]");
+	new rTime;
+	if (sscanf(params, "i", rTime))
+		return SendUsageMessage(playerid, va_return("/roundtime [1..30 (minutes), " COL_PRIM "current: " COL_USAGE "%d{FFFFFF}]", ConfigRoundTime));
 
-	new rTime = strval(params);
 	if (rTime < 1 || rTime > 30)
-		return SendErrorMessage(playerid, "Round time can't be lower than 1 or higher than 30 mints.");
+		return SendErrorMessage(playerid, "Round time can't be lower than 1 or higher than 30 minutes.");
 
 	LogAdminCommand("roundtime", playerid, INVALID_PLAYER_ID);
 
+	new oldValue = ConfigRoundTime;
 	ConfigRoundTime = rTime;
 
-	new iString[128];
-	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Round Time'", rTime);
-	db_free_result(db_query(sqliteconnection, iString));
-
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed the round time to: {FFFFFF}%d mints", Player[playerid][Name], rTime);
-	return SendClientMessageToAll(-1, iString);
+	db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'Round Time'", rTime)));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has changed the round time to: {FFFFFF}%d minutes" COL_PRIM ", previous setting: {FFFFFF}%d minutes" COL_PRIM ".", Player[playerid][Name], rTime, oldValue);
 }
