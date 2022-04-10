@@ -115,6 +115,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 #include "commands/cr.inc"
 #include "commands/credits.inc"
 #include "commands/dance.inc"
+#include "commands/deaglenerf.inc"
 #include "commands/deathdiss.inc"
 #include "commands/defaultskins.inc"
 #include "commands/deleteacc.inc"

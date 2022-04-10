@@ -41,6 +41,11 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 		else if (amount < 30.0)
 			amount = GRENADE_LOW_DAMAGE;
 	}
+	// Deagle nerf
+	if (weaponid == WEAPON_DEAGLE && ShouldNerfDeagle)
+	{
+		amount = DeagleNerfValue;
+	}
 
 	// Detect headshots
 	if (bodypart == 9)
@@ -76,6 +81,8 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 		}
 		else if (diff == 0)
 			SetAP(playerid, 0);
+		else if (ShouldNerfDeagle)
+			SetAP(playerid, diff);
 		else
 			UpdatePlayerArmourVariables(playerid, diff);
 	}

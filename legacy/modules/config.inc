@@ -19,9 +19,10 @@ new ConfigCPTime;		 // CP time
 new ConfigRoundTime;	 // Round time
 new Float: MainSpawn[4]; // Main spawn position and facing angle
 new MainInterior;		 // Main spawn interior
-new WeatherLimit = 50;
-new TimeLimit	 = 50;
-new GAME_SPEED	 = 1000;
+new WeatherLimit		   = 50;
+new TimeLimit			   = 50;
+new GAME_SPEED			   = 1000;
+new Float: DeagleNerfValue = 35.000; // Baseline value for the nerf, setting it here has no effect
 
 new Float: Max_Packetloss;
 new Max_Ping;
@@ -44,6 +45,7 @@ new bool: VehicleHealthTextdraw		  = false;
 new bool: SyncAbuse					  = true;
 new bool: ScreenFlashing			  = true;
 new bool: DefendersWithVehicles		  = false;
+new bool: ShouldNerfDeagle			  = false;
 
 new RoundHP							  = 100;
 new RoundAR							  = 100;
