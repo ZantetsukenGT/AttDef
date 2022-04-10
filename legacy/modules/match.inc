@@ -79,7 +79,6 @@ new TempDamage[MAX_TEAMS];						 // Temporary taken-damage of each team
 new ServerLastPlayed;							 // Holds the ID of the last played round
 new ServerLastPlayedType;						 // Remembers the type of the last played round (base, round ..etc)
 new PlayersInCP;								 // How many players are capturing the checkpoint
-new RoundMints;									 // Round minutes (countdown)
 new RoundSeconds;								 // Round seconds (countdown)
 new GameType;									 // Currently played round game type
 new TotalRounds;								 // Total rounds

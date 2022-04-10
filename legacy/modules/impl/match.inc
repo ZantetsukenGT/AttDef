@@ -357,12 +357,7 @@ public GameLoopCallback()
 			// Handle round time
 			RoundSeconds--;
 			if (RoundSeconds <= 0)
-			{
-				RoundSeconds = 59;
-				RoundMints--;
-				if (RoundMints < 0)
-					return EndRound(1); // Defenders Win
-			}
+				return EndRound(1); // Defenders Win
 			// Increase elapsed time
 			ElapsedTime++;
 			// Draw round time (and CP time if it's being taken)
@@ -371,7 +366,7 @@ public GameLoopCallback()
 				case 0:
 				{
 					new str[16];
-					format(str, sizeof(str), "~w~%d:%02d", RoundMints, RoundSeconds);
+					format(str, sizeof(str), "~w~%d:%02d", RoundSeconds / 60, RoundSeconds % 60);
 					TextDrawSetString(timerCenterTD, str);
 					TextDrawSetString(AttDef_RoundTimer, str);
 					TextDrawSetString(AttDef_ModernRoundStats[5], str);
@@ -380,7 +375,7 @@ public GameLoopCallback()
 				{
 					new str[32];
 					CurrentCPTime--;
-					format(str, sizeof(str), "~w~%d:%02d / ~r~~h~%d", RoundMints, RoundSeconds, CurrentCPTime);
+					format(str, sizeof(str), "~w~%d:%02d / ~r~~h~%d", RoundSeconds / 60, RoundSeconds % 60, CurrentCPTime);
 					TextDrawSetString(timerCenterTD, str);
 					TextDrawSetString(AttDef_RoundTimer, str);
 					TextDrawSetString(AttDef_ModernRoundStats[5], str);
@@ -451,18 +446,13 @@ public GameLoopCallback()
 			RoundSeconds--;
 			if (RoundSeconds <= 0)
 			{
-				RoundSeconds = 59;
-				RoundMints--;
-				if (RoundMints < 0)
-				{
-					if (TeamHP[ATTACKER] < TeamHP[DEFENDER])
-						EndRound(2);
-					else if (TeamHP[DEFENDER] < TeamHP[ATTACKER])
-						EndRound(3);
-					else if (floatround(TeamHP[ATTACKER]) == floatround(TeamHP[DEFENDER]))
-						EndRound(4); // No one win
-					return 1;
-				}
+				if (TeamHP[ATTACKER] < TeamHP[DEFENDER])
+					EndRound(2);
+				else if (TeamHP[DEFENDER] < TeamHP[ATTACKER])
+					EndRound(3);
+				else if (floatround(TeamHP[ATTACKER]) == floatround(TeamHP[DEFENDER]))
+					EndRound(4); // No one win
+				return 1;
 			}
 			ElapsedTime++;
 			// Draw round time (and CP time if it's being taken)
@@ -471,7 +461,7 @@ public GameLoopCallback()
 				case 0:
 				{
 					new str[16];
-					format(str, sizeof(str), "~w~%d:%02d", RoundMints, RoundSeconds);
+					format(str, sizeof(str), "~w~%d:%02d", RoundSeconds / 60, RoundSeconds % 60);
 					TextDrawSetString(timerCenterTD, str);
 					TextDrawSetString(AttDef_RoundTimer, str);
 					TextDrawSetString(AttDef_ModernRoundStats[5], str);
@@ -480,7 +470,7 @@ public GameLoopCallback()
 				{
 					CurrentCPTime--;
 					new str[32];
-					format(str, sizeof(str), "~w~%d:%02d / %s%d", RoundMints, RoundSeconds, TDC[TeamCapturingCP], CurrentCPTime);
+					format(str, sizeof(str), "~w~%d:%02d / %s%d", RoundSeconds / 60, RoundSeconds % 60, TDC[TeamCapturingCP], CurrentCPTime);
 					TextDrawSetString(timerCenterTD, str);
 					TextDrawSetString(AttDef_RoundTimer, str);
 					TextDrawSetString(AttDef_ModernRoundStats[5], str);
@@ -1100,7 +1090,7 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 
 	Player[ToAddID][Team]	   = Player[ToReplaceID][Team];
 	Player[ToAddID][WasInTeam] = Player[ToAddID][Team];
-	SwitchTeamFix(ToAddID, false, false, false);
+	SwitchTeamFix(ToAddID, false, false, true);
 
 	SetSpawnInfo(ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], Pos[0], Pos[1], Pos[2] + 1, Pos[3], 0, 0, 0, 0, 0, 0);
 	Player[ToAddID][IgnoreSpawn] = true;
@@ -1164,7 +1154,7 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 
 	Player[ToAddID][Team]		= SaveVariables[i][pTeam];
 	Player[playerid][WasInTeam] = Player[ToAddID][Team];
-	SwitchTeamFix(ToAddID, false, false, false);
+	SwitchTeamFix(ToAddID, false, false, true);
 
 	if (!SaveVariables[i][WasCrashedInStart])
 	{
@@ -1600,8 +1590,7 @@ SpawnPlayersInRC()
 
 	UpdateTeamCornerInfo();
 
-	RoundMints	 = ConfigRoundTime;
-	RoundSeconds = 0;
+	RoundSeconds	 = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
@@ -1882,8 +1871,7 @@ SpawnPlayersInArena()
 
 	UpdateTeamCornerInfo();
 
-	RoundMints	 = ConfigRoundTime;
-	RoundSeconds = 0;
+	RoundSeconds	 = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
@@ -2343,8 +2331,7 @@ SpawnPlayersInBase()
 
 	UpdateTeamCornerInfo();
 
-	RoundMints	 = ConfigRoundTime;
-	RoundSeconds = 0;
+	RoundSeconds	 = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
