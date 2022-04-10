@@ -27,21 +27,21 @@ public SendTipMessageToAll()
 {
 	switch (random(16))
 	{
-		case 0: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Try different gunmenu styles with {FFFFFF}/gunmenustyle");
-		case 1: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Want to differentiate your team-mates on radar by color? Use {FFFFFF}/playermarkers");
-		case 2: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Use {FFFFFF}/weaponbinds " COL_TIP "to code your own weapon key binds.");
-		case 3: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "You can drop a gun by holding it and typing {FFFFFF}/remgun");
-		case 4: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "If you're lagging, you can request netcheck with {FFFFFF}/netcheckme");
-		case 5: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Disrespect noobs, use {FFFFFF}/deathdiss " COL_TIP "command.");
-		case 6: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Getting distracted by some textdraws? Try {FFFFFF}/hud");
-		case 7: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Enter no-clip camera mode with /freecam command.");
-		case 8: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Play in different duel arenas by means of 'custom' parameter in {FFFFFF}/duel " COL_TIP "command.");
-		case 9: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Use {FFFFFF}/cmdhelp [Command name] " COL_TIP "to get info about any command.");
-		case 10: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Change your hit sounds with {FFFFFF}/sound " COL_TIP "command.");
-		case 11: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Change your time and weather with {FFFFFF}/time " COL_TIP "and {FFFFFF}/weather " COL_TIP "commands.");
-		case 12: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Press 'Tab' key and click on a player for quicker operations/commands.");
-		case 13: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "You can change your skin with /skin while in lobby, DM or duel.");
-		case 14: SendClientMessageToAll(-1, COL_TIP_PRIM "Tips: " COL_TIP "Switch round textdraws style with {FFFFFF}/style");
+		case 0: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Try different gunmenu styles with {FFFFFF}/gunmenustyle");
+		case 1: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Want to differentiate your team-mates on radar by color? Use {FFFFFF}/playermarkers");
+		case 2: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Use {FFFFFF}/weaponbinds " COL_TIP "to code your own weapon key binds.");
+		case 3: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "You can drop a gun by holding it and typing {FFFFFF}/remgun");
+		case 4: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "If you're lagging, you can request netcheck with {FFFFFF}/netcheckme");
+		case 5: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Disrespect noobs, use {FFFFFF}/deathdiss " COL_TIP "command.");
+		case 6: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Getting distracted by some textdraws? Try {FFFFFF}/hud");
+		case 7: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Enter no-clip camera mode with /freecam command.");
+		case 8: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Play in different duel arenas by means of 'custom' parameter in {FFFFFF}/duel " COL_TIP "command.");
+		case 9: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Use {FFFFFF}/cmdhelp [Command name] " COL_TIP "to get info about any command.");
+		case 10: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Change your hit sounds with {FFFFFF}/sound " COL_TIP "command.");
+		case 11: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Change your time and weather with {FFFFFF}/time " COL_TIP "and {FFFFFF}/weather " COL_TIP "commands.");
+		case 12: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Press 'Tab' key and click on a player for quicker operations/commands.");
+		case 13: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "You can change your skin with /skin while in lobby, DM or duel.");
+		case 14: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Switch round textdraws style with {FFFFFF}/style");
 	}
 	return 1;
 }
@@ -58,9 +58,7 @@ SendErrorMessage(playerid, const text[], MessageBoxType: messagebox_type = MSGBO
 	{
 		case MSGBOX_TYPE_MIDDLE:
 		{
-			new str[144];
-			format(str, sizeof(str), "{FF3333}ERROR: {FFFFFF}%s", text);
-			SendClientMessage(playerid, -1, str);
+			va_SendClientMessage(playerid, COL_ERROR_HEX, "ERROR: {FFFFFF}%s", text);
 		}
 		default:
 		{
@@ -77,9 +75,7 @@ SendWarningMessage(playerid, const text[], MessageBoxType: messagebox_type = MSG
 	{
 		case MSGBOX_TYPE_MIDDLE:
 		{
-			new str[144];
-			format(str, sizeof(str), "{AAAA00}WARNING: {FFFFFF}%s", text);
-			SendClientMessage(playerid, -1, str);
+			va_SendClientMessage(playerid, COL_WARNING_HEX, "WARNING: {FFFFFF}%s", text);
 		}
 		default:
 		{
@@ -96,9 +92,7 @@ SendUsageMessage(playerid, const text[], MessageBoxType: messagebox_type = MSGBO
 	{
 		case MSGBOX_TYPE_MIDDLE:
 		{
-			new str[144];
-			format(str, sizeof(str), "{CCCCCC}USAGE: {FFFFFF}%s", text);
-			SendClientMessage(playerid, -1, str);
+			va_SendClientMessage(playerid, COL_USAGE_HEX, "USAGE: {FFFFFF}%s", text);
 		}
 		default:
 		{
@@ -148,7 +142,7 @@ AutoAFKCheck()
 			TogglePlayerControllable(i, 0);
 			Player[i][IsAFK] = true;
 
-			SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has been set to AFK mode automatically due to one minute(+) of inactivity!", Player[i][Name]));
+			va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has been set to AFK mode automatically due to one minute(+) of inactivity!", Player[i][Name]);
 		}
 	}
 }
@@ -222,14 +216,13 @@ CheckPlayerNet(playerid)
 	if (Player[playerid][FPS] < Min_FPS && Player[playerid][PauseCount] < 5 && Player[playerid][FPSCheck])
 	{
 		Player[playerid][FPSKick]++;
-		SendClientMessage(playerid, -1, va_return("{FF756D}Low FPS! Warning %d/" #MAX_LOWFPS_WARNINGS " - use /netcheckme", Player[playerid][FPSKick]));
+		va_SendClientMessage(playerid, -1, "{FF756D}Low FPS! Warning %d/" #MAX_LOWFPS_WARNINGS " - use /netcheckme", Player[playerid][FPSKick]);
 
 		if (Player[playerid][FPSKick] == MAX_LOWFPS_WARNINGS)
 		{
-			SendClientMessageToAll(
+			va_SendClientMessageToAll(
 				-1,
-				va_return(
-					"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], Player[playerid][FPS], Min_FPS));
+				"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], Player[playerid][FPS], Min_FPS);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
@@ -241,14 +234,13 @@ CheckPlayerNet(playerid)
 	if (NetStats_PacketLossPercent(playerid) >= Max_Packetloss && !Player[playerid][FakePacketRenovation] && Player[playerid][PLCheck])
 	{
 		Player[playerid][PacketKick]++;
-		SendClientMessage(playerid, -1, va_return("{FF756D}High PL! Warning %d/" #MAX_PACKETLOSS_WARNINGS " - use /netcheckme", Player[playerid][PacketKick]));
+		va_SendClientMessage(playerid, -1, "{FF756D}High PL! Warning %d/" #MAX_PACKETLOSS_WARNINGS " - use /netcheckme", Player[playerid][PacketKick]);
 
 		if (Player[playerid][PacketKick] == MAX_PACKETLOSS_WARNINGS)
 		{
-			SendClientMessageToAll(
-				-1, va_return(
-						"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Packetloss | %.2f/%.2f " COL_PRIM ":.", Player[playerid][Name],
-						NetStats_PacketLossPercent(playerid), Max_Packetloss));
+			va_SendClientMessageToAll(
+				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Packetloss | %.2f/%.2f " COL_PRIM ":.", Player[playerid][Name],
+						NetStats_PacketLossPercent(playerid), Max_Packetloss);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
@@ -260,14 +252,13 @@ CheckPlayerNet(playerid)
 	if (GetPlayerPing(playerid) >= Max_Ping && Player[playerid][PingCheck])
 	{
 		Player[playerid][PingKick]++;
-		SendClientMessage(playerid, -1, va_return("{FF756D}High Ping! Warning %d/" #MAX_HIGHPING_WARNINGS " - use /netcheckme", Player[playerid][PingKick]));
+		va_SendClientMessage(playerid, -1, "{FF756D}High Ping! Warning %d/" #MAX_HIGHPING_WARNINGS " - use /netcheckme", Player[playerid][PingKick]);
 
 		if (Player[playerid][PingKick] == MAX_HIGHPING_WARNINGS)
 		{
-			SendClientMessageToAll(
-				-1, va_return(
-						"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], GetPlayerPing(playerid),
-						Max_Ping));
+			va_SendClientMessageToAll(
+				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], GetPlayerPing(playerid),
+						Max_Ping);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
@@ -1016,9 +1007,7 @@ SwapTeams()
 	}
 	Iter_Clear(ToFixSwitch);
 
-	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}Teams are swapped - {FF0033}Attackers: {FFFFFF}%s | {3344FF}Defenders: {FFFFFF}%s", TeamName[ATTACKER], TeamName[DEFENDER]);
-	SendClientMessageToAll(-1, iString);
+	va_SendClientMessageToAll(-1, "{FFFFFF}Teams are swapped - {FF0033}Attackers: {FFFFFF}%s | {3344FF}Defenders: {FFFFFF}%s", TeamName[ATTACKER], TeamName[DEFENDER]);
 	FixVsTextDraw();
 	return 1;
 }
@@ -1029,7 +1018,7 @@ public DoAutoBalance()
 	BalanceTeams();
 	if (!PreMatchResultsShowing)
 		AllowStartBase = true;
-	SendClientMessageToAll(-1, COL_PRIM "Teams have been auto-balanced.");
+	SendClientMessageToAll(COL_PRIM_HEX, "Teams have been auto-balanced.");
 }
 
 forward DontAutoBalance();
@@ -1121,11 +1110,9 @@ BalanceTeams()
 
 SwitchTeamFix(playerid, bool: message = true, bool: fixvs = true, bool: changeskin = true)
 {
-	new iString[160];
 	if (message)
 	{
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has switched to: {FFFFFF}%s", Player[playerid][Name], TeamName[Player[playerid][Team]]);
-		SendClientMessageToAll(-1, iString);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has switched to: {FFFFFF}%s", Player[playerid][Name], TeamName[Player[playerid][Team]]);
 	}
 
 	UpdateRoundKillDmgTDmg(playerid);
@@ -1627,9 +1614,7 @@ public AimbotCheck(playerid)
 	GetPlayerWeaponData(playerid, 0, ammo, ammo);
 	if (ammo == 1000)
 	{
-		new str[144];
-		format(str, sizeof(str), "{FFFFFF}System " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}Aimbot (NOT A BUG)", Player[playerid][Name]);
-		SendClientMessageToAll(-1, str);
+		va_SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}Aimbot (NOT A BUG)", Player[playerid][Name]);
 		BanEx(playerid, "(SYSTEM BAN) Aimbot");
 		return 1;
 	}
