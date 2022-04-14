@@ -13,7 +13,7 @@
 
 #include <mSelection> // Selection with preview models feature library
 
-#define GM_VERSION "1.37.8 (r)"
+#define GM_VERSION "1.37.9 (r)"
 #define GM_NAME	   "Att-Def"
 new GM_WEBSITE[50] = "discord.gg/MbQbr9BKFs";
 
