@@ -22,9 +22,11 @@ public OnPlayerKicked(playerid)
 	return 1;
 }
 
-forward SendTipMessageToAll();
-public SendTipMessageToAll()
+forward SendTipMessageToAll(bool: calledDuringPause);
+public SendTipMessageToAll(bool: calledDuringPause)
 {
+	if (calledDuringPause)
+		TipTimerDuringPause = 0;
 	switch (random(16))
 	{
 		case 0: SendClientMessageToAll(COL_TIP_PRIM_HEX, "Tips: " COL_TIP "Try different gunmenu styles with {FFFFFF}/gunmenustyle");

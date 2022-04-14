@@ -52,12 +52,12 @@ new bool: IsArenaPlayed[MAX_ARENAS];			 // Whether an arena is played or not
 new PausePressed;								 // A tick count when the last time pause command (or button) was used (or pressed)
 new PreStartRoundTimer	= 0;					 // Timer used to start the countdown for a round start
 new ViewRoundTimer		= 0;					 // Timer used every second to view a round when started
-new GameLoop			= -1;					 // The ID of the timer that handles everything about the current active round
-new PauseStopWatchTimer = -1;					 // The ID of the timer that counts up on each round pause
+new GameLoop			= 0;					 // The ID of the timer that handles everything about the current active round
+new PauseStopWatchTimer = 0;					 // The ID of the timer that counts up on each round pause
 new PauseTimeElapsed[2];						 // Time elapsed since round pause (minutes and seconds)
 new TotalPausesInRound;							 // How many times the round has been paused in one round
 new PauseAirVehicles_Timer;						 // The ID of the timer that keeps air vehicles in the air when round is paused
-new TipTimerDuringPause = -1;					 // A timer which is used to send tips after a certain time since a round pause
+new TipTimerDuringPause = 0;					 // A timer which is used to send tips after a certain time since a round pause
 new Float: TempAirVehicles_Pos[MAX_VEHICLES][3]; // Temporarily store velocity of air vehicles when round is paused
 new Iterator: TempAirVehicles<MAX_VEHICLES>;	 // Temporarily contains IDs of air vehicles when round is paused
 new Iterator: PlayersInRound<MAX_PLAYERS>;		 // The IDs of players in round (alive/playing) are to be stored in this array

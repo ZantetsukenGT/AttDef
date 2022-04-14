@@ -493,26 +493,23 @@ public GameLoopCallback()
 
 StartGameLoop()
 {
-	if (GameLoop != -1)
+	if (GameLoop)
 		return;
-
 	GameLoop = SetPreciseTimer("GameLoopCallback", GAME_SPEED, true);
 }
 
 KillGameLoop()
 {
-	if (GameLoop == -1)
+	if (!GameLoop)
 		return;
-
 	DeletePreciseTimer(GameLoop);
-	GameLoop = -1;
+	GameLoop = 0;
 }
 
 RestartGameLoop()
 {
-	if (GameLoop == -1)
+	if (Current == -1)
 		return;
-
 	KillGameLoop();
 	StartGameLoop();
 }
@@ -629,10 +626,10 @@ DetermineRandomRound(mode = 0, bool: ignore = false, type = ARENA)
 forward UnpauseRound();
 public UnpauseRound()
 {
-	if (PauseStopWatchTimer != -1)
+	if (PauseStopWatchTimer)
 	{
 		DeletePreciseTimer(PauseStopWatchTimer);
-		PauseStopWatchTimer = -1;
+		PauseStopWatchTimer = 0;
 	}
 
 	RoundUnpausing = true;
@@ -681,8 +678,11 @@ public UnpauseRound()
 		RecountPlayersOnCP();
 		CheckTeamElimination();
 
-		DeletePreciseTimer(TipTimerDuringPause);
-		TipTimerDuringPause = -1;
+		if (TipTimerDuringPause)
+		{
+			DeletePreciseTimer(TipTimerDuringPause);
+			TipTimerDuringPause = 0;
+		}
 	}
 	return 1;
 }
@@ -731,12 +731,12 @@ PauseRound()
 	if (airVehiclesFound != 0)
 		PauseAirVehicles_Timer = SetPreciseTimer("PauseAirVehicles_Handler", 50, true);
 
-	if (TipTimerDuringPause != -1)
+	if (TipTimerDuringPause)
 		DeletePreciseTimer(TipTimerDuringPause);
 
-	TipTimerDuringPause = SetPreciseTimer("SendTipMessageToAll", 15000, false);
+	TipTimerDuringPause = SetPreciseTimer("SendTipMessageToAll", 15000, false, "b", true);
 
-	if (PauseStopWatchTimer == -1)
+	if (!PauseStopWatchTimer)
 	{
 		TotalPausesInRound++;
 		PauseTimeElapsed[0] = 0;
@@ -1605,7 +1605,7 @@ SpawnPlayersInRC()
 		UpdateTeamHP(ATTACKER);
 		UpdateTeamHP(DEFENDER);
 		UpdateTeamNamesTextdraw();
-		StartGameLoop();
+		RestartGameLoop();
 		RadarFix();
 		foreach (new i : PlayersInRound)
 		{
@@ -1886,7 +1886,7 @@ SpawnPlayersInArena()
 		UpdateTeamHP(ATTACKER);
 		UpdateTeamHP(DEFENDER);
 		UpdateTeamNamesTextdraw();
-		StartGameLoop();
+		RestartGameLoop();
 		RadarFix();
 		SetPreciseTimer("ShowPlayingPlayersGunmenu", 1000, false);
 		SetPreciseTimer("Round_EnableSync", 1050, false);
@@ -2346,7 +2346,7 @@ SpawnPlayersInBase()
 		UpdateTeamHP(ATTACKER);
 		UpdateTeamHP(DEFENDER);
 		UpdateTeamNamesTextdraw();
-		StartGameLoop();
+		RestartGameLoop();
 		RadarFix();
 		SetPreciseTimer("ShowPlayingPlayersGunmenu", 1000, false);
 		SetPreciseTimer("Round_EnableSync", 1050, false);
@@ -2846,7 +2846,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 	switch (random(3))
 	{
-		case 2: SetPreciseTimer("SendTipMessageToAll", 7000, false);
+		case 2: SetPreciseTimer("SendTipMessageToAll", 7000, false, "b", false);
 	}
 	return 1;
 }
