@@ -157,7 +157,7 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 
 					ModernTextDrawFlash(DEFENDER);
 
-					if (AttHpTimer)
+					if (DefHpTimer)
 						DeletePreciseTimer(DefHpTimer);
 					DefHpTimer = SetPreciseTimer("HideHpTextForDef", 2500, false);
 				}
