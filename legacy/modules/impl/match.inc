@@ -50,7 +50,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	UpdateTeamHP(Player[playerid][Team], playerid);
 	// Call OnPlayerLeaveCheckpoint to see if this player was in the checkpoint and fix issues
 	if (Current != -1)
-		OnPlayerLeaveCheckpoint(playerid);
+		CallLocalFunction("OnPlayerLeaveCheckpoint", "i", playerid);
 }
 
 hook OnGameModeInit()
@@ -1258,7 +1258,7 @@ RemovePlayerFromRound(playerid, bool: remove_iterator = true)
 		Iter_Remove(PlayersInRound, playerid);
 
 	if (Current != -1)
-		OnPlayerLeaveCheckpoint(playerid);
+		CallLocalFunction("OnPlayerLeaveCheckpoint", "i", playerid);
 
 	Player[playerid][WasInBase]	   = false;
 	Player[playerid][WasInTeam]	   = NON;

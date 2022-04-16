@@ -418,7 +418,7 @@ RecountPlayersOnCP()
 		{
 			Player[i][WasInCP] = false;
 			if (IsPlayerInCheckpoint(i))
-				OnPlayerEnterCheckpoint(i);
+				CallLocalFunction("OnPlayerEnterCheckpoint", "i", i);
 		}
 	}
 
@@ -1334,7 +1334,7 @@ RadarFix(playerid = INVALID_PLAYER_ID)
 		{
 			foreach (new x : Player)
 			{
-				OnPlayerStreamIn(i, x);
+				CallLocalFunction("OnPlayerStreamIn", "ii", i, x);
 			}
 		}
 		return;
@@ -1343,7 +1343,7 @@ RadarFix(playerid = INVALID_PLAYER_ID)
 	// if only one player's color is changed and needs updating
 	foreach (new i : Player)
 	{
-		OnPlayerStreamIn(playerid, i);
+		CallLocalFunction("OnPlayerStreamIn", "ii", playerid, i);
 	}
 }
 

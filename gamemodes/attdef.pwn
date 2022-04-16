@@ -6,7 +6,7 @@
 
 #include <a_samp>
 #include <iphub-key>
-//#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
+#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 
 // YSI Libraries 5.x
 // See https://github.com/pawn-lang/YSI-Includes for all the documentation.

@@ -7,7 +7,7 @@ public OnPlayerRequestSpawn(playerid)
 {
 	if (!Player[playerid][Spawned])
 	{
-		OnPlayerRequestClass(playerid, 0);
+		CallLocalFunction("OnPlayerRequestClass", "ii", playerid, 0);
 		return 0;
 	}
 	return 1;
