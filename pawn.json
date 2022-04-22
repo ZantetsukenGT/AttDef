@@ -5,7 +5,7 @@
 	"output": "gamemodes/attdef.amx",
 	"dependencies": [
 		"Southclaws/progress2",
-		"Southclaws/samp-geoip",
+		"ZantetsukenGT/samp-geoip",
 		"bmisiak/samp-precise-timers",
 		"NexiusTailer/MapFix",
 		"oscar-broman/samp-weapon-config",
