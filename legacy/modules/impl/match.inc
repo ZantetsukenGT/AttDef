@@ -1082,7 +1082,7 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 	Player[ToAddID][WasInTeam] = Player[ToAddID][Team];
 	SwitchTeamFix(ToAddID, false, false, true);
 
-	SetSpawnInfo(ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], Pos[0], Pos[1], Pos[2] + 1, Pos[3], 0, 0, 0, 0, 0, 0);
+	SetSpawnInfo(ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], Pos[0], Pos[1], Pos[2] + 1, Pos[3], 0, 0, 0, 0, 0, 0);
 	Player[ToAddID][IgnoreSpawn] = true;
 	SpawnPlayer(ToAddID);
 
@@ -1149,7 +1149,7 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 	if (!SaveVariables[i][WasCrashedInStart])
 	{
 		SetSpawnInfo(
-			ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], SaveVariables[i][pCoords][0], SaveVariables[i][pCoords][1], SaveVariables[i][pCoords][2] + 1,
+			ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], SaveVariables[i][pCoords][0], SaveVariables[i][pCoords][1], SaveVariables[i][pCoords][2] + 1,
 			SaveVariables[i][pCoords][3], 0, 0, 0, 0, 0, 0);
 
 		SetPlayerInterior(ToAddID, SaveVariables[i][pInterior]);
@@ -1163,11 +1163,11 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 			{
 				case ATTACKER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], BAttackerSpawn[Current][0] + RandomMinMax(-3, 3), BAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BAttackerSpawn[Current][0] + RandomMinMax(-3, 3), BAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
 						BAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 				case DEFENDER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], BDefenderSpawn[Current][0] + RandomMinMax(-3, 3), BDefenderSpawn[Current][1] + RandomMinMax(-3, 3),
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BDefenderSpawn[Current][0] + RandomMinMax(-3, 3), BDefenderSpawn[Current][1] + RandomMinMax(-3, 3),
 						BDefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			}
 			SetPlayerInterior(ToAddID, BInterior[Current]);
@@ -1178,11 +1178,11 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 			{
 				case ATTACKER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], AAttackerSpawn[Current][0] + RandomMinMax(-3, 3), AAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], AAttackerSpawn[Current][0] + RandomMinMax(-3, 3), AAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
 						AAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 				case DEFENDER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[playerid][Team]], ADefenderSpawn[Current][0] + RandomMinMax(-3, 3), ADefenderSpawn[Current][1] + RandomMinMax(-3, 3),
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], ADefenderSpawn[Current][0] + RandomMinMax(-3, 3), ADefenderSpawn[Current][1] + RandomMinMax(-3, 3),
 						ADefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			}
 			SetPlayerInterior(ToAddID, AInterior[Current]);
