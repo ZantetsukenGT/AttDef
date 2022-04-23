@@ -701,17 +701,8 @@ public PauseAirVehicles_Handler()
 forward PauseStopWatch();
 public PauseStopWatch()
 {
-	if (PauseTimeElapsed[0] == 59)
-	{
-		PauseTimeElapsed[0] = 0;
-		PauseTimeElapsed[1]++;
-	}
-	else
-		PauseTimeElapsed[0]++;
-
-	new str[68];
-	format(str, sizeof str, "~r~~h~Round is paused!~n~~w~Time: ~r~~h~%02d:%02d ~w~Count: ~r~~h~%d", PauseTimeElapsed[1], PauseTimeElapsed[0], TotalPausesInRound);
-	TextDrawSetString(PauseTD, str);
+	PauseTimeElapsed++;
+	TextDrawSetString(PauseTD, va_return("~r~~h~Round is paused!~n~~w~Time: ~r~~h~%02d:%02d ~w~Count: ~r~~h~%d", PauseTimeElapsed / 60, PauseTimeElapsed % 60, TotalPausesInRound));
 	return 1;
 }
 
@@ -739,8 +730,7 @@ PauseRound()
 	if (!PauseStopWatchTimer)
 	{
 		TotalPausesInRound++;
-		PauseTimeElapsed[0] = 0;
-		PauseTimeElapsed[1] = 0;
+		PauseTimeElapsed = 0;
 		PauseStopWatchTimer = SetPreciseTimer("PauseStopWatch", 1000, true);
 	}
 
