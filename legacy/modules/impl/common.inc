@@ -215,7 +215,10 @@ DeleteAllDeadBodies()
 
 CheckPlayerNet(playerid)
 {
-	if (Player[playerid][FPS] < Min_FPS && Player[playerid][PauseCount] < 5 && Player[playerid][FPSCheck])
+	new pFPS = GetPlayerFPS(playerid);
+	new pPL = NetStats_PacketLossPercent(playerid);
+	new pPing = GetPlayerPing(playerid);
+	if (pFPS < Min_FPS && Player[playerid][PauseCount] < 5 && Player[playerid][FPSCheck])
 	{
 		Player[playerid][FPSKick]++;
 		va_SendClientMessage(playerid, -1, "{FF756D}Low FPS! Warning %d/" #MAX_LOWFPS_WARNINGS " - use /netcheckme", Player[playerid][FPSKick]);
@@ -224,7 +227,7 @@ CheckPlayerNet(playerid)
 		{
 			va_SendClientMessageToAll(
 				-1,
-				"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], Player[playerid][FPS], Min_FPS);
+				"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], pFPS, Min_FPS);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
@@ -233,7 +236,7 @@ CheckPlayerNet(playerid)
 		Player[playerid][FPSKick] = 0;
 	}
 
-	if (NetStats_PacketLossPercent(playerid) >= Max_Packetloss && !Player[playerid][FakePacketRenovation] && Player[playerid][PLCheck])
+	if (pPL >= Max_Packetloss && !Player[playerid][FakePacketRenovation] && Player[playerid][PLCheck])
 	{
 		Player[playerid][PacketKick]++;
 		va_SendClientMessage(playerid, -1, "{FF756D}High PL! Warning %d/" #MAX_PACKETLOSS_WARNINGS " - use /netcheckme", Player[playerid][PacketKick]);
@@ -242,7 +245,7 @@ CheckPlayerNet(playerid)
 		{
 			va_SendClientMessageToAll(
 				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Packetloss | %.2f/%.2f " COL_PRIM ":.", Player[playerid][Name],
-						NetStats_PacketLossPercent(playerid), Max_Packetloss);
+						pPL, Max_Packetloss);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
@@ -251,7 +254,7 @@ CheckPlayerNet(playerid)
 		Player[playerid][PacketKick] = 0;
 	}
 
-	if (GetPlayerPing(playerid) >= Max_Ping && Player[playerid][PingCheck])
+	if (pPing >= Max_Ping && Player[playerid][PingCheck])
 	{
 		Player[playerid][PingKick]++;
 		va_SendClientMessage(playerid, -1, "{FF756D}High Ping! Warning %d/" #MAX_HIGHPING_WARNINGS " - use /netcheckme", Player[playerid][PingKick]);
@@ -259,7 +262,7 @@ CheckPlayerNet(playerid)
 		if (Player[playerid][PingKick] == MAX_HIGHPING_WARNINGS)
 		{
 			va_SendClientMessageToAll(
-				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], GetPlayerPing(playerid),
+				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], pPing,
 						Max_Ping);
 			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
 		}
@@ -538,13 +541,9 @@ ShowTargetInfo(playerid, targetid)
 		DeletePreciseTimer(TargetInfoData[playerid][TargetInfoTimer]);
 	TargetInfoData[playerid][TargetInfoTimer] = SetPreciseTimer("HideTargetInfo", 5000, false, "i", playerid);
 
-	new str[128];
-	format(
-		str, sizeof str, "%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%d", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
-		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][FPS], MAIN_TEXT_COLOUR,
-		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], (Player[targetid][pHealth] + Player[targetid][pArmour]));
-
-	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], str);
+	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%d", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
+		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerFPS(playerid), MAIN_TEXT_COLOUR,
+		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][pHealth] + Player[targetid][pArmour]));
 	PlayerTextDrawShow(playerid, TargetInfoData[playerid][TargetInfoTD]);
 	TargetInfoData[playerid][TargetInfoLastTick]   = currentTick;
 	TargetInfoData[playerid][TargetInfoLastTarget] = targetid;
@@ -1505,7 +1504,7 @@ SyncPlayer(playerid)
 	return 1;
 }
 
-GetPlayerFPS(playerid)
+UpdatePlayerFPS(playerid)
 {
 	new drunk2 = GetPlayerDrunkLevel(playerid);
 	if (drunk2 < 100)
@@ -1522,7 +1521,11 @@ GetPlayerFPS(playerid)
 			Player[playerid][DLlast] = drunk2;
 		}
 	}
-	return Player[playerid][FPS];
+}
+
+GetPlayerFPS(playerid)
+{
+	return Player[playerid][FPS] <= 0 ? 0 : Player[playerid][FPS] - 1;
 }
 
 FixVsTextDraw(exception = -1)

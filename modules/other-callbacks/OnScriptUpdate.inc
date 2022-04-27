@@ -14,8 +14,8 @@ public OnScriptUpdate()
 		// AFK Variable Update
 		Player[i][PauseCount]++;
 
-		// Get & update player FPS
-		GetPlayerFPS(i);
+		// Update player FPS
+		UpdatePlayerFPS(i);
 
 		// Show target info
 		ShowTargetInfo(i, GetPlayerTargetPlayer(i));
@@ -23,16 +23,16 @@ public OnScriptUpdate()
 		// Update net info textdraws
 		if (PlayerInterface[i][INTERFACE_NET])
 		{
+			new pFPS  = GetPlayerFPS(playerid);
+			new pPL	  = NetStats_PacketLossPercent(playerid);
+			new pPing = GetPlayerPing(playerid);
 			PlayerTextDrawSetString(
-				i, FPSPingPacket[i],
-				va_return(
-					"%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, Player[i][FPS], MAIN_TEXT_COLOUR, GetPlayerPing(i), MAIN_TEXT_COLOUR,
-					NetStats_PacketLossPercent(i)));
+				i, FPSPingPacket[i], va_return("%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, pFPS, MAIN_TEXT_COLOUR, pPing, MAIN_TEXT_COLOUR, pPL));
 			Update3DTextLabelText(
 				Player[i][InfoLabel], -1,
 				va_return(
-					"%sPL: {FFFFFF}%.1f%%\n%sPing: {FFFFFF}%d\n%sFPS: {FFFFFF}%d", TextColor[Player[i][Team]], NetStats_PacketLossPercent(i), TextColor[Player[i][Team]],
-					GetPlayerPing(i), TextColor[Player[i][Team]], Player[i][FPS]));
+					"%sPL: {FFFFFF}%.1f%%\n%sPing: {FFFFFF}%d\n%sFPS: {FFFFFF}%d", TextColor[Player[i][Team]], pPL, TextColor[Player[i][Team]], pPing, TextColor[Player[i][Team]],
+					pFPS));
 		}
 	}
 
