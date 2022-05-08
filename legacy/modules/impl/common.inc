@@ -174,19 +174,16 @@ CreateDeadBody(playerid, killerid, reason, Float: distance = 0.0, Float: x = 0.0
 		case DEFENDER: color = 0x8E9CF5FF;
 	}
 
-	new str[144];
 	switch (killerid)
 	{
 		case INVALID_PLAYER_ID:
 		{
-			format(str, sizeof str, "Dead body of: %s\nReason: %s", Player[playerid][Name], WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(va_return("Dead body of: %s\nReason: %s", Player[playerid][Name], ReturnWeaponName(reason)), color, x, y, z - 0.3, 20.0, worldid, 1);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 		default:
 		{
-			format(str, sizeof str, "Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", Player[playerid][Name], Player[killerid][Name], distance, WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(va_return("Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", Player[playerid][Name], Player[killerid][Name], distance, ReturnWeaponName(reason)), color, x, y, z - 0.3, 20.0, worldid, 1);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 	}
@@ -215,9 +212,9 @@ DeleteAllDeadBodies()
 
 CheckPlayerNet(playerid)
 {
-	new pFPS = GetPlayerFPS(playerid);
-	new pPL = NetStats_PacketLossPercent(playerid);
-	new pPing = GetPlayerPing(playerid);
+	new pFPS	   = GetPlayerFPS(playerid);
+	new Float: pPL = NetStats_PacketLossPercent(playerid);
+	new pPing	   = GetPlayerPing(playerid);
 	if (pFPS < Min_FPS && Player[playerid][PauseCount] < 5 && Player[playerid][FPSCheck])
 	{
 		Player[playerid][FPSKick]++;
@@ -273,7 +270,7 @@ CheckPlayerNet(playerid)
 	}
 }
 
-bool: IsValidWeapon(weaponid) { return weaponid > 0 && weaponid < 19 || weaponid > 21 && weaponid < 47 && weaponid != 40; }
+bool: IsValidWeapon(weaponid) { return weaponid > 1 && weaponid < 19 || weaponid > 21 && weaponid < 47 && weaponid != 40; }
 
 bool: IsValidSkin(skinid) { return skinid > 74 && skinid < 265 || skinid >= 0 && skinid < 74 || skinid > 272 && skinid < 300; }
 
@@ -342,18 +339,6 @@ public SpawnConnectedPlayer(playerid, team)
 	SetPlayerWeather(playerid, Player[playerid][Weather]);
 	SetPlayerTime(playerid, Player[playerid][Time], 0);
 
-	ShowPlayerProgressBar(playerid, HealthBar[playerid]);
-	if (PlayerInterface[playerid][INTERFACE_HP])
-	{
-		PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
-	}
-	else
-	{
-		PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
-	}
-
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
 
 	if (PlayerInterface[playerid][INTERFACE_NET])
@@ -377,8 +362,6 @@ public SpawnConnectedPlayer(playerid, team)
 	TextDrawShowForPlayer(playerid, DefHpLose);
 
 	PlayerTextDrawShow(playerid, TD_RoundSpec[playerid]);
-	PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-	PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
 
 	if (WarMode)
@@ -541,9 +524,9 @@ ShowTargetInfo(playerid, targetid)
 		DeletePreciseTimer(TargetInfoData[playerid][TargetInfoTimer]);
 	TargetInfoData[playerid][TargetInfoTimer] = SetPreciseTimer("HideTargetInfo", 5000, false, "i", playerid);
 
-	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%d", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
+	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%.1f", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
 		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerFPS(playerid), MAIN_TEXT_COLOUR,
-		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][pHealth] + Player[targetid][pArmour]));
+		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerHealth(targetid) + GetPlayerArmour(targetid)));
 	PlayerTextDrawShow(playerid, TargetInfoData[playerid][TargetInfoTD]);
 	TargetInfoData[playerid][TargetInfoLastTick]   = currentTick;
 	TargetInfoData[playerid][TargetInfoLastTarget] = targetid;
@@ -580,198 +563,13 @@ bool: IsValidSound(soundid)
 
 GetWeaponID(const weaponname[])
 {
-	for (new i = 0; i < 55; ++i)
+	for (new i = 0; i < 57; ++i)
 	{
-		if (strfind(WeaponNames[i], weaponname, true) != -1)
+		if (strfind(ReturnWeaponName(i), weaponname, true) != -1)
 			return i;
 	}
 	return -1;
 }
-/*
-GetWeaponIDFromModelID(modelid)
-{
-	new weaponid = 0xFFFF;
-	switch(modelid)
-	{
-		case 373:
-		{
-			weaponid = 0;
-		}
-		case 331:
-		{
-			weaponid = 1;
-		}
-		case 333:
-		{
-			weaponid = 2;
-		}
-		case 334:
-		{
-			weaponid = 3;
-		}
-		case 335:
-		{
-			weaponid = 4;
-		}
-		case 336:
-		{
-			weaponid = 5;
-		}
-		case 337:
-		{
-			weaponid = 6;
-		}
-		case 338:
-		{
-			weaponid = 7;
-		}
-		case 339:
-		{
-			weaponid = 8;
-		}
-		case 341:
-		{
-			weaponid = 9;
-		}
-		case 321:
-		{
-			weaponid = 10;
-		}
-		case 322:
-		{
-			weaponid = 11;
-		}
-		case 323:
-		{
-			weaponid = 12;
-		}
-		case 324:
-		{
-			weaponid = 13;
-		}
-		case 325:
-		{
-			weaponid = 14;
-		}
-		case 326:
-		{
-			weaponid = 15;
-		}
-		case 342:
-		{
-			weaponid = 16;
-		}
-		case 343:
-		{
-			weaponid = 17;
-		}
-		case 344:
-		{
-			weaponid = 18;
-		}
-		case 346:
-		{
-			weaponid = 22;
-		}
-		case 347:
-		{
-			weaponid = 23;
-		}
-		case 348:
-		{
-			weaponid = 24;
-		}
-		case 349:
-		{
-			weaponid = 25;
-		}
-		case 350:
-		{
-			weaponid = 26;
-		}
-		case 351:
-		{
-			weaponid = 27;
-		}
-		case 352:
-		{
-			weaponid = 28;
-		}
-		case 353:
-		{
-			weaponid = 29;
-		}
-		case 355:
-		{
-			weaponid = 30;
-		}
-		case 356:
-		{
-			weaponid = 31;
-		}
-		case 372:
-		{
-			weaponid = 32;
-		}
-		case 357:
-		{
-			weaponid = 33;
-		}
-		case 358:
-		{
-			weaponid = 34;
-		}
-		case 359:
-		{
-			weaponid = 35;
-		}
-		case 360:
-		{
-			weaponid = 36;
-		}
-		case 361:
-		{
-			weaponid = 37;
-		}
-		case 362:
-		{
-			weaponid = 38;
-		}
-		case 363:
-		{
-			weaponid = 39;
-		}
-		case 364:
-		{
-			weaponid = 40;
-		}
-		case 365:
-		{
-			weaponid = 41;
-		}
-		case 366:
-		{
-			weaponid = 42;
-		}
-		case 367:
-		{
-			weaponid = 43;
-		}
-		case 368:
-		{
-			weaponid = 44;
-		}
-		case 369:
-		{
-			weaponid = 45;
-		}
-		case 371:
-		{
-			weaponid = 46;
-		}
-	}
-	return weaponid;
-}*/
 
 GetWeaponModelFromID(weaponid)
 {
@@ -977,7 +775,7 @@ SwapTeams()
 
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2)
+		if (SaveVariables[i][pName][0])
 		{
 			if (SaveVariables[i][pTeam] == ATTACKER)
 				SaveVariables[i][pTeam] = DEFENDER;
@@ -1222,7 +1020,7 @@ GetPlayerHighestScores(array[][rankingEnum], left, right)
 
 GetPlayerHighestScores2(array[][rankingEnum], names[][MAX_PLAYER_NAME], left, right)
 {
-	new tempLeft = left, tempRight = right, pivot = array[(left + right) / 2][player_Score], tempVar, tempVarStr[MAX_PLAYER_NAME];
+	new tempLeft = left, tempRight = right, pivot = array[(left + right) / 2][player_Score], tempVar, Float: tempVarFloat, tempVarStr[MAX_PLAYER_NAME];
 	while (tempLeft <= tempRight)
 	{
 		while (array[tempLeft][player_Score] > pivot) tempLeft++;
@@ -1237,7 +1035,7 @@ GetPlayerHighestScores2(array[][rankingEnum], names[][MAX_PLAYER_NAME], left, ri
 			tempVar = array[tempLeft][player_Deaths], array[tempLeft][player_Deaths] = array[tempRight][player_Deaths], array[tempRight][player_Deaths] = tempVar;
 			tempVar = array[tempLeft][player_Team], array[tempLeft][player_Team] = array[tempRight][player_Team], array[tempRight][player_Team] = tempVar;
 			tempVar = array[tempLeft][player_TPlayed], array[tempLeft][player_TPlayed] = array[tempRight][player_TPlayed], array[tempRight][player_TPlayed] = tempVar;
-			tempVar = array[tempLeft][player_HP], array[tempLeft][player_HP] = array[tempRight][player_HP], array[tempRight][player_HP] = tempVar;
+			tempVarFloat = array[tempLeft][player_HP], array[tempLeft][player_HP] = array[tempRight][player_HP], array[tempRight][player_HP] = tempVarFloat;
 			tempVar = array[tempLeft][player_Acc], array[tempLeft][player_Acc] = array[tempRight][player_Acc], array[tempRight][player_Acc] = tempVar;
 			tempVar = array[tempLeft][player_Overall], array[tempLeft][player_Overall] = array[tempRight][player_Overall], array[tempRight][player_Overall] = tempVar;
 			tempLeft++, tempRight--;
@@ -1459,48 +1257,34 @@ SyncPlayer(playerid)
 		return 1;
 	if ((RoundPaused || !AllowSync) && Player[playerid][Playing])
 		return 1;
-	if (Player[playerid][OnGunmenu])
-		return SendErrorMessage(playerid, "Can't sync while in gunmenu");
-	if (GetTickCount() - Player[playerid][LastTimeSynced] < 1000)
-		return 1;
 	if (GetPlayerVehicleID(playerid))
 		return 1;
+	new currentTick = GetTickCount();
+	if (currentTick - Player[playerid][LastTimeSynced] < 1000)
+		return 1;
+	if (Player[playerid][OnGunmenu])
+		return SendErrorMessage(playerid, "Can't sync while in gunmenu");
 	if (Player[playerid][IsAFK] || Player[playerid][IsFrozen])
 		return SendErrorMessage(playerid, "Can't sync while frozen or in AFK mode");
 
-	// Set spectators to re-spectate
-	if (Player[playerid][BeingSpeced])
-		SetPreciseTimer("ForceRespectate", 1000, false, "i", playerid);
+	// Update tick count
+	Player[playerid][LastTimeSynced] = currentTick;
 
-	// Store info before re-spawn
-	new Float: Pos[4],
-				CurrWep,
-				Float: Velocity[3];
-	CurrWep = GetPlayerWeapon(playerid);
-	GetPlayerPos(playerid, Pos[0], Pos[1], Pos[2]);
-	GetPlayerFacingAngle(playerid, Pos[3]);
-	GetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
-	new Weapons[13][2];
-	for (new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]);
-
-	// Set spawn info and spawn player
-	SetSpawnInfo(playerid, GetPlayerTeam(playerid), GetPlayerSkin(playerid), Pos[0], Pos[1], Pos[2] - 0.4, Pos[3], 0, 0, 0, 0, 0, 0);
+	// Store speed info before re-spawn for SyncAbuse, let weapon-config handle more sync variables
+	new Float: x, Float: y, Float: z;
+	GetPlayerVelocity(playerid, x, y, z);
 	Player[playerid][IgnoreSpawn] = true;
-	SpawnPlayer(playerid);
+	
+	//weapon-config resync
+	ResyncPlayer(playerid);
 
 	// Set info back after re-spawn
-	SetHP(playerid, Player[playerid][pHealth]);
-	SetAP(playerid, Player[playerid][pArmour]);
-	SetPlayerInterior(playerid, GetPlayerInterior(playerid));
-	SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(playerid));
-	for (new i = 0; i < 13; i++) GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]);
-	SetPlayerArmedWeapon(playerid, CurrWep);
-
 	if (!SyncAbuse)
-		SetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
+		SetPlayerVelocity(playerid, x, y, z);
 
-	// Update tick count
-	Player[playerid][LastTimeSynced] = GetTickCount();
+	// Set spectators to re-spectate
+	if (Player[playerid][BeingSpeced])
+		SetPreciseTimer("ForceRespectate", GetPlayerPing(playerid), false, "i", playerid);
 	return 1;
 }
 
@@ -1545,7 +1329,7 @@ FixVsTextDraw(exception = -1)
 				case DEFENDER: ct[1]++;
 			}
 		}
-		format(str, sizeof(str), "  ~r~%d  %sVs  ~b~~h~%d", ct[0], MAIN_TEXT_COLOUR, ct[1]);
+		format(str, sizeof(str), "~r~%d  %svs  ~b~~h~%d", ct[0], MAIN_TEXT_COLOUR, ct[1]);
 		foreach (new i : Player)
 			PlayerTextDrawSetString(i, BaseID_VS[i], str);
 	}
@@ -1591,8 +1375,8 @@ SpawnInDM(playerid, DMID)
 		Player[playerid][VWorld]); // Put player in a different virtual world so that if you
 								   // create a DM in your lobby and you join the DM, you
 								   // won't be able to see other players in the lobby.
-	SetHP(playerid, 100);
-	SetAP(playerid, 100);
+	SetHP(playerid, 100.0);
+	SetAP(playerid, 100.0);
 }
 
 QuitDM(playerid)
@@ -1610,20 +1394,6 @@ QuitDM(playerid)
 	Player[playerid][DMReadd] = 0;
 	SpawnInLobby(playerid);
 	return 1;
-}
-
-forward AimbotCheck(playerid);
-public AimbotCheck(playerid)
-{
-	new ammo = 0;
-	GetPlayerWeaponData(playerid, 0, ammo, ammo);
-	if (ammo == 1000)
-	{
-		va_SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}Aimbot (NOT A BUG)", Player[playerid][Name]);
-		BanEx(playerid, "(SYSTEM BAN) Aimbot");
-		return 1;
-	}
-	return 0;
 }
 
 bool: IsSafeGametext(const text[])
