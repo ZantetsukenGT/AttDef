@@ -18,14 +18,9 @@ hook OnPlayerDisconnect(playerid, reason)
 	if (!Player[playerid][InDuel])
 		return;
 
-	new iString[128];
-	format(
-		iString, sizeof(iString), "{FFFFFF}%s left server during a duel {757575}| HP %d | Armour %d", Player[playerid][Name], Player[playerid][pHealth], Player[playerid][pArmour]);
-	SendClientMessageToAll(-1, iString);
-
 	new winner = Player[playerid][challengerid];
-	format(iString, sizeof(iString), "{FFFFFF}His opponent %s had {757575}%d HP and %d Armour", Player[winner][Name], Player[winner][pHealth], Player[winner][pArmour]);
-	SendClientMessageToAll(-1, iString);
+	va_SendClientMessageToAll(-1, "{FFFFFF}%s left server during a duel {757575}| HP %.1f | Armour %.1f", Player[playerid][Name], GetPlayerHealth(playerid), GetPlayerArmour(playerid));
+	va_SendClientMessageToAll(-1, "{FFFFFF}His opponent %s had {757575}%.1f HP and %.1f Armour", Player[winner][Name], GetPlayerHealth(winner), GetPlayerArmour(winner));
 	Player[winner][InDuel] = false;
 	Player[playerid][DuelsLost]++;
 	Player[winner][DuelsWon]++;
@@ -101,11 +96,8 @@ ProcessDuelRequest(duel_host, duel_guest, weapon1, weapon2, arena, size)
 	SendClientMessage(duel_guest, -1, "{FF8800}Type {FFFFFF}/yes {FF8800}to accept the duel challenge or {FFFFFF}/no {FF8800}to deny the duel challenge.");
 	PlayerPlaySound(duel_guest, 1137, 0.0, 0.0, 0.0);
 
-	new iString[164];
-	format(
-		iString, sizeof(iString), "%s%s {FFFFFF}challenged %s%s {FFFFFF}to a duel with: %s and %s", TextColor[Player[duel_host][Team]], Player[duel_host][Name],
-		TextColor[Player[duel_guest][Team]], Player[duel_guest][Name], WeaponNames[weapon1], WeaponNames[weapon2]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "%s%s {FFFFFF}challenged %s%s {FFFFFF}to a duel with: %s and %s", TextColor[Player[duel_host][Team]], Player[duel_host][Name],
+		TextColor[Player[duel_guest][Team]], Player[duel_guest][Name], ReturnWeaponName(weapon1), ReturnWeaponName(weapon2));
 }
 
 DetermineDuelArena(Float: centerx, Float: centery, size, &Float: minx, &Float: miny, &Float: maxx, &Float: maxy)
@@ -151,10 +143,10 @@ StartDuel(dueller1, dueller2, weapon1, weapon2, Float: centerx, Float: centery, 
 	ResetPlayerWeapons(dueller2);
 	SetPlayerVirtualWorld(dueller1, dueller1 + 10);
 	SetPlayerVirtualWorld(dueller2, dueller1 + 10);
-	SetHP(dueller1, 100);
-	SetHP(dueller2, 100);
-	SetAP(dueller1, 100);
-	SetAP(dueller2, 100);
+	SetHP(dueller1, 100.0);
+	SetHP(dueller2, 100.0);
+	SetAP(dueller1, 100.0);
+	SetAP(dueller2, 100.0);
 	GameTextForPlayer(dueller1, "~r~~h~rape!!!", 3000, 6);
 	GameTextForPlayer(dueller2, "~r~~h~rape!!!", 3000, 6);
 	SetPlayerColor(dueller1, 0xFAB18488);
@@ -205,15 +197,12 @@ StartDuel(dueller1, dueller2, weapon1, weapon2, Float: centerx, Float: centery, 
 
 PlayerDuelQuit(playerid)
 {
-	new winner, iString[128], HPs[2];
-	GetHP(playerid, HPs[0]);
-	GetAP(playerid, HPs[1]);
-	winner = Player[playerid][challengerid];
+	new Float: pHP	   = GetPlayerHealth(playerid);
+	new Float: pArmour = GetPlayerArmour(playerid);
+	new winner = Player[playerid][challengerid];
 
-	format(
-		iString, sizeof(iString), "%s%s {FFFFFF}rage-quit from a duel | {757575}HP %d | Armour %d", TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], HPs[0],
-		HPs[1]);
-	SendClientMessageToAll(-1, iString);
+	va_SendClientMessageToAll(-1, "%s%s {FFFFFF}rage-quit from a duel | {757575}HP %.1f | Armour %.1f", TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], pHP,
+		pArmour);
 
 	Player[playerid][InDuel] = false;
 	Player[winner][InDuel]	 = false;
@@ -226,19 +215,14 @@ PlayerDuelQuit(playerid)
 	Player[winner][challengerid]   = -1;
 }
 
-ProcessDuellerDeath(playerid, killerid, reason)
+ProcessDuellerDeath(playerid)
 {
-	if (killerid == -1 || killerid == INVALID_PLAYER_ID)
-		killerid = Player[playerid][challengerid];
+	new killerid = Player[playerid][challengerid];
 
-	new str[144];
-	new HP[2];
-	GetHP(killerid, HP[0]);
-	GetAP(killerid, HP[1]);
-	format(
-		str, sizeof(str), "%s%s " COL_PRIM "raped %s%s " COL_PRIM "in a duel with %s | {FFFFFF}%d HP", TextColor[Player[killerid][TeamBeforeDuel]], Player[killerid][Name],
-		TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], WeaponNames[reason], (HP[0] + HP[1]));
-	SendClientMessageToAll(-1, str);
+	new Float: pHP	   = GetPlayerHealth(killerid);
+	new Float: pArmour = GetPlayerArmour(killerid);
+	va_SendClientMessageToAll(-1, "%s%s " COL_PRIM "raped %s%s " COL_PRIM "in a duel | {FFFFFF}%.1f HP", TextColor[Player[killerid][TeamBeforeDuel]], Player[killerid][Name],
+		TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], pHP + pArmour);
 	Player[playerid][challengerid] = -1;
 	Player[killerid][challengerid] = -1;
 	Player[playerid][duelweap1]	   = 0;

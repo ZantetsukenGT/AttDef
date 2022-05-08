@@ -150,8 +150,6 @@ InitPlayer(playerid)
 	Player[playerid][SpectatingRound]		   = -1;
 	InitPlayerSpectate(playerid);
 	ForgetSpectator(playerid);
-	Player[playerid][HitBy]				 = INVALID_PLAYER_ID;
-	Player[playerid][HitWith]			 = 47;
 	Player[playerid][HitSound]			 = 17802;
 	Player[playerid][GetHitSound]		 = 1131;
 	Player[playerid][LastEditWepLimit]	 = -1;
@@ -198,7 +196,6 @@ InitPlayer(playerid)
 	Player[playerid][blockedall]			   = false;
 	Player[playerid][OnGunmenu]				   = false;
 	Player[playerid][GunmenuStyle]			   = GUNMENU_STYLE_DIALOG;
-	Player[playerid][AlreadyDying]			   = false;
 	Player[playerid][TempNetcheck]			   = false;
 	Player[playerid][InDeathCamera]			   = false;
 	Player[playerid][HasDeathQuote]			   = false;
@@ -384,10 +381,6 @@ LoginPlayer(playerid, DBResult: res)
 	db_get_field_assoc(res, "InterfaceNet", iString, sizeof(iString));
 	PlayerInterface[playerid][INTERFACE_NET] = strval(iString) != 0;
 
-	// Load Show HP textdraws
-	db_get_field_assoc(res, "InterfaceHP", iString, sizeof(iString));
-	PlayerInterface[playerid][INTERFACE_HP] = strval(iString) != 0;
-
 	// Load weapon key binds
 	new fieldName[12], value;
 	for (new i = 0; i < MAX_WEAPON_BINDS; i++)
@@ -438,7 +431,7 @@ StorePlayerVariablesMin(playerid)
 {
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2)
+		if (SaveVariables[i][pName][0])
 			continue;
 
 		SaveVariables[i][pTeam]		 = Player[playerid][Team];
@@ -456,8 +449,8 @@ StorePlayerVariablesMin(playerid)
 		SaveVariables[i][tshotsHit]	   = Player[playerid][TotalshotsHit];
 		SaveVariables[i][tBulletsShot] = Player[playerid][TotalBulletsFired];
 
-		SaveVariables[i][gHealth]	   = 0;
-		SaveVariables[i][gArmour]	   = 0;
+		SaveVariables[i][gHealth]	   = 0.0;
+		SaveVariables[i][gArmour]	   = 0.0;
 
 		SaveVariables[i][RoundID]	   = Current;
 		SaveVariables[i][ToBeAdded]	   = false;
@@ -495,10 +488,9 @@ StorePlayerVariablesMin(playerid)
 
 StorePlayerVariables(playerid)
 {
-	new iString[128];
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2)
+		if (SaveVariables[i][pName][0])
 			continue;
 
 		format(SaveVariables[i][pName], 24, Player[playerid][Name]);
@@ -509,13 +501,13 @@ StorePlayerVariables(playerid)
 
 		if (!Player[i][ToAddInRound])
 		{
-			GetHP(playerid, SaveVariables[i][gHealth]);
-			GetAP(playerid, SaveVariables[i][gArmour]);
+			SaveVariables[i][gHealth] = GetPlayerHealth(i);
+			SaveVariables[i][gArmour] = GetPlayerArmour(i);
 		}
 		else
 		{
-			SaveVariables[i][gArmour] = 100;
-			SaveVariables[i][gHealth] = 100;
+			SaveVariables[i][gArmour] = 100.0;
+			SaveVariables[i][gHealth] = 100.0;
 		}
 
 		SaveVariables[i][pTeam]		 = Player[playerid][Team];
@@ -568,8 +560,7 @@ StorePlayerVariables(playerid)
 		if (Current != -1 && (!AllowStartBase || ElapsedTime < 20) && (Player[i][ToAddInRound] || Player[i][Playing]))
 			SaveVariables[i][WasCrashedInStart] = true;
 
-		format(iString, sizeof(iString), "{FFFFFF}%s's " COL_PRIM "data saved.", Player[playerid][Name]);
-		SendClientMessageToAll(-1, iString);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s's " COL_PRIM "data saved.", Player[playerid][Name]);
 		break;
 	}
 }
@@ -579,7 +570,7 @@ ShouldPlayerBeReadded(playerid)
 {
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2 && strcmp(SaveVariables[i][pName], Player[playerid][Name], true) == 0)
+		if (SaveVariables[i][pName][0] && strcmp(SaveVariables[i][pName], Player[playerid][Name], true) == 0)
 		{
 			if (SaveVariables[i][RoundID] != Current || Current == -1 || !SaveVariables[i][ToBeAdded])
 				return -1;
@@ -596,7 +587,7 @@ LoadPlayerVariables(playerid)
 
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2 && strcmp(SaveVariables[i][pName], Player[playerid][Name], true) == 0)
+		if (SaveVariables[i][pName][0] && strcmp(SaveVariables[i][pName], Player[playerid][Name], true) == 0)
 		{
 			if (SaveVariables[i][RoundID] != Current || Current == -1)
 			{
@@ -815,8 +806,8 @@ ResetSaveVariables(index)
 	SaveVariables[index][pCoords][2]		= 0.0;
 	SaveVariables[index][pCoords][3]		= 0.0;
 
-	SaveVariables[index][gHealth]			= 0;
-	SaveVariables[index][gArmour]			= 0;
+	SaveVariables[index][gHealth]			= 0.0;
+	SaveVariables[index][gArmour]			= 0.0;
 	SaveVariables[index][pInterior]			= 0;
 	SaveVariables[index][pVWorld]			= 0;
 	SaveVariables[index][pTeam]				= 0;

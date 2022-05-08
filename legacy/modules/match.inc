@@ -72,7 +72,7 @@ new UnpauseTimer;								 // Holds the ID of the unpause round timer
 new Current = -1;								 // Current round ID. -1 means there's no active round at the moment.
 new PlayersAlive[MAX_TEAMS];					 // How many players are alive in each team
 new PlayersDead[MAX_TEAMS];						 // How many players are dead in each team
-new TeamHP[MAX_TEAMS];							 // How much HP does a team have
+new Float: TeamHP[MAX_TEAMS];					 // How much HP does a team have
 new TeamName[MAX_TEAMS][24];					 // Used to hold the team name in WarMode
 new TeamScore[MAX_TEAMS];						 // Used to the team round score in Warmode
 new TempDamage[MAX_TEAMS];						 // Temporary taken-damage of each team

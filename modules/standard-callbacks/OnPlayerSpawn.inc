@@ -31,8 +31,8 @@ public OnPlayerSpawn(playerid)
 	if (!Player[playerid][Playing] && !Player[playerid][InDM] && !Player[playerid][InDuel])
 	{
 		// Adjust player HP
-		SetHP(playerid, 100);
-		SetAP(playerid, 100);
+		SetHP(playerid, 100.0);
+		SetAP(playerid, 100.0);
 
 		// Unarm players from any weapons
 		ResetPlayerWeapons(playerid);

@@ -15,17 +15,13 @@ YCMD: sethp(playerid, params[], help)
 		return SendUsageMessage(playerid, "/sethp [Player ID] [Amount]");
 	if (!IsPlayerConnected(pID))
 		return SendErrorMessage(playerid, "That player isn't connected.");
+	if (!WC_IsPlayerSpawned(playerid) || IsPlayerDying(playerid))
+		return SendErrorMessage(playerid, "That player isn't spawned.");
 
-	if (Amount < 0)
-		Amount = 0;
-	if (Amount > 100)
-		Amount = 100;
-
-	SetHP(pID, Amount);
+	Amount = clamp(Amount, 0, 100);
+	SetHP(pID, float(Amount));
 
 	LogAdminCommand("sethp", playerid, pID);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "HP to: {FFFFFF}%d", Player[playerid][Name], Player[pID][Name], Amount);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "HP to: {FFFFFF}%d", Player[playerid][Name], Player[pID][Name], Amount);
 }

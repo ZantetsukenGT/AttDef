@@ -14,7 +14,7 @@ YCMD: armourall(playerid, params[], help)
 	foreach (new i : Player)
 	{
 		if (Player[i][Playing])
-			SetAP(i, 100);
+			SetAP(i, 100.0);
 	}
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has armoured everyone.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has armoured everyone.", Player[playerid][Name]);
 }

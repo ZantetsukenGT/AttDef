@@ -12,7 +12,7 @@ YCMD: heal(playerid, params[], help)
 	if (Player[playerid][InDuel])
 		return SendErrorMessage(playerid, "Can't use this command during duel.");
 
-	SetHP(playerid, 100);
-	SetAP(playerid, 100);
+	SetHP(playerid, 100.0);
+	SetAP(playerid, 100.0);
 	return 1;
 }

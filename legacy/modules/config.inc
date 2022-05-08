@@ -46,7 +46,7 @@ new bool: ScreenFlashing			  = true;
 new bool: DefendersWithVehicles		  = false;
 new bool: ShouldNerfDeagle			  = false;
 
-new RoundHP							  = 100;
-new RoundAR							  = 100;
+new Float: RoundHP							  = 100.0;
+new Float: RoundAR							  = 100.0;
 
 new Skin[MAX_TEAMS];

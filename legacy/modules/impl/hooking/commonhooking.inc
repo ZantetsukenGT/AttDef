@@ -72,8 +72,8 @@ hook stock SetPlayerSkin(playerid, skinid)
 	SpawnPlayer(playerid);
 
 	// Set info back after re-spawn
-	SetHP(playerid, Player[playerid][pHealth]);
-	SetAP(playerid, Player[playerid][pArmour]);
+	SetHP(playerid, GetPlayerHealth(playerid));
+	SetAP(playerid, GetPlayerArmour(playerid));
 	SetPlayerInterior(playerid, GetPlayerInterior(playerid));
 	SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(playerid));
 

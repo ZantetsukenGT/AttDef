@@ -13,13 +13,13 @@ YCMD: back(playerid, params[], help)
 	Player[playerid][Team] = REFEREE;
 	TogglePlayerControllable(playerid, 1);
 	Player[playerid][IsAFK] = false;
-	SetHP(playerid, 100);
+	SetHP(playerid, 100.0);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "is back from AFK mode.", Player[playerid][Name]);
-	SendClientMessageToAll(-1, iString);
-	format(
-		iString, sizeof(iString), "%s%s\n%s%s\n%sReferee\n%s%s Sub\n%s%s Sub", TextColor[ATTACKER], TeamName[ATTACKER], TextColor[DEFENDER], TeamName[DEFENDER], TextColor[REFEREE],
-		TextColor[ATTACKER_SUB], TeamName[ATTACKER], TextColor[DEFENDER_SUB], TeamName[DEFENDER]);
-	return ShowPlayerDialog(playerid, DIALOG_SWITCH_TEAM, DIALOG_STYLE_LIST, "{FFFFFF}Team Selection", iString, "Select", "");
+	va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "is back from AFK mode.", Player[playerid][Name]);
+	return ShowPlayerDialog(
+		playerid, DIALOG_SWITCH_TEAM, DIALOG_STYLE_LIST, "{FFFFFF}Team Selection",
+		va_return(
+			"%s%s\n%s%s\n%sReferee\n%s%s Sub\n%s%s Sub", TextColor[ATTACKER], TeamName[ATTACKER], TextColor[DEFENDER], TeamName[DEFENDER], TextColor[REFEREE],
+			TextColor[ATTACKER_SUB], TeamName[ATTACKER], TextColor[DEFENDER_SUB], TeamName[DEFENDER]),
+		"Select", "");
 }

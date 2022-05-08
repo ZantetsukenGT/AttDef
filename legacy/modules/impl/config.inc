@@ -491,7 +491,7 @@ LoadConfig()
 	db_next_row(res);
 
 	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Round HP AR
-	sscanf(iString, "p<,>dd", RoundAR, RoundHP);
+	sscanf(iString, "p<,>ff", RoundAR, RoundHP);
 	db_next_row(res);
 
 	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Main Background Colour
