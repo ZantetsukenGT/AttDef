@@ -9,24 +9,21 @@ YCMD: giveweapon(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "give a weapon to a specific player.");
-	new pID, Weapon[50], Ammo;
 
-	if (sscanf(params, "is[50]d", pID, Weapon, Ammo))
-		return SendUsageMessage(playerid, "/giveweapon [Player ID] [Weapon Name] [Ammo]");
-
-	if (Ammo < 0 || Ammo > 9999)
-		return SendErrorMessage(playerid, "Invalid Ammo.");
+	new pID, Weapon[WC_MAX_WEAPON_NAME], Ammo;
+	if (sscanf(params, "is[*]I(250)", pID, WC_MAX_WEAPON_NAME, Weapon, Ammo))
+		return SendUsageMessage(playerid, "/giveweapon [Player ID] [Weapon Name] [Optional: Ammo]");
 
 	new WeaponID = GetWeaponID(Weapon);
-	if (WeaponID < 1 || WeaponID > 46 || WeaponID == 19 || WeaponID == 20 || WeaponID == 21 || WeaponID == 22)
-		return SendErrorMessage(playerid, "Invalid Weapon Name.");
-	if (WeaponID == 44 || WeaponID == 45)
-		return SendErrorMessage(playerid, "We don't do this shit around here.");
+	if (!IsValidWeapon(WeaponID))
+		return SendErrorMessage(playerid, "Invalid Weapon.");
+
+	Ammo = clamp(Ammo, 10, 9999);
 
 	GivePlayerWeapon(pID, WeaponID, Ammo);
 
 	LogAdminCommand("giveweapon", playerid, pID);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has given {FFFFFF}%s " COL_PRIM "a {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name],
-		Player[pID][Name], WeaponNames[WeaponID]));
+	return va_SendClientMessageToAll(
+		-1, "{FFFFFF}%s " COL_PRIM "has given {FFFFFF}%s " COL_PRIM "a {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name], Player[pID][Name], ReturnWeaponName(WeaponID));
 }

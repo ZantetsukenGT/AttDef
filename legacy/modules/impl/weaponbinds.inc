@@ -47,7 +47,7 @@ UpdatePlayerWeaponBindTextDraw(playerid)
 	//format(str, sizeof str, "[Gun binds]");
 	for (new i = 0; i < MAX_WEAPON_BINDS; i++)
 	{
-		format(str, sizeof str, "%s~n~%s+%s = %s", str, WEAPON_BIND_PRIMARY_KEY_TEXT, WeaponBindKeyText[i], WeaponNames[WeaponBindData[playerid][BindKeyWeapon][i]]);
+		format(str, sizeof str, "%s~n~%s+%s = %s", str, WEAPON_BIND_PRIMARY_KEY_TEXT, WeaponBindKeyText[i], ReturnWeaponName(WeaponBindData[playerid][BindKeyWeapon][i]));
 	}
 	PlayerTextDrawSetString(playerid, WeaponBindData[playerid][WeaponBindTextDraw], str);
 }
@@ -81,7 +81,7 @@ ShowPlayerWeaponBindDialog(playerid)
 	format(str, sizeof str, Player[playerid][WeaponBinding] ? "%s{CC0000}Disable\n" : "%s{33CC00}Enable\n", str);
 	for (new i = 0; i < MAX_WEAPON_BINDS; i++)
 	{
-		format(str, sizeof str, "%s%s+%s\t%s\n", str, WEAPON_BIND_PRIMARY_KEY_TEXT_ALT, WeaponBindKeyText_ALT[i], WeaponNames[WeaponBindData[playerid][BindKeyWeapon][i]]);
+		format(str, sizeof str, "%s%s+%s\t%s\n", str, WEAPON_BIND_PRIMARY_KEY_TEXT_ALT, WeaponBindKeyText_ALT[i], ReturnWeaponName(WeaponBindData[playerid][BindKeyWeapon][i]));
 	}
 	return ShowPlayerDialog(playerid, DIALOG_WEAPONBIND_MAIN, DIALOG_STYLE_TABLIST_HEADERS, "Weapon Binds", str, "Modify", "Cancel");
 }
