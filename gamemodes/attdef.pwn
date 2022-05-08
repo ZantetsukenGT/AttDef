@@ -6,7 +6,6 @@
 
 #include <a_samp>
 #include <iphub-key>
-#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 
 // YSI Libraries 5.x
 // See https://github.com/pawn-lang/YSI-Includes for all the documentation.
@@ -17,6 +16,7 @@
 #include <YSI_Visual\y_dialog>	   // Provides an abstraction of dialogs, doing away with IDs and allowing you to use individual public or inline functions per dialog.
 
 // Libraries
+#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 #include <sscanf2>			   // Sscanf 2.11.x
 #include <geoip>			   // A simple library that provides information from IPHub for connected players.
 #include <strlib>			   // String functions for SA-MP Pawn scripting by Slice (Oscar Broman)
