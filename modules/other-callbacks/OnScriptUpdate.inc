@@ -7,8 +7,6 @@
 forward OnScriptUpdate();
 public OnScriptUpdate()
 {
-	CheckVisualDamageTextDraws(); // This basically hides damage textdraws and damage bubbles that should be hidden
-
 	foreach (new i : Player)
 	{
 		// AFK Variable Update
@@ -23,9 +21,9 @@ public OnScriptUpdate()
 		// Update net info textdraws
 		if (PlayerInterface[i][INTERFACE_NET])
 		{
-			new pFPS  = GetPlayerFPS(playerid);
-			new pPL	  = NetStats_PacketLossPercent(playerid);
-			new pPing = GetPlayerPing(playerid);
+			new pFPS	   = GetPlayerFPS(i);
+			new Float: pPL = NetStats_PacketLossPercent(i);
+			new pPing	   = GetPlayerPing(i);
 			PlayerTextDrawSetString(
 				i, FPSPingPacket[i], va_return("%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, pFPS, MAIN_TEXT_COLOUR, pPing, MAIN_TEXT_COLOUR, pPL));
 			Update3DTextLabelText(
@@ -54,6 +52,5 @@ public OnScriptUpdate()
 			}
 		}
 	}
-
 	return 1;
 }
