@@ -34,9 +34,17 @@ hook OnPlayerDisconnect(playerid, reason)
 	}
 }
 
+InitWeaponConfig()
+{
+	SetVehicleUnoccupiedDamage(false);
+	SetVehiclePassengerDamage(true);
+	SetRespawnTime(0);
+}
+
 InitScriptCoreSettings()
 {
 	Command_SetDeniedReturn(true);		   //To avoid default unknown command message
+	InitWeaponConfig();
 	SetAltCommands();
 	LoadDatabase();
 	UsePlayerPedAnims();				   // Player movement
@@ -65,15 +73,12 @@ InitScriptSecondarySettings()
 	// Settings
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
-	lagcompmode = GetServerVarAsInt("lagcompmode");
 	CheckServerHostname();
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();
 	InitSpectate();
-	InitVisualDamage();
 	InitGunmenu();
 	InitVoting();
-	AdjustWeaponRanges();
 
 	CreateObject(3095, 268.74, 1884.21, 16.07, 0.00, 0.00, 0.00); // block area 51
 
