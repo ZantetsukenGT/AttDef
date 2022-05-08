@@ -42,7 +42,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new str[140];
 				format(
 					str, sizeof str, "Key: %s+%s\nCurrent weapon: %s\n\nType weapon name or ID below to code this key bind for it", WEAPON_BIND_PRIMARY_KEY_TEXT_ALT,
-					WeaponBindKeyText_ALT[index], WeaponNames[WeaponBindData[playerid][BindKeyWeapon][index]]);
+					WeaponBindKeyText_ALT[index], ReturnWeaponName(WeaponBindData[playerid][BindKeyWeapon][index]));
 				ShowPlayerDialog(playerid, DIALOG_WEAPONBIND_MODIFY, DIALOG_STYLE_INPUT, "Coding weapon key bind", str, "Code it", "Cancel");
 			}
 			return 1;
@@ -97,7 +97,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					for (new i = 0; i < SAVE_SLOTS; i++)
 					{
-						if (strlen(SaveVariables[i][pName]) > 2 && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
+						if (SaveVariables[i][pName][0] && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
 						{
 							AddDialogListitem(playerid, SaveVariables[i][pName]);
 						}
@@ -154,7 +154,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					for (new i = 0; i < SAVE_SLOTS; i++)
 					{
-						if (strlen(SaveVariables[i][pName]) > 2 && !strcmp(SaveVariables[i][pName], inputtext, false, strlen(inputtext)) && SaveVariables[i][RoundID] == Current)
+						if (SaveVariables[i][pName][0] && !strcmp(SaveVariables[i][pName], inputtext, false, strlen(inputtext)) && SaveVariables[i][RoundID] == Current)
 						{
 							ToReplaceID = i;
 							break;
@@ -901,13 +901,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 
-			RoundHP = hp;
+			RoundHP = float(hp);
 
-			new str[128];
-			format(str, sizeof(str), "%s " COL_PRIM "has changed the round health to: {FFFFFF}%d", Player[playerid][Name], RoundHP);
+			new str[144];
+			format(str, sizeof(str), "%s " COL_PRIM "has changed the round health to: {FFFFFF}%d", Player[playerid][Name], hp);
 			SendClientMessageToAll(-1, str);
 
-			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%d,%d' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
+			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%f,%f' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
 			db_free_result(db_query(sqliteconnection, str));
 
 			ShowConfigDialog(playerid);
@@ -923,13 +923,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 
-			RoundAR = hp;
+			RoundAR = float(hp);
 
-			new str[128];
-			format(str, sizeof(str), "%s " COL_PRIM "has changed the round armour to: {FFFFFF}%d", Player[playerid][Name], RoundAR);
+			new str[144];
+			format(str, sizeof(str), "%s " COL_PRIM "has changed the round armour to: {FFFFFF}%d", Player[playerid][Name], hp);
 			SendClientMessageToAll(-1, str);
 
-			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%d,%d' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
+			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%f,%f' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
 			db_free_result(db_query(sqliteconnection, str));
 
 			ShowConfigDialog(playerid);
