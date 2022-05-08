@@ -21,8 +21,5 @@ YCMD: freecam(playerid, params[], help)
 	PlayerTextDrawHide(playerid, RoundKillDmgTDmg[playerid]);
 	PlayerTextDrawHide(playerid, FPSPingPacket[playerid]);
 	PlayerTextDrawHide(playerid, BaseID_VS[playerid]);
-	PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-	PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
-	HidePlayerProgressBar(playerid, HealthBar[playerid]);
 	return SendClientMessage(playerid, -1, "Use /specoff to exit FreeCam! Try /movecam for camera movement");
 }

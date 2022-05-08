@@ -25,7 +25,6 @@
 
 #define INTERFACE_SPEC		0
 #define INTERFACE_NET		1
-#define INTERFACE_HP		2
 
 new bool:PlayerInterface[MAX_PLAYERS][MAX_PLAYER_INTERFACE_ASPECTS];
 
@@ -100,8 +99,6 @@ new Text:AttDef_ModernRoundStats[10];
 
 new PlayerText:FPSPingPacket[MAX_PLAYERS]; // Ping, FPS and Packetloss textdraw on top right corner.
 new PlayerText:RoundKillDmgTDmg[MAX_PLAYERS]; // Shows Kills, Damage and Total Damage on the left hand side of the radar.
-new PlayerText:DoingDamage[MAX_PLAYERS][MAX_VISUAL_DAMAGES]; // Shows when player hits someone.
-new PlayerText:GettingDamaged[MAX_PLAYERS][MAX_VISUAL_DAMAGES]; // Shows when someone hits you.
 new PlayerText:FriendlyDamage[MAX_PLAYERS][2]; // Shows when your teammate hits you or you hit them
 new PlayerText:WhoSpec[MAX_PLAYERS]; // Shows who is spectating you.
 new PlayerText:SpecText[MAX_PLAYERS][4]; // Shows spectated player info.
@@ -109,9 +106,6 @@ new PlayerText:AreaCheckTD[MAX_PLAYERS]; // Show countdown textdraw when the pla
 new PlayerText:AreaCheckBG[MAX_PLAYERS];
 new PlayerText:DeathText[MAX_PLAYERS][2];
 new PlayerText:TD_RoundSpec[MAX_PLAYERS];
-new PlayerText:ArmourTextDraw[MAX_PLAYERS];
-new PlayerText:HPTextDraw_TD[MAX_PLAYERS];
 new PlayerText:BaseID_VS[MAX_PLAYERS];
 new PlayerText:VInfo[MAX_PLAYERS];
 new DeathMessageStr[MAX_PLAYERS][32];
-new PlayerBar:HealthBar[MAX_PLAYERS]; // Server-sided health

@@ -876,29 +876,7 @@ RoundTextdrawsCreate()
 
 LoadPlayerTextDraws(playerid)
 {
-	HealthBar[playerid]		= CreatePlayerProgressBar(playerid, 547.000000, 67.000000, 64.000000, 6.000000, 0xB4191DFF, 100.000000, BAR_DIRECTION_RIGHT);
-
-	HPTextDraw_TD[playerid] = CreatePlayerTextDraw(playerid, 577, 67.1, "_");
-	PlayerTextDrawBackgroundColor(playerid, HPTextDraw_TD[playerid], MAIN_BACKGROUND_COLOUR);
-	PlayerTextDrawFont(playerid, HPTextDraw_TD[playerid], 2);
-	PlayerTextDrawLetterSize(playerid, HPTextDraw_TD[playerid], 0.2300, 0.7000);
-	PlayerTextDrawColor(playerid, HPTextDraw_TD[playerid], 16711935);
-	PlayerTextDrawSetOutline(playerid, HPTextDraw_TD[playerid], 0);
-	PlayerTextDrawSetProportional(playerid, HPTextDraw_TD[playerid], 1);
-	PlayerTextDrawSetShadow(playerid, HPTextDraw_TD[playerid], 0);
-	PlayerTextDrawAlignment(playerid, HPTextDraw_TD[playerid], 2);
-
-	ArmourTextDraw[playerid] = CreatePlayerTextDraw(playerid, 577, 46.0, "_");
-	PlayerTextDrawBackgroundColor(playerid, ArmourTextDraw[playerid], MAIN_BACKGROUND_COLOUR);
-	PlayerTextDrawFont(playerid, ArmourTextDraw[playerid], 2);
-	PlayerTextDrawLetterSize(playerid, ArmourTextDraw[playerid], 0.2300, 0.7000);
-	PlayerTextDrawColor(playerid, ArmourTextDraw[playerid], 16711935);
-	PlayerTextDrawSetOutline(playerid, ArmourTextDraw[playerid], 0);
-	PlayerTextDrawSetProportional(playerid, ArmourTextDraw[playerid], 1);
-	PlayerTextDrawSetShadow(playerid, ArmourTextDraw[playerid], 0);
-	PlayerTextDrawAlignment(playerid, ArmourTextDraw[playerid], 2);
-
-	BaseID_VS[playerid] = CreatePlayerTextDraw(playerid, 548.000000, 25.000000, "_");
+	BaseID_VS[playerid] = CreatePlayerTextDraw(playerid, 576.000000, 25.000000, "_");
 	PlayerTextDrawFont(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawLetterSize(playerid, BaseID_VS[playerid], 0.26000, 1.500000);
 	PlayerTextDrawBackgroundColor(playerid, BaseID_VS[playerid], MAIN_BACKGROUND_COLOUR);
@@ -906,10 +884,8 @@ LoadPlayerTextDraws(playerid)
 	PlayerTextDrawSetOutline(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawSetProportional(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawSetShadow(playerid, BaseID_VS[playerid], 0);
+	PlayerTextDrawAlignment(playerid, BaseID_VS[playerid], 2);
 
-	HidePlayerProgressBar(playerid, HealthBar[playerid]);
-	PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-	PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
 	PlayerTextDrawHide(playerid, BaseID_VS[playerid]);
 
 	TargetInfoData[playerid][TargetInfoTD] = CreatePlayerTextDraw(playerid, 55.000000, 300.000000, "_");
@@ -973,38 +949,6 @@ LoadPlayerTextDraws(playerid)
 
 	PlayerTextDrawShow(playerid, FriendlyDamage[playerid][0]);
 	PlayerTextDrawShow(playerid, FriendlyDamage[playerid][1]);
-
-	y += DAMAGE_TEXTDRAW_Y_DIFF;
-
-	// Other visual damage textdraws
-	for (new i = 0; i < MAX_VISUAL_DAMAGES; i++)
-	{
-		VisualDamage[playerid][ShownTakenDamage][i] = false;
-		VisualDamage[playerid][ShownGivenDamage][i] = false;
-
-		DoingDamage[playerid][i]					= CreatePlayerTextDraw(playerid, 170.0, y, "_");
-		PlayerTextDrawFont(playerid, DoingDamage[playerid][i], 1);
-		PlayerTextDrawLetterSize(playerid, DoingDamage[playerid][i], 0.18000, 0.9);
-		PlayerTextDrawBackgroundColor(playerid, DoingDamage[playerid][i], MAIN_BACKGROUND_COLOUR);
-		PlayerTextDrawColor(playerid, DoingDamage[playerid][i], 16727295);
-		PlayerTextDrawSetProportional(playerid, DoingDamage[playerid][i], 1);
-		PlayerTextDrawSetOutline(playerid, DoingDamage[playerid][i], 1);
-		PlayerTextDrawSetShadow(playerid, DoingDamage[playerid][i], 0);
-
-		GettingDamaged[playerid][i] = CreatePlayerTextDraw(playerid, 380.0, y, "_");
-		PlayerTextDrawFont(playerid, GettingDamaged[playerid][i], 1);
-		PlayerTextDrawLetterSize(playerid, GettingDamaged[playerid][i], 0.18000, 0.9);
-		PlayerTextDrawBackgroundColor(playerid, GettingDamaged[playerid][i], MAIN_BACKGROUND_COLOUR);
-		PlayerTextDrawColor(playerid, GettingDamaged[playerid][i], 16727295);
-		PlayerTextDrawSetProportional(playerid, GettingDamaged[playerid][i], 1);
-		PlayerTextDrawSetOutline(playerid, GettingDamaged[playerid][i], 1);
-		PlayerTextDrawSetShadow(playerid, GettingDamaged[playerid][i], 0);
-
-		PlayerTextDrawShow(playerid, DoingDamage[playerid][i]);
-		PlayerTextDrawShow(playerid, GettingDamaged[playerid][i]);
-
-		y += DAMAGE_TEXTDRAW_Y_DIFF;
-	}
 
 	WhoSpec[playerid] = CreatePlayerTextDraw(playerid, 1, 150.00000, "_");
 	PlayerTextDrawBackgroundColor(playerid, WhoSpec[playerid], MAIN_BACKGROUND_COLOUR);
@@ -1338,12 +1282,6 @@ ShowEndRoundTextDraw(playerid)
 	else
 		TextDrawShowForPlayer(playerid, teamWonHow);
 
-	for (new i = 0; i < 3; i++)
-	{
-		PlayerTextDrawSetString(playerid, DoingDamage[playerid][i], "_");
-		PlayerTextDrawSetString(playerid, GettingDamaged[playerid][i], "_");
-	}
-
 	PlayerTextDrawHide(playerid, DeathText[playerid][0]);
 	PlayerTextDrawHide(playerid, DeathText[playerid][1]);
 
@@ -1509,26 +1447,19 @@ TogglePlayerInterface(playerid, bool: toggle, interface = -1)
 		{
 			PlayerInterface[playerid][INTERFACE_SPEC] = toggle;
 			PlayerInterface[playerid][INTERFACE_NET]  = toggle;
-			PlayerInterface[playerid][INTERFACE_HP]	  = toggle;
 			if (toggle)
 			{
 				PlayerTextDrawShow(playerid, WhoSpec[playerid]);
 				PlayerTextDrawShow(playerid, FPSPingPacket[playerid]);
-				PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-				PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
 			}
 			else
 			{
 				PlayerTextDrawHide(playerid, WhoSpec[playerid]);
 				PlayerTextDrawHide(playerid, FPSPingPacket[playerid]);
-				PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-				PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
 			}
 			format(str, sizeof(str), "UPDATE Players SET InterfaceSpec = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_SPEC], Player[playerid][Name]);
 			db_free_result(db_query(sqliteconnection, str));
 			format(str, sizeof(str), "UPDATE Players SET InterfaceNet = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_NET], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
-			format(str, sizeof(str), "UPDATE Players SET InterfaceHP = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_HP], Player[playerid][Name]);
 			db_free_result(db_query(sqliteconnection, str));
 		}
 		case INTERFACE_SPEC:
@@ -1551,23 +1482,6 @@ TogglePlayerInterface(playerid, bool: toggle, interface = -1)
 				PlayerTextDrawHide(playerid, FPSPingPacket[playerid]);
 
 			format(str, sizeof(str), "UPDATE Players SET InterfaceNet = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_NET], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
-		}
-		case INTERFACE_HP:
-		{
-			PlayerInterface[playerid][INTERFACE_HP] = toggle;
-			if (toggle)
-			{
-				PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-				PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
-			}
-			else
-			{
-				PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-				PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
-			}
-
-			format(str, sizeof(str), "UPDATE Players SET InterfaceHP = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_HP], Player[playerid][Name]);
 			db_free_result(db_query(sqliteconnection, str));
 		}
 	}
