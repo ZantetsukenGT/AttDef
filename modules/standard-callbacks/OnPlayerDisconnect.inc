@@ -5,39 +5,33 @@
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	// Send public disconnect messages
-	new iString[144];
 	switch (reason)
 	{
 		case 0:
 		{
 			if (!Player[playerid][Playing])
-				format(iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has had a crash/timeout.", Player[playerid][Name]);
+				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has had a crash/timeout.", Player[playerid][Name]);
 			else
-				format(
-					iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has had a crash/timeout {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+				va_SendClientMessageToAll(
+					-1, "{FFFFFF}%s {CCCCCC}has had a crash/timeout {FFFFFF}(HP %.1f | AP %.1f).", Player[playerid][Name], GetPlayerHealth(playerid), GetPlayerArmour(playerid));
 		}
 		case 1:
 		{
 			if (!Player[playerid][Playing])
-				format(iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has quit the server.", Player[playerid][Name]);
+				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has quit the server.", Player[playerid][Name]);
 			else
-				format(
-					iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has quit the server {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+				va_SendClientMessageToAll(
+					-1, "{FFFFFF}%s {CCCCCC}has quit the server {FFFFFF}(HP %.1f | AP %.1f).", Player[playerid][Name], GetPlayerHealth(playerid), GetPlayerArmour(playerid));
 		}
 		case 2:
 		{
 			if (!Player[playerid][Playing])
-				format(iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has been kicked or banned.", Player[playerid][Name]);
+				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has been kicked or banned.", Player[playerid][Name]);
 			else
-				format(
-					iString, sizeof(iString), "{FFFFFF}%s {CCCCCC}has been kicked or banned {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+				va_SendClientMessageToAll(
+					-1, "{FFFFFF}%s {CCCCCC}has been kicked or banned {FFFFFF}(HP %.1f | AP %.1f).", Player[playerid][Name], GetPlayerHealth(playerid), GetPlayerArmour(playerid));
 		}
 	}
-	SendClientMessageToAll(-1, iString);
 	// Check player spawned vehicle
 	if (IsValidVehicle(Player[playerid][LastVehicle]))
 	{
