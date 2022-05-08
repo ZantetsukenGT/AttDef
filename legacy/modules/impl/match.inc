@@ -102,11 +102,12 @@ public StartRoundAutomatically()
 		case 0: // arena
 		{
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-			new id = DetermineRandomRound(0, true, ARENA);
+			new id		   = DetermineRandomRound(0, true, ARENA);
 			if (id == -1)
 			{
 				AllowStartBase = true;
-				SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "couldn't start an {FFFFFF}arena " COL_PRIM "because the current {FFFFFF}arena set " COL_PRIM "doesn't have any.");
+				SendClientMessageToAll(
+					-1, "{FFFFFF}System " COL_PRIM "couldn't start an {FFFFFF}arena " COL_PRIM "because the current {FFFFFF}arena set " COL_PRIM "doesn't have any.");
 				return 1;
 			}
 			PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 2000, false, "i", id);
@@ -118,11 +119,12 @@ public StartRoundAutomatically()
 		case 1: // base
 		{
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-			new id = DetermineRandomRound(0, true, BASE);
+			new id		   = DetermineRandomRound(0, true, BASE);
 			if (id == -1)
 			{
 				AllowStartBase = true;
-				SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "couldn't start a {FFFFFF}base " COL_PRIM "because the current {FFFFFF}base set " COL_PRIM "doesn't have any.");
+				SendClientMessageToAll(
+					-1, "{FFFFFF}System " COL_PRIM "couldn't start a {FFFFFF}base " COL_PRIM "because the current {FFFFFF}base set " COL_PRIM "doesn't have any.");
 				return 1;
 			}
 			PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 2000, false, "i", id);
@@ -236,16 +238,16 @@ UpdateTeamPlayerCount(teamid, bool: elimination_check, exception = -1)
 	{
 		case ATTACKER:
 		{
-			format(str, sizeof str, "~w~%d__(%d)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d__(%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
 			TextDrawSetString(leftTeamData, str);
-			format(str, sizeof str, "~w~%d (%d)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d (%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
 			TextDrawSetString(AttDef_ModernRoundStats[6], str);
 		}
 		case DEFENDER:
 		{
-			format(str, sizeof str, "~w~(%d)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%.0f)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
 			TextDrawSetString(rightTeamData, str);
-			format(str, sizeof str, "~w~(%d) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%.0f) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
 			TextDrawSetString(AttDef_ModernRoundStats[7], str);
 		}
 	}
@@ -253,7 +255,7 @@ UpdateTeamPlayerCount(teamid, bool: elimination_check, exception = -1)
 	// Update attdef style round textdraws
 	format(
 		str, sizeof(str),
-		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%d~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%d~w~)~n~",
+		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%.0f~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%.0f~w~)~n~",
 		TeamName[ATTACKER], PlayersAlive[ATTACKER], TeamHP[ATTACKER], TeamName[DEFENDER], PlayersAlive[DEFENDER], TeamHP[DEFENDER]);
 	TextDrawSetString(AttDef_RoundStats, str);
 
@@ -284,7 +286,7 @@ UpdateTeamHP(teamid, exception = -1)
 		return;
 
 	// Reset team hp variable
-	TeamHP[teamid] = 0;
+	TeamHP[teamid] = 0.0;
 	// Loop through players playing current round
 	foreach (new i : PlayersInRound)
 	{
@@ -296,7 +298,7 @@ UpdateTeamHP(teamid, exception = -1)
 			continue; // Skip this index
 
 		// Add total HP of this player (at this index) to team total HP
-		TeamHP[teamid] += Player[i][pHealth] + Player[i][pArmour];
+		TeamHP[teamid] += GetPlayerHealth(i) + GetPlayerArmour(i);
 	}
 	// Update round textdraws with correct info
 	new str[150];
@@ -304,16 +306,16 @@ UpdateTeamHP(teamid, exception = -1)
 	{
 		case ATTACKER:
 		{
-			format(str, sizeof str, "~w~%d__(%d)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d__(%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
 			TextDrawSetString(leftTeamData, str);
-			format(str, sizeof str, "~w~%d (%d)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d (%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
 			TextDrawSetString(AttDef_ModernRoundStats[6], str);
 		}
 		case DEFENDER:
 		{
-			format(str, sizeof str, "~w~(%d)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%.0f)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
 			TextDrawSetString(rightTeamData, str);
-			format(str, sizeof str, "~w~(%d) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%.0f) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
 			TextDrawSetString(AttDef_ModernRoundStats[7], str);
 		}
 	}
@@ -321,7 +323,7 @@ UpdateTeamHP(teamid, exception = -1)
 	// Update attdef style round textdraws
 	format(
 		str, sizeof(str),
-		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%d~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%d~w~)~n~",
+		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%.0f~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%.0f~w~)~n~",
 		TeamName[ATTACKER], PlayersAlive[ATTACKER], TeamHP[ATTACKER], TeamName[DEFENDER], PlayersAlive[DEFENDER], TeamHP[DEFENDER]);
 	TextDrawSetString(AttDef_RoundStats, str);
 }
@@ -420,7 +422,7 @@ public GameLoopCallback()
 						SendClientMessageToAll(
 							-1,
 							va_return(
-								"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%d | %d)", Player[i][Name], Player[i][pHealth], Player[i][pArmour]));
+								"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%.1f | %.1f)", Player[i][Name], GetPlayerHealth(i), GetPlayerArmour(i)));
 
 						Player[i][OutOfArena] = MAX_ZONE_LIMIT_WARNINGS;
 
@@ -730,7 +732,7 @@ PauseRound()
 	if (!PauseStopWatchTimer)
 	{
 		TotalPausesInRound++;
-		PauseTimeElapsed = 0;
+		PauseTimeElapsed	= 0;
 		PauseStopWatchTimer = SetPreciseTimer("PauseStopWatch", 1000, true);
 	}
 
@@ -913,7 +915,7 @@ PlayerRequestBackup(playerid)
 		return 0; // fail
 
 	// Calculate the player's total HP
-	new totHP = Player[playerid][pHealth] + Player[playerid][pArmour];
+	new Float: totHP = GetPlayerHealth(playerid) + GetPlayerArmour(playerid);
 
 	// Get the player's facing angle
 	new Float: facingAngle;
@@ -921,8 +923,8 @@ PlayerRequestBackup(playerid)
 
 	// Get player's position
 	new Float: x,
-		Float: y,
-		Float: z;
+			   Float: y,
+					  Float: z;
 	GetPlayerPos(playerid, x, y, z);
 
 	// Find how many players are in range
@@ -948,7 +950,7 @@ PlayerRequestBackup(playerid)
 
 	// Format backup request message to send it later
 	format(
-		str, sizeof(str), "{%s}[HELP] %s {FFFFFF}needs backup [Heading %s | HP %d | Enemies: %d]", team == ATTACKER ? "FF6666" : "9999FF", Player[playerid][Name],
+		str, sizeof(str), "{%s}[HELP] %s {FFFFFF}needs backup [Heading %s | HP %.0f | Enemies: %d]", team == ATTACKER ? "FF6666" : "9999FF", Player[playerid][Name],
 		GetCardinalPoint(facingAngle), totHP, enemiesCt);
 
 	// This is for players who use colored markers (via /playermarkers)
@@ -1061,15 +1063,13 @@ public SwapBothTeams()
 forward OnPlayerReplace(ToAddID, ToReplaceID, playerid);
 public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 {
-	new Float: Pos[4],
-			   HP[2],
-			   iString[180];
+	new Float: Pos[4];
 
 	GetPlayerPos(ToReplaceID, Pos[0], Pos[1], Pos[2]);
 	GetPlayerFacingAngle(ToReplaceID, Pos[3]);
 
-	GetHP(ToReplaceID, HP[0]);
-	GetAP(ToReplaceID, HP[1]);
+	new Float: pHP	   = GetPlayerHealth(ToReplaceID);
+	new Float: pArmour = GetPlayerArmour(ToReplaceID);
 
 	new Weapons[13], Ammo[13];
 	for (new i = 0; i < 13; i++) { GetPlayerWeaponData(ToReplaceID, i, Weapons[i], Ammo[i]); }
@@ -1086,8 +1086,8 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 	Player[ToAddID][IgnoreSpawn] = true;
 	SpawnPlayer(ToAddID);
 
-	SetHP(ToAddID, HP[0]);
-	SetAP(ToAddID, HP[1]);
+	SetHP(ToAddID, pHP);
+	SetAP(ToAddID, pArmour);
 
 	SetPlayerPos(ToAddID, Pos[0], Pos[1], Pos[2] + 1);
 	SetPlayerFacingAngle(ToAddID, Pos[3]);
@@ -1124,10 +1124,8 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 		TextDrawShowForAll(PauseTD);
 	}
 
-	format(
-		iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has replaced {FFFFFF}%s " COL_PRIM "by {FFFFFF}%s", Player[playerid][Name], Player[ToReplaceID][Name],
-		Player[ToAddID][Name]);
-	SendClientMessageToAll(-1, iString);
+	va_SendClientMessageToAll(
+		-1, "{FFFFFF}%s " COL_PRIM "has replaced {FFFFFF}%s " COL_PRIM "by {FFFFFF}%s", Player[playerid][Name], Player[ToReplaceID][Name], Player[ToAddID][Name]);
 
 	UpdateRoundKillDmgTDmg(ToAddID);
 
@@ -1163,12 +1161,12 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 			{
 				case ATTACKER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BAttackerSpawn[Current][0] + RandomMinMax(-3, 3), BAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
-						BAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BAttackerSpawn[Current][0] + RandomMinMax(-3, 3),
+						BAttackerSpawn[Current][1] + RandomMinMax(-3, 3), BAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 				case DEFENDER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BDefenderSpawn[Current][0] + RandomMinMax(-3, 3), BDefenderSpawn[Current][1] + RandomMinMax(-3, 3),
-						BDefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], BDefenderSpawn[Current][0] + RandomMinMax(-3, 3),
+						BDefenderSpawn[Current][1] + RandomMinMax(-3, 3), BDefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			}
 			SetPlayerInterior(ToAddID, BInterior[Current]);
 		}
@@ -1178,12 +1176,12 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 			{
 				case ATTACKER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], AAttackerSpawn[Current][0] + RandomMinMax(-3, 3), AAttackerSpawn[Current][1] + RandomMinMax(-3, 3),
-						AAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], AAttackerSpawn[Current][0] + RandomMinMax(-3, 3),
+						AAttackerSpawn[Current][1] + RandomMinMax(-3, 3), AAttackerSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 				case DEFENDER:
 					SetSpawnInfo(
-						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], ADefenderSpawn[Current][0] + RandomMinMax(-3, 3), ADefenderSpawn[Current][1] + RandomMinMax(-3, 3),
-						ADefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
+						ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], ADefenderSpawn[Current][0] + RandomMinMax(-3, 3),
+						ADefenderSpawn[Current][1] + RandomMinMax(-3, 3), ADefenderSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			}
 			SetPlayerInterior(ToAddID, AInterior[Current]);
 		}
@@ -1303,7 +1301,7 @@ ResetRoundVariablesInSlots()
 {
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2)
+		if (SaveVariables[i][pName][0])
 		{
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
@@ -1580,7 +1578,7 @@ SpawnPlayersInRC()
 
 	UpdateTeamCornerInfo();
 
-	RoundSeconds	 = ConfigRoundTime * 60;
+	RoundSeconds = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
@@ -1861,7 +1859,7 @@ SpawnPlayersInArena()
 
 	UpdateTeamCornerInfo();
 
-	RoundSeconds	 = ConfigRoundTime * 60;
+	RoundSeconds = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
@@ -1966,8 +1964,8 @@ public AddPlayerToArena(playerid)
 		case REFEREE:
 		{
 			SetSpawnInfo(
-				playerid, Player[playerid][Team], Skin[Player[playerid][Team]], ACPSpawn[Current][0] + RandomMinMax(-1, 1), ACPSpawn[Current][1] + RandomMinMax(-1, 1), ACPSpawn[Current][2] + 0.5, 0,
-				0, 0, 0, 0, 0, 0);
+				playerid, Player[playerid][Team], Skin[Player[playerid][Team]], ACPSpawn[Current][0] + RandomMinMax(-1, 1), ACPSpawn[Current][1] + RandomMinMax(-1, 1),
+				ACPSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			SpawnPlayer(playerid);
 			SetPlayerColor(playerid, REFEREE_COLOR);
 			SetPlayerTeam(playerid, 3);
@@ -2036,12 +2034,12 @@ public OnBaseStart(BaseID)
 	new iString[32];
 	format(iString, sizeof(iString), "%sBase %s(~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, Current, MAIN_TEXT_COLOUR);
 
-	ViewBaseCamPos[0] = BCPSpawn[Current][0];
-	ViewBaseCamPos[1] = BCPSpawn[Current][1];
-	ViewBaseCamPos[2] = BCPSpawn[Current][2];
-	ViewRoundCountdown		  = 9;
+	ViewBaseCamPos[0]  = BCPSpawn[Current][0];
+	ViewBaseCamPos[1]  = BCPSpawn[Current][1];
+	ViewBaseCamPos[2]  = BCPSpawn[Current][2];
+	ViewRoundCountdown = 9;
 
-	CPZone			  = GangZoneCreate(BCPSpawn[Current][0] - 75, BCPSpawn[Current][1] - 75, BCPSpawn[Current][0] + 75, BCPSpawn[Current][1] + 75);
+	CPZone			   = GangZoneCreate(BCPSpawn[Current][0] - 75, BCPSpawn[Current][1] - 75, BCPSpawn[Current][0] + 75, BCPSpawn[Current][1] + 75);
 	GangZoneShowForAll(CPZone, GANGZONE_CP);
 
 	foreach (new i : Player)
@@ -2207,7 +2205,7 @@ public ViewBaseForPlayers()
 forward EnableVehicleCollisions(playerid);
 public EnableVehicleCollisions(playerid)
 {
-	if(Current != - 1)
+	if (Current != -1)
 	{
 		DisableRemoteVehicleCollisions(playerid, 0);
 		SendClientMessage(playerid, -1, "Vehicle collisions " COL_PRIM "have been {00FF00}enabled");
@@ -2282,10 +2280,9 @@ SpawnPlayersInBase()
 
 					DisableRemoteVehicleCollisions(i, 1);
 					SetPreciseTimer("EnableVehicleCollisions", 15000, false, "i", i);
-					SendClientMessage(i, -1, "Vehicle collisions "COL_PRIM"have been {FF0000}disabled"COL_PRIM" for 15 seconds");
+					SendClientMessage(i, -1, "Vehicle collisions " COL_PRIM "have been {FF0000}disabled" COL_PRIM " for 15 seconds");
 
 					ShowTeamBarsForPlayer(i);
-
 				}
 				case DEFENDER:
 				{
@@ -2321,7 +2318,7 @@ SpawnPlayersInBase()
 
 	UpdateTeamCornerInfo();
 
-	RoundSeconds	 = ConfigRoundTime * 60;
+	RoundSeconds = ConfigRoundTime * 60;
 
 	if (CheckTeamElimination() != 0)
 	{
@@ -2345,10 +2342,7 @@ SpawnPlayersInBase()
 }
 
 forward Round_EnableSync();
-public Round_EnableSync()
-{
-	AllowSync = true;
-}
+public Round_EnableSync() { AllowSync = true; }
 
 forward AddPlayerToBase(playerid);
 public AddPlayerToBase(playerid)
@@ -2432,8 +2426,8 @@ public AddPlayerToBase(playerid)
 		case REFEREE:
 		{
 			SetSpawnInfo(
-				playerid, Player[playerid][Team], Skin[Player[playerid][Team]], BCPSpawn[Current][0] + RandomMinMax(-1, 1), BCPSpawn[Current][1] + RandomMinMax(-1, 1), BCPSpawn[Current][2] + 0.5, 0,
-				0, 0, 0, 0, 0, 0);
+				playerid, Player[playerid][Team], Skin[Player[playerid][Team]], BCPSpawn[Current][0] + RandomMinMax(-1, 1), BCPSpawn[Current][1] + RandomMinMax(-1, 1),
+				BCPSpawn[Current][2] + 0.5, 0, 0, 0, 0, 0, 0, 0);
 			SpawnPlayer(playerid);
 			SetCPForPlayer(playerid);
 			SetPlayerColor(playerid, REFEREE_COLOR);
@@ -2550,9 +2544,9 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	new playerScores[MAX_PLAYERS][rankingEnum], index, p, names[MAX_PLAYERS][MAX_PLAYER_NAME];
 
 	new Float: ahpleft,
-		Float: dhpleft,
-			   aalive,
-			   dalive;
+			   Float: dhpleft,
+					  aalive,
+					  dalive;
 
 	foreach (new i : Player)
 	{
@@ -2561,18 +2555,19 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 		{
 			if (Player[i][WasInBase])
 			{
+				new Float: pHPArmour = GetPlayerHealth(i) + GetPlayerArmour(i);
 				if (Player[i][Playing])
 				{
 					OnPlayerAmmoUpdate(i);
 
 					if (Player[i][Team] == ATTACKER)
 					{
-						ahpleft = ahpleft + (Player[i][pHealth] + Player[i][pArmour]);
+						ahpleft = ahpleft + pHPArmour;
 						aalive++;
 					}
 					else if (Player[i][Team] == DEFENDER)
 					{
-						dhpleft = dhpleft + (Player[i][pHealth] + Player[i][pArmour]);
+						dhpleft = dhpleft + pHPArmour;
 						dalive++;
 					}
 				}
@@ -2580,14 +2575,14 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				playerScores[index][player_Team]   = Player[i][Team];
 				playerScores[index][player_Kills]  = Player[i][RoundKills];
 				playerScores[index][player_Deaths] = Player[i][RoundDeaths];
-				playerScores[index][player_HP]	   = Player[i][pHealth] + Player[i][pArmour];
+				playerScores[index][player_HP]	   = pHPArmour;
 				playerScores[index][player_Acc]	   = floatround(Player[i][Accuracy], floatround_round);
 
 				if (playerScores[index][player_Deaths] > 0)
 					playerScores[index][player_Overall] = playerScores[index][player_Score] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 				else
 					playerScores[index][player_Overall]
-						= playerScores[index][player_Score] + playerScores[index][player_HP] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
+						= playerScores[index][player_Score] + floatround(playerScores[index][player_HP], floatround_ceil) + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 
 				format(names[index], MAX_PLAYER_NAME, Player[i][NameWithoutTag]);
 
@@ -2613,8 +2608,8 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 			if (!Player[i][InDuel])
 			{
-				SetHP(i, 100);
-				SetAP(i, 100);
+				SetHP(i, 100.0);
+				SetAP(i, 100.0);
 			}
 
 			if (Player[i][InDeathCamera])
@@ -2639,7 +2634,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2 && Current == SaveVariables[i][RoundID] && SaveVariables[i][CheckScore])
+		if (SaveVariables[i][pName][0] && Current == SaveVariables[i][RoundID] && SaveVariables[i][CheckScore])
 		{
 			playerScores[index][player_Score]  = SaveVariables[i][RDamage];
 			playerScores[index][player_Team]   = SaveVariables[i][pTeam];
@@ -2652,7 +2647,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				playerScores[index][player_Overall] = playerScores[index][player_Score] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 			else
 				playerScores[index][player_Overall]
-					= playerScores[index][player_Score] + playerScores[index][player_HP] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
+					= playerScores[index][player_Score] + floatround(playerScores[index][player_HP], floatround_ceil) + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 
 			format(names[index], MAX_PLAYER_NAME, SaveVariables[i][pNameWithoutTag]);
 
@@ -2709,7 +2704,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			if (playerScores[i][player_Deaths] > 0)
 				format(AttDeaths, sizeof(AttDeaths), "%s~w~Dead~n~", AttDeaths);
 			else
-				format(AttDeaths, sizeof(AttDeaths), "%s~w~%d~n~", AttDeaths, playerScores[i][player_HP]);
+				format(AttDeaths, sizeof(AttDeaths), "%s~w~%.0f~n~", AttDeaths, playerScores[i][player_HP]);
 			format(AttDamage, sizeof(AttDamage), "%s~w~%d~n~", AttDamage, playerScores[i][player_Score]);
 			format(AttAcc, sizeof(AttAcc), "%s~w~%d%%~n~", AttAcc, playerScores[i][player_Acc]);
 		}
@@ -2720,7 +2715,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			if (playerScores[i][player_Deaths] > 0)
 				format(DefDeaths, sizeof(DefDeaths), "%s~w~Dead~n~", DefDeaths);
 			else
-				format(DefDeaths, sizeof(DefDeaths), "%s~w~%d~n~", DefDeaths, playerScores[i][player_HP]);
+				format(DefDeaths, sizeof(DefDeaths), "%s~w~%.0f~n~", DefDeaths, playerScores[i][player_HP]);
 
 			format(DefDamage, sizeof(DefDamage), "%s~w~%d~n~", DefDamage, playerScores[i][player_Score]);
 			format(DefAcc, sizeof(DefAcc), "%s~w~%d%%~n~", DefAcc, playerScores[i][player_Acc]);
@@ -2908,7 +2903,7 @@ public WarEnded()
 			playerScores[index][player_Kills]	= Player[i][TotalKills];
 			playerScores[index][player_Deaths]	= Player[i][TotalDeaths];
 			playerScores[index][player_TPlayed] = Player[i][RoundPlayed];
-			playerScores[index][player_HP]		= Player[i][pHealth] + Player[i][pArmour];
+			playerScores[index][player_HP]		= GetPlayerHealth(i) + GetPlayerArmour(i);
 
 			new Float: nTotalAccuracy;
 			if (Player[i][TotalBulletsFired] == 0)
@@ -2938,7 +2933,7 @@ public WarEnded()
 	}
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2 && SaveVariables[i][TDamage] > 0)
+		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0)
 		{
 			playerScores[index][player_Score]	= SaveVariables[i][TDamage];
 			playerScores[index][player_Team]	= SaveVariables[i][pTeam];
