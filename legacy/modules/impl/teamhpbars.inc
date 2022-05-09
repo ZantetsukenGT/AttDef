@@ -59,7 +59,7 @@ CreatePlayerTeamBar(playerid)
 
 	new teamToSet	  = Player[playerid][Team];
 	new teamBarColour = TEAMBARS_ATTACKER_COLOR;
-	new formatToUse[] = "~w~~h~%s ~r~~h~~h~~h~%.0f / %d";
+	new formatToUse[] = "~w~~h~%s ~r~~h~~h~~h~%d / %d";
 	if (teamToSet == DEFENDER)
 	{
 		teamBarColour	= TEAMBARS_DEFENDER_COLOR;
@@ -72,7 +72,7 @@ CreatePlayerTeamBar(playerid)
 	TeamBarsData[playerid][TeamBar]		= CreatePlayerProgressBar(playerid, TEAMBARS_BAR_START_X, y, 80.50, 9.19, teamBarColour, 200.0);
 	// Create team bar textdraws
 	TeamBarsData[playerid][TeamBarText] = TextDrawCreate(
-		TEAMBARS_TEXT_START_X, y, va_return(formatToUse, Player[playerid][NameWithoutTag], GetPlayerHealth(playerid) + GetPlayerArmour(playerid), Player[playerid][RoundDamage]));
+		TEAMBARS_TEXT_START_X, y, va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(GetPlayerHealth(playerid) + GetPlayerArmour(playerid)), floatround(Player[playerid][RoundDamage])));
 	TextDrawBackgroundColor(TeamBarsData[playerid][TeamBarText], 51);
 	TextDrawFont(TeamBarsData[playerid][TeamBarText], 1);
 	TextDrawLetterSize(TeamBarsData[playerid][TeamBarText], 0.160000, 0.900000);
@@ -244,7 +244,7 @@ UpdatePlayerTeamBar(playerid)
 	if (Player[playerid][Playing])
 	{
 		new colourToSet;
-		new formatToUse[] = "~w~~h~%s ~r~~h~~h~~h~%.0f / %d";
+		new formatToUse[] = "~w~~h~%s ~r~~h~~h~~h~%d / %d";
 		if (Player[playerid][Team] == ATTACKER)
 			colourToSet = Player[playerid][AskingForHelp] ? TEAMBARS_ATTACKER_HELP_COLOR : TEAMBARS_ATTACKER_COLOR;
 		else if (Player[playerid][Team] == DEFENDER)
@@ -257,7 +257,7 @@ UpdatePlayerTeamBar(playerid)
 		SetPlayerProgressBarColour(playerid, TeamBarsData[playerid][TeamBar], colourToSet);
 		TextDrawSetString(
 			TeamBarsData[playerid][TeamBarText],
-			va_return(formatToUse, Player[playerid][NameWithoutTag], pHPArmour, Player[playerid][RoundDamage]));
+			va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(pHPArmour), floatround(Player[playerid][RoundDamage])));
 	}
 	else
 	{

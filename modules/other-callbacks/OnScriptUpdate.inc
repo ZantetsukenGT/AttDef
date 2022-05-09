@@ -47,7 +47,7 @@ public OnScriptUpdate()
 				{
 					new Float: vHealth;
 					GetVehicleHealth(vID, vHealth);
-					PlayerTextDrawSetString(i, VInfo[i], va_return("~w~%s ~r~%.0f%%", aVehicleNames[vModelID - 400], vHealth / 10));
+					PlayerTextDrawSetString(i, VInfo[i], va_return("~w~%s ~r~%d%%", aVehicleNames[vModelID - 400], floatround(vHealth / 10)));
 				}
 			}
 		}

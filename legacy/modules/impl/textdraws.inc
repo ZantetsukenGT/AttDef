@@ -1055,7 +1055,7 @@ UpdateRoundKillDmgTDmg(playerid)
 		TDC[Player[playerid][Team]], Player[playerid][RoundDamage], MAIN_TEXT_COLOUR, TDC[Player[playerid][Team]], Player[playerid][TotalDamage]);*/
 	format(
 		iString, sizeof(iString), "%sKills ~r~%d~n~%sDamage ~r~%d~n~%sTotal Dmg ~r~%d", MAIN_TEXT_COLOUR, Player[playerid][RoundKills], MAIN_TEXT_COLOUR,
-		Player[playerid][RoundDamage], MAIN_TEXT_COLOUR, Player[playerid][TotalDamage]);
+		floatround(Player[playerid][RoundDamage]), MAIN_TEXT_COLOUR, floatround(Player[playerid][TotalDamage]));
 
 	PlayerTextDrawSetString(playerid, RoundKillDmgTDmg[playerid], iString);
 	return 1;

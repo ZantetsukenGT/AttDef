@@ -36,9 +36,9 @@ UpdatePlayerHPAPVariables(playerid, bool: WasPlaying)
 	if (WasPlaying)
 	{
 		if (Player[playerid][Team] == ATTACKER)
-			SetPlayerScore(playerid, floatround(health + armour, floatround_floor));
+			SetPlayerScore(playerid, floatround(health + armour));
 		else
-			SetPlayerScore(playerid, -floatround(health + armour, floatround_floor));
+			SetPlayerScore(playerid, -floatround(health + armour));
 	}
 }
 

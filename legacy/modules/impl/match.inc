@@ -238,16 +238,16 @@ UpdateTeamPlayerCount(teamid, bool: elimination_check, exception = -1)
 	{
 		case ATTACKER:
 		{
-			format(str, sizeof str, "~w~%d__(%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d__(%d)", PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]));
 			TextDrawSetString(leftTeamData, str);
-			format(str, sizeof str, "~w~%d (%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d (%d)", PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]));
 			TextDrawSetString(AttDef_ModernRoundStats[6], str);
 		}
 		case DEFENDER:
 		{
-			format(str, sizeof str, "~w~(%.0f)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%d)__%d", floatround(TeamHP[DEFENDER]), PlayersAlive[DEFENDER]);
 			TextDrawSetString(rightTeamData, str);
-			format(str, sizeof str, "~w~(%.0f) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%d) %d", floatround(TeamHP[DEFENDER]), PlayersAlive[DEFENDER]);
 			TextDrawSetString(AttDef_ModernRoundStats[7], str);
 		}
 	}
@@ -255,8 +255,8 @@ UpdateTeamPlayerCount(teamid, bool: elimination_check, exception = -1)
 	// Update attdef style round textdraws
 	format(
 		str, sizeof(str),
-		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%.0f~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%.0f~w~)~n~",
-		TeamName[ATTACKER], PlayersAlive[ATTACKER], TeamHP[ATTACKER], TeamName[DEFENDER], PlayersAlive[DEFENDER], TeamHP[DEFENDER]);
+		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%d~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%d~w~)~n~",
+		TeamName[ATTACKER], PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]), TeamName[DEFENDER], PlayersAlive[DEFENDER], floatround(TeamHP[DEFENDER]));
 	TextDrawSetString(AttDef_RoundStats, str);
 
 // If we're asked to check team/round elimination
@@ -306,16 +306,16 @@ UpdateTeamHP(teamid, exception = -1)
 	{
 		case ATTACKER:
 		{
-			format(str, sizeof str, "~w~%d__(%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d__(%d)", PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]));
 			TextDrawSetString(leftTeamData, str);
-			format(str, sizeof str, "~w~%d (%.0f)", PlayersAlive[ATTACKER], TeamHP[ATTACKER]);
+			format(str, sizeof str, "~w~%d (%d)", PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]));
 			TextDrawSetString(AttDef_ModernRoundStats[6], str);
 		}
 		case DEFENDER:
 		{
-			format(str, sizeof str, "~w~(%.0f)__%d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%d)__%d", floatround(TeamHP[DEFENDER]), PlayersAlive[DEFENDER]);
 			TextDrawSetString(rightTeamData, str);
-			format(str, sizeof str, "~w~(%.0f) %d", TeamHP[DEFENDER], PlayersAlive[DEFENDER]);
+			format(str, sizeof str, "~w~(%d) %d", floatround(TeamHP[DEFENDER]), PlayersAlive[DEFENDER]);
 			TextDrawSetString(AttDef_ModernRoundStats[7], str);
 		}
 	}
@@ -323,8 +323,8 @@ UpdateTeamHP(teamid, exception = -1)
 	// Update attdef style round textdraws
 	format(
 		str, sizeof(str),
-		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%.0f~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%.0f~w~)~n~",
-		TeamName[ATTACKER], PlayersAlive[ATTACKER], TeamHP[ATTACKER], TeamName[DEFENDER], PlayersAlive[DEFENDER], TeamHP[DEFENDER]);
+		"~r~~h~%s  ~r~~h~~h~%d   ~w~(~r~~h~~h~%d~w~)			   	                    			   	            ~b~~h~%s  ~b~~h~~h~%d   ~w~(~b~~h~~h~%d~w~)~n~",
+		TeamName[ATTACKER], PlayersAlive[ATTACKER], floatround(TeamHP[ATTACKER]), TeamName[DEFENDER], PlayersAlive[DEFENDER], floatround(TeamHP[DEFENDER]));
 	TextDrawSetString(AttDef_RoundStats, str);
 }
 
@@ -950,8 +950,8 @@ PlayerRequestBackup(playerid)
 
 	// Format backup request message to send it later
 	format(
-		str, sizeof(str), "{%s}[HELP] %s {FFFFFF}needs backup [Heading %s | HP %.0f | Enemies: %d]", team == ATTACKER ? "FF6666" : "9999FF", Player[playerid][Name],
-		GetCardinalPoint(facingAngle), totHP, enemiesCt);
+		str, sizeof(str), "{%s}[HELP] %s {FFFFFF}needs backup [Heading %s | HP %d | Enemies: %d]", team == ATTACKER ? "FF6666" : "9999FF", Player[playerid][Name],
+		GetCardinalPoint(facingAngle), floatround(totHP), enemiesCt);
 
 	// This is for players who use colored markers (via /playermarkers)
 	new specialStr[144];
@@ -1283,7 +1283,7 @@ ResetPlayerRoundVariables(playerid, bool: resetTotals = false)
 	{
 		Player[playerid][TotalKills]		= 0;
 		Player[playerid][TotalDeaths]		= 0;
-		Player[playerid][TotalDamage]		= 0;
+		Player[playerid][TotalDamage]		= 0.0;
 		Player[playerid][RoundPlayed]		= 0;
 		Player[playerid][TotalBulletsFired] = 0;
 		Player[playerid][TotalshotsHit]		= 0;
@@ -1292,7 +1292,7 @@ ResetPlayerRoundVariables(playerid, bool: resetTotals = false)
 	{
 		Player[playerid][RoundKills]  = 0;
 		Player[playerid][RoundDeaths] = 0;
-		Player[playerid][RoundDamage] = 0;
+		Player[playerid][RoundDamage] = 0.0;
 		Player[playerid][shotsHit]	  = 0;
 	}
 }
@@ -1305,7 +1305,7 @@ ResetRoundVariablesInSlots()
 		{
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
-			SaveVariables[i][RDamage]	 = 0;
+			SaveVariables[i][RDamage]	 = 0.0;
 			SaveVariables[i][sWasInBase] = false;
 		}
 	}
@@ -2576,13 +2576,13 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				playerScores[index][player_Kills]  = Player[i][RoundKills];
 				playerScores[index][player_Deaths] = Player[i][RoundDeaths];
 				playerScores[index][player_HP]	   = pHPArmour;
-				playerScores[index][player_Acc]	   = floatround(Player[i][Accuracy], floatround_round);
+				playerScores[index][player_Acc]	   = Player[i][Accuracy];
 
 				if (playerScores[index][player_Deaths] > 0)
 					playerScores[index][player_Overall] = playerScores[index][player_Score] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 				else
 					playerScores[index][player_Overall]
-						= playerScores[index][player_Score] + floatround(playerScores[index][player_HP], floatround_ceil) + playerScores[index][player_Kills] + playerScores[index][player_Acc];
+						= playerScores[index][player_Score] + playerScores[index][player_HP] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 
 				format(names[index], MAX_PLAYER_NAME, Player[i][NameWithoutTag]);
 
@@ -2647,13 +2647,13 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				playerScores[index][player_Overall] = playerScores[index][player_Score] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 			else
 				playerScores[index][player_Overall]
-					= playerScores[index][player_Score] + floatround(playerScores[index][player_HP], floatround_ceil) + playerScores[index][player_Kills] + playerScores[index][player_Acc];
+					= playerScores[index][player_Score] + playerScores[index][player_HP] + playerScores[index][player_Kills] + playerScores[index][player_Acc];
 
 			format(names[index], MAX_PLAYER_NAME, SaveVariables[i][pNameWithoutTag]);
 
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
-			SaveVariables[i][RDamage]	 = 0;
+			SaveVariables[i][RDamage]	 = 0.0;
 
 			SaveVariables[i][RoundID]	 = -1;
 			SaveVariables[i][CheckScore] = false;
@@ -2669,9 +2669,9 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 	new topkill, topkillID = -1, Float: topDmg,
 				 topDmgID = -1,
-				 topAcc,
+				 Float: topAcc,
 				 topAccID = -1,
-				 topOverall,
+				 Float: topOverall,
 				 topOverallID = -1;
 
 	for (new i = 0; i != p; ++i)
@@ -2681,17 +2681,17 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			topkill	  = playerScores[i][player_Kills];
 			topkillID = i;
 		}
-		if (playerScores[i][player_Score] > topDmg && playerScores[i][player_Score] > 0)
+		if (playerScores[i][player_Score] > topDmg && playerScores[i][player_Score] > 0.0)
 		{
 			topDmg	 = playerScores[i][player_Score];
 			topDmgID = i;
 		}
-		if (playerScores[i][player_Acc] > topAcc && playerScores[i][player_Acc] > 0)
+		if (playerScores[i][player_Acc] > topAcc && playerScores[i][player_Acc] > 0.0)
 		{
 			topAcc	 = playerScores[i][player_Acc];
 			topAccID = i;
 		}
-		if (playerScores[i][player_Overall] > topOverall && playerScores[i][player_Score] > 0 && playerScores[i][player_Team] == winnerid)
+		if (playerScores[i][player_Overall] > topOverall && playerScores[i][player_Score] > 0.0 && playerScores[i][player_Team] == winnerid)
 		{
 			topOverall	 = playerScores[i][player_Overall];
 			topOverallID = i;
@@ -2704,9 +2704,9 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			if (playerScores[i][player_Deaths] > 0)
 				format(AttDeaths, sizeof(AttDeaths), "%s~w~Dead~n~", AttDeaths);
 			else
-				format(AttDeaths, sizeof(AttDeaths), "%s~w~%.0f~n~", AttDeaths, playerScores[i][player_HP]);
-			format(AttDamage, sizeof(AttDamage), "%s~w~%d~n~", AttDamage, playerScores[i][player_Score]);
-			format(AttAcc, sizeof(AttAcc), "%s~w~%d%%~n~", AttAcc, playerScores[i][player_Acc]);
+				format(AttDeaths, sizeof(AttDeaths), "%s~w~%d~n~", AttDeaths, floatround(playerScores[i][player_HP]));
+			format(AttDamage, sizeof(AttDamage), "%s~w~%d~n~", AttDamage, floatround(playerScores[i][player_Score]));
+			format(AttAcc, sizeof(AttAcc), "%s~w~%d%%~n~", AttAcc, floatround(playerScores[i][player_Acc]));
 		}
 		else if (playerScores[i][player_Team] == DEFENDER || playerScores[i][player_Team] == DEFENDER_SUB)
 		{
@@ -2715,23 +2715,23 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			if (playerScores[i][player_Deaths] > 0)
 				format(DefDeaths, sizeof(DefDeaths), "%s~w~Dead~n~", DefDeaths);
 			else
-				format(DefDeaths, sizeof(DefDeaths), "%s~w~%.0f~n~", DefDeaths, playerScores[i][player_HP]);
+				format(DefDeaths, sizeof(DefDeaths), "%s~w~%d~n~", DefDeaths, floatround(playerScores[i][player_HP]));
 
-			format(DefDamage, sizeof(DefDamage), "%s~w~%d~n~", DefDamage, playerScores[i][player_Score]);
-			format(DefAcc, sizeof(DefAcc), "%s~w~%d%%~n~", DefAcc, playerScores[i][player_Acc]);
+			format(DefDamage, sizeof(DefDamage), "%s~w~%d~n~", DefDamage, floatround(playerScores[i][player_Score]));
+			format(DefAcc, sizeof(DefAcc), "%s~w~%d%%~n~", DefAcc, floatround(playerScores[i][player_Acc]));
 		}
 
 		if (i == 0)
 			format(
-				TopString[0], 128, "%s1st         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[0], 128, "%s1st         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 		else if (i == 1)
 			format(
-				TopString[1], 128, "%s2nd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[1], 128, "%s2nd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 		else if (i == 2)
 			format(
-				TopString[2], 128, "%s3rd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[2], 128, "%s3rd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 	}
 
@@ -2756,8 +2756,8 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	switch (WinID)
 	{
 		case 0: format(iString, sizeof(iString), "~r~~h~Attackers ~w~captured the ~b~~h~Checkpoint");
-		case 3: format(iString, sizeof(iString), "~r~~h~~h~Attackers ~w~won by ~r~%.0f hp ~w~and ~r~~h~%d players alive", ahpleft, aalive);
-		case 1, 2: format(iString, sizeof(iString), "~b~~h~~h~Defenders ~w~won by ~b~%.0f hp ~w~and ~b~~h~%d players alive", dhpleft, dalive);
+		case 3: format(iString, sizeof(iString), "~r~~h~~h~Attackers ~w~won by ~r~%d hp ~w~and ~r~~h~%d players alive", floatround(ahpleft), aalive);
+		case 1, 2: format(iString, sizeof(iString), "~b~~h~~h~Defenders ~w~won by ~b~%d hp ~w~and ~b~~h~%d players alive", floatround(dhpleft), dalive);
 		case 5: format(iString, sizeof(iString), "~r~~h~%s ~w~captured the ~r~~h~Checkpoint", TeamName[ATTACKER]);
 		case 6: format(iString, sizeof(iString), "~b~~h~%s ~w~captured the ~b~~h~Checkpoint", TeamName[DEFENDER]);
 	}
@@ -2896,7 +2896,7 @@ public WarEnded()
 
 	foreach (new i : Player)
 	{
-		if (Player[i][TotalDamage] > 0)
+		if (Player[i][TotalDamage] > 0.0)
 		{
 			playerScores[index][player_Score]	= Player[i][TotalDamage];
 			playerScores[index][player_Team]	= Player[i][Team];
@@ -2909,18 +2909,18 @@ public WarEnded()
 			if (Player[i][TotalBulletsFired] == 0)
 				nTotalAccuracy = 0.0;
 			else
-				nTotalAccuracy = floatmul(100.0, floatdiv(Player[i][TotalshotsHit], Player[i][TotalBulletsFired]));
-			playerScores[index][player_Acc] = floatround(nTotalAccuracy, floatround_round);
+				nTotalAccuracy = 100.0 * Player[i][TotalshotsHit] / Player[i][TotalBulletsFired];
+			playerScores[index][player_Acc] = nTotalAccuracy;
 
 			if (playerScores[index][player_TPlayed] > 0)
-				playerScores[index][player_Overall] = (playerScores[index][player_Score] / playerScores[index][player_TPlayed]) + playerScores[index][player_Kills]
+				playerScores[index][player_Overall] = playerScores[index][player_Score] / playerScores[index][player_TPlayed] + playerScores[index][player_Kills]
 													+ playerScores[index][player_TPlayed] + playerScores[index][player_Acc] - playerScores[index][player_Deaths];
 			else
-				playerScores[index][player_Overall] = 0;
+				playerScores[index][player_Overall] = 0.0;
 
 			format(names[index], MAX_PLAYER_NAME, Player[i][NameWithoutTag]);
 
-			printf("overall of %s[%d]: %d", names[index], index, playerScores[index][player_Overall]);
+			printf("overall of %s[%d]: %.2f", names[index], index, playerScores[index][player_Overall]);
 
 			playerScores[index++][player_ID] = i;
 			p++;
@@ -2933,7 +2933,7 @@ public WarEnded()
 	}
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0)
+		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0.0)
 		{
 			playerScores[index][player_Score]	= SaveVariables[i][TDamage];
 			playerScores[index][player_Team]	= SaveVariables[i][pTeam];
@@ -2946,20 +2946,20 @@ public WarEnded()
 			if (SaveVariables[i][tBulletsShot] == 0)
 				nTotalAccuracy = 0.0;
 			else
-				nTotalAccuracy = floatmul(100.0, floatdiv(SaveVariables[i][tshotsHit], SaveVariables[i][tBulletsShot]));
-			playerScores[index][player_Acc] = floatround(nTotalAccuracy, floatround_round);
+				nTotalAccuracy = 100.0 * SaveVariables[i][tshotsHit] / SaveVariables[i][tBulletsShot];
+			playerScores[index][player_Acc] = nTotalAccuracy;
 
 			if (playerScores[index][player_TPlayed] > 0)
-				playerScores[index][player_Overall] = (playerScores[index][player_Score] / playerScores[index][player_TPlayed]) + playerScores[index][player_Kills]
+				playerScores[index][player_Overall] = playerScores[index][player_Score] / playerScores[index][player_TPlayed] + playerScores[index][player_Kills]
 													+ playerScores[index][player_TPlayed] + playerScores[index][player_Acc] - playerScores[index][player_Deaths];
 			else
-				playerScores[index][player_Overall] = 0;
+				playerScores[index][player_Overall] = 0.0;
 
 			format(names[index], MAX_PLAYER_NAME, SaveVariables[i][pNameWithoutTag]);
 
 			SaveVariables[i][RKills]  = 0;
 			SaveVariables[i][RDeaths] = 0;
-			SaveVariables[i][RDamage] = 0;
+			SaveVariables[i][RDamage] = 0.0;
 
 			SaveVariables[i][RoundID] = -1;
 			index++;
@@ -2971,9 +2971,9 @@ public WarEnded()
 
 	new topkill, topkillID = -1, Float: topDmg,
 				 topDmgID = -1,
-				 topAcc,
+				 Float: topAcc,
 				 topAccID = -1,
-				 topOverall,
+				 Float: topOverall,
 				 topOverallID = -1;
 
 	for (new i = 0; i != p; ++i)
@@ -2983,17 +2983,17 @@ public WarEnded()
 			topkill	  = playerScores[i][player_Kills];
 			topkillID = i;
 		}
-		if (playerScores[i][player_Score] > topDmg && playerScores[i][player_Score] > 0)
+		if (playerScores[i][player_Score] > topDmg && playerScores[i][player_Score] > 0.0)
 		{
 			topDmg	 = playerScores[i][player_Score];
 			topDmgID = i;
 		}
-		if (playerScores[i][player_Acc] > topAcc && playerScores[i][player_Acc] > 0)
+		if (playerScores[i][player_Acc] > topAcc && playerScores[i][player_Acc] > 0.0)
 		{
 			topAcc	 = playerScores[i][player_Acc];
 			topAccID = i;
 		}
-		if (playerScores[i][player_Overall] > topOverall && playerScores[i][player_Overall] != 0 && playerScores[i][player_Score] > 0 && playerScores[i][player_TPlayed] > 0
+		if (playerScores[i][player_Overall] > topOverall && playerScores[i][player_Overall] > 0.0 && playerScores[i][player_Score] > 0.0 && playerScores[i][player_TPlayed] > 0
 			&& playerScores[i][player_Team] == winnerid)
 		{
 			topOverall	 = playerScores[i][player_Overall];
@@ -3006,8 +3006,8 @@ public WarEnded()
 			format(AttKills, sizeof(AttKills), "%s~w~%d~n~", AttKills, playerScores[i][player_Kills]);
 			format(AttDeaths, sizeof(AttDeaths), "%s~w~%d~n~", AttDeaths, playerScores[i][player_Deaths]);
 			format(AttPlayed, sizeof(AttPlayed), "%s~w~%d~n~", AttPlayed, playerScores[i][player_TPlayed]);
-			format(AttDamage, sizeof(AttDamage), "%s~w~%d~n~", AttDamage, playerScores[i][player_Score]);
-			format(AttAcc, sizeof(AttAcc), "%s~w~%d%%~n~", AttAcc, playerScores[i][player_Acc]);
+			format(AttDamage, sizeof(AttDamage), "%s~w~%d~n~", AttDamage, floatround(playerScores[i][player_Score]));
+			format(AttAcc, sizeof(AttAcc), "%s~w~%d%%~n~", AttAcc, floatround(playerScores[i][player_Acc]));
 		}
 		else if (playerScores[i][player_Team] == DEFENDER || playerScores[i][player_Team] == DEFENDER_SUB)
 		{
@@ -3015,20 +3015,20 @@ public WarEnded()
 			format(DefKills, sizeof(DefKills), "%s~w~%d~n~", DefKills, playerScores[i][player_Kills]);
 			format(DefDeaths, sizeof(DefDeaths), "%s~w~%d~n~", DefDeaths, playerScores[i][player_Deaths]);
 			format(DefPlayed, sizeof(DefPlayed), "%s~w~%d~n~", DefPlayed, playerScores[i][player_TPlayed]);
-			format(DefDamage, sizeof(DefDamage), "%s~w~%d~n~", DefDamage, playerScores[i][player_Score]);
-			format(DefAcc, sizeof(DefAcc), "%s~w~%d%%~n~", DefAcc, playerScores[i][player_Acc]);
+			format(DefDamage, sizeof(DefDamage), "%s~w~%d~n~", DefDamage, floatround(playerScores[i][player_Score]));
+			format(DefAcc, sizeof(DefAcc), "%s~w~%d%%~n~", DefAcc, floatround(playerScores[i][player_Acc]));
 		}
 		if (i == 0)
 			format(
-				TopString[0], 128, "%s1st         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[0], 128, "%s1st         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 		else if (i == 1)
 			format(
-				TopString[1], 128, "%s2nd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[1], 128, "%s2nd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 		else if (i == 2)
 			format(
-				TopString[2], 128, "%s3rd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], playerScores[i][player_Score],
+				TopString[2], 128, "%s3rd         -         %s   	({FFFFFF}%d%s)", TextColor[playerScores[i][player_Team]], names[i], floatround(playerScores[i][player_Score]),
 				TextColor[playerScores[i][player_Team]]);
 	}
 

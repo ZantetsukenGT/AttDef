@@ -107,9 +107,9 @@ UpdateTeamCornerInfo()
 	for (new i = 0; i < MAX_PLAYERS; i++)
 	{
 		AttackersArray[i][playerID]		= -1;
-		AttackersArray[i][playerDamage] = -1;
+		AttackersArray[i][playerDamage] = -1.0;
 		DefendersArray[i][playerID]		= -1;
-		DefendersArray[i][playerDamage] = -1;
+		DefendersArray[i][playerDamage] = -1.0;
 	}
 
 	foreach (new i : Player)
@@ -168,12 +168,12 @@ UpdateTeamCornerInfo()
 
 		if (Player[AttackersArray[i][playerID]][Playing])
 			format(
-				PlayersSecondString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%.0f ~w~- ~r~%d~n~", PlayersSecondString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				GetPlayerHealth(AttackersArray[i][playerID]) + GetPlayerArmour(AttackersArray[i][playerID]), AttackersArray[i][playerDamage]);
+				PlayersSecondString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%d ~w~- ~r~%d~n~", PlayersSecondString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
+				floatround(GetPlayerHealth(AttackersArray[i][playerID]) + GetPlayerArmour(AttackersArray[i][playerID])), floatround(AttackersArray[i][playerDamage]));
 		else
 			format(
 				PlayersSecondString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~Dead ~w~- ~r~%d~n~", PlayersSecondString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				AttackersArray[i][playerDamage]);
+				floatround(AttackersArray[i][playerDamage]));
 
 		PlayersAddedToSecondString[0]++;
 	}
@@ -191,12 +191,12 @@ UpdateTeamCornerInfo()
 
 		if (Player[AttackersArray[i][playerID]][Playing])
 			format(
-				PlayersFirstString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%.0f ~w~- ~r~%d~n~", PlayersFirstString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				GetPlayerHealth(AttackersArray[i][playerID]) + GetPlayerArmour(AttackersArray[i][playerID]), AttackersArray[i][playerDamage]);
+				PlayersFirstString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%d ~w~- ~r~%d~n~", PlayersFirstString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
+				floatround(GetPlayerHealth(AttackersArray[i][playerID]) + GetPlayerArmour(AttackersArray[i][playerID])), floatround(AttackersArray[i][playerDamage]));
 		else
 			format(
 				PlayersFirstString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~Dead ~w~- ~r~%d~n~", PlayersFirstString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				AttackersArray[i][playerDamage]);
+				floatround(AttackersArray[i][playerDamage]));
 
 		PlayersAddedToFirstString[0]++;
 	}
@@ -213,12 +213,12 @@ UpdateTeamCornerInfo()
 
 		if (Player[DefendersArray[i][playerID]][Playing])
 			format(
-				PlayersSecondString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%.0f ~w~- ~b~%d~n~", PlayersSecondString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				GetPlayerHealth(DefendersArray[i][playerID]) + GetPlayerArmour(DefendersArray[i][playerID]), DefendersArray[i][playerDamage]);
+				PlayersSecondString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%d ~w~- ~b~%d~n~", PlayersSecondString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
+				floatround(GetPlayerHealth(DefendersArray[i][playerID]) + GetPlayerArmour(DefendersArray[i][playerID])), floatround(DefendersArray[i][playerDamage]));
 		else
 			format(
 				PlayersSecondString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~Dead ~w~- ~b~%d~n~", PlayersSecondString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				DefendersArray[i][playerDamage]);
+				floatround(DefendersArray[i][playerDamage]));
 
 		PlayersAddedToSecondString[1]++;
 	}
@@ -236,12 +236,12 @@ UpdateTeamCornerInfo()
 
 		if (Player[DefendersArray[i][playerID]][Playing])
 			format(
-				PlayersFirstString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%.0f ~w~- ~b~%d~n~", PlayersFirstString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				GetPlayerHealth(DefendersArray[i][playerID]) + GetPlayerArmour(DefendersArray[i][playerID]), DefendersArray[i][playerDamage]);
+				PlayersFirstString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%d ~w~- ~b~%d~n~", PlayersFirstString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
+				floatround(GetPlayerHealth(DefendersArray[i][playerID]) + GetPlayerArmour(DefendersArray[i][playerID])), floatround(DefendersArray[i][playerDamage]));
 		else
 			format(
 				PlayersFirstString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~Dead ~w~- ~b~%d~n~", PlayersFirstString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				DefendersArray[i][playerDamage]);
+				floatround(DefendersArray[i][playerDamage]));
 
 		PlayersAddedToFirstString[1]++;
 	}

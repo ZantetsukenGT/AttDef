@@ -34,7 +34,7 @@ public OnPlayerClickTextDraw(playerid, Text: clickedid)
 			{
 				Player[i][TotalKills]		 = 0;
 				Player[i][TotalDeaths]		 = 0;
-				Player[i][TotalDamage]		 = 0;
+				Player[i][TotalDamage]		 = 0.0;
 				Player[i][RoundPlayed]		 = 0;
 				Player[i][TotalBulletsFired] = 0;
 				Player[i][TotalshotsHit]	 = 0;

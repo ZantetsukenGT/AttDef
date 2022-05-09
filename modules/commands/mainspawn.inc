@@ -8,7 +8,7 @@ YCMD: mainspawn(playerid, params[], help)
 	/*if (Player[playerid][Level] < 4 && !IsPlayerAdmin(playerid))
 		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
 	if (help)
-		return SendCommandHelpMessage(playerid, "change server main spawn position.");
+		return SendCommandHelpMessage(playerid, "change server main spawn position and optional weather.");
 	GetPlayerPos(playerid, MainSpawn[0], MainSpawn[1], MainSpawn[2]);
 	GetPlayerFacingAngle(playerid, MainSpawn[3]);
 	MainInterior = GetPlayerInterior(playerid);

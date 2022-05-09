@@ -83,9 +83,9 @@ PlayerVoteReadd(playerid, onplayerid)
 			{
 				if (Player[onplayerid][Playing])
 				{
-					Player[onplayerid][TotalKills]	= Player[onplayerid][TotalKills] - Player[onplayerid][RoundKills];
-					Player[onplayerid][TotalDeaths] = Player[onplayerid][TotalDeaths] - Player[onplayerid][RoundDeaths];
-					Player[onplayerid][TotalDamage] = Player[onplayerid][TotalDamage] - Player[onplayerid][RoundDamage];
+					Player[onplayerid][TotalKills]	-= Player[onplayerid][RoundKills];
+					Player[onplayerid][TotalDeaths] -= Player[onplayerid][RoundDeaths];
+					Player[onplayerid][TotalDamage] -= Player[onplayerid][RoundDamage];
 				}
 				DeletePlayerTeamBar(onplayerid);
 				if (GameType == BASE)

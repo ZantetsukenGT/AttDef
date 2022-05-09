@@ -524,7 +524,7 @@ ShowTargetInfo(playerid, targetid)
 		DeletePreciseTimer(TargetInfoData[playerid][TargetInfoTimer]);
 	TargetInfoData[playerid][TargetInfoTimer] = SetPreciseTimer("HideTargetInfo", 5000, false, "i", playerid);
 
-	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%.1f", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
+	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.2f   %sHP: %s%.1f", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
 		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerFPS(playerid), MAIN_TEXT_COLOUR,
 		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerHealth(targetid) + GetPlayerArmour(targetid)));
 	PlayerTextDrawShow(playerid, TargetInfoData[playerid][TargetInfoTD]);
@@ -633,7 +633,7 @@ OnPlayerAmmoUpdate(playerid)
 				TotalShots += (9999 - Ammo);
 		}
 
-		accuracy = TotalShots == 0 ? 0.0 : floatmul(100.0, floatdiv(Player[playerid][shotsHit], TotalShots));
+		accuracy = TotalShots == 0 ? 0.0 : 100.0 * Player[playerid][shotsHit] / TotalShots;
 
 		Player[playerid][TotalBulletsFired] += TotalShots;
 		Player[playerid][TotalshotsHit] += Player[playerid][shotsHit];
@@ -1020,7 +1020,7 @@ GetPlayerHighestScores(array[][rankingEnum], left, right)
 
 GetPlayerHighestScores2(array[][rankingEnum], names[][MAX_PLAYER_NAME], left, right)
 {
-	new tempLeft = left, tempRight = right, pivot = array[(left + right) / 2][player_Score], tempVar, Float: tempVarFloat, tempVarStr[MAX_PLAYER_NAME];
+	new tempLeft = left, tempRight = right, Float: pivot = array[(left + right) / 2][player_Score], tempVar, Float: tempVarFloat, tempVarStr[MAX_PLAYER_NAME];
 	while (tempLeft <= tempRight)
 	{
 		while (array[tempLeft][player_Score] > pivot) tempLeft++;
@@ -1028,7 +1028,7 @@ GetPlayerHighestScores2(array[][rankingEnum], names[][MAX_PLAYER_NAME], left, ri
 
 		if (tempLeft <= tempRight)
 		{
-			tempVar = array[tempLeft][player_Score], array[tempLeft][player_Score] = array[tempRight][player_Score], array[tempRight][player_Score] = tempVar;
+			tempVarFloat = array[tempLeft][player_Score], array[tempLeft][player_Score] = array[tempRight][player_Score], array[tempRight][player_Score] = tempVarFloat;
 			tempVar = array[tempLeft][player_ID], array[tempLeft][player_ID] = array[tempRight][player_ID], array[tempRight][player_ID] = tempVar;
 			tempVarStr = names[tempLeft], names[tempLeft] = names[tempRight], names[tempRight] = tempVarStr;
 			tempVar = array[tempLeft][player_Kills], array[tempLeft][player_Kills] = array[tempRight][player_Kills], array[tempRight][player_Kills] = tempVar;
@@ -1036,8 +1036,8 @@ GetPlayerHighestScores2(array[][rankingEnum], names[][MAX_PLAYER_NAME], left, ri
 			tempVar = array[tempLeft][player_Team], array[tempLeft][player_Team] = array[tempRight][player_Team], array[tempRight][player_Team] = tempVar;
 			tempVar = array[tempLeft][player_TPlayed], array[tempLeft][player_TPlayed] = array[tempRight][player_TPlayed], array[tempRight][player_TPlayed] = tempVar;
 			tempVarFloat = array[tempLeft][player_HP], array[tempLeft][player_HP] = array[tempRight][player_HP], array[tempRight][player_HP] = tempVarFloat;
-			tempVar = array[tempLeft][player_Acc], array[tempLeft][player_Acc] = array[tempRight][player_Acc], array[tempRight][player_Acc] = tempVar;
-			tempVar = array[tempLeft][player_Overall], array[tempLeft][player_Overall] = array[tempRight][player_Overall], array[tempRight][player_Overall] = tempVar;
+			tempVarFloat = array[tempLeft][player_Acc], array[tempLeft][player_Acc] = array[tempRight][player_Acc], array[tempRight][player_Acc] = tempVarFloat;
+			tempVarFloat = array[tempLeft][player_Overall], array[tempLeft][player_Overall] = array[tempRight][player_Overall], array[tempRight][player_Overall] = tempVarFloat;
 			tempLeft++, tempRight--;
 		}
 	}

@@ -23,9 +23,9 @@ YCMD: readd(playerid, params[], help)
 
 	if (Player[pID][Playing])
 	{
-		Player[pID][TotalKills]	 = Player[pID][TotalKills] - Player[pID][RoundKills];
-		Player[pID][TotalDeaths] = Player[pID][TotalDeaths] - Player[pID][RoundDeaths];
-		Player[pID][TotalDamage] = Player[pID][TotalDamage] - Player[pID][RoundDamage];
+		Player[pID][TotalKills]	 -= Player[pID][RoundKills];
+		Player[pID][TotalDeaths] -= Player[pID][RoundDeaths];
+		Player[pID][TotalDamage] -= Player[pID][RoundDamage];
 	}
 
 	DeletePlayerTeamBar(pID);

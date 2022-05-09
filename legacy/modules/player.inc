@@ -87,10 +87,10 @@ enum PlayerVariables
 	DMReadd,
 	RoundKills,
 	RoundDeaths,
-	RoundDamage,
+	Float: RoundDamage,
 	TotalKills,
 	TotalDeaths,
-	TotalDamage,
+	Float: TotalDamage,
 	WeaponPicked,
 	OutOfArena,
 	PacketKick,
@@ -140,8 +140,8 @@ enum save_vars {
 	pInterior,
 	pVWorld,
 	Float: pCoords[4],
-	RDamage,
-	TDamage,
+	Float: RDamage,
+	Float: TDamage,
 	RKills,
 	TKills,
 	RDeaths,
@@ -149,7 +149,7 @@ enum save_vars {
 	WeaponsPicked,
 	RoundID,
 	TPlayed,
-	iAccuracy,
+	Float: iAccuracy,
 	tshotsHit,
 	tBulletsShot,
 	bool: WasCrashedInStart,
@@ -167,14 +167,14 @@ enum save_vars {
 // Used for ranking players
 enum rankingEnum
 {
-	player_Score,
-	player_Overall,
+	Float: player_Score,
+	Float: player_Overall,
 	player_Team,
 	player_Kills,
 	player_Deaths,
 	player_TPlayed,
 	Float: player_HP,
-	player_Acc,
+	Float: player_Acc,
 	player_ID
 }
 

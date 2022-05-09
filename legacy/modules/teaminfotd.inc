@@ -14,7 +14,7 @@
 enum _sort_Info_
 {
 	playerID,
-	playerDamage
+	Float: playerDamage
 }
 
 #define MAX_PLAYERS_IN_TEXTDRAW 4
