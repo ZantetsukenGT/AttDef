@@ -13,9 +13,9 @@
 
 #include <mSelection> // Selection with preview models feature library
 
-#define GM_VERSION "1.37.9 (r)"
+#define GM_VERSION "1.38.0 (dev)"
 #define GM_NAME	   "Att-Def"
-new GM_WEBSITE[50] = "discord.gg/MbQbr9BKFs";
+new GM_WEBSITE[50] = "discord.gg/656yKRTq8A";
 
 #define SAFE_GAMETEXT_AUTO_CHECK 0 // When enabled, most of textdraw and gametext functions are hooked to automatically reject unsafe use of tildes.
 
@@ -27,4 +27,3 @@ new GM_WEBSITE[50] = "discord.gg/MbQbr9BKFs";
 
 new DB: sqliteconnection; // SQLite Databases
 new teamskinlist = mS_INVALID_LISTID, playerskinlist = mS_INVALID_LISTID;
-new lagcompmode = 0;
