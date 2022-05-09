@@ -4,7 +4,7 @@
 #define MAX_PLAYERS 50
 #define YSI_NO_HEAP_MALLOC
 
-#include <jit>
+#include <crashdetect>
 #include <a_samp>
 #include <iphub-key>
 

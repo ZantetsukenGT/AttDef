@@ -31,9 +31,8 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, "{CCCCCC}\n    *Climb bug won't damage you anymore.");
 				strcat(str, "{CCCCCC}\n    *Ability to apply a custom damage system, combos or whatever.");
 				strcat(str, "{CCCCCC}\n    *And much more (really).");
-				strcat(str, "{CCCCCC}\nSeveral optimizations + JIT Compiler plugin for better performance.");
 				strcat(str, "{CCCCCC}\nReplacing someone should set its correct skin now.");
-				strcat(str, "{CCCCCC}\nFixed some rare crashes.");
+				strcat(str, "{CCCCCC}\nSeveral optimizations and fixed some rare crashes.");
 				strcat(str, "{CCCCCC}\nAdjusted some textdraws.");
 				strcat(str, COL_PRIM"\n\nPRO TIPS:");
 				strcat(str, COL_SEC "\n{FFD700}Sniper bug fix available! " COL_SEC "shorturl.at/bgpH1");

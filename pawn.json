@@ -4,7 +4,7 @@
 	"entry": "gamemodes/attdef.pwn",
 	"output": "gamemodes/attdef.amx",
 	"dependencies": [
-		"Zeex/samp-plugin-jit",
+		"Zeex/samp-plugin-crashdetect",
 		"ZantetsukenGT/progress2",
 		"ZantetsukenGT/samp-geoip",
 		"bmisiak/samp-precise-timers",
