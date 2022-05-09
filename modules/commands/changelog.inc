@@ -25,10 +25,16 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				strcat(str, COL_SEC "\n  1.38.0 Features and fixes");
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-				strcat(str, "{CCCCCC}\nAdded weapon-config for a more consistent damage system, stalemates are not possible anymore.");
+				strcat(str, "{CCCCCC}\nAdded weapon-config for a more consistent damage system.");
+				strcat(str, "{CCCCCC}\n    *Changing weapon damage reflect faster and is more responsive.");
+				strcat(str, "{CCCCCC}\n    *Stalemates are not possible anymore.");
+				strcat(str, "{CCCCCC}\n    *Climb bug won't damage you anymore.");
+				strcat(str, "{CCCCCC}\n    *Ability to apply a custom damage system, combos or whatever.");
+				strcat(str, "{CCCCCC}\n    *And much more (really).");
 				strcat(str, "{CCCCCC}\nSeveral optimizations + JIT Compiler plugin for better performance.");
 				strcat(str, "{CCCCCC}\nReplacing someone should set its correct skin now.");
 				strcat(str, "{CCCCCC}\nFixed some rare crashes.");
+				strcat(str, "{CCCCCC}\nAdjusted some textdraws.");
 				strcat(str, COL_PRIM"\n\nPRO TIPS:");
 				strcat(str, COL_SEC "\n{FFD700}Sniper bug fix available! " COL_SEC "shorturl.at/bgpH1");
 				strcat(str, COL_SEC "\n{FFD700}Silent ASI Loader required: " COL_SEC "shorturl.at/szCR0");
