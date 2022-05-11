@@ -16,7 +16,7 @@ static bool: ShouldDamagePlayer(playerid, issuerid, Float: amount, weaponid)
 		case WEAPON_VEHICLE, WEAPON_HELIBLADES: return false;
 		case WEAPON_COLLISION:
 		{
-			if (amount <= 10 || GetPlayerArmour(playerid) > 0 && SyncAbuse)
+			if (amount <= 10.0 || GetPlayerArmour(playerid) > 0.0 && SyncAbuse)
 				return false;
 		}
 	}
@@ -59,10 +59,6 @@ public OnPlayerDamage(&playerid, &Float: amount, &issuerid, &weapon, &bodypart)
 				amount = GRENADE_MEDIUM_DAMAGE;
 			else
 				amount = GRENADE_LOW_DAMAGE;
-		}
-		case WEAPON_COLLISION: //Cancel collision damage for now, just to it test out
-		{
-			//return 0;
 		}
 	}
 

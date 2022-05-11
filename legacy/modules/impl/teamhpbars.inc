@@ -265,7 +265,7 @@ UpdatePlayerTeamBar(playerid)
 		if (Player[playerid][Team] == DEFENDER)
 			formatToUse[10] = 'b';
 		SetPlayerProgressBarValue(playerid, TeamBarsData[playerid][TeamBar], 0.0);
-		TextDrawSetString(TeamBarsData[playerid][TeamBarText], va_return(formatToUse, Player[playerid][NameWithoutTag], Player[playerid][RoundDamage]));
+		TextDrawSetString(TeamBarsData[playerid][TeamBarText], va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(Player[playerid][RoundDamage])));
 	}
 
 	foreach (new i : Player)

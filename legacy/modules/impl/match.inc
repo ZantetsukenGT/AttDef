@@ -2742,11 +2742,11 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	else
 		format(iString, sizeof(iString), "~w~~h~Most Kills: None_____");
 	if (topDmgID >= 0)
-		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: %s~h~~h~%s ~w~~h~%.0f_____", iString, TDC[playerScores[topDmgID][player_Team]], names[topDmgID], topDmg);
+		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: %s~h~~h~%s ~w~~h~%d_____", iString, TDC[playerScores[topDmgID][player_Team]], names[topDmgID], floatround(topDmg));
 	else
 		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: None_____", iString);
 	if (topAccID >= 0)
-		format(iString, sizeof(iString), "%s~w~~h~Top Acc: %s~h~~h~%s ~w~~h~%d%%", iString, TDC[playerScores[topAccID][player_Team]], names[topAccID], topAcc);
+		format(iString, sizeof(iString), "%s~w~~h~Top Acc: %s~h~~h~%s ~w~~h~%d%%", iString, TDC[playerScores[topAccID][player_Team]], names[topAccID], floatround(topAcc));
 	else
 		format(iString, sizeof(iString), "%s~w~~h~Top Acc: None", iString);
 	TextDrawSetString(leftTop, iString);
@@ -3039,11 +3039,11 @@ public WarEnded()
 	else
 		format(iString, sizeof(iString), "~w~~h~Most Kills: None_____");
 	if (topDmgID >= 0)
-		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: %s~h~~h~%s ~w~~h~%.0f_____", iString, TDC[playerScores[topDmgID][player_Team]], names[topDmgID], topDmg);
+		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: %s~h~~h~%s ~w~~h~%d_____", iString, TDC[playerScores[topDmgID][player_Team]], names[topDmgID], floatround(topDmg));
 	else
 		format(iString, sizeof(iString), "%s~w~~h~Most Dmg: None_____", iString);
 	if (topAccID >= 0)
-		format(iString, sizeof(iString), "%s~w~~h~Top Acc: %s~h~~h~%s ~w~~h~%d%%", iString, TDC[playerScores[topAccID][player_Team]], names[topAccID], topAcc);
+		format(iString, sizeof(iString), "%s~w~~h~Top Acc: %s~h~~h~%s ~w~~h~%d%%", iString, TDC[playerScores[topAccID][player_Team]], names[topAccID], floatround(topAcc));
 	else
 		format(iString, sizeof(iString), "%s~w~~h~Top Acc: None", iString);
 	TextDrawSetString(leftTop, iString);
