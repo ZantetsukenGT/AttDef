@@ -75,7 +75,7 @@ new PlayersDead[MAX_TEAMS];						 // How many players are dead in each team
 new Float: TeamHP[MAX_TEAMS];					 // How much HP does a team have
 new TeamName[MAX_TEAMS][24];					 // Used to hold the team name in WarMode
 new TeamScore[MAX_TEAMS];						 // Used to the team round score in Warmode
-new TempDamage[MAX_TEAMS];						 // Temporary taken-damage of each team
+new Float: TempDamage[MAX_TEAMS];				 // Temporary taken-damage of each team
 new ServerLastPlayed;							 // Holds the ID of the last played round
 new ServerLastPlayedType;						 // Remembers the type of the last played round (base, round ..etc)
 new PlayersInCP;								 // How many players are capturing the checkpoint

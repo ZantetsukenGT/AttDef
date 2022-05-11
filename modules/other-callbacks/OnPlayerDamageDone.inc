@@ -47,7 +47,7 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 					TextDrawSetString(AttHpLose, va_return("~r~~h~%s", Player[playerid][NameWithoutTag]));
 
 					TempDamage[ATTACKER] += amount;
-					TextDrawSetString(TeamHpLose[0], va_return("~r~-%d", TempDamage[ATTACKER]));
+					TextDrawSetString(TeamHpLose[0], va_return("~r~-%d", floatround(TempDamage[ATTACKER])));
 
 					ModernTextDrawFlash(ATTACKER);
 
@@ -60,7 +60,7 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 					TextDrawSetString(DefHpLose, va_return("~b~~h~%s", Player[playerid][NameWithoutTag]));
 
 					TempDamage[DEFENDER] += amount;
-					TextDrawSetString(TeamHpLose[1], va_return("~b~-%d", TempDamage[DEFENDER]));
+					TextDrawSetString(TeamHpLose[1], va_return("~b~-%d", floatround(TempDamage[DEFENDER])));
 
 					ModernTextDrawFlash(DEFENDER);
 

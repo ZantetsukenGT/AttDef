@@ -1028,7 +1028,7 @@ public HideHpTextForAtt()
 	TextDrawSetString(TeamHpLose[0], " ");
 	TextDrawSetString(AttHpLose, " ");
 	StopModernTextDrawFlash(ATTACKER);
-	TempDamage[ATTACKER] = 0;
+	TempDamage[ATTACKER] = 0.0;
 	return 1;
 }
 
@@ -1039,7 +1039,7 @@ public HideHpTextForDef()
 	TextDrawSetString(TeamHpLose[1], " ");
 	TextDrawSetString(DefHpLose, " ");
 	StopModernTextDrawFlash(DEFENDER);
-	TempDamage[DEFENDER] = 0;
+	TempDamage[DEFENDER] = 0.0;
 	return 1;
 }
 
