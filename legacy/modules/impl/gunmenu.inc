@@ -79,42 +79,23 @@ ResetGunmenuSelections(team = -1)
 
 UpdateGunmenuLimitsTextDraw(updated_team = -1)
 {
-	switch (updated_team)
+	new team,
+		iterationLimit = MAX_TEAMS;
+	if (updated_team != -1)
 	{
-		case -1:
+		team = updated_team;
+		iterationLimit = updated_team + 1;
+	}
+	for (; team < iterationLimit; team++)
+	{
+		new str[GUNMENU_LIMIT_TEXTDRAW_SIZE];
+		for (new i; i < MAX_GUNMENU_GUNS; i++)
 		{
-			new str[GUNMENU_LIMIT_TEXTDRAW_SIZE];
-			new i;
-			for (new team = 0; team < MAX_TEAMS; team++)
-			{
-				i = 0;
-				format(str, sizeof str, "%s%s ~w~[%d/%d] [ammo: %d]", TDC[team], ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][TimesSelected][team], GunmenuData[i][GunLimit]);
-				i++;
-				for (; i < MAX_GUNMENU_GUNS; i++)
-				{
-					format(
-						str, sizeof str, "%s~n~%s%s ~w~[%d/%d] [ammo: %d]", str, TDC[team], ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][TimesSelected][team],
-						GunmenuData[i][GunLimit]);
-				}
-				TextDrawSetString(GunmenuLimitsTD[team], str);
-			}
-		}
-		default:
-		{
-			new str[GUNMENU_LIMIT_TEXTDRAW_SIZE];
-			new i = 0;
 			format(
-				str, sizeof str, "%s%s ~w~[%d/%d] [ammo: %d]", TDC[updated_team], ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][TimesSelected][updated_team],
+				str, sizeof str, "%s%s%s ~w~[%d/%d] [ammo: %d]~n~", str, TDC[team], ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][TimesSelected][team],
 				GunmenuData[i][GunLimit], GunmenuData[i][GunAmmo]);
-			i++;
-			for (; i < MAX_GUNMENU_GUNS; i++)
-			{
-				format(
-					str, sizeof str, "%s~n~%s%s ~w~[%d/%d] [ammo: %d]", str, TDC[updated_team], ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][TimesSelected][updated_team],
-					GunmenuData[i][GunLimit], GunmenuData[i][GunAmmo]);
-			}
-			TextDrawSetString(GunmenuLimitsTD[updated_team], str);
 		}
+		TextDrawSetString(GunmenuLimitsTD[team], str);
 	}
 }
 
