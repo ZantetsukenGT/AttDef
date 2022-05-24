@@ -13,8 +13,6 @@
 
 SetHP(playerid, Float: amount)
 {
-	if (!WC_IsPlayerSpawned(playerid) || IsPlayerDying(playerid))
-		return;
 	new bool: wasPlaying = Player[playerid][Playing];
 	SetPlayerHealth(playerid, amount);
 	UpdatePlayerHPAPVariables(playerid, wasPlaying);
@@ -22,8 +20,6 @@ SetHP(playerid, Float: amount)
 
 SetAP(playerid, Float: amount)
 {
-	if (!WC_IsPlayerSpawned(playerid) || IsPlayerDying(playerid))
-		return;
 	SetPlayerArmour(playerid, amount);
 	UpdatePlayerHPAPVariables(playerid, Player[playerid][Playing]);
 }
