@@ -29,7 +29,8 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 	{
 		// Update team HP bars
 		UpdatePlayerTeamBar(playerid);
-		UpdatePlayerTeamBar(issuerid);
+		if (issuerid != INVALID_PLAYER_ID) // If the damager is a HUMAN
+			UpdatePlayerTeamBar(issuerid);
 
 		// Update teammates information textdraw
 		UpdateTeamCornerInfo();
