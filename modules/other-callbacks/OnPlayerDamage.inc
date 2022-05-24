@@ -3,19 +3,23 @@
 #endif
 #define _attdef_OnPDamage
 
-static bool: ShouldDamagePlayer(playerid, issuerid, Float: amount, weaponid)
+static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 {
-	if (Player[playerid][IsAFK]) // Players who are in AFK mode should not be damaged
+	if (Player[playerid][IsAFK] && weaponid != WEAPON_UNKNOWN) // Players who are in AFK mode should not be damaged
 		return false;
-
-	if (Player[playerid][Playing] && Player[playerid][OnGunmenu]) // Players who are picking weapons from gun-menu should not be damaged
+	if (Player[playerid][Playing] && Player[playerid][OnGunmenu] && weaponid != WEAPON_UNKNOWN) // Players who are picking weapons from gun-menu should not be damaged
 		return false;
 
 	switch (weaponid)
 	{
 		case WEAPON_VEHICLE, WEAPON_HELIBLADES: return false;
+		case WEAPON_UNKNOWN: return true; // sethp and setarmour should be applied regardless
 		case WEAPON_COLLISION:
 		{
+			new anim = GetPlayerAnimationIndex(playerid);
+			// apply death when the player splats with a parachute
+			if (958 <= anim <= 979)
+				return true;
 			if (amount <= 10.0 || GetPlayerArmour(playerid) > 0.0 && SyncAbuse)
 				return false;
 		}
@@ -53,6 +57,9 @@ public OnPlayerDamage(&playerid, &Float: amount, &issuerid, &weapon, &bodypart)
 	{
 		case WEAPON_EXPLOSION, WEAPON_GRENADE, WEAPON_ROCKETLAUNCHER, WEAPON_HEATSEEKER:
 		{
+			//an explosion dealing 0.0 dmg means the player exploded in a vehicle, we must apply death here
+			if (amount <= 0.0005)
+				return 1;
 			if (amount > 60.0)
 				amount = GRENADE_HIGH_DAMAGE;
 			else if (amount >= 30.0)
