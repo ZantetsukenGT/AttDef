@@ -15,7 +15,7 @@
 
 #define GM_VERSION "1.38.0 (dev)"
 #define GM_NAME	   "Att-Def"
-new GM_WEBSITE[50] = "discord.gg/656yKRTq8A";
+new GM_WEBSITE[50] = "discord.io/attackdefend";
 
 #define SAFE_GAMETEXT_AUTO_CHECK 0 // When enabled, most of textdraw and gametext functions are hooked to automatically reject unsafe use of tildes.
 
