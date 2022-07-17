@@ -20,7 +20,7 @@ static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 			// apply death when the player splats with a parachute
 			if (958 <= anim <= 979)
 				return true;
-			if (amount <= 10.0 || GetPlayerArmour(playerid) > 0.0 && SyncAbuse)
+			if (amount <= 10.0 || GetPlayerArmour(playerid) > 0.0)
 				return false;
 		}
 	}

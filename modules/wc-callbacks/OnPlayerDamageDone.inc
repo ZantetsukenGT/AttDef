@@ -45,29 +45,29 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 			{
 				case ATTACKER:
 				{
-					TextDrawSetString(AttHpLose, va_return("~r~~h~%s", Player[playerid][NameWithoutTag]));
+					va_TextDrawSetString(AttHpLose, "~r~~h~%s", Player[playerid][NameWithoutTag]);
 
 					TempDamage[ATTACKER] += amount;
-					TextDrawSetString(TeamHpLose[0], va_return("~r~-%d", floatround(TempDamage[ATTACKER])));
+					va_TextDrawSetString(TeamHpLose[0], "~r~-%d", floatround(TempDamage[ATTACKER]));
 
 					ModernTextDrawFlash(ATTACKER);
 
 					if (AttHpTimer)
-						DeletePreciseTimer(AttHpTimer);
-					AttHpTimer = SetPreciseTimer("HideHpTextForAtt", 2500, false);
+						KillTimer(AttHpTimer);
+					AttHpTimer = SetTimer("HideHpTextForAtt", 2500, false);
 				}
 				case DEFENDER:
 				{
-					TextDrawSetString(DefHpLose, va_return("~b~~h~%s", Player[playerid][NameWithoutTag]));
+					va_TextDrawSetString(DefHpLose, "~b~~h~%s", Player[playerid][NameWithoutTag]);
 
 					TempDamage[DEFENDER] += amount;
-					TextDrawSetString(TeamHpLose[1], va_return("~b~-%d", floatround(TempDamage[DEFENDER])));
+					va_TextDrawSetString(TeamHpLose[1], "~b~-%d", floatround(TempDamage[DEFENDER]));
 
 					ModernTextDrawFlash(DEFENDER);
 
 					if (DefHpTimer)
-						DeletePreciseTimer(DefHpTimer);
-					DefHpTimer = SetPreciseTimer("HideHpTextForDef", 2500, false);
+						KillTimer(DefHpTimer);
+					DefHpTimer = SetTimer("HideHpTextForDef", 2500, false);
 				}
 			}
 		}
