@@ -32,7 +32,7 @@ DoRandomBase(playerid)
 		SendClientMessageToAll(-1, COL_PRIM "Couldn't start a {FFFFFF}base " COL_PRIM "with the defined criteria. {FFFFFF}(perhaps the current base set doesn't have exterior bases)");
 		return;
 	}
-	PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 4000, false, "i", BaseID);
+	PreStartRoundTimer = SetTimerEx("OnBaseStart", 4000, false, "i", BaseID);
 
 	new iString[144];
 	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);

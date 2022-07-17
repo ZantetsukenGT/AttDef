@@ -30,5 +30,5 @@ YCMD: deleteacc(playerid, params[], help)
 	format(iString, sizeof(iString), "DELETE FROM Players WHERE Name = '%q'", str);
 	db_free_result(db_query(sqliteconnection, iString));
 
-	return SendClientMessage(playerid, -1, va_return("{008800}Success: {FFFFFF}%s" COL_PRIM "'s account was deleted.", str));
+	return va_SendClientMessage(playerid, -1, "{008800}Success: {FFFFFF}%s" COL_PRIM "'s account was deleted.", str);
 }

@@ -145,7 +145,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 				foreach (new i : Player)
 					PlayerPlaySound(i, 1133, 0.0, 0.0, 0.0);
 				Player[playerid][lastChat] = currentTick;
-				SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "is asking for an %spause!", Player[playerid][Name], RoundPaused ? "un" : ""));
+				va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "is asking for an %spause!", Player[playerid][Name], RoundPaused ? "un" : "");
 				return 1;
 			}
 		}

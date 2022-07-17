@@ -60,8 +60,8 @@ public OnPlayerClickTextDraw(playerid, Text: clickedid)
 		else
 		{
 			SendRconCommand("password 0");
-			SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has unlocked the server.", Player[playerid][Name]));
-			TextDrawSetString(LockServerTD, va_return("%sServer: ~r~Unlocked", MAIN_TEXT_COLOUR));
+			va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unlocked the server.", Player[playerid][Name]);
+			va_TextDrawSetString(LockServerTD, "%sServer: ~r~Unlocked", MAIN_TEXT_COLOUR);
 
 			ServerLocked = false;
 			PermLocked	 = false;

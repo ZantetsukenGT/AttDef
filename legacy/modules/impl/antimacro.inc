@@ -87,25 +87,21 @@ bool: CheckPlayerSprintMacro(playerid, newkeys, oldkeys)
 		AntimacroData[playerid][TimesWarned]++;
 		AntimacroData[playerid][LastTimeWarned] = tick;
 #if ANTIMACRO_DEBUG == 1
-		SendClientMessageToAll(
-			-1, va_return(
-					"Warning %d for sprint macro | Warning: %d | KeyTick: %d | Speed diff: %d | Current Speed: %d", playerid, AntimacroData[playerid][TimesWarned], diff,
-					speed - AntimacroData[playerid][LastMonitoredSpeed], speed));
+		va_SendClientMessageToAll(
+			-1, "Warning %d for sprint macro | Warning: %d | KeyTick: %d | Speed diff: %d | Current Speed: %d", playerid, AntimacroData[playerid][TimesWarned], diff,
+					speed - AntimacroData[playerid][LastMonitoredSpeed], speed);
 #endif
 		if (AntimacroData[playerid][TimesWarned] == ANTIMACRO_MAX_WARNINGS) // Have they been warned/suspected for sprint macros enough?
 		{
 // Enough is enough. They don't learn, punish them now!
 #if ANTIMACRO_DEBUG == 1
-			SendClientMessageToAll(
+			va_SendClientMessageToAll(
 				-1,
-				va_return(
-					"Kicking %d for sprint macro | KeyTick: %d | Speed diff: %d | Current Speed: %d", playerid, diff, speed - AntimacroData[playerid][LastMonitoredSpeed], speed));
+				"Kicking %d for sprint macro | KeyTick: %d | Speed diff: %d | Current Speed: %d", playerid, diff, speed - AntimacroData[playerid][LastMonitoredSpeed], speed);
 #endif
 			AntimacroData[playerid][TimesWarned]	= 0;
 			AntimacroData[playerid][LastTimeWarned] = diff;
-			new str[144];
-			format(str, sizeof str, COL_PRIM "Anti sprint macro has stopped {FFFFFF}%s " COL_PRIM "from moving for tapping sprint key too fast.", Player[playerid][Name]);
-			SendClientMessageToAll(-1, str);
+			va_SendClientMessageToAll(-1, COL_PRIM "Anti sprint macro has stopped {FFFFFF}%s " COL_PRIM "from moving for tapping sprint key too fast.", Player[playerid][Name]);
 			TogglePlayerControllable(playerid, false);
 			TogglePlayerControllable(playerid, true);
 			return true; // PUNISHED

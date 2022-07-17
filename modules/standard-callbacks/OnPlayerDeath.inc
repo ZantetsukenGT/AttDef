@@ -25,8 +25,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 	{
 		if (!RandomDeathMessages)
 		{
-			PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("%sKilled By: ~r~%s", MAIN_TEXT_COLOUR, Player[killerid][Name]));
-			PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou Killed: ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+			va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "%sKilled By: ~r~%s", MAIN_TEXT_COLOUR, Player[killerid][Name]);
+			va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou Killed: ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 		}
 		else
 		{
@@ -34,13 +34,13 @@ public OnPlayerDeath(playerid, killerid, reason)
 			{
 				case WEAPON_KNIFE:
 				{
-					PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~rp~%s%s knifed you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-					PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou knifed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+					va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~rp~%s%s knifed you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+					va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou knifed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 				}
 				case WEAPON_GRENADE:
 				{
-					PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s bombed you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-					PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou bombed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+					va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s bombed you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+					va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou bombed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 				}
 				default:
 				{
@@ -48,24 +48,24 @@ public OnPlayerDeath(playerid, killerid, reason)
 					{
 						case 0:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s raped you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou raped ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s raped you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou raped ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 1:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s owned you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou owned ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s owned you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou owned ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 2:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s murdered you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou murdered ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s murdered you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							va_PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou murdered ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 3:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s sent you to cemetery", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(
-								killerid, DeathText[killerid][0], va_return("%sYou sent ~r~%s%s to cemetery", MAIN_TEXT_COLOUR, Player[playerid][Name], MAIN_TEXT_COLOUR));
+							va_PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s sent you to cemetery", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							va_PlayerTextDrawSetString(
+								killerid, DeathText[killerid][0], "%sYou sent ~r~%s%s to cemetery", MAIN_TEXT_COLOUR, Player[playerid][Name], MAIN_TEXT_COLOUR);
 						}
 					}
 				}
@@ -75,7 +75,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		PlayerTextDrawShow(killerid, DeathText[killerid][0]);
 		PlayerTextDrawShow(playerid, DeathText[playerid][1]);
 
-		SetPreciseTimer("DeathMessageF", 4000, false, "ii", killerid, playerid);
+		SetTimerEx("DeathMessageF", 4000, false, "ii", killerid, playerid);
 
 		if (Player[playerid][Playing] && Player[killerid][Playing] && AllowStartBase)
 		{

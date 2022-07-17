@@ -148,7 +148,7 @@ LoadTextDraws()
 	TextDrawUseBox(SettingBox, 1);
 	TextDrawBoxColor(SettingBox, 0x00000033);
 
-	WarModeText = TextDrawCreate(125.000000, 285.000000, va_return("%sWar\tMode:\t~r~OFF", MAIN_TEXT_COLOUR));
+	WarModeText = va_TextDrawCreate(125.000000, 285.000000, "%sWar\tMode:\t~r~OFF", MAIN_TEXT_COLOUR);
 	TextDrawAlignment(WarModeText, 2);
 	TextDrawFont(WarModeText, 1);
 	TextDrawLetterSize(WarModeText, 0.31, 1.45);
@@ -160,7 +160,7 @@ LoadTextDraws()
 	TextDrawTextSize(WarModeText, 20, 150);
 	TextDrawSetSelectable(WarModeText, 1);
 
-	LockServerTD = TextDrawCreate(125.000000, 315.000000, va_return("%sServer:\t~r~Unlocked", MAIN_TEXT_COLOUR));
+	LockServerTD = va_TextDrawCreate(125.000000, 315.000000, "%sServer:\t~r~Unlocked", MAIN_TEXT_COLOUR);
 	TextDrawAlignment(LockServerTD, 2);
 	TextDrawFont(LockServerTD, 1);
 	TextDrawLetterSize(LockServerTD, 0.31, 1.45);
@@ -172,7 +172,7 @@ LoadTextDraws()
 	TextDrawTextSize(LockServerTD, 30, 200);
 	TextDrawSetSelectable(LockServerTD, 1);
 
-	CloseText = TextDrawCreate(125.000000, 330.000000, va_return("%sClose Settings", MAIN_TEXT_COLOUR));
+	CloseText = va_TextDrawCreate(125.000000, 330.000000, "%sClose Settings", MAIN_TEXT_COLOUR);
 	TextDrawAlignment(CloseText, 2);
 	TextDrawFont(CloseText, 1);
 	TextDrawLetterSize(CloseText, 0.31, 1.45);
@@ -1048,16 +1048,8 @@ LoadPlayerTextDraws(playerid)
 
 UpdateRoundKillDmgTDmg(playerid)
 {
-	new iString[160];
-
-	/*format(
-		iString, sizeof(iString), "%sKills %s%d~n~%sDamage %s%d~n~%sTotal Dmg %s%d", MAIN_TEXT_COLOUR, TDC[Player[playerid][Team]], Player[playerid][RoundKills], MAIN_TEXT_COLOUR,
-		TDC[Player[playerid][Team]], Player[playerid][RoundDamage], MAIN_TEXT_COLOUR, TDC[Player[playerid][Team]], Player[playerid][TotalDamage]);*/
-	format(
-		iString, sizeof(iString), "%sKills ~r~%d~n~%sDamage ~r~%d~n~%sTotal Dmg ~r~%d", MAIN_TEXT_COLOUR, Player[playerid][RoundKills], MAIN_TEXT_COLOUR,
+	va_PlayerTextDrawSetString(playerid, RoundKillDmgTDmg[playerid], "%sKills ~r~%d~n~%sDamage ~r~%d~n~%sTotal Dmg ~r~%d", MAIN_TEXT_COLOUR, Player[playerid][RoundKills], MAIN_TEXT_COLOUR,
 		floatround(Player[playerid][RoundDamage]), MAIN_TEXT_COLOUR, floatround(Player[playerid][TotalDamage]));
-
-	PlayerTextDrawSetString(playerid, RoundKillDmgTDmg[playerid], iString);
 	return 1;
 }
 
@@ -1397,39 +1389,21 @@ HideMatchScoreBoard(playerid = -1)
 
 UpdateTeamScoreTextDraw()
 {
-	//TextDrawSetString(TeamScoreText, va_return("%d     %d", TeamScore[ATTACKER], TeamScore[DEFENDER]));
-	new iString[144];
-	format(
-		iString, sizeof(iString), "~r~%s %s(~r~%d%s) ~b~~h~%s %s(~b~~h~%d%s)", TeamName[ATTACKER], MAIN_TEXT_COLOUR, TeamScore[ATTACKER], MAIN_TEXT_COLOUR, TeamName[DEFENDER],
+	va_TextDrawSetString(TeamScoreText, "~r~%s %s(~r~%d%s) ~b~~h~%s %s(~b~~h~%d%s)", TeamName[ATTACKER], MAIN_TEXT_COLOUR, TeamScore[ATTACKER], MAIN_TEXT_COLOUR, TeamName[DEFENDER],
 		MAIN_TEXT_COLOUR, TeamScore[DEFENDER], MAIN_TEXT_COLOUR);
-	TextDrawSetString(TeamScoreText, iString);
 	UpdateRoundsPlayedTextDraw();
 }
 
 UpdateTeamNameTextDraw()
 {
-	/*TextDrawSetString(TeamAttackerTD, va_return("~r~~h~~h~%s", TeamName[ATTACKER]));
-	TextDrawSetString(TeamDefenderTD, va_return("~b~~h~~h~%s", TeamName[DEFENDER]));*/
-	new iString[144];
-	format(
-		iString, sizeof(iString), "~r~%s %s(~r~%d%s) ~b~~h~%s %s(~b~~h~%d%s)", TeamName[ATTACKER], MAIN_TEXT_COLOUR, TeamScore[ATTACKER], MAIN_TEXT_COLOUR, TeamName[DEFENDER],
+	va_TextDrawSetString(TeamScoreText, "~r~%s %s(~r~%d%s) ~b~~h~%s %s(~b~~h~%d%s)", TeamName[ATTACKER], MAIN_TEXT_COLOUR, TeamScore[ATTACKER], MAIN_TEXT_COLOUR, TeamName[DEFENDER],
 		MAIN_TEXT_COLOUR, TeamScore[DEFENDER], MAIN_TEXT_COLOUR);
-	TextDrawSetString(TeamScoreText, iString);
 	UpdateRoundsPlayedTextDraw();
 }
 
 UpdateRoundsPlayedTextDraw()
 {
-	/*TextDrawSetString(RoundsPlayed, va_return("~h~Ro~h~un~h~ds: ~h~%d/%d", CurrentRound, TotalRounds));
-
-	if (TeamScore[ATTACKER] == TeamScore[DEFENDER])
-		TextDrawSetString(RoundsPlayed, va_return("%sRounds %d/%d", MAIN_TEXT_COLOUR, CurrentRound, TotalRounds));
-	else if (TeamScore[ATTACKER] > TeamScore[DEFENDER])
-		TextDrawSetString(RoundsPlayed, va_return("%sRounds ~r~~h~~h~%d~r~/~h~~h~%d", MAIN_TEXT_COLOUR, CurrentRound, TotalRounds));
-	else if (TeamScore[DEFENDER] > TeamScore[ATTACKER])
-		TextDrawSetString(RoundsPlayed, va_return("%sRounds ~b~~h~~h~%d~b~/~h~~h~%d", MAIN_TEXT_COLOUR, CurrentRound, TotalRounds));*/
-
-	TextDrawSetString(RoundsPlayed, va_return("%sRounds ~r~~h~~h~%d~r~/~h~~h~%d", MAIN_TEXT_COLOUR, CurrentRound, TotalRounds));
+	va_TextDrawSetString(RoundsPlayed, "%sRounds ~r~~h~~h~%d~r~/~h~~h~%d", MAIN_TEXT_COLOUR, CurrentRound, TotalRounds);
 }
 
 InitPlayerInterface(playerid)

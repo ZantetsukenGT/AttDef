@@ -44,7 +44,7 @@ YCMD: loadbases(playerid, params[], help)
 	}
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentBaseSet'", CurrentBaseSet)));
 	LoadBases();
-	if (isequal(CurrentBaseSet, "NewBulletproofBases"))
-		return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | New Bulletproof + cYs Bases", Player[playerid][Name], baseset));
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | %s", Player[playerid][Name], baseset, CurrentBaseSet));
+	if (!strcmp(CurrentBaseSet, "NewBulletproofBases"))
+		return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | New Bulletproof + cYs Bases", Player[playerid][Name], baseset);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | %s", Player[playerid][Name], baseset, CurrentBaseSet);
 }

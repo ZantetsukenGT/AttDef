@@ -27,6 +27,8 @@ Fetch the needed libraries/dependencies, make sure you have [sampctl](https://gi
 sampctl package ensure
 ```
 
+Then MOVE `pawnraknet.dll` from the `plugins` folder into the `components` folder
+
 ## Build
 
 Will generate the attdef.amx file needed to run the server:

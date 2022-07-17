@@ -17,5 +17,5 @@ YCMD: healall(playerid, params[], help)
 			SetHP(i, RoundHP);
 	}
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has healed everyone.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has healed everyone.", Player[playerid][Name]);
 }

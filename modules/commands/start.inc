@@ -27,7 +27,7 @@ YCMD: start(playerid, params[], help)
 		case _I<rc>:
 		{
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-			PreStartRoundTimer = SetPreciseTimer("OnRCStart", 2000, false);
+			PreStartRoundTimer = SetTimer("OnRCStart", 2000, false);
 
 			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has started RC Battlefield round (Interior: 72)", Player[playerid][Name]);
 		}
@@ -48,7 +48,7 @@ YCMD: start(playerid, params[], help)
 				GameType	   = BASE;
 
 				AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-				PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 2000, false, "i", BaseID);
+				PreStartRoundTimer = SetTimerEx("OnBaseStart", 2000, false, "i", BaseID);
 
 				format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has started the last played Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
 			}
@@ -64,7 +64,7 @@ YCMD: start(playerid, params[], help)
 				GameType	   = ARENA;
 
 				AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-				PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 2000, false, "i", ArenaID);
+				PreStartRoundTimer = SetTimerEx("OnArenaStart", 2000, false, "i", ArenaID);
 
 				format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has started the last played Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
 			}
@@ -83,7 +83,7 @@ YCMD: start(playerid, params[], help)
 			GameType	   = BASE;
 
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-			PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 2000, false, "i", BaseID);
+			PreStartRoundTimer = SetTimerEx("OnBaseStart", 2000, false, "i", BaseID);
 
 			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has started Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
 		}
@@ -102,7 +102,7 @@ YCMD: start(playerid, params[], help)
 			GameType	   = ARENA;
 
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
-			PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 2000, false, "i", ArenaID);
+			PreStartRoundTimer = SetTimerEx("OnArenaStart", 2000, false, "i", ArenaID);
 
 			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has started Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
 		}

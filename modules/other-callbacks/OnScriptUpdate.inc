@@ -24,8 +24,8 @@ public OnScriptUpdate()
 			new pFPS	   = GetPlayerFPS(i);
 			new Float: pPL = NetStats_PacketLossPercent(i);
 			new pPing	   = GetPlayerPing(i);
-			PlayerTextDrawSetString(
-				i, FPSPingPacket[i], va_return("%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, pFPS, MAIN_TEXT_COLOUR, pPing, MAIN_TEXT_COLOUR, pPL));
+			va_PlayerTextDrawSetString(
+				i, FPSPingPacket[i], "%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, pFPS, MAIN_TEXT_COLOUR, pPing, MAIN_TEXT_COLOUR, pPL);
 			Update3DTextLabelText(
 				Player[i][InfoLabel], -1,
 				va_return(
@@ -47,7 +47,7 @@ public OnScriptUpdate()
 				{
 					new Float: vHealth;
 					GetVehicleHealth(vID, vHealth);
-					PlayerTextDrawSetString(i, VInfo[i], va_return("~w~%s ~r~%d%%", aVehicleNames[vModelID - 400], floatround(vHealth / 10)));
+					va_PlayerTextDrawSetString(i, VInfo[i], "~w~%s ~r~%d%%", aVehicleNames[vModelID - 400], floatround(vHealth / 10));
 				}
 			}
 		}

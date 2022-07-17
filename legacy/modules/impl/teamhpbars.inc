@@ -71,8 +71,8 @@ CreatePlayerTeamBar(playerid)
 	// Create team progress bar
 	TeamBarsData[playerid][TeamBar]		= CreatePlayerProgressBar(playerid, TEAMBARS_BAR_START_X, y, 80.50, 9.19, teamBarColour, 200.0);
 	// Create team bar textdraws
-	TeamBarsData[playerid][TeamBarText] = TextDrawCreate(
-		TEAMBARS_TEXT_START_X, y, va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(GetPlayerHealth(playerid) + GetPlayerArmour(playerid)), floatround(Player[playerid][RoundDamage])));
+	TeamBarsData[playerid][TeamBarText] = va_TextDrawCreate(
+		TEAMBARS_TEXT_START_X, y, formatToUse, Player[playerid][NameWithoutTag], floatround(GetPlayerHealth(playerid) + GetPlayerArmour(playerid)), floatround(Player[playerid][RoundDamage]));
 	TextDrawBackgroundColor(TeamBarsData[playerid][TeamBarText], 51);
 	TextDrawFont(TeamBarsData[playerid][TeamBarText], 1);
 	TextDrawLetterSize(TeamBarsData[playerid][TeamBarText], 0.160000, 0.900000);
@@ -255,9 +255,9 @@ UpdatePlayerTeamBar(playerid)
 		new Float: pHPArmour = GetPlayerHealth(playerid) + GetPlayerArmour(playerid);
 		SetPlayerProgressBarValue(playerid, TeamBarsData[playerid][TeamBar], pHPArmour);
 		SetPlayerProgressBarColour(playerid, TeamBarsData[playerid][TeamBar], colourToSet);
-		TextDrawSetString(
+		va_TextDrawSetString(
 			TeamBarsData[playerid][TeamBarText],
-			va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(pHPArmour), floatround(Player[playerid][RoundDamage])));
+			formatToUse, Player[playerid][NameWithoutTag], floatround(pHPArmour), floatround(Player[playerid][RoundDamage]));
 	}
 	else
 	{
@@ -265,7 +265,7 @@ UpdatePlayerTeamBar(playerid)
 		if (Player[playerid][Team] == DEFENDER)
 			formatToUse[10] = 'b';
 		SetPlayerProgressBarValue(playerid, TeamBarsData[playerid][TeamBar], 0.0);
-		TextDrawSetString(TeamBarsData[playerid][TeamBarText], va_return(formatToUse, Player[playerid][NameWithoutTag], floatround(Player[playerid][RoundDamage])));
+		va_TextDrawSetString(TeamBarsData[playerid][TeamBarText], formatToUse, Player[playerid][NameWithoutTag], floatround(Player[playerid][RoundDamage]));
 	}
 
 	foreach (new i : Player)

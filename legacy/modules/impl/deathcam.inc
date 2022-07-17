@@ -64,7 +64,7 @@ PlayDeathCamera(playerid, Float: deathX, Float: deathY, Float: deathZ, bool: dea
 	SetPlayerDrunkLevel(playerid, 50000);
 
 	Player[playerid][InDeathCamera] = true;
-	SetPreciseTimer("OnPlayerDeathCameraEnd", DEATH_CAMERA_DURATION, false, "i", playerid);
+	SetTimerEx("OnPlayerDeathCameraEnd", DEATH_CAMERA_DURATION, false, "i", playerid);
 	MessageBox(playerid, MSGBOX_TYPE_BOTTOM, "~y~~h~~h~~h~tip", "Press ~r~~h~~h~~k~~PED_FIREWEAPON~ ~w~to skip death camera!", DEATH_CAMERA_DURATION);
 }
 

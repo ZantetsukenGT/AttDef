@@ -50,7 +50,7 @@ PlayerVoteSwitch(playerid, onplayerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		VoteData[votetype][VotingOnPlayer]	  = onplayerid;
 		foreach (new i : Player)
@@ -59,29 +59,26 @@ PlayerVoteSwitch(playerid, onplayerid)
 			PlayerPlaySound(i, 1133, 0.0, 0.0, 0.0);
 		}
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has started {FFFFFF}Switch-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/voteswitch %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has started {FFFFFF}Switch-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/voteswitch %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 	}
 	else
 	{
 		VoteData[votetype][VoteCount]++;
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}Switch-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/voteswitch %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}Switch-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/voteswitch %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			Player[onplayerid][Team] = GetTeamWithLessPlayers();
 			SwitchTeamFix(onplayerid);
-			SendClientMessageToAll(
-				-1, va_return(
-						"" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "switched to the team which has less players count (%s)!", Player[onplayerid][Name],
-						TeamName[Player[onplayerid][Team]]));
+			va_SendClientMessageToAll(
+				-1, COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "switched to the team which has less players count (%s)!", Player[onplayerid][Name],
+						TeamName[Player[onplayerid][Team]]);
 		}
 	}
 	return 1;

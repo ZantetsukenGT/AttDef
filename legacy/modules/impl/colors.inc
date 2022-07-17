@@ -97,7 +97,7 @@ ChangeTheme(playerid, listitem)
 		}
 	}
 	SaveThemeSettings();
-	SendClientMessageToAll(-1, va_return("%s has set up a new theme colour. Server is restarting so the changes can take effect.", Player[playerid][Name]));
+	va_SendClientMessageToAll(-1, "%s has set up a new theme colour. Server is restarting so the changes can take effect.", Player[playerid][Name]);
 	SendRconCommand("gmx");
 	return 1;
 }

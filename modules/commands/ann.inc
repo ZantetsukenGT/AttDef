@@ -22,8 +22,8 @@ YCMD: ann(playerid, params[], help)
 	}
 
 	if (AnnTimer)
-		DeletePreciseTimer(AnnTimer);
-	AnnTimer = SetPreciseTimer("HideAnnForAll", 5000, false);
+		KillTimer(AnnTimer);
+	AnnTimer = SetTimer("HideAnnForAll", 5000, false);
 
 	TextDrawSetString(AnnTD, str);
 	TextDrawShowForAll(AnnTD);

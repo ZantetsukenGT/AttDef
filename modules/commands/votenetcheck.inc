@@ -50,7 +50,7 @@ PlayerVoteNetCheck(playerid, onplayerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		VoteData[votetype][VotingOnPlayer]	  = onplayerid;
 		Player[onplayerid][TempNetcheck]	  = true;
@@ -60,19 +60,17 @@ PlayerVoteNetCheck(playerid, onplayerid)
 			PlayerPlaySound(i, 1133, 0.0, 0.0, 0.0);
 		}
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has started {FFFFFF}netcheck-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votenetcheck %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has started {FFFFFF}netcheck-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votenetcheck %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 	}
 	else
 	{
 		VoteData[votetype][VoteCount]++;
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}netcheck-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votenetcheck %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}netcheck-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votenetcheck %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
 			if (Player[onplayerid][NetCheck])
@@ -81,7 +79,7 @@ PlayerVoteNetCheck(playerid, onplayerid)
 				Player[onplayerid][FPSCheck]  = false;
 				Player[onplayerid][PingCheck] = false;
 				Player[onplayerid][PLCheck]	  = false;
-				SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "disabled Net-Check!", Player[onplayerid][Name]));
+				va_SendClientMessageToAll(-1, COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "disabled Net-Check!", Player[onplayerid][Name]);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET NetCheck = 0 WHERE Name = '%q'", Player[onplayerid][Name])));
 			}
 			else
@@ -90,10 +88,10 @@ PlayerVoteNetCheck(playerid, onplayerid)
 				Player[onplayerid][FPSCheck]  = true;
 				Player[onplayerid][PingCheck] = true;
 				Player[onplayerid][PLCheck]	  = true;
-				SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "enabled Net-Check!", Player[onplayerid][Name]));
+				va_SendClientMessageToAll(-1, COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "enabled Net-Check!", Player[onplayerid][Name]);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET NetCheck = 1 WHERE Name = '%q'", Player[onplayerid][Name])));
 			}
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 		}
 	}

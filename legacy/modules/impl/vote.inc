@@ -32,8 +32,8 @@ public ResetVoting(votetype, bool: message)
 		VoteData[votetype][PlayerVoted][i] = false;
 	}
 	if (message)
-		SendClientMessageToAll(
-			-1, va_return("{FFFFFF}%s-voting " COL_PRIM "has been reset due to an error or vote timeout (%d secs)!", VoteTypeNames[votetype], VOTE_TIMEOUT_INTERVAL / 1000));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s-voting " COL_PRIM "has been reset due to an error or vote timeout (%d secs)!", VoteTypeNames[votetype], VOTE_TIMEOUT_INTERVAL / 1000);
 	return 1;
 }
 

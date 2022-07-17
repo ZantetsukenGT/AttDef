@@ -34,7 +34,7 @@ public InlineLogin(playerid, dialogid, response, listitem, string: inputtext[])
 		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has been kicked from the server for not logging in.", Player[playerid][Name]);
 		SendClientMessageToAll(-1, iString);
 
-		SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 	}
 	return 1;
 }
@@ -68,7 +68,7 @@ public InlineRegister(playerid, dialogid, response, listitem, string: inputtext[
 		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has been kicked from the server for not registering.", Player[playerid][Name]);
 		SendClientMessageToAll(-1, iString);
 
-		SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 	}
 	return 1;
 }
@@ -89,7 +89,7 @@ public OnLoginPassHash(playerid, bool: success)
 	new teamid = ShouldPlayerBeReadded(playerid);
 	if (teamid != -1)
 	{
-		SetPreciseTimer("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
+		SetTimerEx("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
 	}
 	else
 	{
@@ -118,7 +118,7 @@ public OnRegisterPassHash(playerid)
 	new teamid = ShouldPlayerBeReadded(playerid);
 	if (teamid != -1)
 	{
-		SetPreciseTimer("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
+		SetTimerEx("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
 	}
 	else
 	{
@@ -268,7 +268,7 @@ public OnPlayerRequestClass(playerid, classid)
 			new teamid = ShouldPlayerBeReadded(playerid);
 			if (teamid != -1)
 			{
-				SetPreciseTimer("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
+				SetTimerEx("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
 			}
 			else
 			{
@@ -284,7 +284,7 @@ public OnPlayerRequestClass(playerid, classid)
 	new teamid = ShouldPlayerBeReadded(playerid);
 	if (teamid != -1)
 	{
-		SetPreciseTimer("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
+		SetTimerEx("SpawnConnectedPlayer", 250, false, "ii", playerid, teamid);
 	}
 	else
 	{

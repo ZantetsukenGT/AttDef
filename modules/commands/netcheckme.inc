@@ -25,7 +25,7 @@ YCMD: netcheckme(playerid, params[], help)
 
 	Player[playerid][NetCheckTimeoutTimestamp] = timeStamp;
 	Player[playerid][TempNetcheck]			   = true;
-	SetPreciseTimer("RemoveTempNetcheck", 45000, false, "i", playerid);
+	SetTimerEx("RemoveTempNetcheck", 45000, false, "i", playerid);
 	SendClientMessage(playerid, -1, COL_PRIM "You've been temporarily netchecked for 45 seconds only.");
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s (%d) " COL_PRIM "requests permanent net-check.", Player[playerid][Name], playerid));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s (%d) " COL_PRIM "requests permanent net-check.", Player[playerid][Name], playerid);
 }

@@ -60,8 +60,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 	PlayerTextDrawSetString(hitterid, FriendlyDamage[hitterid][0], str);
 
 	if (FriendlyDamageTimer[hitterid])
-		DeletePreciseTimer(FriendlyDamageTimer[hitterid]);
-	FriendlyDamageTimer[hitterid] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hitterid);
+		KillTimer(FriendlyDamageTimer[hitterid]);
+	FriendlyDamageTimer[hitterid] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hitterid);
 
 	// Loop through the array that contains hitter's spectators
 	foreach (new i : PlayerSpectators[hitterid])
@@ -69,8 +69,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 		PlayerTextDrawSetString(i, FriendlyDamage[i][0], str);
 
 		if (FriendlyDamageTimer[i])
-			DeletePreciseTimer(FriendlyDamageTimer[i]);
-		FriendlyDamageTimer[i] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
+			KillTimer(FriendlyDamageTimer[i]);
+		FriendlyDamageTimer[i] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
 	}
 
 	format(str, sizeof(str), "~y~~h~%s (team-fire)", Player[hitterid][NameWithoutTag]);
@@ -78,8 +78,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 	PlayerTextDrawSetString(hittedid, FriendlyDamage[hittedid][1], str);
 
 	if (FriendlyDamageTimer[hittedid])
-		DeletePreciseTimer(FriendlyDamageTimer[hittedid]);
-	FriendlyDamageTimer[hittedid] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hittedid);
+		KillTimer(FriendlyDamageTimer[hittedid]);
+	FriendlyDamageTimer[hittedid] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hittedid);
 
 	// Loop through the array that contains hitter's spectators
 	foreach (new i : PlayerSpectators[hittedid])
@@ -87,7 +87,7 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 		PlayerTextDrawSetString(i, FriendlyDamage[i][1], str);
 
 		if (FriendlyDamageTimer[i])
-			DeletePreciseTimer(FriendlyDamageTimer[i]);
-		FriendlyDamageTimer[i] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
+			KillTimer(FriendlyDamageTimer[i]);
+		FriendlyDamageTimer[i] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
 	}
 }

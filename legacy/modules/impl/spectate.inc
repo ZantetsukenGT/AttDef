@@ -59,7 +59,7 @@ public UpdateInfoForSpectators()
 InitSpectate()
 {
 	Iter_Init(PlayerSpectators);										 // empty the iterator array
-	SetPreciseTimer("UpdateInfoForSpectators", UPDATE_SPECINFO_INTERVAL, true); // start timer to update the textdraws of spectators
+	SetTimer("UpdateInfoForSpectators", UPDATE_SPECINFO_INTERVAL, true); // start timer to update the textdraws of spectators
 	return 1;
 }
 
@@ -165,7 +165,7 @@ SpectatePlayer(playerid, specid)
 
 	if (TargetInfoData[playerid][TargetInfoTimer])
 	{
-		DeletePreciseTimer(TargetInfoData[playerid][TargetInfoTimer]);
+		KillTimer(TargetInfoData[playerid][TargetInfoTimer]);
 		HideTargetInfo(playerid); // hides the target info textdraws
 	}
 	new OldSpecID = -1;
@@ -469,7 +469,7 @@ SpectateAnyPlayer(playerid, bool: teammatch, bool: ascending, exception = -1)
 		}
 		// This will be reached if no available players to be spectated are found
 		StopSpectate(playerid, false); // Exit spectate mode
-		SetPreciseTimer("RemoveSpectatorSafely", 500, false, "i", playerid);
+		SetTimerEx("RemoveSpectatorSafely", 500, false, "i", playerid);
 	}
 	else if (ascending)
 	{
@@ -533,5 +533,5 @@ SpectateAnyPlayer(playerid, bool: teammatch, bool: ascending, exception = -1)
 	}
 	// This will be reached if no available players to be spectated are found
 	StopSpectate(playerid, false); // Exit spectate mode
-	SetPreciseTimer("RemoveSpectatorSafely", 500, false, "i", playerid);
+	SetTimerEx("RemoveSpectatorSafely", 500, false, "i", playerid);
 }

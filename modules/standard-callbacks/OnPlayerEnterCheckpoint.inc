@@ -55,12 +55,12 @@ public OnPlayerEnterCheckpoint(playerid)
 						else if (GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK)
 						{
 							if (CurrentCPTime < ConfigCPTime)
-								SendClientMessageToAll(-1, va_return(COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied due to abusing jetpack.", Player[playerid][Name]));
+								va_SendClientMessageToAll(-1, COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied due to abusing jetpack.", Player[playerid][Name]);
 						}
 						else if (CurrentCPTime < ConfigCPTime)
-							SendClientMessageToAll(
+							va_SendClientMessageToAll(
 								-1,
-								va_return(COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied. This might be considered as cheating or bug abusing.", Player[playerid][Name]));
+								COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied. This might be considered as cheating or bug abusing.", Player[playerid][Name]);
 					}
 				}
 			}
@@ -145,12 +145,11 @@ public OnPlayerEnterCheckpoint(playerid)
 							else if (GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK)
 							{
 								if (CurrentCPTime < ConfigCPTime)
-									SendClientMessageToAll(-1, va_return(COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied due to abusing jetpack.", Player[playerid][Name]));
+									va_SendClientMessageToAll(-1, COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied due to abusing jetpack.", Player[playerid][Name]);
 							}
 							else if (CurrentCPTime < ConfigCPTime)
-								SendClientMessageToAll(
-									-1, va_return(
-											COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied. This might be considered as cheating or bug abusing.", Player[playerid][Name]));
+								va_SendClientMessageToAll(
+									-1, COL_PRIM "CP touch by {FFFFFF}%s " COL_PRIM "is denied. This might be considered as cheating or bug abusing.", Player[playerid][Name]);
 						}
 					}
 				}

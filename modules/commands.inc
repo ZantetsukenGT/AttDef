@@ -23,8 +23,7 @@ enum e_COMMAND_ERRORS
 public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS: success)
 {
 	// Skip spam check on shortcut commands
-	strtrim(cmdtext);
-	if (!isequal(cmdtext, "/rb", true) && !isequal(cmdtext, "/ra", true) && strfind(cmdtext, "/cmdhelp", true) == -1)
+	if (strcmp(cmdtext, "/rb", true) && strcmp(cmdtext, "/ra", true) && strfind(cmdtext, "/cmdhelp", true) == -1)
 	{
 		new currentTick = GetTickCount();
 		if (AntiSpam && currentTick - Player[playerid][lastChat] < 500)
@@ -43,7 +42,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 	// AFK players are not supposed to use any command
 	if (Player[playerid][IsAFK])
 	{
-		if (isequal(cmdtext, "/back", true))
+		if (!strcmp(cmdtext, "/back", true))
 			return COMMAND_OK;
 		else
 		{
@@ -54,7 +53,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 	// Normal players should not use any command while in duel
 	if (Player[playerid][InDuel])
 	{
-		if (isequal(cmdtext, "/rq", true))
+		if (!strcmp(cmdtext, "/rq", true))
 			return COMMAND_OK;
 		else if (Player[playerid][Level] < 1 && !IsPlayerAdmin(playerid))
 		{

@@ -27,7 +27,7 @@ PlayerVotePause(playerid)
 	new MaxVotesNeeded = Iter_Count(PlayersInRound);
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		foreach (new i : Player)
 		{
@@ -35,23 +35,21 @@ PlayerVotePause(playerid)
 			PlayerPlaySound(i, 1133, 0.0, 0.0, 0.0);
 		}
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has started {FFFFFF}pause-voting " COL_PRIM "[%d/%d] [/votepause or press Y]", Player[playerid][Name], VoteData[votetype][VoteCount],
-					MaxVotesNeeded));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has started {FFFFFF}pause-voting " COL_PRIM "[%d/%d] [/votepause or press Y]", Player[playerid][Name], VoteData[votetype][VoteCount],
+					MaxVotesNeeded);
 	}
 	else
 	{
 		VoteData[votetype][VoteCount]++;
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}pause-voting " COL_PRIM "[%d/%d] [/votepause or press Y]", Player[playerid][Name], VoteData[votetype][VoteCount],
-					MaxVotesNeeded));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}pause-voting " COL_PRIM "[%d/%d] [/votepause or press Y]", Player[playerid][Name], VoteData[votetype][VoteCount],
+					MaxVotesNeeded);
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
 			SendClientMessageToAll(-1, "" COL_PRIM "Pause-voting result: {FFFFFF}round has been paused!");
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			PausePressed = GetTickCount();
 			PauseRound();

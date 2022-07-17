@@ -178,12 +178,12 @@ CreateDeadBody(playerid, killerid, reason, Float: distance = 0.0, Float: x = 0.0
 	{
 		case INVALID_PLAYER_ID:
 		{
-			new Text3D: textlabel = Create3DTextLabel(va_return("Dead body of: %s\nReason: %s", Player[playerid][Name], ReturnWeaponName(reason)), color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = va_Create3DTextLabel("Dead body of: %s\nReason: %s", color, x, y, z - 0.3, 20.0, worldid, true, Player[playerid][Name], ReturnWeaponName(reason));
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 		default:
 		{
-			new Text3D: textlabel = Create3DTextLabel(va_return("Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", Player[playerid][Name], Player[killerid][Name], distance, ReturnWeaponName(reason)), color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = va_Create3DTextLabel("Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", color, x, y, z - 0.3, 20.0, worldid, true, Player[playerid][Name], Player[killerid][Name], distance, ReturnWeaponName(reason));
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 	}
@@ -225,7 +225,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1,
 				"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], pFPS, Min_FPS);
-			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
 	else
@@ -243,7 +243,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Packetloss | %.2f/%.2f " COL_PRIM ":.", Player[playerid][Name],
 						pPL, Max_Packetloss);
-			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
 	else
@@ -261,7 +261,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], pPing,
 						Max_Ping);
-			SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 		}
 	}
 	else
@@ -521,12 +521,12 @@ ShowTargetInfo(playerid, targetid)
 		return 1;
 
 	if (TargetInfoData[playerid][TargetInfoTimer])
-		DeletePreciseTimer(TargetInfoData[playerid][TargetInfoTimer]);
-	TargetInfoData[playerid][TargetInfoTimer] = SetPreciseTimer("HideTargetInfo", 5000, false, "i", playerid);
+		KillTimer(TargetInfoData[playerid][TargetInfoTimer]);
+	TargetInfoData[playerid][TargetInfoTimer] = SetTimerEx("HideTargetInfo", 5000, false, "i", playerid);
 
-	PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], va_return("%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.2f   %sHP: %s%.1f", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
+	va_PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], "%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.2f   %sHP: %s%.1f", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
 		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerFPS(playerid), MAIN_TEXT_COLOUR,
-		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerHealth(targetid) + GetPlayerArmour(targetid)));
+		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerHealth(targetid) + GetPlayerArmour(targetid));
 	PlayerTextDrawShow(playerid, TargetInfoData[playerid][TargetInfoTD]);
 	TargetInfoData[playerid][TargetInfoLastTick]   = currentTick;
 	TargetInfoData[playerid][TargetInfoLastTarget] = targetid;
@@ -1271,20 +1271,20 @@ SyncPlayer(playerid)
 	Player[playerid][LastTimeSynced] = currentTick;
 
 	// Store speed info before re-spawn for SyncAbuse, let weapon-config handle more sync variables
-	new Float: x, Float: y, Float: z;
-	GetPlayerVelocity(playerid, x, y, z);
+	//new Float: x, Float: y, Float: z;
+	//GetPlayerVelocity(playerid, x, y, z);
 	Player[playerid][IgnoreSpawn] = true;
 	
 	//weapon-config resync
 	ResyncPlayer(playerid);
 
 	// Set info back after re-spawn
-	if (!SyncAbuse)
-		SetPlayerVelocity(playerid, x, y, z);
+	//if (!SyncAbuse)
+	//	SetPlayerVelocity(playerid, x, y, z);
 
 	// Set spectators to re-spectate
 	if (Player[playerid][BeingSpeced])
-		SetPreciseTimer("ForceRespectate", GetPlayerPing(playerid), false, "i", playerid);
+		SetTimerEx("ForceRespectate", GetPlayerPing(playerid), false, "i", playerid);
 	return 1;
 }
 

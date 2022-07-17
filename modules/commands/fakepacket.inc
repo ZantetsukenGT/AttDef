@@ -48,7 +48,7 @@ YCMD: fakepacket(playerid, params[], help)
 	if (NetStats_PacketLossPercent(pID) == 0.0)
 		return SendErrorMessage(playerid, "That player has 0.0% packet-loss");
 
-	SetPreciseTimer("FakePacketRenovationEnd", interv * 60 * 1000, false, "ifb", pID, NetStats_PacketLossPercent(pID), true);
+	SetTimerEx("FakePacketRenovationEnd", interv * 60 * 1000, false, "ifb", pID, NetStats_PacketLossPercent(pID), true);
 	Player[pID][FakePacketRenovation] = true;
 
 	LogAdminCommand("fakepacket", playerid, pID);

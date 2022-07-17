@@ -19,8 +19,8 @@ YCMD: war(playerid, params[], help)
 	if (strcmp(TeamAName, "end", true) == 0 && isnull(TeamBName) && WarMode)
 	{
 		WarModeEnding = true;
-		SetPreciseTimer("WarEnded", 5000, false);
-		SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set the match to end!", Player[playerid][Name]));
+		SetTimer("WarEnded", 5000, false);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set the match to end!", Player[playerid][Name]);
 		SendClientMessageToAll(-1, COL_PRIM "Preparing End Match Results..");
 		return SendClientMessageToAll(-1, COL_PRIM "If you missed the results, type {FFFFFF}/showagain");
 	}
@@ -53,7 +53,7 @@ YCMD: war(playerid, params[], help)
 		MatchRoundsRecord[i][round__completed] = false;
 	}
 
-	TextDrawSetString(WarModeText, va_return("%sWar Mode: ~r~ON", MAIN_TEXT_COLOUR));
+	va_TextDrawSetString(WarModeText, "%sWar Mode: ~r~ON", MAIN_TEXT_COLOUR);
 
 	new toTeam = ATTACKER, oppositeTeam = DEFENDER;
 	new Seat, MyVehicle					= -1;
@@ -106,5 +106,5 @@ YCMD: war(playerid, params[], help)
 		}
 	}
 	ShowMatchScoreBoard();
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has enabled the Match-Mode.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has enabled the Match-Mode.", Player[playerid][Name]);
 }

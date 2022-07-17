@@ -89,6 +89,6 @@ YCMD: acar(playerid, params[], help)
 
 	LogAdminCommand("acar", playerid, INVALID_PLAYER_ID);
 
-	return SendClientMessageToAll(-1, va_return("%s%s{FFFFFF} has spawned a(n) %s%s {FFFFFF}as admin", TextColor[Player[playerid][Team]], Player[playerid][Name],
-		TextColor[Player[playerid][Team]], aVehicleNames[veh - 400]));
+	return va_SendClientMessageToAll(-1, "%s%s{FFFFFF} has spawned a(n) %s%s {FFFFFF}as admin", TextColor[Player[playerid][Team]], Player[playerid][Name],
+		TextColor[Player[playerid][Team]], aVehicleNames[veh - 400]);
 }

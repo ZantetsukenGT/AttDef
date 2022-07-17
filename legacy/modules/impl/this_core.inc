@@ -59,7 +59,7 @@ InitScriptCoreSettings()
 	return 1;
 }
 
-CheckServerHostname() { GetServerVarAsString("hostname", hostname, sizeof(hostname)); }
+CheckServerHostname() { GetConsoleVarAsString("name", hostname, sizeof(hostname)); }
 
 InitScriptSecondarySettings()
 {
@@ -108,9 +108,9 @@ AddToServersDatabase()
 	}
 
 	new ServerIP[30];
-	GetServerVarAsString("bind", ServerIP, sizeof(ServerIP));
+	GetConsoleVarAsString("bind", ServerIP, sizeof(ServerIP));
 
-	new port = GetServerVarAsInt("port");
+	new port = GetConsoleVarAsInt("port");
 
 	if (!strlen(ServerIP))
 		ServerIP = "noip";

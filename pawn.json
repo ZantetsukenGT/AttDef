@@ -5,22 +5,19 @@
 	"output": "gamemodes/attdef.amx",
 	"dependencies": [
 		"Zeex/samp-plugin-crashdetect",
+		"NexiusTailer/MapFix",
+		"pawn-lang/samp-stdlib",
+		"pawn-lang/YSI-Includes@5.x",
+		"Sreyas-Sreelal/samp-bcrypt",
+		"Y-Less/sscanf",
+		"ZantetsukenGT/pawn-requests",
 		"ZantetsukenGT/progress2",
 		"ZantetsukenGT/samp-geoip",
-		"bmisiak/samp-precise-timers",
-		"NexiusTailer/MapFix",
-		"ZantetsukenGT/samp-weapon-config",
-		"oscar-broman/strlib",
-		"pawn-lang/YSI-Includes@5.x",
-		"pawn-lang/sa-mp-fixes",
-		"sampctl/samp-stdlib",
-		"Southclaws/pawn-requests",
-		"Sreyas-Sreelal/samp-bcrypt",
-		"Y-Less/sscanf"
+		"ZantetsukenGT/samp-weapon-config@omp"
 	],
 	"local": true,
 	"runtime": {
-		"version": "0.3.7",
+		"version": "openmp",
 		"mode": "server",
 		"rcon_password": "changeme",
 		"port": 36543,
@@ -60,35 +57,34 @@
 	},
 	"builds": [
 		{
-			"name": "dev",
-			"args": [
-				"-;+",
-				"-(+",
-				"-\\+",
-				"-d3",
-				"-Z+"
-			],
-			"includes": [
-				"legacy",
-				"modules"
-			],
-			"compiler": {}
-		},
-		{
 			"name": "main",
 			"args": [
+				"-d3",
+				"-O1",
 				"-;+",
 				"-(+",
 				"-\\+",
-				"-d0",
-				"-O1",
 				"-Z+"
 			],
 			"includes": [
 				"legacy",
 				"modules"
+			]
+		},
+		{
+			"name": "release",
+			"args": [
+				"-d0",
+				"-O1",
+				"-;+",
+				"-(+",
+				"-\\+",
+				"-Z+"
 			],
-			"compiler": {}
+			"includes": [
+				"legacy",
+				"modules"
+			]
 		}
 	]
 }

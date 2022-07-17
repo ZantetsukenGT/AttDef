@@ -66,7 +66,7 @@ LoadBases()
 
 	db_free_result(res);
 
-	SendClientMessageToAll(-1, va_return(COL_PRIM "Bases Loaded: {FFFFFF}%d " COL_PRIM "| Current base set: {FFFFFF}%s", TotalBases, CurrentBaseSet));
+	va_SendClientMessageToAll(-1, COL_PRIM "Bases Loaded: {FFFFFF}%d " COL_PRIM "| Current base set: {FFFFFF}%s", TotalBases, CurrentBaseSet);
 	printf("Bases Loaded: %d (from table: %s)", TotalBases, CurrentBaseSet);
 }
 
@@ -109,7 +109,7 @@ LoadArenas()
 
 	db_free_result(res);
 
-	SendClientMessageToAll(-1, va_return(COL_PRIM "Arenas Loaded: {FFFFFF}%d " COL_PRIM "| Current arena set: {FFFFFF}%s", TotalArenas, CurrentArenaSet));
+	va_SendClientMessageToAll(-1, COL_PRIM "Arenas Loaded: {FFFFFF}%d " COL_PRIM "| Current arena set: {FFFFFF}%s", TotalArenas, CurrentArenaSet);
 	printf("Arenas Loaded: %d (from table: %s)", TotalArenas, CurrentArenaSet);
 }
 

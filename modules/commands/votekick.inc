@@ -47,7 +47,7 @@ PlayerVoteKick(playerid, onplayerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		VoteData[votetype][VotingOnPlayer]	  = onplayerid;
 		foreach (new i : Player)
@@ -56,25 +56,23 @@ PlayerVoteKick(playerid, onplayerid)
 			PlayerPlaySound(i, 1133, 0.0, 0.0, 0.0);
 		}
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has started {FFFFFF}kick-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votekick %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has started {FFFFFF}kick-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votekick %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 	}
 	else
 	{
 		VoteData[votetype][VoteCount]++;
 		VoteData[votetype][PlayerVoted][playerid] = true;
-		SendClientMessageToAll(
-			-1, va_return(
-					"{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}kick-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votekick %d]", Player[playerid][Name],
-					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid));
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s" COL_PRIM " has added to {FFFFFF}kick-voting " COL_PRIM "on {FFFFFF}%s " COL_PRIM "[%d/%d] [/votekick %d]", Player[playerid][Name],
+					Player[onplayerid][Name], VoteData[votetype][VoteCount], MaxVotesNeeded, onplayerid);
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
-			SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "kicked from the server!", Player[onplayerid][Name]));
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			va_SendClientMessageToAll(-1, COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "kicked from the server!", Player[onplayerid][Name]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
-			SetPreciseTimer("OnPlayerKicked", 500, false, "i", onplayerid);
+			SetTimerEx("OnPlayerKicked", 500, false, "i", onplayerid);
 		}
 	}
 	return 1;

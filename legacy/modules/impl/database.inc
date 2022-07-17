@@ -18,7 +18,7 @@
 SetDatabaseToReload(playerid = INVALID_PLAYER_ID)
 {
 	if (playerid != INVALID_PLAYER_ID)
-		SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set the SQLite database to reload.", Player[playerid][Name]));
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set the SQLite database to reload.", Player[playerid][Name]);
 
 	db_close(sqliteconnection);
 	sqliteconnection	= db_open("AttDefDatabase.db");

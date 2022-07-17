@@ -14,5 +14,5 @@ YCMD: swap(playerid, params[], help)
 
 	SwapTeams();
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has swapped the teams.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has swapped the teams.", Player[playerid][Name]);
 }
