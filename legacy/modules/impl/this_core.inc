@@ -39,6 +39,9 @@ InitWeaponConfig()
 	SetVehicleUnoccupiedDamage(false);
 	SetVehiclePassengerDamage(true);
 	SetRespawnTime(0);
+	SetWeaponName(0, !"Punch");
+	SetWeaponName(27, !"Spas");
+	SetWeaponName(33, !"Rifle");
 }
 
 InitScriptCoreSettings()
