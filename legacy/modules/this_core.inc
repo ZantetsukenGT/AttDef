@@ -27,4 +27,4 @@ new GM_WEBSITE[50] = "discord.gg/MbQbr9BKFs";
 
 new DB: sqliteconnection; // SQLite Databases
 new teamskinlist = mS_INVALID_LISTID, playerskinlist = mS_INVALID_LISTID;
-new lagcompmode = 0;
+new bool:IsSkinshot = 0;

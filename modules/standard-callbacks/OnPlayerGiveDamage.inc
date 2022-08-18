@@ -5,7 +5,7 @@
 
 public OnPlayerGiveDamage(playerid, damagedid, Float: amount, weaponid, bodypart)
 {
-	if (lagcompmode != 0)
+	if (IsSkinshot)
 		HandlePlayerDamage(damagedid, playerid, amount, weaponid, bodypart);
 	return 1;
 }

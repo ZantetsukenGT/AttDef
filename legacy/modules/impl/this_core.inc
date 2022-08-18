@@ -51,7 +51,7 @@ InitScriptCoreSettings()
 	return 1;
 }
 
-CheckServerHostname() { GetServerVarAsString("hostname", hostname, sizeof(hostname)); }
+CheckServerHostname() { GetConsoleVarAsString("name", hostname); }
 
 InitScriptSecondarySettings()
 {
@@ -65,7 +65,7 @@ InitScriptSecondarySettings()
 	// Settings
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
-	lagcompmode = GetServerVarAsInt("lagcompmode");
+	IsSkinshot = GetConsoleVarAsBool("game.use_lag_compensation");
 	CheckServerHostname();
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();
@@ -103,9 +103,9 @@ AddToServersDatabase()
 	}
 
 	new ServerIP[30];
-	GetServerVarAsString("bind", ServerIP, sizeof(ServerIP));
+	GetConsoleVarAsString("bind", ServerIP, sizeof(ServerIP));
 
-	new port = GetServerVarAsInt("port");
+	new port = GetConsoleVarAsInt("port");
 
 	if (!strlen(ServerIP))
 		ServerIP = "noip";
