@@ -65,7 +65,7 @@ InitScriptSecondarySettings()
 	// Settings
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
-	IsSkinshot = GetConsoleVarAsBool("game.use_lag_compensation");
+	IsSkinshot = bool:GetConsoleVarAsBool("game.use_lag_compensation");
 	CheckServerHostname();
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();
