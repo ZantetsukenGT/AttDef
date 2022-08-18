@@ -10,8 +10,8 @@ YCMD: duel(playerid, params[], help)
 	if (Player[playerid][InDuel])
 		return SendErrorMessage(playerid, "You are already dueling someone.");
 
-	new invitedid, Weapon1[23], Weapon2[23], duelarena[8], sizeStr[8];
-	if (sscanf(params, "is[23]s[23]S( )[8]S( )[8]", invitedid, Weapon1, Weapon2, duelarena, sizeStr))
+	new invitedid, Weapon1[23], Weapon2[23], duelarena[8], size;
+	if (sscanf(params, "is[*]s[*]S( )[8]I(90)", invitedid, sizeof(Weapon1), Weapon1, sizeof(Weapon2), Weapon2, duelarena, size))
 	{
 		SendUsageMessage(playerid, "/duel [Player ID] [Weapon 1] [Weapon 2] [Optional: default/custom] [Optional: area size]");
 		return SendClientMessage(playerid, -1, "" COL_PRIM "Note: {FFFFFF}[custom] to play in your current place and [default] for default duel arena");
@@ -30,31 +30,19 @@ YCMD: duel(playerid, params[], help)
 		return SendErrorMessage(playerid, "Can't duel with yourself.");
 
 	new WeaponID1 = GetWeaponID(Weapon1);
-	if (WeaponID1 < 1 || WeaponID1 > 46 || WeaponID1 == 19 || WeaponID1 == 20 || WeaponID1 == 21)
+	if (!IsValidWeapon(WeaponID1))
 		return SendErrorMessage(playerid, "Invalid Weapon Name.");
-	if (WeaponID1 == 40 || WeaponID1 == 43 || WeaponID1 == 44 || WeaponID1 == 45)
-		return SendErrorMessage(playerid, "That weapon is not allowed in duels.");
 
 	new WeaponID2 = GetWeaponID(Weapon2);
-	if (WeaponID2 < 1 || WeaponID2 > 46 || WeaponID2 == 19 || WeaponID2 == 20 || WeaponID2 == 21)
-		return SendErrorMessage(playerid, "Invalid Weapon Name.");
-	if (WeaponID2 == 40 || WeaponID2 == 43 || WeaponID2 == 44 || WeaponID2 == 45)
+	if (!IsValidWeapon(WeaponID2))
 		return SendErrorMessage(playerid, "That weapon is not allowed in duels.");
 
 	new duelarenaid;
 	switch (YHash(duelarena, false))
 	{
-		case _I<default>: duelarenaid = DEFAULT_DUEL_ARENA_ID;
 		case _I<custom>: duelarenaid = 1 + DEFAULT_DUEL_ARENA_ID;
 		default: duelarenaid = DEFAULT_DUEL_ARENA_ID;
 	}
-
-	new size = 90;
-	if (!isnull(sizeStr))
-	{
-		size = strval(sizeStr);
-		if (size < 50)
-			size = 50;
-	}
+	size = max(size, 50);
 	return ProcessDuelRequest(playerid, invitedid, WeaponID1, WeaponID2, duelarenaid, size);
 }

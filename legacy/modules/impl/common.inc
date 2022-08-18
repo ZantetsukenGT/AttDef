@@ -1337,7 +1337,7 @@ FixVsTextDraw(exception = -1)
 				case DEFENDER: ct[1]++;
 			}
 		}
-		format(str, sizeof(str), "  ~r~%d  %sVs  ~b~~h~%d", ct[0], MAIN_TEXT_COLOUR, ct[1]);
+		format(str, sizeof(str), "~r~%d  %svs  ~b~~h~%d", ct[0], MAIN_TEXT_COLOUR, ct[1]);
 		foreach (new i : Player)
 			PlayerTextDrawSetString(i, BaseID_VS[i], str);
 	}

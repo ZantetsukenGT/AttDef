@@ -17,21 +17,17 @@ YCMD: getgun(playerid, params[], help)
 		return SendErrorMessage(playerid, "Can't use this command during DM.");
 
 	new Weapon[50], Ammo;
-
-	if (sscanf(params, "s[50]d", Weapon, Ammo))
-		return SendUsageMessage(playerid, "/getgun [Weapon Name] [Ammo]");
-
-	if (Ammo < 0 || Ammo > 9999)
-		return SendErrorMessage(playerid, "Invalid Ammo.");
+	if (sscanf(params, "s[*]I(250)", sizeof(Weapon), Weapon, Ammo))
+		return SendUsageMessage(playerid, "/getgun [Weapon Name] [Optional: Ammo]");
 
 	new WeaponID = GetWeaponID(Weapon);
-	if (WeaponID < 1 || WeaponID > 46 || WeaponID == 19 || WeaponID == 20 || WeaponID == 21 || WeaponID == 22)
+	if (!IsValidWeapon(WeaponID))
 		return SendErrorMessage(playerid, "Invalid Weapon Name.");
-	if (WeaponID == 44 || WeaponID == 45)
-		return SendErrorMessage(playerid, "We don't do this shit around here.");
+
+	Ammo = clamp(Ammo, 10, 9999);
 
 	GivePlayerWeapon(playerid, WeaponID, Ammo);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has given himself {FFFFFF}%s " COL_PRIM "with {FFFFFF}%d " COL_PRIM "ammo.", Player[playerid][Name],
-		WeaponNames[WeaponID], Ammo));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has given himself {FFFFFF}%s " COL_PRIM "with {FFFFFF}%d " COL_PRIM "ammo.", Player[playerid][Name],
+		WeaponNames[WeaponID], Ammo);
 }
