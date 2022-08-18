@@ -19,7 +19,7 @@ YCMD: war(playerid, params[], help)
 	if (strcmp(TeamAName, "end", true) == 0 && isnull(TeamBName) && WarMode)
 	{
 		WarModeEnding = true;
-		SetPreciseTimer("WarEnded", 5000, false);
+		SetTimer("WarEnded", 5000, false);
 		SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set the match to end!", Player[playerid][Name]));
 		SendClientMessageToAll(-1, COL_PRIM "Preparing End Match Results..");
 		return SendClientMessageToAll(-1, COL_PRIM "If you missed the results, type {FFFFFF}/showagain");

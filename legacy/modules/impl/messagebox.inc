@@ -116,7 +116,7 @@ MessageBox(playerid, MessageBoxType: type, const caption[], const info[], interv
 	PlayerTextDrawShow(playerid, MsgBoxData[playerid][info_TD][type]);
 
 	if (MsgBoxData[playerid][MsgBoxtimer][type])
-		DeletePreciseTimer(MsgBoxData[playerid][MsgBoxtimer][type]);
-	MsgBoxData[playerid][MsgBoxtimer][type] = SetPreciseTimer("HideMessageBox", interval, false, "ii", playerid, _: type);
+		KillTimer(MsgBoxData[playerid][MsgBoxtimer][type]);
+	MsgBoxData[playerid][MsgBoxtimer][type] = SetTimerEx("HideMessageBox", interval, false, "ii", playerid, _: type);
 	return 1;
 }

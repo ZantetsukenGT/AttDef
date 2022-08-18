@@ -57,7 +57,7 @@ PlayerVoteAdd(playerid, onplayerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		VoteData[votetype][VotingOnPlayer]	  = onplayerid;
 		foreach (new i : Player)
@@ -82,7 +82,7 @@ PlayerVoteAdd(playerid, onplayerid)
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
 			SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "added to the round!", Player[onplayerid][Name]));
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			if (Current != -1)
 			{

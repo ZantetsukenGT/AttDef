@@ -50,7 +50,7 @@ hook stock SetPlayerSkin(playerid, skinid)
 
 	// Set spectators to re-spectate
 	if (Player[playerid][BeingSpeced])
-		SetPreciseTimer("ForceRespectate", 1000, false, "i", playerid);
+		SetTimerEx("ForceRespectate", 1000, false, "i", playerid);
 
 	// Store info before re-spawn
 	new Float: __Pos[4],

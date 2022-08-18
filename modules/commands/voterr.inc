@@ -27,7 +27,7 @@ PlayerVoteRestartRound(playerid)
 	new MaxVotesNeeded = Iter_Count(PlayersInRound);
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		foreach (new i : Player)
 		{
@@ -52,7 +52,7 @@ PlayerVoteRestartRound(playerid)
 		{
 			AllowStartBase = false;
 			SendClientMessageToAll(-1, "" COL_PRIM "Restart round-voting result: {FFFFFF}round has been set to restart!");
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			if (RoundPaused)
 			{
@@ -66,12 +66,12 @@ PlayerVoteRestartRound(playerid)
 			if (GameType == BASE)
 			{
 				BaseStarted = false;
-				PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 4000, false, "i", Current);
+				PreStartRoundTimer = SetTimerEx("OnBaseStart", 4000, false, "i", Current);
 			}
 			else if (GameType == ARENA)
 			{
 				ArenaStarted = false;
-				PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 4000, false, "i", Current);
+				PreStartRoundTimer = SetTimerEx("OnArenaStart", 4000, false, "i", Current);
 			}
 
 			foreach (new i : Player)

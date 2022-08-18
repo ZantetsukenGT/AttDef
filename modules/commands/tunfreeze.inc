@@ -17,7 +17,7 @@ YCMD: tunfreeze(playerid, params[], help)
 		return SendErrorMessage(playerid, "That player isnt connected.");
 
 	TogglePlayerControllable(pID, 1);
-    SetPreciseTimer("DelayedFreeze", 500, false, "i", pID);
+    SetTimerEx("DelayedFreeze", 500, false, "i", pID);
 
 	LogAdminCommand("tunfreeze", playerid, pID);
 

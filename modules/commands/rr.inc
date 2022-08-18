@@ -42,12 +42,12 @@ YCMD: rr(playerid, params[], help)
 	if (GameType == BASE)
 	{
 		BaseStarted = false;
-		PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 4000, false, "i", Current);
+		PreStartRoundTimer = SetTimerEx("OnBaseStart", 4000, false, "i", Current);
 	}
 	else if (GameType == ARENA)
 	{
 		ArenaStarted = false;
-		PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 4000, false, "i", Current);
+		PreStartRoundTimer = SetTimerEx("OnArenaStart", 4000, false, "i", Current);
 	}
 
 	foreach (new i : Player)

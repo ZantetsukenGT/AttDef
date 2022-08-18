@@ -13,6 +13,6 @@ YCMD: fixcp(playerid, params[], help)
 		return SendErrorMessage(playerid, "There are no checkpoints in RC arenas!");
 
 	if (Player[playerid][Playing])
-		SetPreciseTimer("SetCPForPlayer", 1000, false, "i", playerid);
+		SetTimerEx("SetCPForPlayer", 1000, false, "i", playerid);
 	return 1;
 }

@@ -16,12 +16,12 @@ YCMD: end(playerid, params[], help)
 
 	if (PreStartRoundTimer)
 	{
-		DeletePreciseTimer(PreStartRoundTimer);
+		KillTimer(PreStartRoundTimer);
 		PreStartRoundTimer = 0;
 	}
 	if (ViewRoundTimer)
 	{
-		DeletePreciseTimer(ViewRoundTimer);
+		KillTimer(ViewRoundTimer);
 		ViewRoundTimer = 0;
 
 		TextDrawSetString(centerTeamNames, " ");

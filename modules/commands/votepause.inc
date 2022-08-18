@@ -27,7 +27,7 @@ PlayerVotePause(playerid)
 	new MaxVotesNeeded = Iter_Count(PlayersInRound);
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		foreach (new i : Player)
 		{
@@ -51,7 +51,7 @@ PlayerVotePause(playerid)
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
 			SendClientMessageToAll(-1, "" COL_PRIM "Pause-voting result: {FFFFFF}round has been paused!");
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			PausePressed = GetTickCount();
 			PauseRound();

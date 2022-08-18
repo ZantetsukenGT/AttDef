@@ -31,7 +31,7 @@ hook OnPlayerDisconnect(playerid, reason)
 		// If configured to pause the round automatically
 		if (AutoPause && !RoundPaused && !RoundUnpausing)
 		{
-			DeletePreciseTimer(UnpauseTimer);
+			KillTimer(UnpauseTimer);
 			RoundUnpausing = false;
 			PauseRound();
 			SendClientMessageToAll(-1, COL_PRIM "Round has been auto-paused.");
@@ -81,7 +81,7 @@ public StartRoundAutomatically()
 	{
 		SendClientMessageToAll(-1, COL_PRIM "Auto round starter error: {FFFFFF}Not enough players to start a round!");
 		SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "will try to start a round again in 60 seconds!");
-		SetPreciseTimer("StartRoundAutomatically", 60000, false);
+		SetTimer("StartRoundAutomatically", 60000, false);
 		return 0;
 	}
 
@@ -109,7 +109,7 @@ public StartRoundAutomatically()
 				SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "couldn't start an {FFFFFF}arena " COL_PRIM "because the current {FFFFFF}arena set " COL_PRIM "doesn't have any.");
 				return 1;
 			}
-			PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 2000, false, "i", id);
+			PreStartRoundTimer = SetTimerEx("OnArenaStart", 2000, false, "i", id);
 
 			new str[144];
 			format(str, sizeof(str), "{FFFFFF}System " COL_PRIM "has randomly started Arena: {FFFFFF}%s (ID: %d)", AName[id], id);
@@ -125,7 +125,7 @@ public StartRoundAutomatically()
 				SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "couldn't start a {FFFFFF}base " COL_PRIM "because the current {FFFFFF}base set " COL_PRIM "doesn't have any.");
 				return 1;
 			}
-			PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 2000, false, "i", id);
+			PreStartRoundTimer = SetTimerEx("OnBaseStart", 2000, false, "i", id);
 
 			new str[144];
 			format(str, sizeof(str), "{FFFFFF}System " COL_PRIM "has randomly started Base: {FFFFFF}%s (ID: %d)", BName[id], id);
@@ -140,7 +140,7 @@ SetRoundAutoStart(in_seconds)
 	if (in_seconds > 0)
 	{
 		SendClientMessageToAll(-1, va_return("{FFFFFF}System " COL_PRIM "is starting another round in %d seconds!", in_seconds));
-		SetPreciseTimer("StartRoundAutomatically", in_seconds * 1000, false);
+		SetTimer("StartRoundAutomatically", in_seconds * 1000, false);
 	}
 	else
 		StartRoundAutomatically();
@@ -495,14 +495,14 @@ StartGameLoop()
 {
 	if (GameLoop)
 		return;
-	GameLoop = SetPreciseTimer("GameLoopCallback", GAME_SPEED, true);
+	GameLoop = SetTimer("GameLoopCallback", GAME_SPEED, true);
 }
 
 KillGameLoop()
 {
 	if (!GameLoop)
 		return;
-	DeletePreciseTimer(GameLoop);
+	KillTimer(GameLoop);
 	GameLoop = 0;
 }
 
@@ -628,7 +628,7 @@ public UnpauseRound()
 {
 	if (PauseStopWatchTimer)
 	{
-		DeletePreciseTimer(PauseStopWatchTimer);
+		KillTimer(PauseStopWatchTimer);
 		PauseStopWatchTimer = 0;
 	}
 
@@ -644,7 +644,7 @@ public UnpauseRound()
 		format(iString, sizeof(iString), "~g~~h~Round resuming in ~h~%d", PauseCountdown);
 		TextDrawSetString(PauseTD, iString);
 		TextDrawShowForAll(PauseTD);
-		UnpauseTimer = SetPreciseTimer("UnpauseRound", 1000, false);
+		UnpauseTimer = SetTimer("UnpauseRound", 1000, false);
 	}
 	else
 	{
@@ -669,7 +669,7 @@ public UnpauseRound()
 		{
 			SetVehicleVelocity(g, VehicleVelc[g][0], VehicleVelc[g][1], VehicleVelc[g][2]);
 		}
-		DeletePreciseTimer(PauseAirVehicles_Timer);
+		KillTimer(PauseAirVehicles_Timer);
 		Iter_Clear(TempAirVehicles);
 
 		RoundPaused	   = false;
@@ -680,7 +680,7 @@ public UnpauseRound()
 
 		if (TipTimerDuringPause)
 		{
-			DeletePreciseTimer(TipTimerDuringPause);
+			KillTimer(TipTimerDuringPause);
 			TipTimerDuringPause = 0;
 		}
 	}
@@ -691,7 +691,7 @@ forward PauseAirVehicles_Handler();
 public PauseAirVehicles_Handler()
 {
 	if (Iter_Count(TempAirVehicles) == 0)
-		return DeletePreciseTimer(PauseAirVehicles_Timer);
+		return KillTimer(PauseAirVehicles_Timer);
 
 	foreach (new i : TempAirVehicles)
 		SetVehiclePos(i, TempAirVehicles_Pos[i][0], TempAirVehicles_Pos[i][1], TempAirVehicles_Pos[i][2]);
@@ -720,18 +720,18 @@ PauseRound()
 		GetVehicleVelocity(g, VehicleVelc[g][0], VehicleVelc[g][1], VehicleVelc[g][2]);
 	}
 	if (airVehiclesFound != 0)
-		PauseAirVehicles_Timer = SetPreciseTimer("PauseAirVehicles_Handler", 50, true);
+		PauseAirVehicles_Timer = SetTimer("PauseAirVehicles_Handler", 50, true);
 
 	if (TipTimerDuringPause)
-		DeletePreciseTimer(TipTimerDuringPause);
+		KillTimer(TipTimerDuringPause);
 
-	TipTimerDuringPause = SetPreciseTimer("SendTipMessageToAll", 15000, false, "b", true);
+	TipTimerDuringPause = SetTimerEx("SendTipMessageToAll", 15000, false, "b", true);
 
 	if (!PauseStopWatchTimer)
 	{
 		TotalPausesInRound++;
 		PauseTimeElapsed = 0;
-		PauseStopWatchTimer = SetPreciseTimer("PauseStopWatch", 1000, true);
+		PauseStopWatchTimer = SetTimer("PauseStopWatch", 1000, true);
 	}
 
 	// Make sure this bix red textdraw won't stay on players screen because it will get annoying
@@ -981,7 +981,7 @@ PlayerRequestBackup(playerid)
 	SetPlayerColor(playerid, team == ATTACKER ? ATTACKER_ASKING_HELP : DEFENDER_ASKING_HELP);
 
 	// Set a timer to end backup request later
-	SetPreciseTimer("EndTeamBackupRequest", 7000, 0, "i", playerid);
+	SetTimerEx("EndTeamBackupRequest", 7000, 0, "i", playerid);
 
 	// Set values to tell that this team has someone requesting for backup now
 	TeamHelp[team]					= true;
@@ -1010,8 +1010,8 @@ CreateTeamDeathMapIcon(teamid, Float: x, Float: y, Float: z)
 	new iconID = teamid == DEFENDER ? DEFENDER_DEATH_ICON : ATTACKER_DEATH_ICON;
 
 	if (TeamDeathIconTimer[teamid])
-		DeletePreciseTimer(TeamDeathIconTimer[teamid]);
-	TeamDeathIconTimer[teamid] = SetPreciseTimer("RemoveTeamDeathMapIcon", 5000, false, "ii", teamid, iconID);
+		KillTimer(TeamDeathIconTimer[teamid]);
+	TeamDeathIconTimer[teamid] = SetTimerEx("RemoveTeamDeathMapIcon", 5000, false, "ii", teamid, iconID);
 	foreach (new i : PlayersInRound)
 	{
 		if (Player[i][Team] == teamid)
@@ -1433,7 +1433,7 @@ public ViewRCForPlayers()
 {
 	if (ViewRoundCountdown == 0)
 	{
-		DeletePreciseTimer(ViewRoundTimer);
+		KillTimer(ViewRoundTimer);
 		ViewRoundTimer = 0;
 
 		SpawnPlayersInRC();
@@ -1444,7 +1444,7 @@ public ViewRCForPlayers()
 		return 1;
 	}
 	if (!ViewRoundTimer)
-		ViewRoundTimer = SetPreciseTimer("ViewRCForPlayers", 1000, true);
+		ViewRoundTimer = SetTimer("ViewRCForPlayers", 1000, true);
 
 	new iString[64];
 	format(iString, sizeof(iString), "~w~RC starting in ~r~~h~%d ~w~seconds", ViewRoundCountdown);
@@ -1508,7 +1508,7 @@ SpawnPlayersInRC()
 
 			if (!Player[i][FakePacketRenovation] && Player[i][NetCheck] && NetStats_GetConnectedTime(i) < 300000)
 			{
-				SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
+				SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
 				Player[i][FakePacketRenovation] = true;
 			}
 
@@ -1604,7 +1604,7 @@ SpawnPlayersInRC()
 			GivePlayerWeapon(i, WEAPON_SHOTGSPA, 9999);
 			GivePlayerWeapon(i, WEAPON_DEAGLE, 9999);
 		}
-		SetPreciseTimer("Round_EnableSync", 1050, false);
+		SetTimer("Round_EnableSync", 1050, false);
 	}
 }
 
@@ -1710,7 +1710,7 @@ public ViewArenaForPlayers()
 {
 	if (ViewRoundCountdown == 0)
 	{
-		DeletePreciseTimer(ViewRoundTimer);
+		KillTimer(ViewRoundTimer);
 		ViewRoundTimer = 0;
 
 		SpawnPlayersInArena();
@@ -1721,7 +1721,7 @@ public ViewArenaForPlayers()
 		return 1;
 	}
 	if (!ViewRoundTimer)
-		ViewRoundTimer = SetPreciseTimer("ViewArenaForPlayers", 1000, true);
+		ViewRoundTimer = SetTimer("ViewArenaForPlayers", 1000, true);
 
 	new iString[64];
 	format(iString, sizeof(iString), "~w~Arena starting in ~r~~h~%d ~w~seconds", ViewRoundCountdown);
@@ -1786,7 +1786,7 @@ SpawnPlayersInArena()
 
 			if (!Player[i][FakePacketRenovation] && Player[i][NetCheck] && NetStats_GetConnectedTime(i) < 300000)
 			{
-				SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
+				SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
 				Player[i][FakePacketRenovation] = true;
 			}
 
@@ -1878,8 +1878,8 @@ SpawnPlayersInArena()
 		UpdateTeamNamesTextdraw();
 		RestartGameLoop();
 		RadarFix();
-		SetPreciseTimer("ShowPlayingPlayersGunmenu", 1000, false);
-		SetPreciseTimer("Round_EnableSync", 1050, false);
+		SetTimer("ShowPlayingPlayersGunmenu", 1000, false);
+		SetTimer("Round_EnableSync", 1050, false);
 	}
 }
 
@@ -1889,7 +1889,7 @@ public AddPlayerToArena(playerid)
 	if (Player[playerid][Spectating])
 	{
 		StopSpectate(playerid);
-		SetPreciseTimer("AddPlayerToArena", 500, false, "i", playerid);
+		SetTimerEx("AddPlayerToArena", 500, false, "i", playerid);
 		return 1;
 	}
 
@@ -1907,7 +1907,7 @@ public AddPlayerToArena(playerid)
 
 	if (!Player[playerid][FakePacketRenovation] && Player[playerid][NetCheck] && NetStats_GetConnectedTime(playerid) < 300000)
 	{
-		SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
+		SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
 		Player[playerid][FakePacketRenovation] = true;
 	}
 
@@ -2109,7 +2109,7 @@ public ViewBaseForPlayers()
 {
 	if (ViewRoundCountdown == 0)
 	{
-		DeletePreciseTimer(ViewRoundTimer);
+		KillTimer(ViewRoundTimer);
 		ViewRoundTimer = 0;
 
 		SpawnPlayersInBase();
@@ -2120,7 +2120,7 @@ public ViewBaseForPlayers()
 		return 1;
 	}
 	if (!ViewRoundTimer)
-		ViewRoundTimer = SetPreciseTimer("ViewBaseForPlayers", 1000, true);
+		ViewRoundTimer = SetTimer("ViewBaseForPlayers", 1000, true);
 
 	new iString[64];
 	format(iString, sizeof(iString), "~w~Base starting in ~r~~h~%d ~w~seconds", ViewRoundCountdown);
@@ -2236,7 +2236,7 @@ SpawnPlayersInBase()
 
 			if (!Player[i][FakePacketRenovation] && Player[i][NetCheck] && NetStats_GetConnectedTime(i) < 300000)
 			{
-				SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
+				SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", i, NetStats_PacketLossPercent(i), false);
 				Player[i][FakePacketRenovation] = true;
 			}
 
@@ -2281,7 +2281,7 @@ SpawnPlayersInBase()
 					SetPlayerTeam(i, ATTACKER);
 
 					DisableRemoteVehicleCollisions(i, 1);
-					SetPreciseTimer("EnableVehicleCollisions", 15000, false, "i", i);
+					SetTimerEx("EnableVehicleCollisions", 15000, false, "i", i);
 					SendClientMessage(i, -1, "Vehicle collisions "COL_PRIM"have been {FF0000}disabled"COL_PRIM" for 15 seconds");
 
 					ShowTeamBarsForPlayer(i);
@@ -2338,8 +2338,8 @@ SpawnPlayersInBase()
 		UpdateTeamNamesTextdraw();
 		RestartGameLoop();
 		RadarFix();
-		SetPreciseTimer("ShowPlayingPlayersGunmenu", 1000, false);
-		SetPreciseTimer("Round_EnableSync", 1050, false);
+		SetTimer("ShowPlayingPlayersGunmenu", 1000, false);
+		SetTimer("Round_EnableSync", 1050, false);
 	}
 	return 1;
 }
@@ -2356,7 +2356,7 @@ public AddPlayerToBase(playerid)
 	if (Player[playerid][Spectating])
 	{
 		StopSpectate(playerid);
-		SetPreciseTimer("AddPlayerToBase", 500, false, "i", playerid);
+		SetTimerEx("AddPlayerToBase", 500, false, "i", playerid);
 		return 1;
 	}
 
@@ -2377,7 +2377,7 @@ public AddPlayerToBase(playerid)
 
 	if (!Player[playerid][FakePacketRenovation] && Player[playerid][NetCheck] && NetStats_GetConnectedTime(playerid) < 300000)
 	{
-		SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
+		SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
 		Player[playerid][FakePacketRenovation] = true;
 	}
 
@@ -2799,15 +2799,15 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	AllowStartBase = false;
 
 	if (WarMode)
-		SetPreciseTimer("SwapBothTeams", 2500, false);
+		SetTimer("SwapBothTeams", 2500, false);
 	else if (AutoBal)
-		SetPreciseTimer("DoAutoBalance", 2500, false);
+		SetTimer("DoAutoBalance", 2500, false);
 	else
-		SetPreciseTimer("DontAutoBalance", 2500, false);
+		SetTimer("DontAutoBalance", 2500, false);
 
 	if (CurrentRound >= TotalRounds && CurrentRound != 0)
 	{
-		SetPreciseTimer("WarEnded", 5000, false);
+		SetTimer("WarEnded", 5000, false);
 		SendClientMessageToAll(-1, COL_PRIM "Preparing End Match Results..");
 		SendClientMessageToAll(-1, COL_PRIM "If you missed the results, type {FFFFFF}/showagain");
 	}
@@ -2832,11 +2832,11 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	if (AutoRoundStarter)
 		SetRoundAutoStart(20);
 
-	SetPreciseTimer("NotEndingRound", 3000, false);
+	SetTimer("NotEndingRound", 3000, false);
 
 	switch (random(3))
 	{
-		case 2: SetPreciseTimer("SendTipMessageToAll", 7000, false, "b", false);
+		case 2: SetTimerEx("SendTipMessageToAll", 7000, false, "b", false);
 	}
 	return 1;
 }

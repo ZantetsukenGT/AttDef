@@ -760,7 +760,7 @@ LoadPlayerVariables(playerid)
 					SetPlayerArmedWeapon(playerid, 0);
 
 				if (SaveVariables[i][pVehicleID] != -1)
-					SetPreciseTimer("RespawnInVehicleAfterComeBack", 500, false, "ddd", playerid, SaveVariables[i][pVehicleID], SaveVariables[i][pSeatID]);
+					SetTimerEx("RespawnInVehicleAfterComeBack", 500, false, "ddd", playerid, SaveVariables[i][pVehicleID], SaveVariables[i][pSeatID]);
 			}
 			else if (GameType == ARENA)
 			{
@@ -789,7 +789,7 @@ LoadPlayerVariables(playerid)
 
 			if (!Player[playerid][FakePacketRenovation] && Player[playerid][NetCheck] && NetStats_GetConnectedTime(playerid) < 300000)
 			{
-				SetPreciseTimer("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
+				SetTimerEx("FakePacketRenovationEnd", 30000, false, "ifb", playerid, NetStats_PacketLossPercent(playerid), false);
 				Player[playerid][FakePacketRenovation] = true;
 			}
 

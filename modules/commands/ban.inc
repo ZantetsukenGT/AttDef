@@ -25,7 +25,7 @@ YCMD: ban(playerid, params[], help)
 	SendClientMessageToAll(-1, iString);
 
 	format(iString, sizeof(iString), "%s - %s", Player[playerid][Name], Reason);
-	SetPreciseTimer("BanExDelayed", 350, false, "ds", pID, iString);
+	SetTimerEx("BanExDelayed", 350, false, "ds", pID, iString);
 	return LogAdminCommand("ban", playerid, pID);
 }
 

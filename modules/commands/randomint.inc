@@ -35,7 +35,7 @@ YCMD: randomint(playerid, params[], help)
 				SendClientMessageToAll(-1, COL_PRIM "Couldn't start a {FFFFFF}base " COL_PRIM "with the defined criteria. {FFFFFF}(perhaps the current base set doesn't have interior bases)");
 				return 1;
 			}
-			PreStartRoundTimer = SetPreciseTimer("OnBaseStart", 4000, false, "i", BaseID);
+			PreStartRoundTimer = SetTimerEx("OnBaseStart", 4000, false, "i", BaseID);
 
 			GameType = BASE;
 
@@ -59,7 +59,7 @@ YCMD: randomint(playerid, params[], help)
 				SendClientMessageToAll(-1, COL_PRIM "Couldn't start an {FFFFFF}arena " COL_PRIM "with the defined criteria. {FFFFFF}(perhaps the current arena set doesn't have interior arenas)");
 				return 1;
 			}
-			PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 4000, false, "i", ArenaID);
+			PreStartRoundTimer = SetTimerEx("OnArenaStart", 4000, false, "i", ArenaID);
 
 			GameType = ARENA;
 

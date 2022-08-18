@@ -37,7 +37,7 @@ PlayerVoteEndMatch(playerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		foreach (new i : Player)
 		{
@@ -61,7 +61,7 @@ PlayerVoteEndMatch(playerid)
 		if (VoteData[votetype][VoteCount] >= MaxVotesNeeded) // Enough people voted!
 		{
 			SendClientMessageToAll(-1, "" COL_PRIM "End Match-voting result: {FFFFFF}match has been set to end!");
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 			if (Current != -1)
 			{
@@ -137,7 +137,7 @@ PlayerVoteEndMatch(playerid)
 				ResetTeamLeaders();
 				Iter_Clear(PlayersInRound);
 			}
-			SetPreciseTimer("WarEnded", 4000, false);
+			SetTimer("WarEnded", 4000, false);
 		}
 	}
 	return 1;

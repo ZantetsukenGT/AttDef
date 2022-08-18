@@ -21,7 +21,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					GivePlayerWeapon(playerid, weap, ammo);
 				}
-				SetPreciseTimer("ShowPlayerMeleeWeaponsMenu", GetPlayerPing(playerid) + 200, false, "i", playerid);
+				SetTimerEx("ShowPlayerMeleeWeaponsMenu", GetPlayerPing(playerid) + 200, false, "i", playerid);
 			}
 			return 1;
 		}
@@ -148,7 +148,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if (Player[ToAddID][Spectating] == true)
 						StopSpectate(ToAddID);
 
-					SetPreciseTimer("OnPlayerReplace", 500, false, "iii", ToAddID, ToReplaceID, playerid);
+					SetTimerEx("OnPlayerReplace", 500, false, "iii", ToAddID, ToReplaceID, playerid);
 				}
 				else
 				{
@@ -185,7 +185,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						if (Player[ToAddID][Spectating] == true)
 							StopSpectate(ToAddID);
-						SetPreciseTimer("OnPlayerInGameReplace", 500, false, "iii", ToAddID, ToReplaceID, playerid);
+						SetTimerEx("OnPlayerInGameReplace", 500, false, "iii", ToAddID, ToReplaceID, playerid);
 					}
 					else
 						SendErrorMessage(playerid, "Player not found.");

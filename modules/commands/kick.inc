@@ -25,7 +25,7 @@ YCMD: kick(playerid, params[], help)
 	else
 		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has kicked {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], reason);
 
-	SetPreciseTimer("OnPlayerKicked", 350, false, "i", pID);
+	SetTimerEx("OnPlayerKicked", 350, false, "i", pID);
 	LogAdminCommand("kick", playerid, pID);
 	return SendClientMessageToAll(-1, iString);
 }

@@ -218,7 +218,7 @@ IsLegalHit(playerid, issuerid, Float: amount, weaponid)
 	{
 		SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has been forced to relog for having weapon bugs. {FFFFFF}(Most likely Sniper Bug)", Player[playerid][Name]));
 		MessageBox(playerid, MSGBOX_TYPE_MIDDLE, "~r~~h~Sniper Bug", "You likely to have Sniper Bug and a relog is needed", 3000);
-		SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 		return 0;
 	}
 	// Some checks need to be done if there's a damager
@@ -262,7 +262,7 @@ SetHP(playerid, amount)
 			return 0;
 
 		Player[playerid][AlreadyDying] = true;
-		SetPreciseTimer("ServerOnPlayerDeath", SERVER_PlAYER_DEATH_DELAY, false, "iii", playerid, Player[playerid][HitBy], Player[playerid][HitWith]);
+		SetTimerEx("ServerOnPlayerDeath", SERVER_PlAYER_DEATH_DELAY, false, "iii", playerid, Player[playerid][HitBy], Player[playerid][HitWith]);
 		HidePlayerProgressBar(playerid, HealthBar[playerid]);
 		Player[playerid][pHealth] = 0;
 		SetPlayerScore(playerid, 0);
@@ -536,8 +536,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 	PlayerTextDrawSetString(hitterid, FriendlyDamage[hitterid][0], str);
 
 	if (VisualDamage[hitterid][FriendlyDamageTimer])
-		DeletePreciseTimer(VisualDamage[hitterid][FriendlyDamageTimer]);
-	VisualDamage[hitterid][FriendlyDamageTimer] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hitterid);
+		KillTimer(VisualDamage[hitterid][FriendlyDamageTimer]);
+	VisualDamage[hitterid][FriendlyDamageTimer] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hitterid);
 
 	// Loop through the array that contains hitter's spectators
 	foreach (new i : PlayerSpectators[hitterid])
@@ -545,8 +545,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 		PlayerTextDrawSetString(i, FriendlyDamage[i][0], str);
 
 		if (VisualDamage[i][FriendlyDamageTimer])
-			DeletePreciseTimer(VisualDamage[i][FriendlyDamageTimer]);
-		VisualDamage[i][FriendlyDamageTimer] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
+			KillTimer(VisualDamage[i][FriendlyDamageTimer]);
+		VisualDamage[i][FriendlyDamageTimer] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
 	}
 
 	format(str, sizeof str, "~y~~h~%s (team-fire)", Player[hitterid][NameWithoutTag]);
@@ -554,8 +554,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 	PlayerTextDrawSetString(hittedid, FriendlyDamage[hittedid][1], str);
 
 	if (VisualDamage[hittedid][FriendlyDamageTimer])
-		DeletePreciseTimer(VisualDamage[hittedid][FriendlyDamageTimer]);
-	VisualDamage[hittedid][FriendlyDamageTimer] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hittedid);
+		KillTimer(VisualDamage[hittedid][FriendlyDamageTimer]);
+	VisualDamage[hittedid][FriendlyDamageTimer] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", hittedid);
 
 	// Loop through the array that contains hitter's spectators
 	foreach (new i : PlayerSpectators[hittedid])
@@ -563,8 +563,8 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 		PlayerTextDrawSetString(i, FriendlyDamage[i][1], str);
 
 		if (VisualDamage[i][FriendlyDamageTimer])
-			DeletePreciseTimer(VisualDamage[i][FriendlyDamageTimer]);
-		VisualDamage[i][FriendlyDamageTimer] = SetPreciseTimer("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
+			KillTimer(VisualDamage[i][FriendlyDamageTimer]);
+		VisualDamage[i][FriendlyDamageTimer] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
 	}
 }
 

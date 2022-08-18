@@ -153,7 +153,7 @@ HidePlayerGunmenu(playerid)
 			{
 				SetCPForPlayer(playerid);
 			}
-			DeletePreciseTimer(GunmenuData[playerid][GunFreezePlane]);
+			KillTimer(GunmenuData[playerid][GunFreezePlane]);
 			TextDrawHideForPlayer(playerid, GunmenuLimitsTD[Player[playerid][Team]]);
 			DestroyPlayerGunObjects(playerid);
 			CancelEdit(playerid);
@@ -416,7 +416,7 @@ forward FreezePlayerPlane(playerid, planeid);
 public FreezePlayerPlane(playerid, planeid)
 {
 	if (GetPlayerVehicleID(playerid) != planeid)
-		DeletePreciseTimer(GunmenuData[playerid][GunFreezePlane]);
+		KillTimer(GunmenuData[playerid][GunFreezePlane]);
 	else
 		SetVehiclePos(planeid, TempAirVehicles_Pos[planeid][0], TempAirVehicles_Pos[planeid][1], TempAirVehicles_Pos[planeid][2]);
 	return 1;
@@ -430,7 +430,7 @@ public ShowPlayerGunmenu(playerid, delay)
 
 	if (delay > 0)
 	{
-		SetPreciseTimer("ShowPlayerGunmenu", delay, false, "ii", playerid, 0);
+		SetTimerEx("ShowPlayerGunmenu", delay, false, "ii", playerid, 0);
 		return 1;
 	}
 	Player[playerid][OnGunmenu] = true; // Indicate that they're on the gunmenu selection mode
@@ -445,7 +445,7 @@ public ShowPlayerGunmenu(playerid, delay)
 			{
 				InAirVehicle = true;
 				GetVehiclePos(veh, TempAirVehicles_Pos[veh][0], TempAirVehicles_Pos[veh][1], TempAirVehicles_Pos[veh][2]);
-				GunmenuData[playerid][GunFreezePlane] = SetPreciseTimer("FreezePlayerPlane", 50, true, "ii", playerid, veh);
+				GunmenuData[playerid][GunFreezePlane] = SetTimerEx("FreezePlayerPlane", 50, true, "ii", playerid, veh);
 			}
 			TextDrawShowForPlayer(playerid, GunmenuLimitsTD[Player[playerid][Team]]);
 			DisablePlayerCheckpoint(playerid); // Checkpoints seem to make object selection gitched, disable them temporarily
@@ -683,7 +683,6 @@ OnPlayerFinishGunmenu(playerid)
 			SendClientMessage(i, -1, str);
 	}
 	ShowGunmenuHelp(playerid);
-	SetPreciseTimer("AimbotCheck", 3000, false, "i", playerid);
 }
 
 forward ShowPlayerMeleeWeaponsMenu(playerid);

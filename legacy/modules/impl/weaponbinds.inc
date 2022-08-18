@@ -70,7 +70,7 @@ ShowPlayerWeaponBindTextDraw(playerid, time)
 	UpdatePlayerWeaponBindTextDraw(playerid);
 	PlayerTextDrawShow(playerid, WeaponBindData[playerid][WeaponBindTextDraw]);
 	WeaponBindData[playerid][WeaponBindTDShown] = true;
-	SetPreciseTimer("HidePlayerWeaponBindTextDraw", time, false, "i", playerid);
+	SetTimerEx("HidePlayerWeaponBindTextDraw", time, false, "i", playerid);
 }
 
 // Shows the weapon key bind coder dialog

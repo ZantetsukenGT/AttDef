@@ -142,8 +142,8 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 					ModernTextDrawFlash(ATTACKER);
 
 					if (AttHpTimer)
-						DeletePreciseTimer(AttHpTimer);
-					AttHpTimer = SetPreciseTimer("HideHpTextForAtt", 2500, false);
+						KillTimer(AttHpTimer);
+					AttHpTimer = SetTimer("HideHpTextForAtt", 2500, false);
 				}
 				case DEFENDER:
 				{
@@ -158,8 +158,8 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 					ModernTextDrawFlash(DEFENDER);
 
 					if (DefHpTimer)
-						DeletePreciseTimer(DefHpTimer);
-					DefHpTimer = SetPreciseTimer("HideHpTextForDef", 2500, false);
+						KillTimer(DefHpTimer);
+					DefHpTimer = SetTimer("HideHpTextForDef", 2500, false);
 				}
 			}
 		}

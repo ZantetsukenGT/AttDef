@@ -22,7 +22,7 @@ public OnPlayerConnect(playerid)
 	{
 		va_SendClientMessageToAll(-1, COL_PRIM "ID %d could't connect to the server properly. Maximum players limit exceeded!", playerid);
 		va_SendClientMessageToAll(-1, "MAX PLAYERS LIMIT: %d", MAX_PLAYERS);
-		SetPreciseTimer("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
 		return 0;
 	}
 
@@ -44,7 +44,7 @@ public OnGeoDataReady(playerid)
 		case 1:
 		{
 			va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {FF6666}Proxy{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
-			SetPreciseTimer("_BanPlayerDelayed", GetPlayerPing(playerid), false, "i", playerid);
+			SetTimerEx("_BanPlayerDelayed", GetPlayerPing(playerid), false, "i", playerid);
 		}
 		case 2: va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {AAAA00}Proxy?{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 	}

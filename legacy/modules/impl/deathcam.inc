@@ -39,7 +39,7 @@ public OnPlayerDeathCameraEnd(playerid)
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
 	ShowPlayerProgressBar(playerid, HealthBar[playerid]);
 	if (Current != -1)
-		SetPreciseTimer("SpectateAnyPlayerT", 1000, false, "i", playerid);
+		SetTimerEx("SpectateAnyPlayerT", 1000, false, "i", playerid);
 	return 1;
 }
 
@@ -72,7 +72,7 @@ PlayDeathCamera(playerid, Float: deathX, Float: deathY, Float: deathZ, bool: dea
 	SetPlayerDrunkLevel(playerid, 50000);
 
 	Player[playerid][InDeathCamera] = true;
-	SetPreciseTimer("OnPlayerDeathCameraEnd", DEATH_CAMERA_DURATION, false, "i", playerid);
+	SetTimerEx("OnPlayerDeathCameraEnd", DEATH_CAMERA_DURATION, false, "i", playerid);
 	MessageBox(playerid, MSGBOX_TYPE_BOTTOM, "~y~~h~~h~~h~tip", "Press ~r~~h~~h~~k~~PED_FIREWEAPON~ ~w~to skip death camera!", DEATH_CAMERA_DURATION);
 }
 

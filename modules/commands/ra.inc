@@ -33,7 +33,7 @@ DoRandomArena(playerid)
 		return;
 	}
 	
-	PreStartRoundTimer = SetPreciseTimer("OnArenaStart", 4000, false, "i", ArenaID);
+	PreStartRoundTimer = SetTimerEx("OnArenaStart", 4000, false, "i", ArenaID);
 
 	new iString[144];
 	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);

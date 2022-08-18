@@ -50,7 +50,7 @@ PlayerVoteNetCheck(playerid, onplayerid)
 	new MaxVotesNeeded = countInTeam[0] + countInTeam[1];
 	if (VoteData[votetype][VoteCount] < 1) // First vote?
 	{
-		VoteData[votetype][VotingExpireTimer] = SetPreciseTimer("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
+		VoteData[votetype][VotingExpireTimer] = SetTimerEx("ResetVoting", VOTE_TIMEOUT_INTERVAL, false, "ib", votetype, true);
 		VoteData[votetype][VoteCount]		  = 1;
 		VoteData[votetype][VotingOnPlayer]	  = onplayerid;
 		Player[onplayerid][TempNetcheck]	  = true;
@@ -93,7 +93,7 @@ PlayerVoteNetCheck(playerid, onplayerid)
 				SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "enabled Net-Check!", Player[onplayerid][Name]));
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET NetCheck = 1 WHERE Name = '%q'", Player[onplayerid][Name])));
 			}
-			DeletePreciseTimer(VoteData[votetype][VotingExpireTimer]);
+			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
 		}
 	}

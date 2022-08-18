@@ -27,7 +27,6 @@
 #include <gBugFix>			   // Fix false vehicle entry as passenger (G (teleport/distance) bug)
 #include <md-sort>			   // Sorts multi dimensional arrays by Slice (Oscar Broman)
 #include <mapfix>			   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
-#include <samp-precise-timers> // Precise timers for the server. It is written in Rust, a memory-safe language, replaces SetTimer and SetTimerEx
 #include <samp_bcrypt>		   // A bcrypt plugin for samp in Rust.
 #include <ndialog-pages>	   // https://github.com/Nickk888SAMP/Dialog-Pages
 

@@ -82,7 +82,7 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 		PlayerTextDrawShow(killerid, DeathText[killerid][0]);
 		PlayerTextDrawShow(playerid, DeathText[playerid][1]);
 
-		SetPreciseTimer("DeathMessageF", 4000, false, "ii", killerid, playerid);
+		SetTimerEx("DeathMessageF", 4000, false, "ii", killerid, playerid);
 
 		if (Player[playerid][Playing] && Player[killerid][Playing] && AllowStartBase)
 		{
@@ -134,7 +134,7 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 			PlayDeathCamera(playerid, x, y, z, showdeathquote);
 		}
 		else // If not
-			SetPreciseTimer("SpectateAnyPlayerT", 1000, false, "i", playerid);
+			SetTimerEx("SpectateAnyPlayerT", 1000, false, "i", playerid);
 		// Create an icon on radar where the player died
 		CreateTeamDeathMapIcon(Player[playerid][Team], x, y, z);
 	}
