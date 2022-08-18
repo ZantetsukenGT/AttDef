@@ -7,6 +7,8 @@ YCMD: addme(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "add yourself to the round.");
+	if (Current == -1)
+		return SendErrorMessage(playerid, "Round is not active.");
 	if (Player[playerid][Team] != ATTACKER && Player[playerid][Team] != DEFENDER)
 		return SendErrorMessage(playerid, "You must be either in attacker or defender team");
 	if (WarMode)
