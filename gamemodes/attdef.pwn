@@ -7,6 +7,7 @@
 #include <a_samp>
 #include <omp>				   // omp's native YSF implementations
 #include <iphub-key>
+#include <Pawn.RakNet>		   // Allows you to capture and analyze RakNet traffic
 //#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 
 // YSI Libraries 5.x
@@ -21,7 +22,6 @@
 // Libraries
 #include <sscanf2>			   // Sscanf 2.11.x
 #include <geoip>			   // A simple library that provides information from IPHub for connected players.
-#include <strlib>			   // String functions for SA-MP Pawn scripting by Slice (Oscar Broman)
 #include <progress2>		   // A SA:MP UI library for rendering progress bars
 #include <mSelection>		   // Selection with preview models feature library
 #include <gBugFix>			   // Fix false vehicle entry as passenger (G (teleport/distance) bug)
