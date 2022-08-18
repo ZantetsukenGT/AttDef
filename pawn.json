@@ -4,22 +4,20 @@
 	"entry": "gamemodes/attdef.pwn",
 	"output": "gamemodes/attdef.amx",
 	"dependencies": [
-		"Southclaws/progress2",
-		"Southclaws/samp-geoip",
-		"bmisiak/samp-precise-timers",
+		"Zeex/samp-plugin-crashdetect",
+		"katursis/Pawn.RakNet@omp",
 		"NexiusTailer/MapFix",
-		"oscar-broman/samp-weapon-config",
-		"oscar-broman/strlib",
+		"pawn-lang/samp-stdlib",
 		"pawn-lang/YSI-Includes@5.x",
-		"pawn-lang/sa-mp-fixes",
-		"sampctl/samp-stdlib",
-		"Southclaws/pawn-requests",
 		"Sreyas-Sreelal/samp-bcrypt",
-		"Y-Less/sscanf"
+		"Y-Less/sscanf",
+		"ZantetsukenGT/pawn-requests",
+		"ZantetsukenGT/progress2",
+		"ZantetsukenGT/samp-geoip"
 	],
 	"local": true,
 	"runtime": {
-		"version": "0.3.7",
+		"version": "openmp",
 		"mode": "server",
 		"rcon_password": "changeme",
 		"port": 36543,
@@ -27,7 +25,7 @@
 		"maxplayers": 50,
 		"language": "English",
 		"mapname": "San Andreas",
-		"weburl": "discord.gg/MbQbr9BKFs",
+		"weburl": "discord.io/attackdefend",
 		"gamemodetext": "Unknown",
 		"announce": true,
 		"lanmode": false,
@@ -59,35 +57,34 @@
 	},
 	"builds": [
 		{
-			"name": "dev",
-			"args": [
-				"-;+",
-				"-(+",
-				"-\\+",
-				"-d3",
-				"-Z+"
-			],
-			"includes": [
-				"legacy",
-				"modules"
-			],
-			"compiler": {}
-		},
-		{
 			"name": "main",
 			"args": [
+				"-d3",
+				"-O1",
 				"-;+",
 				"-(+",
 				"-\\+",
-				"-d0",
-				"-O1",
 				"-Z+"
 			],
 			"includes": [
 				"legacy",
 				"modules"
+			]
+		},
+		{
+			"name": "release",
+			"args": [
+				"-d0",
+				"-O1",
+				"-;+",
+				"-(+",
+				"-\\+",
+				"-Z+"
 			],
-			"compiler": {}
+			"includes": [
+				"legacy",
+				"modules"
+			]
 		}
 	]
 }
