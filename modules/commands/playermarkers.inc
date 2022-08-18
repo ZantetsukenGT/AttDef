@@ -10,7 +10,7 @@ YCMD: playermarkers(playerid, params[], help)
 	Player[playerid][PlayerMarkers] = !Player[playerid][PlayerMarkers];
 	foreach (new i : Player)
 	{
-		OnPlayerStreamIn(i, playerid);
+		CallLocalFunction("OnPlayerStreamIn", "ii", i, playerid);
 	}
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Players` SET `PlayerMarkers` = '%d' WHERE `Name` = '%q'", Player[playerid][PlayerMarkers], Player[playerid][Name])));
 	if (Player[playerid][PlayerMarkers])

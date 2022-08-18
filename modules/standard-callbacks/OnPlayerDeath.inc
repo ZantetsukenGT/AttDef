@@ -175,7 +175,7 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 	ResetPlayerGunmenu(playerid, false);
 
 	// Call OnPlayerLeaveCheckpoint to see if player was in CP and fix issues
-	OnPlayerLeaveCheckpoint(playerid);
+	CallLocalFunction("OnPlayerLeaveCheckpoint", "i", playerid);
 
 	// If he's spectating, stop it
 	if (Player[playerid][Spectating])
