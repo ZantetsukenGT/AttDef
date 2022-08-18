@@ -97,7 +97,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					for (new i = 0; i < SAVE_SLOTS; i++)
 					{
-						if (strlen(SaveVariables[i][pName]) > 2 && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
+						if (SaveVariables[i][pName][0] && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
 						{
 							AddDialogListitem(playerid, SaveVariables[i][pName]);
 						}
@@ -154,7 +154,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					for (new i = 0; i < SAVE_SLOTS; i++)
 					{
-						if (strlen(SaveVariables[i][pName]) > 2 && !strcmp(SaveVariables[i][pName], inputtext, false, strlen(inputtext)) && SaveVariables[i][RoundID] == Current)
+						if (SaveVariables[i][pName][0] && !strcmp(SaveVariables[i][pName], inputtext, false, strlen(inputtext)) && SaveVariables[i][RoundID] == Current)
 						{
 							ToReplaceID = i;
 							break;
