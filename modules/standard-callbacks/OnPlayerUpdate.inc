@@ -3,10 +3,10 @@
 #endif
 #define _attdef_OnPUpdate
 
+static const PARACHUTE_SLOT = 11;
+
 public OnPlayerUpdate(playerid)
 {
-	if (!IsPlayerConnected(playerid))
-		return 0;
 	// Player is sending updates, hence they're not paused
 	Player[playerid][PauseCount] = 0;
 
@@ -17,30 +17,22 @@ public OnPlayerUpdate(playerid)
 		return 0;
 	}
 
-	new animLib[32], animName[32];
-	new pAnimIndex = GetPlayerAnimationIndex(playerid);
-	if (pAnimIndex)
-        GetAnimationName(pAnimIndex, animLib, sizeof animLib, animName, sizeof animName);
-	new pAnimNameHash = YHash(animName);
-	//new pAnimLibHash = YHash(animLib);
 	//remove parachute functions
-	if (GetPlayerWeapon(playerid) == WEAPON_PARACHUTE)
+	new weaponid, ammo;
+	GetPlayerWeaponData(playerid, PARACHUTE_SLOT, weaponid, ammo);
+	if (ammo && weaponid == WEAPON_PARACHUTE)
 	{
-		new Weapons[10][2];
-		for (new i = 0; i < 10; i++) { GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]); }
-		switch (pAnimNameHash)
+		switch (GetPlayerAnimationIndex(playerid))
 		{
-			case _H<RUN_PLAYER>:
+			case 971: // PARA_open
 			{
-				ResetPlayerWeapons(playerid);
-				for (new i = 0; i < 10; i++) { GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]); }
-			}
-			case _H<PARA_OPEN>:
-			{
-				ResetPlayerWeapons(playerid);
-				for (new i = 0; i < 10; i++) { GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]); }
+				RemovePlayerWeapon(playerid, weaponid);
 				SetPlayerVelocity(playerid, 0, 0, 0);
 				ClearAnimations(playerid);
+			}
+			case 1231: // run_player
+			{
+				RemovePlayerWeapon(playerid, weaponid);
 			}
 		}
 	}

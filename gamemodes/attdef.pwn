@@ -5,6 +5,7 @@
 #define YSI_NO_HEAP_MALLOC
 
 #include <a_samp>
+#include <omp>				   // omp's native YSF implementations
 #include <iphub-key>
 //#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 
@@ -12,6 +13,7 @@
 // See https://github.com/pawn-lang/YSI-Includes for all the documentation.
 #include <YSI_Players\y_groups>	   // Provides an abstraction for various collections of players; including factions, teams, admin levels, and more.
 #include <YSI_Coding\y_stringhash> // Performs compile-time hashing of strings, for use as array indexes, case values, and more.
+#include <YSI_Coding\y_timers>	   // SetTimer and SetTimerEx wrappers with task and ptask
 #include <YSI_Data\y_iterate>	   // The latest version of foreach with many extras for iterators and special iterators (iterator functions).
 #include <YSI_Visual\y_commands>   // The most fully featured command processor for SA:MP.
 #include <YSI_Visual\y_dialog>	   // Provides an abstraction of dialogs, doing away with IDs and allowing you to use individual public or inline functions per dialog.
