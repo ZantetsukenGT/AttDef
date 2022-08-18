@@ -235,14 +235,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new MC = Player[playerid][ChatChannel];
 						new YC = Player[CID][ChatChannel];
 
-						if (Player[playerid][Level] > 4 && !IsPlayerAdmin(playerid))
-						{
-							new str[35];
-							// Get player IP
-							GetPlayerIp(CID, str, sizeof(str));
-							format(techInfo, sizeof techInfo, "" COL_PRIM "- {FFFFFF}IP: %s\n", str);
-						}
-
 						format(
 							statsSTR[0], sizeof(statsSTR[]),
 							COL_PRIM "- {FFFFFF}Country: %s, %s\n\n" COL_PRIM "- {FFFFFF}Round Kills: \t%d\t\t" COL_PRIM "- {FFFFFF}Total Kills: \t\t%d\t\t" COL_PRIM "- {FFFFFF}FPS: \t\t\t%d\n" COL_PRIM "- {FFFFFF}Round Deaths: \t%.0f\t\t" COL_PRIM "- {FFFFFF}Total Deaths: \t%d\t\t" COL_PRIM "- {FFFFFF}Ping: \t\t\t%d\n",
