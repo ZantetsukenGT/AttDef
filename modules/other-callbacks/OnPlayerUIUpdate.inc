@@ -15,15 +15,15 @@ ptask OnPlayerUIUpdate[1000](playerid)
 	// Update net info textdraws
 	if (PlayerInterface[playerid][INTERFACE_NET])
 	{
-		new pFPS  = GetPlayerFPS(playerid);
-		new pPL	  = NetStats_PacketLossPercent(playerid);
-		new pPing = GetPlayerPing(playerid);
+		new pFPS	   = GetPlayerFPS(playerid);
+		new Float: pPL = NetStats_PacketLossPercent(playerid);
+		new pPing	   = GetPlayerPing(playerid);
 		va_PlayerTextDrawSetString(
 			playerid, FPSPingPacket[playerid],
 			"%sFPS ~r~%d %sPing ~r~%d %sPacketLoss ~r~%.2f%%", MAIN_TEXT_COLOUR, pFPS, MAIN_TEXT_COLOUR, pPL, MAIN_TEXT_COLOUR, pPL);
-		va_Update3DTextLabelText(
+		Update3DTextLabelText(
 			Player[playerid][InfoLabel], -1,
-			"%sPL: {FFFFFF}%.1f%%\n%sPing: {FFFFFF}%d\n%sFPS: {FFFFFF}%d", TextColor[Player[playerid][Team]], pPL, TextColor[Player[playerid][Team]],
-			pPing, TextColor[Player[playerid][Team]], pFPS);
+			va_return("%sPL: {FFFFFF}%.1f%%\n%sPing: {FFFFFF}%d\n%sFPS: {FFFFFF}%d", TextColor[Player[playerid][Team]], pPL, TextColor[Player[playerid][Team]],
+				pPing, TextColor[Player[playerid][Team]], pFPS));
 	}
 }
