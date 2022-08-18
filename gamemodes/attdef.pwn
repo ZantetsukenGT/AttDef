@@ -30,6 +30,7 @@
 #include <ndialog-pages>	   // https://github.com/Nickk888SAMP/Dialog-Pages
 
 // Att-Def's own stuff
+#include <fps-utils>
 #include <modules>
 #include <commands>
 #include <other-callbacks>	  // Dependencies and miscellaneous callbacks, organized in different files
