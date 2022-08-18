@@ -1303,7 +1303,7 @@ ResetRoundVariablesInSlots()
 {
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
-		if (strlen(SaveVariables[i][pName]) >= 2)
+		if (SaveVariables[i][pName][0])
 		{
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
@@ -2639,7 +2639,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2 && Current == SaveVariables[i][RoundID] && SaveVariables[i][CheckScore])
+		if (SaveVariables[i][pName][0] && Current == SaveVariables[i][RoundID] && SaveVariables[i][CheckScore])
 		{
 			playerScores[index][player_Score]  = SaveVariables[i][RDamage];
 			playerScores[index][player_Team]   = SaveVariables[i][pTeam];
@@ -2938,7 +2938,7 @@ public WarEnded()
 	}
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2 && SaveVariables[i][TDamage] > 0)
+		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0)
 		{
 			playerScores[index][player_Score]	= SaveVariables[i][TDamage];
 			playerScores[index][player_Team]	= SaveVariables[i][pTeam];
