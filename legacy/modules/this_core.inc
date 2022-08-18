@@ -13,9 +13,9 @@
 
 #include <mSelection> // Selection with preview models feature library
 
-#define GM_VERSION "1.37.9 (r)"
+#define GM_VERSION "1.37.10 (r)"
 #define GM_NAME	   "Att-Def"
-new GM_WEBSITE[50] = "discord.gg/MbQbr9BKFs";
+new GM_WEBSITE[50] = "discord.io/attackdefend";
 
 #define SAFE_GAMETEXT_AUTO_CHECK 0 // When enabled, most of textdraw and gametext functions are hooked to automatically reject unsafe use of tildes.
 
