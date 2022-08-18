@@ -6,7 +6,6 @@
 
 #include <a_samp>
 #include <omp>				   // omp's native YSF implementations
-#include <iphub-key>
 #include <Pawn.RakNet>		   // Allows you to capture and analyze RakNet traffic
 //#include <weapon-config>	   // Provides a more consistent and responsive damage system with many new features.
 
