@@ -54,7 +54,7 @@ new PreStartRoundTimer	= 0;					 // Timer used to start the countdown for a roun
 new ViewRoundTimer		= 0;					 // Timer used every second to view a round when started
 new GameLoop			= 0;					 // The ID of the timer that handles everything about the current active round
 new PauseStopWatchTimer = 0;					 // The ID of the timer that counts up on each round pause
-new PauseTimeElapsed[2];						 // Time elapsed since round pause (minutes and seconds)
+new PauseTimeElapsed;							 // Time elapsed since round pause (minutes and seconds)
 new TotalPausesInRound;							 // How many times the round has been paused in one round
 new PauseAirVehicles_Timer;						 // The ID of the timer that keeps air vehicles in the air when round is paused
 new TipTimerDuringPause = 0;					 // A timer which is used to send tips after a certain time since a round pause
