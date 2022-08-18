@@ -898,7 +898,7 @@ LoadPlayerTextDraws(playerid)
 	PlayerTextDrawSetShadow(playerid, ArmourTextDraw[playerid], 0);
 	PlayerTextDrawAlignment(playerid, ArmourTextDraw[playerid], 2);
 
-	BaseID_VS[playerid] = CreatePlayerTextDraw(playerid, 548.000000, 25.000000, "_");
+	BaseID_VS[playerid] = CreatePlayerTextDraw(playerid, 576.000000, 25.000000, "_");
 	PlayerTextDrawFont(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawLetterSize(playerid, BaseID_VS[playerid], 0.26000, 1.500000);
 	PlayerTextDrawBackgroundColor(playerid, BaseID_VS[playerid], MAIN_BACKGROUND_COLOUR);
@@ -906,6 +906,7 @@ LoadPlayerTextDraws(playerid)
 	PlayerTextDrawSetOutline(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawSetProportional(playerid, BaseID_VS[playerid], 1);
 	PlayerTextDrawSetShadow(playerid, BaseID_VS[playerid], 0);
+	PlayerTextDrawAlignment(playerid, BaseID_VS[playerid], 2);
 
 	HidePlayerProgressBar(playerid, HealthBar[playerid]);
 	PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
