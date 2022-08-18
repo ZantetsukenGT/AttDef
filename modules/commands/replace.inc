@@ -14,13 +14,13 @@ YCMD: replace(playerid, params[], help)
 
 	LogAdminCommand("replace", playerid, INVALID_PLAYER_ID);
 
-	new str[2048];
 	foreach (new i : Player)
 	{
 		if (Player[i][InDuel] || Player[i][IsAFK] || !Player[i][Spawned])
 			continue;
 
-		format(str, sizeof str, "%s%s\n", str, Player[i][Name]);
+		AddDialogListitem(playerid, Player[i][Name]);
 	}
-	return ShowPlayerDialog(playerid, DIALOG_REPLACE_FIRST, DIALOG_STYLE_LIST, COL_PRIM "Player to add", str, "Process", "Cancel");
+	ShowPlayerDialog(playerid, DIALOG_REPLACE_FIRST, DIALOG_STYLE_LIST, COL_PRIM "Player to add", #, "Process", "Cancel", 15);
+	return 1;
 }

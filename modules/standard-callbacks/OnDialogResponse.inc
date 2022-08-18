@@ -88,22 +88,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				if (ToAddID > -1)
 				{
-					new str[2048];
 					foreach (new i : Player)
 					{
-						if (Player[i][Playing] != true)
+						if (!Player[i][Playing])
 							continue;
 
-						format(str, sizeof str, "%s%s\n", str, Player[i][Name]);
+						AddDialogListitem(playerid, Player[i][Name]);
 					}
 					for (new i = 0; i < SAVE_SLOTS; i++)
 					{
 						if (strlen(SaveVariables[i][pName]) > 2 && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
 						{
-							format(str, sizeof str, "%s%s\n", str, SaveVariables[i][pName]);
+							AddDialogListitem(playerid, SaveVariables[i][pName]);
 						}
 					}
-					ShowPlayerDialog(playerid, DIALOG_REPLACE_SECOND, DIALOG_STYLE_LIST, "" COL_PRIM "Player to replace", str, "Process", "Cancel");
+					ShowPlayerDialog(playerid, DIALOG_REPLACE_SECOND, DIALOG_STYLE_LIST, COL_PRIM "Player to replace", #, "Process", "Cancel", 15);
 				}
 				else
 					SendErrorMessage(playerid, "Player not found.");
