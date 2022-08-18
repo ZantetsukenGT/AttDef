@@ -273,7 +273,7 @@ CheckPlayerNet(playerid)
 	}
 }
 
-bool: IsValidWeapon(weaponid) { return weaponid > 0 && weaponid < 19 || weaponid > 21 && weaponid < 47 && weaponid != 40; }
+bool: IsValidWeapon(weaponid) { return weaponid > 1 && weaponid < 19 || weaponid > 21 && weaponid < 47 && weaponid != 40; }
 
 bool: IsValidSkin(skinid) { return skinid > 74 && skinid < 265 || skinid >= 0 && skinid < 74 || skinid > 272 && skinid < 300; }
 
@@ -589,191 +589,6 @@ GetWeaponID(const weaponname[])
 	}
 	return -1;
 }
-/*
-GetWeaponIDFromModelID(modelid)
-{
-	new weaponid = 0xFFFF;
-	switch(modelid)
-	{
-		case 373:
-		{
-			weaponid = 0;
-		}
-		case 331:
-		{
-			weaponid = 1;
-		}
-		case 333:
-		{
-			weaponid = 2;
-		}
-		case 334:
-		{
-			weaponid = 3;
-		}
-		case 335:
-		{
-			weaponid = 4;
-		}
-		case 336:
-		{
-			weaponid = 5;
-		}
-		case 337:
-		{
-			weaponid = 6;
-		}
-		case 338:
-		{
-			weaponid = 7;
-		}
-		case 339:
-		{
-			weaponid = 8;
-		}
-		case 341:
-		{
-			weaponid = 9;
-		}
-		case 321:
-		{
-			weaponid = 10;
-		}
-		case 322:
-		{
-			weaponid = 11;
-		}
-		case 323:
-		{
-			weaponid = 12;
-		}
-		case 324:
-		{
-			weaponid = 13;
-		}
-		case 325:
-		{
-			weaponid = 14;
-		}
-		case 326:
-		{
-			weaponid = 15;
-		}
-		case 342:
-		{
-			weaponid = 16;
-		}
-		case 343:
-		{
-			weaponid = 17;
-		}
-		case 344:
-		{
-			weaponid = 18;
-		}
-		case 346:
-		{
-			weaponid = 22;
-		}
-		case 347:
-		{
-			weaponid = 23;
-		}
-		case 348:
-		{
-			weaponid = 24;
-		}
-		case 349:
-		{
-			weaponid = 25;
-		}
-		case 350:
-		{
-			weaponid = 26;
-		}
-		case 351:
-		{
-			weaponid = 27;
-		}
-		case 352:
-		{
-			weaponid = 28;
-		}
-		case 353:
-		{
-			weaponid = 29;
-		}
-		case 355:
-		{
-			weaponid = 30;
-		}
-		case 356:
-		{
-			weaponid = 31;
-		}
-		case 372:
-		{
-			weaponid = 32;
-		}
-		case 357:
-		{
-			weaponid = 33;
-		}
-		case 358:
-		{
-			weaponid = 34;
-		}
-		case 359:
-		{
-			weaponid = 35;
-		}
-		case 360:
-		{
-			weaponid = 36;
-		}
-		case 361:
-		{
-			weaponid = 37;
-		}
-		case 362:
-		{
-			weaponid = 38;
-		}
-		case 363:
-		{
-			weaponid = 39;
-		}
-		case 364:
-		{
-			weaponid = 40;
-		}
-		case 365:
-		{
-			weaponid = 41;
-		}
-		case 366:
-		{
-			weaponid = 42;
-		}
-		case 367:
-		{
-			weaponid = 43;
-		}
-		case 368:
-		{
-			weaponid = 44;
-		}
-		case 369:
-		{
-			weaponid = 45;
-		}
-		case 371:
-		{
-			weaponid = 46;
-		}
-	}
-	return weaponid;
-}*/
 
 GetWeaponModelFromID(weaponid)
 {
@@ -979,7 +794,7 @@ SwapTeams()
 
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (strlen(SaveVariables[i][pName]) > 2)
+		if (SaveVariables[i][pName][0])
 		{
 			if (SaveVariables[i][pTeam] == ATTACKER)
 				SaveVariables[i][pTeam] = DEFENDER;
@@ -1457,16 +1272,18 @@ public ForceRespectate(playerid)
 SyncPlayer(playerid)
 {
 	// Restrictions
+	new currentTick = GetTickCount();
+	if (currentTick - Player[playerid][LastTimeSynced] < 1000)
+		return 1;
+	Player[playerid][LastTimeSynced] = currentTick;
 	if (Player[playerid][Spectating])
 		return 1;
 	if ((RoundPaused || !AllowSync) && Player[playerid][Playing])
 		return 1;
-	if (Player[playerid][OnGunmenu])
-		return SendErrorMessage(playerid, "Can't sync while in gunmenu");
-	if (GetTickCount() - Player[playerid][LastTimeSynced] < 1000)
-		return 1;
 	if (GetPlayerVehicleID(playerid))
 		return 1;
+	if (Player[playerid][OnGunmenu])
+		return SendErrorMessage(playerid, "Can't sync while in gunmenu");
 	if (Player[playerid][IsAFK] || Player[playerid][IsFrozen])
 		return SendErrorMessage(playerid, "Can't sync while frozen or in AFK mode");
 
@@ -1475,18 +1292,18 @@ SyncPlayer(playerid)
 		SetPreciseTimer("ForceRespectate", 1000, false, "i", playerid);
 
 	// Store info before re-spawn
-	new Float: Pos[4],
+	new Float: x, y, z, r,
 				CurrWep,
-				Float: Velocity[3];
+				Float: vX, vY, vZ;
 	CurrWep = GetPlayerWeapon(playerid);
-	GetPlayerPos(playerid, Pos[0], Pos[1], Pos[2]);
-	GetPlayerFacingAngle(playerid, Pos[3]);
-	GetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
+	GetPlayerPos(playerid, x, y, z);
+	GetPlayerFacingAngle(playerid, r);
+	GetPlayerVelocity(playerid, vX, vY, vZ);
 	new Weapons[13][2];
 	for (new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]);
 
 	// Set spawn info and spawn player
-	SetSpawnInfo(playerid, GetPlayerTeam(playerid), GetPlayerSkin(playerid), Pos[0], Pos[1], Pos[2] - 0.4, Pos[3], 0, 0, 0, 0, 0, 0);
+	SetSpawnInfo(playerid, GetPlayerTeam(playerid), GetPlayerSkin(playerid), x, y, z - 0.4, r, 0, 0, 0, 0, 0, 0);
 	Player[playerid][IgnoreSpawn] = true;
 	SpawnPlayer(playerid);
 
@@ -1499,10 +1316,7 @@ SyncPlayer(playerid)
 	SetPlayerArmedWeapon(playerid, CurrWep);
 
 	if (!SyncAbuse)
-		SetPlayerVelocity(playerid, Velocity[0], Velocity[1], Velocity[2]);
-
-	// Update tick count
-	Player[playerid][LastTimeSynced] = GetTickCount();
+		SetPlayerVelocity(playerid, vX, vY, vZ);
 	return 1;
 }
 
@@ -1588,20 +1402,6 @@ QuitDM(playerid)
 	Player[playerid][DMReadd] = 0;
 	SpawnInLobby(playerid);
 	return 1;
-}
-
-forward AimbotCheck(playerid);
-public AimbotCheck(playerid)
-{
-	new ammo = 0;
-	GetPlayerWeaponData(playerid, 0, ammo, ammo);
-	if (ammo == 1000)
-	{
-		va_SendClientMessageToAll(-1, "{FFFFFF}System " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}Aimbot (NOT A BUG)", Player[playerid][Name]);
-		BanEx(playerid, "(SYSTEM BAN) Aimbot");
-		return 1;
-	}
-	return 0;
 }
 
 bool: IsSafeGametext(const text[])
