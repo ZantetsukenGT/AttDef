@@ -6,8 +6,9 @@
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	new currentTick = GetTickCount();
+	new vehicleid = GetPlayerVehicleID(playerid);
 	// - High priority key functions
-	if (PRESSED(KEY_JUMP | KEY_HANDBRAKE) && GetPlayerVehicleID(playerid) == 0)
+	if (PRESSED(KEY_JUMP | KEY_HANDBRAKE) && !vehicleid)
 	{
 		switch (GetWeaponSlot(GetPlayerWeapon(playerid)))
 		{
@@ -64,7 +65,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			// Lead team
 			if (PRESSED(KEY_CTRL_BACK) && AllowStartBase)
 			{
-				if (GetPlayerVehicleID(playerid))
+				if (vehicleid)
 					return 1;
 
 				if (currentTick - Player[playerid][LastAskLeader] < 5000)
@@ -104,7 +105,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 					case true:
 					{
 						new iString[144];
-						if ((GetTickCount() - PausePressed) < 3000)
+						if (currentTick - PausePressed < 3000)
 							return SendErrorMessage(playerid, "Please Wait.");
 						if (RoundUnpausing == true)
 							return 1;
@@ -122,7 +123,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 						if (RoundUnpausing == true)
 							return SendErrorMessage(playerid, "Round is unpausing, please wait.");
 
-						PausePressed = GetTickCount();
+						PausePressed = currentTick;
 
 						PauseRound();
 
@@ -156,9 +157,9 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	if (CheckKeysForWeaponBind(playerid, newkeys, oldkeys))
 		return 1;
 
-	if (GetPlayerVehicleID(playerid) && PRESSED(KEY_FIRE) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+	if (vehicleid && PRESSED(KEY_FIRE) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	{
-		AddVehicleComponent(GetPlayerVehicleID(playerid), 1010);
+		AddVehicleComponent(vehicleid, 1010);
 		return 1;
 	}
 
@@ -324,12 +325,12 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	}
 	if (Current == -1)
 	{
-		if (PRESSED(KEY_YES) && Player[playerid][Level] > 1 && GetPlayerVehicleID(playerid) == 0)
+		if (PRESSED(KEY_YES) && Player[playerid][Level] > 1 && !vehicleid)
 		{
 			EnableMatchInterface(playerid);
 			return 1;
 		}
-		else if (PRESSED(KEY_NO) && GetPlayerVehicleID(playerid) == 0)
+		else if (PRESSED(KEY_NO) && !vehicleid)
 		{
 			ShowEndRoundTextDraw(playerid);
 			return 1;
