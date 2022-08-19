@@ -5,6 +5,6 @@
 
 public OnPlayerExitVehicle(playerid, vehicleid)
 {
-	Player[playerid][LastEnterVehicleAttempt] = GetTickCount() + 3000;
+	Player[playerid][LastEnterVehicleAttempt] = GetTickCount() - 5000;
 	return 1;
 }

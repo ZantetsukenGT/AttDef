@@ -169,7 +169,7 @@ InitPlayer(playerid)
 	TargetInfoData[playerid][TargetInfoLastTick] = GetTickCount();
 	TargetInfoData[playerid][TargetInfoTimer] = 0;
 	ChangingSkinOfTeam[playerid]			  = -1;
-	Player[playerid][LastEnterVehicleAttempt] = 0;
+	Player[playerid][LastEnterVehicleAttempt] = GetTickCount() - 5000;
 	Player[playerid][RequestedClass]		  = NON;
 	Player[playerid][GunmenuModdingType]	  = 0;
 	Player[playerid][GunmenuModdingIndex]	  = 0;

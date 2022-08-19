@@ -1224,6 +1224,8 @@ SyncPlayer(playerid)
 	if (currentTick - Player[playerid][LastTimeSynced] < 1000)
 		return 1;
 	Player[playerid][LastTimeSynced] = currentTick;
+	if (currentTick - Player[playerid][LastEnterVehicleAttempt] < 5000)
+		return 1;
 	if (Player[playerid][Spectating])
 		return 1;
 	if ((RoundPaused || !AllowSync) && Player[playerid][Playing])

@@ -5,6 +5,15 @@
 
 public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
-	Player[playerid][LastEnterVehicleAttempt] = GetTickCount() + 3000;
+	if (Player[playerid][Playing] && Player[playerid][Team] == DEFENDER && !DefendersWithVehicles)
+	{
+		new Float: x,
+			Float: y,
+			Float: z;
+		GetPlayerPos(playerid, x, y, z);
+		SetPlayerPos(playerid, x, y, z);
+		return 1;
+	}
+	Player[playerid][LastEnterVehicleAttempt] = GetTickCount();
 	return 1;
 }
