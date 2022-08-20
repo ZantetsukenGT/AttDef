@@ -10,8 +10,8 @@ YCMD: add(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "add a specific player to the round.");
 
 	new targetid;
-	if (sscanf(params, "u", targetid))
-		return SendUsageMessage(playerid, "/add [Player ID]");
+	if (sscanf(params, "r", targetid))
+		return SendUsageMessage(playerid, "/add [Player Name/ID]");
 
 	PerformCommandAdd(playerid, targetid);
 	return 1;
@@ -22,7 +22,7 @@ PerformCommandAdd(playerid, targetid)
 	if (Current == -1)
 		return SendErrorMessage(playerid, "Round is not active.");
 
-	if (!IsPlayerConnected(targetid))
+	if (targetid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (Player[targetid][Playing])
 		return SendErrorMessage(playerid, "That player is already playing.");

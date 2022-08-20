@@ -9,10 +9,8 @@ YCMD: ann(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "display a specific announcement to all players");
 	new str[128];
-	if (isnull(params) || sscanf(params, "s[128]", str))
+	if (sscanf(params, "s[128]", str))
 		return SendUsageMessage(playerid, "/ann [Text]");
-	if (strlen(str) > 127)
-		return SendErrorMessage(playerid, "Text is too long. Maximum 128 characters allowed.");
 	if (strfind(str, "`") != -1)
 		return SendErrorMessage(playerid, "` is not allowed.");
 	if (!IsSafeGametext(str))

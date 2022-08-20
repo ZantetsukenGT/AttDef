@@ -8,12 +8,11 @@ YCMD: cptime(playerid, params[], help)
 	//if(Player[playerid][Level] < 1 && !IsPlayerAdmin(playerid)) return SendErrorMessage(playerid,"You need to be a higher admin level to do that.");
 	if (help)
 		return SendCommandHelpMessage(playerid, "set the time needed to capture a checkpoint.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/cptime [Seconds (1 - 60)]");
+	new cpTime;
+	if (sscanf(params, "i", cpTime))
+		return SendUsageMessage(playerid, "/cptime [Seconds (20 - 40)]");
 
-	new cpTime = strval(params);
-	if (cpTime < 1 || cpTime > 60)
-		return SendErrorMessage(playerid, "CP time can't be lower than 1 or higher than 60 seconds.");
+	cpTime = clamp(cpTime, 20, 40);
 
 	ConfigCPTime  = cpTime;
 	CurrentCPTime = ConfigCPTime + 1;

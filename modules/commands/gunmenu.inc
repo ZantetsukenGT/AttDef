@@ -17,9 +17,7 @@ YCMD: gunmenu(playerid, params[], help)
 	{
 		ShowPlayerGunmenu(playerid, 0);
 
-		new iString[128];
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has displayed gunmenu (/gunmenu).", Player[playerid][Name]);
-		return SendClientMessageToAll(-1, iString);
+		return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has displayed gunmenu (/gunmenu).", Player[playerid][Name]);
 	}
 	return SendErrorMessage(playerid, "Too late to show yourself weapon menu.");
 }

@@ -12,11 +12,11 @@ YCMD: readd(playerid, params[], help)
 
 	/*if (Player[playerid][Level] < 1 && !IsPlayerAdmin(playerid))
 		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/readd [Player ID]");
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/readd [Player Name/ID]");
 
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (Player[pID][Team] != ATTACKER && Player[pID][Team] != DEFENDER && Player[pID][Team] != REFEREE)
 		return SendErrorMessage(playerid, "That player must be part of one of the following teams: Attacker, Defender or Referee.");
@@ -37,7 +37,5 @@ YCMD: readd(playerid, params[], help)
 
 	LogAdminCommand("readd", playerid, pID);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has re-added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has re-added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[pID][Name]);
 }

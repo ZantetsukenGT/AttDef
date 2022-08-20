@@ -24,9 +24,6 @@ YCMD: yes(playerid, params[], help)
 		pID, playerid, Player[playerid][duelweap1], Player[playerid][duelweap2], Player[playerid][Duel_X], Player[playerid][Duel_Y], Player[playerid][Duel_Size],
 		Player[playerid][Duel_Interior]);
 
-	new iString[128];
-	format(
-		iString, sizeof(iString), "%s%s {FFFFFF}accepted the duel challenge by %s%s", TextColor[Player[playerid][Team]], Player[playerid][Name], TextColor[Player[pID][Team]],
+	return va_SendClientMessageToAll(-1, "%s%s {FFFFFF}accepted the duel challenge by %s%s", TextColor[Player[playerid][Team]], Player[playerid][Name], TextColor[Player[pID][Team]],
 		Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
 }

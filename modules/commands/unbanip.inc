@@ -12,10 +12,10 @@ YCMD: unbanip(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/unbanip [IP]");
 
-	SendRconCommand(va_return("unbanip %s", params));
+	va_SendRconCommand("unbanip %s", params);
 	SendRconCommand("reloadbans");
 
 	LogAdminCommand("unbanip", playerid, INVALID_PLAYER_ID);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has unbanned an IP address.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unbanned an IP address.", Player[playerid][Name]);
 }

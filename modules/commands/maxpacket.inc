@@ -9,11 +9,11 @@ YCMD: maxpacket(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "set maximum packet-loss limit.");
-	if (isnull(params))
+	new Float: iPacket;
+	if (sscanf(params, "f", iPacket))
 		return SendUsageMessage(playerid, "/maxpacket [Maximum Packetloss]");
 
-	new Float: iPacket = floatstr(params);
-	if (iPacket <= 0 || iPacket > 10)
+	if (iPacket <= 0.0 || iPacket > 10.0)
 		return SendErrorMessage(playerid, "Packetloss value can be between 0 and 10 maximum.");
 
 	Max_Packetloss = iPacket;

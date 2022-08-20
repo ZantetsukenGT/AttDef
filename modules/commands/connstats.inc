@@ -10,13 +10,11 @@ YCMD: connstats(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "fetch connection statistics of a player.");
 
-	new pID = INVALID_PLAYER_ID;
-	if (sscanf(params, "d", pID))
-		return SendUsageMessage(playerid, "/connStats <playerid>");
-	if (!IsPlayerConnected(pID))
-		return SendErrorMessage(playerid, "** Invalid PlayerID! ");
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/connStats [Player Name/ID]");
+	if (pID == INVALID_PLAYER_ID)
+		return SendErrorMessage(playerid, "That player isn't connected.");
 
-	new szString[80];
-	format(szString, sizeof(szString), "(%d)%s's current connection status: %i.", pID, Player[pID][Name], NetStats_ConnectionStatus(pID));
-	return SendClientMessage(playerid, -1, szString);
+	return va_SendClientMessage(playerid, -1, "(%d)%s's current connection status: %i.", pID, Player[pID][Name], NetStats_ConnectionStatus(pID));
 }

@@ -8,9 +8,9 @@ YCMD: mute(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "mute a specific player.");
 	new pID, Reason[128], iString[256];
-	if (sscanf(params, "iS( )[128]", pID, Reason))
-		return SendUsageMessage(playerid, "/mute [Player ID] [Reason]");
-	if (!IsPlayerConnected(pID))
+	if (sscanf(params, "rS( )[128]", pID, Reason))
+		return SendUsageMessage(playerid, "/mute [Player Name/ID] [Reason]");
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isnt connected.");
 
 	if (Player[pID][Mute])
@@ -22,9 +22,9 @@ YCMD: mute(playerid, params[], help)
 
 	LogAdminCommand("mute", playerid, pID);
 
-	if (strlen(Reason))
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
+	if (isnull(Reason))
+		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 	else
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}No reason given.", Player[playerid][Name], Player[pID][Name]);
+		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
 	return SendClientMessageToAll(-1, iString);
 }

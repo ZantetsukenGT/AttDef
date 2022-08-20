@@ -13,10 +13,8 @@ YCMD: changename(playerid, params[], help)
 		return SendErrorMessage(playerid, "Cannot use this command when you're muted.");
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/changename [New Name]");
-	if (strlen(params) < 3)
-		return SendErrorMessage(playerid, "Name cannot be that short!");
-	if (strlen(params) > 20)
-		return SendErrorMessage(playerid, "Name cannot be that long!");
+	if (IsValidNickName(params))
+		return SendErrorMessage(playerid, "Invalid nickname!");
 
 	switch (SetPlayerName(playerid, params))
 	{
@@ -25,7 +23,7 @@ YCMD: changename(playerid, params[], help)
 		default:
 		{
 			//success
-			new iString[128];
+			new iString[144];
 			format(iString, sizeof(iString), "SELECT * FROM `Players` WHERE `Name` = '%q'", params);
 			new DBResult: result = db_query(sqliteconnection, iString);
 			new num_rows		  = db_num_rows(result);

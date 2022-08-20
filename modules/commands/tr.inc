@@ -9,17 +9,15 @@ YCMD: tr(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "set total rounds of the current match.");
-	if (isnull(params) || !IsNumeric(params))
+	new Value;
+	if (sscanf(params, "i", Value))
 		return SendUsageMessage(playerid, "/tr [Total Rounds]");
 
-	new Value = strval(params);
 	if (Value < CurrentRound || Value < 1 || Value > 100)
 		return SendErrorMessage(playerid, "Invalid total rounds.");
 
 	TotalRounds = Value;
 	UpdateRoundsPlayedTextDraw();
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed the total rounds to: {FFFFFF}%d", Player[playerid][Name], TotalRounds);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has changed the total rounds to: {FFFFFF}%d", Player[playerid][Name], TotalRounds);
 }

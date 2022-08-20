@@ -14,10 +14,7 @@ YCMD: lobbyguns(playerid, params[], help)
 
 ToggleLobbyGuns(playerid)
 {
-	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has {FFFFFF}%s " COL_PRIM "guns in lobby.", Player[playerid][Name], LobbyGuns ? "disabled" : "enabled");
 	LobbyGuns = !LobbyGuns;
-
 	LogAdminCommand("lobbyguns", playerid, INVALID_PLAYER_ID);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has {FFFFFF}%s " COL_PRIM "guns in lobby.", Player[playerid][Name], LobbyGuns ? "{66FF66}enabled" : "{FF6666}disabled");
 }

@@ -12,16 +12,14 @@ YCMD: jetpack(playerid, params[], help)
 	if (Player[playerid][Playing])
 		return SendErrorMessage(playerid, "Can't use this command in round.");
 
-	new pID = strval(params);
-	if (isnull(params))
+	new pID;
+	sscanf(params, "R(-1)", pID);
+	if (pID == -1)
 		pID = playerid;
-
-	if (!IsPlayerConnected(pID))
+	else if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 
 	SetPlayerSpecialAction(pID, 2);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "gave a jetpack to {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "gave a jetpack to {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 }

@@ -7,8 +7,8 @@ YCMD: servername(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "changes the server name used for the welcome message");
-	new svname[51 + 1];
-	if (sscanf(params, "s[51]", svname))
+	new svname[52];
+	if (sscanf(params, "s[52]", svname))
 		return SendUsageMessage(playerid, "/servername [Server Name]");
 	if (strlen(svname) > 50)
 		return SendErrorMessage(playerid, "This server name exceeds the maximum character limit (50 characters).");

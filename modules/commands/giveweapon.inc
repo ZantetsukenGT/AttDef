@@ -9,10 +9,12 @@ YCMD: giveweapon(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "give a weapon to a specific player.");
-	new pID, Weapon[50], Ammo;
 
-	if (sscanf(params, "is[*]I(250)", sizeof(Weapon), Weapon, Ammo))
-		return SendUsageMessage(playerid, "/giveweapon [Player ID] [Weapon Name] [Optional: Ammo]");
+	new pID, Weapon[50], Ammo;
+	if (sscanf(params, "rs[*]I(250)", pID, sizeof(Weapon), Weapon, Ammo))
+		return SendUsageMessage(playerid, "/giveweapon [Player Name/ID] [Weapon Name] [Optional: Ammo]");
+	if (pID == INVALID_PLAYER_ID)
+		return SendErrorMessage(playerid, "That player isn't connected.");
 
 	Ammo = clamp(Ammo, 10, 9999);
 

@@ -7,16 +7,13 @@ YCMD: blockpm(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "block private messages from a specific player.");
-	if (isnull(params))
-		return SendUsageMessage(playerid, "/blockpm [Player ID]");
-
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/blockpm [Player Name/ID]");
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 
 	Player[playerid][blockedid] = pID;
 
-	new String[128];
-	format(String, sizeof(String), COL_PRIM "You have blocked PMs from {FFFFFF}%s", Player[pID][Name]);
-	return SendClientMessage(playerid, -1, String);
+	return va_SendClientMessage(playerid, -1, COL_PRIM "You have blocked PMs from {FFFFFF}%s", Player[pID][Name]);
 }

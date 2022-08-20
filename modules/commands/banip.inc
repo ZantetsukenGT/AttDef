@@ -11,13 +11,10 @@ YCMD: banip(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/banip [IP or IP range to ban]");
 
-	new str[128];
-	format(str, sizeof(str), "banip %s", params);
-	SendRconCommand(str);
+	va_SendRconCommand("banip %s", params);
 	SendRconCommand("reloadbans");
 
 	LogAdminCommand("banip", playerid, INVALID_PLAYER_ID);
 
-	format(str, sizeof(str), "{FFFFFF}%s " COL_PRIM "has banned an IP address.", Player[playerid][Name], playerid);
-	return SendClientMessageToAll(-1, str);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned an IP address.", Player[playerid][Name], playerid);
 }

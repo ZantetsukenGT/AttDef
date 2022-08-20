@@ -24,5 +24,5 @@ YCMD: gunmenustyle(playerid, params[], help)
 
 	Player[playerid][GunmenuStyle] = style;
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET GunmenuStyle = %d WHERE Name = '%q'", style, Player[playerid][Name])));
-	return SendClientMessage(playerid, -1, va_return("Changed gunmenu style to: %s", styleStr));
+	return va_SendClientMessage(playerid, -1, "Changed gunmenu style to: %s", styleStr);
 }

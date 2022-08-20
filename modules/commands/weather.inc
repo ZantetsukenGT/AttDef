@@ -7,20 +7,17 @@ YCMD: weather(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "change your weather.");
-	if (isnull(params) || !IsNumeric(params))
+	new myweather;
+	if (sscanf(params, "i", myweather))
 		return SendUsageMessage(playerid, "/weather [ID]");
 
-	new myweather = strval(params);
 	if (myweather < 0 || myweather > WeatherLimit)
 		return SendErrorMessage(playerid, "Invalid weather ID.");
 
 	SetPlayerWeather(playerid, myweather);
 	Player[playerid][Weather] = myweather;
 
-	new iString[128];
-	format(iString, sizeof(iString), "UPDATE Players SET Weather = %d WHERE Name = '%q'", myweather, Player[playerid][Name]);
-	db_free_result(db_query(sqliteconnection, iString));
+	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET Weather = %d WHERE Name = '%q'", myweather, Player[playerid][Name])));
 
-	format(iString, sizeof(iString), "{FFFFFF}Weather changed to: %d", myweather);
-	return SendClientMessage(playerid, -1, iString);
+	return va_SendClientMessage(playerid, -1, "{FFFFFF}Weather changed to: %d", myweather);
 }

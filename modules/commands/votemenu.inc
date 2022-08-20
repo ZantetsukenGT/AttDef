@@ -8,8 +8,8 @@ YCMD: votemenu(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "start a voting (give menu to player)");
 	new pID;
-	if (sscanf(params, "i", pID))
-		return SendUsageMessage(playerid, "/votemenu [Player ID]");
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/votemenu [Player Name/ID]");
 
 	return PlayerVoteMenu(playerid, pID);
 }
@@ -27,7 +27,7 @@ PlayerVoteMenu(playerid, onplayerid)
 	if (VoteData[votetype][VoteCount] > 0 && VoteData[votetype][VotingOnPlayer] != onplayerid)
 		return SendErrorMessage(playerid, va_return("Another gunmenu-voting is in progress (on playerid: %d), please wait!", VoteData[votetype][VotingOnPlayer]));
 
-	if (!IsPlayerConnected(onplayerid))
+	if (onplayerid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (!Player[onplayerid][Playing])
 		return SendErrorMessage(playerid, "That player is not playing.");

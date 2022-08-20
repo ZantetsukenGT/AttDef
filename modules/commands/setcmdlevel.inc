@@ -16,7 +16,7 @@ YCMD: setcmdlevel(playerid, params[], help)
 	if (SetCommandLevel(cmd, level, true) == 0)
 		return SendErrorMessage(playerid, "Invalid command!");
 
-	new message[180];
+	new message[144];
 	if (level == 0)
 		format(message, sizeof(message), "{FFFFFF}%s " COL_PRIM "has permitted command {FFFFFF}/%s " COL_PRIM "for everyone's use.", Player[playerid][Name], cmd);
 	else

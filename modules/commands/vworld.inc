@@ -16,10 +16,10 @@ YCMD: vworld(playerid, params[], help)
 	if (Player[playerid][Spectating])
 		return 1;
 
-	if (isnull(params) || !IsNumeric(params))
+	new vID;
+	if (sscanf(params, "i", vID))
 		return SendUsageMessage(playerid, "/vworld [World ID]");
 
-	new vID = strval(params);
 	if (vID <= 5)
 		return SendErrorMessage(playerid, "Pick a virtual world above 5.");
 

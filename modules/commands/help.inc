@@ -9,7 +9,8 @@ YCMD: help(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "display some guidelines");
 
 	new str[440];
-	strcat(str, "" COL_PRIM "Project on GitHub (v1.21, outdated): {FFFFFF}https://github.com/beijind/SAMPAttackDefend/");
+	strcat(str, COL_PRIM "Project on GitHub (v1.21, outdated): {FFFFFF}https://github.com/beijind/SAMPAttackDefend/");
+	strcat(str, "\n" COL_PRIM "Project on GitHub (latest): {FFFFFF}https://github.com/ZantetsukenGT/AttDef/");
 	strcat(str, "\n\n\n{FFFFFF}To see server settings: {888888}/settings");
 	strcat(str, "\n{FFFFFF}For admin commands: {888888}/acmds");
 	strcat(str, "\n{FFFFFF}For public commands: {888888}/cmds");

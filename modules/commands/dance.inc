@@ -9,12 +9,9 @@ YCMD: dance(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "shake your fucking ass.");
 	if (Current != -1)
 		return SendErrorMessage(playerid, "Can't use this command while in round.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/dance [1-4]");
-
 	new dID = strval(params);
-	if (dID < 1 || dID > 4)
-		return SendErrorMessage(playerid, "Invalid dance ID.");
+	if (sscanf(params, "i", dID) || dID < 1 || dID > 4)
+		return SendUsageMessage(playerid, "/dance [1-4]");
 
 	switch (dID)
 	{

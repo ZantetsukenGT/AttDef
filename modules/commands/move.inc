@@ -10,10 +10,10 @@ YCMD: move(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "teleport a player to another player.");
 	new pID[2];
-	if (sscanf(params, "dd", pID[0], pID[1]))
-		return SendUsageMessage(playerid, "/move [PlayerToMove ID] [PlayerToMoveTo ID]");
-	if (!IsPlayerConnected(pID[0]) || !IsPlayerConnected(pID[1]))
-		return SendErrorMessage(playerid, "One of the player IDs you used is not connected.");
+	if (sscanf(params, "rr", pID[0], pID[1]))
+		return SendUsageMessage(playerid, "/move [PlayerToMove Name/ID] [PlayerToMoveTo Name/ID]");
+	if (pID[0] == INVALID_PLAYER_ID || pID[1] == INVALID_PLAYER_ID)
+		return SendErrorMessage(playerid, "One of the players you specified is not connected.");
 
 	new Float: Pos[3];
 	GetPlayerPos(pID[1], Pos[0], Pos[1], Pos[2]);

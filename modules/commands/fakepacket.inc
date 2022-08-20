@@ -37,9 +37,9 @@ YCMD: fakepacket(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "disable packet-loss status check on a player for a specific time.");
 
 	new pID, interv;
-	if (sscanf(params, "id", pID, interv))
-		return SendUsageMessage(playerid, "/fakepacket [Player ID] [Time in minutes]");
-	if (!IsPlayerConnected(pID))
+	if (sscanf(params, "rd", pID, interv))
+		return SendUsageMessage(playerid, "/fakepacket [Player Name/ID] [Time in minutes]");
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 	if (interv <= 0 || interv > 5)
 		return SendErrorMessage(playerid, "Invalid (Min: 1 | Max: 5).");
@@ -53,9 +53,6 @@ YCMD: fakepacket(playerid, params[], help)
 
 	LogAdminCommand("fakepacket", playerid, pID);
 
-	new str[160];
-	format(
-		str, sizeof str, "{FFFFFF}%s " COL_PRIM "has started fake packetloss renovation on {FFFFFF}%s " COL_PRIM " - Interval: {FFFFFF}%d min(s).", Player[playerid][Name],
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has started PL renovation on {FFFFFF}%s " COL_PRIM " - Interval: {FFFFFF}%d min(s).", Player[playerid][Name],
 		Player[pID][Name], interv);
-	return SendClientMessageToAll(-1, str);
 }

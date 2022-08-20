@@ -9,11 +9,11 @@ YCMD: tunfreeze(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "unfreeze a player for 500ms.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/tunfreeze [Player ID]");
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/tunfreeze [Player Name/ID]");
 
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isnt connected.");
 
 	TogglePlayerControllable(pID, 1);
@@ -21,7 +21,5 @@ YCMD: tunfreeze(playerid, params[], help)
 
 	LogAdminCommand("tunfreeze", playerid, pID);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s" COL_PRIM " for 500ms.", Player[playerid][Name], Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s" COL_PRIM " for 500ms.", Player[playerid][Name], Player[pID][Name]);
 }

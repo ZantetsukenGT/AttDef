@@ -7,17 +7,15 @@ YCMD: cchannel(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "enable you to join a chat channel.");
-	if (isnull(params))
+	new Channel;
+	if (sscanf(params, "i", Channel))
 	{
 		if (Player[playerid][ChatChannel] == -1)
 			return SendUsageMessage(playerid, "/cchannel [Channel ID]");
 
-		new iString[144];
-		format(iString, sizeof(iString), COL_PRIM "Current chat channel ID: {FFFFFF}%d" COL_PRIM ". To join another one use /cchannel [Channel ID]", Player[playerid][ChatChannel]);
-		return SendClientMessage(playerid, -1, iString);
+		return va_SendClientMessage(playerid, -1, COL_PRIM "Current chat channel ID: {FFFFFF}%d" COL_PRIM ". To join another one use /cchannel [Channel ID]", Player[playerid][ChatChannel]);
 	}
 
-	new Channel = strval(params);
 	if (Channel < -1)
 		return SendErrorMessage(playerid, "Invalid channel ID (Disable: -1, Min: 0, Max: " #MAX_CHANNELS ")");
 
@@ -31,10 +29,9 @@ YCMD: cchannel(playerid, params[], help)
 	new previousChannel			  = Player[playerid][ChatChannel];
 	Player[playerid][ChatChannel] = Channel;
 
-	new str[180];
-	format(str, sizeof(str), "UPDATE Players SET ChatChannel = %d WHERE Name = '%q'", Channel, Player[playerid][Name]);
-	db_free_result(db_query(sqliteconnection, str));
+	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET ChatChannel = %d WHERE Name = '%q'", Channel, Player[playerid][Name])));
 
+	new str[144];
 	if (previousChannel != -1)
 	{
 		format(str, sizeof(str), "{FFFFFF}%s " COL_PRIM "has left your chat channel.", Player[playerid][Name]);

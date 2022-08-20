@@ -22,8 +22,6 @@ YCMD: r(playerid, params[], help)
 
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/r [Message]");
-	if (strlen(params) > 142)
-		return SendErrorMessage(playerid, "This message is quite long (max: 142 characters).");
 
 	new str[144];
 	format(str, sizeof(str), "PM from %s (%d): %s", Player[playerid][Name], playerid, params);

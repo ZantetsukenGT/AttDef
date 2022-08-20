@@ -12,12 +12,10 @@ YCMD: rem(playerid, params[], help)
 	if (ElapsedTime > 60)
 		return SendErrorMessage(playerid, "Too late to remove yourself.");
 
-	new iString[128], HP[2];
+	new HP[2];
 	GetHP(playerid, HP[0]);
 	GetAP(playerid, HP[1]);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s (%d) " COL_PRIM "removed himself from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid, HP[0], HP[1]);
-
 	RemovePlayerFromRound(playerid);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s (%d) " COL_PRIM "removed himself from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid, HP[0], HP[1]);
 }

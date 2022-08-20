@@ -9,20 +9,20 @@ YCMD: explode(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "explode a specific player.");
-	if (isnull(params))
-		return SendUsageMessage(playerid, "/explode [Player ID]");
+	new eid;
+	if (sscanf(params, "r", eid))
+		return SendUsageMessage(playerid, "/explode [Player Name/ID]");
 
-	new eid = strval(params);
-	if (!IsPlayerConnected(eid))
+	if (eid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 
-	new Float: Pos[3];
-	GetPlayerPos(eid, Pos[0], Pos[1], Pos[2]);
-	CreateExplosion(Pos[0], Pos[1], Pos[2], 7, 6.0);
+	new Float: x,
+		Float: y,
+		Float: z;
+	GetPlayerPos(eid, x, y, z);
+	CreateExplosion(x, y, z, 7, 6.0);
 
 	LogAdminCommand("explode", playerid, eid);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has exploded {FFFFFF}%s", Player[playerid][Name], Player[eid][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has exploded {FFFFFF}%s", Player[playerid][Name], Player[eid][Name]);
 }

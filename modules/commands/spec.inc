@@ -9,15 +9,15 @@ YCMD: spec(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "enable you to spectate someone.");
 
 	new specid;
-	if (sscanf(params, "u", specid))
-		return SendUsageMessage(playerid, "/spec [Player ID]");
+	if (sscanf(params, "r", specid))
+		return SendUsageMessage(playerid, "/spec [Player Name/ID]");
 
 	return PerformCommandSpec(playerid, specid);
 }
 
 PerformCommandSpec(playerid, specid)
 {
-	if (!IsPlayerConnected(specid))
+	if (specid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 	if (specid == playerid)
 		return SendErrorMessage(playerid, "Can't spectate yourself.");

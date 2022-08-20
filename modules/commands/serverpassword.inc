@@ -10,7 +10,5 @@ YCMD: serverpassword(playerid, params[], help)
 	if (!ServerLocked)
 		return SendErrorMessage(playerid, "Server is not locked.");
 
-	new str[128];
-	format(str, sizeof(str), COL_PRIM "Current Server Password: {FFFFFF}%s", ServerPass[9]);
-	return SendClientMessageToAll(-1, str);
+	return va_SendClientMessageToAll(-1, COL_PRIM "Current Server Password: {FFFFFF}%s", ServerPass[9]);
 }

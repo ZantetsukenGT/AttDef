@@ -23,9 +23,11 @@ YCMD: changelog(playerid1, params[], help)
 			case 0:
 			{
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-				strcat(str, COL_SEC "\n  1.37.10 Features and fixes");
+				strcat(str, COL_SEC "\n  1.37.10 (Performance Update) Features and fixes");
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				strcat(str, "{CCCCCC}\nReplacing someone should set its correct skin now.");
+				strcat(str, "{CCCCCC}\nFPS counter will not double or drop randomly.");
+				strcat(str, "{CCCCCC}\nCommands now can make use of either " COL_SEC "Player Names/ID's.");
 				strcat(str, "{CCCCCC}\nFixed some rare crashes and known errors.");
 				strcat(str, "{CCCCCC}\nPerformance should be overall better on less powerful servers.");
 				strcat(str, "{CCCCCC}\nweapon-config is not present, but will be introduced in v1.38.");

@@ -12,8 +12,8 @@ YCMD: allvs(playerid, params[], help)
 		return SendErrorMessage(playerid, "Can't use while round is active.");
 
 	new toTeam, TempTeamName[6];
-	if (isnull(params) || sscanf(params, "is[6]", toTeam, TempTeamName))
-		return SendUsageMessage(playerid, "/allvs [Team ID | 0 = Attacker, 1 = Defender] [Tag/Name]");
+	if (sscanf(params, "s[6]I(0)", TempTeamName, toTeam))
+		return SendUsageMessage(playerid, "/allvs [Tag/Name] [Optional: Team ID (default 0)| 0 = Attacker, 1 = Defender]");
 	if (toTeam < 0 || toTeam > 1)
 		return SendErrorMessage(playerid, "Available teams: 0 for attacker and 1 for defender");
 

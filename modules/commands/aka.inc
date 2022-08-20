@@ -9,15 +9,15 @@ YCMD: aka(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "fetch AKA data of a player.");
 
 	new pID;
-	if (sscanf(params, "u", pID))
-		return SendUsageMessage(playerid, "/aka [Player ID]");
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/aka [Player Name/ID]");
 
 	return PerformCommandAKA(playerid, pID);
 }
 
 PerformCommandAKA(playerid, targetid)
 {
-	if (!IsPlayerConnected(targetid))
+	if (targetid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 
 	new AKAString[256];

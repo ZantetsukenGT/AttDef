@@ -11,9 +11,9 @@ YCMD: pm(playerid, params[], help)
 		return SendErrorMessage(playerid, "You are muted.");
 
 	new receiverID, message[144];
-	if (sscanf(params, "is[144]", receiverID, message))
-		return SendUsageMessage(playerid, "/pm [Player ID] [Message]");
-	if (!IsPlayerConnected(receiverID))
+	if (sscanf(params, "rs[144]", receiverID, message))
+		return SendUsageMessage(playerid, "/pm [Player Name/ID] [Message]");
+	if (receiverID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "Player not connected.");
 
 	if (Player[receiverID][blockedid] == playerid)
@@ -22,8 +22,6 @@ YCMD: pm(playerid, params[], help)
 		return SendErrorMessage(playerid, "That player has blocked PMs from everyone.");
 	if (Player[receiverID][Mute] && Player[playerid][Team] != Player[receiverID][Team])
 		return SendErrorMessage(playerid, "That player is currently muted and can not reply!");
-	if (strlen(message) > 142)
-		return SendErrorMessage(playerid, "This message is quite long (max: 142 characters).");
 
 	new str[144];
 	format(str, sizeof(str), "PM from %s (%d): %s", Player[playerid][Name], playerid, message);

@@ -9,11 +9,11 @@ YCMD: slap(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "slap a player ass a few meters in the air.");
-	if (isnull(params))
-		return SendUsageMessage(playerid, "/slap [Player ID]");
+	new sid;
+	if (sscanf(params, "r", sid))
+		return SendUsageMessage(playerid, "/slap [Player Name/ID]");
 
-	new sid = strval(params);
-	if (!IsPlayerConnected(sid))
+	if (sid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isnt connected.");
 
 	new Float: posX,
@@ -27,7 +27,5 @@ YCMD: slap(playerid, params[], help)
 
 	LogAdminCommand("slap", playerid, sid);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has slapped {FFFFFF}%s", Player[playerid][Name], Player[sid][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has slapped {FFFFFF}%s", Player[playerid][Name], Player[sid][Name]);
 }

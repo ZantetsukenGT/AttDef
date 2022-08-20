@@ -11,21 +11,20 @@ YCMD: ban(playerid, params[], help)
 	if (!AllowStartBase)
 		return SendErrorMessage(playerid, "Can't ban now. Please wait.");
 
-	new pID, Reason[128], iString[256];
-	if (sscanf(params, "dS( )[128]", pID, Reason))
-		return SendUsageMessage(playerid, "/ban [Player ID] [Reason]");
-	if (!IsPlayerConnected(pID))
+	new pID, Reason[128];
+	if (sscanf(params, "rS( )[128]", pID, Reason))
+		return SendUsageMessage(playerid, "/ban [Player Name/ID] [Reason]");
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 	if (Player[pID][Level] >= Player[playerid][Level])
 		return SendErrorMessage(playerid, "Cannot ban someone of the same or higher admin level as you.");
-	if (strlen(Reason) > 127)
-		return SendErrorMessage(playerid, "Reason is too big.");
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], /*IP,*/ Reason);
-	SendClientMessageToAll(-1, iString);
+	if (isnull(Reason))
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+	else
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
 
-	format(iString, sizeof(iString), "%s - %s", Player[playerid][Name], Reason);
-	SetTimerEx("BanExDelayed", 350, false, "ds", pID, iString);
+	SetTimerEx("BanExDelayed", 350, false, "ds", pID, va_return("%s - %s", Player[playerid][Name], Reason));
 	return LogAdminCommand("ban", playerid, pID);
 }
 

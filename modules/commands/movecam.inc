@@ -15,11 +15,11 @@ YCMD: movecam(playerid, params[], help)
 		return SendErrorMessage(playerid, "You have to be in freecam mode, type /freecam");
 	if (Player[playerid][Team] != REFEREE)
 		return SendErrorMessage(playerid, "You must be in referee team to use this command");
-	if (isnull(params))
-		return SendUsageMessage(playerid, "/movecam [to playerid]");
+	new toplayerid;
+	if (sscanf(params, "r", toplayerid))
+		return SendUsageMessage(playerid, "/movecam [to Player Name/ID]");
 
-	new toplayerid = strval(params);
-	if (!IsPlayerConnected(toplayerid) || IsPlayerNPC(toplayerid))
+	if (toplayerid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "Invalid player ID");
 
 	SetPlayerInterior(playerid, GetPlayerInterior(toplayerid));

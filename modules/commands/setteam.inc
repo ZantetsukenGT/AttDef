@@ -11,12 +11,12 @@ YCMD: setteam(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "set the team of a player.");
 
 	new pID, teamID;
-	if (sscanf(params, "dd", pID, teamID))
-		return SendUsageMessage(playerid, "/setteam [Player ID] [Team ID | 0 Att | 1 Def | 2 Ref | 3 Att_Sub | 4 Def_Sub]");
+	if (sscanf(params, "rd", pID, teamID))
+		return SendUsageMessage(playerid, "/setteam [Player Name/ID] [Team ID | 0 Att | 1 Def | 2 Ref | 3 Att_Sub | 4 Def_Sub]");
 
 	if (teamID < 0 || teamID > 4)
 		return SendErrorMessage(playerid, "Invalid team ID.");
-	if (!IsPlayerConnected(pID))
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 	if (Player[pID][Playing])
 		return SendErrorMessage(playerid, "That player is playing.");
@@ -49,7 +49,5 @@ YCMD: setteam(playerid, params[], help)
 
 	UpdateRoundKillDmgTDmg(pID);
 
-	new iString[150];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has switched {FFFFFF}%s " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], TeamName[teamID + 1]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has switched {FFFFFF}%s " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], TeamName[teamID + 1]);
 }

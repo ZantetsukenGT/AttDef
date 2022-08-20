@@ -9,8 +9,8 @@ YCMD: limit(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "set a limit for weather and time.");
 
-	new Command[64], aLimit, CommandID, iString[144];
-	if (sscanf(params, "s[64]d", Command, aLimit))
+	new Command[8], aLimit, CommandID, iString[144];
+	if (sscanf(params, "s[8]d", Command, aLimit))
 		return SendUsageMessage(playerid, "/limit [weather | time] [Limit]");
 
 	switch (YHash(Command, false))

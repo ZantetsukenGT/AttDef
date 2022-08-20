@@ -11,11 +11,8 @@ YCMD: int(playerid, params[], help)
 		return SendErrorMessage(playerid, COL_PRIM "Can't use while round is active.");
 	if (Player[playerid][InDuel])
 		return SendErrorMessage(playerid, "Can't use this command during duel.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, COL_PRIM "/int [1-147]");
-
-	new id = strval(params);
-	if (id <= 0 || id > 147)
+	new id;
+	if (sscanf(params, "i", id) || id <= 0 || id > 147)
 		return SendUsageMessage(playerid, COL_PRIM "/int [1-147]");
 
 	if (Player[playerid][Spectating])

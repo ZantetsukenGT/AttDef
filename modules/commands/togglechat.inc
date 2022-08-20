@@ -10,10 +10,7 @@ YCMD: togglechat(playerid, params[], help)
 
 	LogAdminCommand("togglechat", playerid, INVALID_PLAYER_ID);
 
-	new message[128];
-	format(
-		message, sizeof(message), "{FFFFFF}%s " COL_PRIM "has %s", Player[playerid][Name],
-		ChatDisabled ? "enabled main chat!" : "disabled main chat! (Press {FFFFFF}Y " COL_PRIM "to ask for round pause)");
 	ChatDisabled = !ChatDisabled;
-	return SendClientMessageToAll(-1, message);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has %s", Player[playerid][Name],
+		ChatDisabled ? "disabled main chat! (Press {FFFFFF}Y " COL_PRIM "to ask for round pause)" : "enabled main chat!");
 }

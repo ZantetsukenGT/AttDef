@@ -8,8 +8,8 @@ YCMD: votekick(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "start a voting (kick a player from the server)");
 	new pID;
-	if (sscanf(params, "i", pID))
-		return SendUsageMessage(playerid, "/votekick [Player ID]");
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/votekick [Player Name/ID]");
 
 	return PlayerVoteKick(playerid, pID);
 }
@@ -25,7 +25,7 @@ PlayerVoteKick(playerid, onplayerid)
 	if (VoteData[votetype][VoteCount] > 0 && VoteData[votetype][VotingOnPlayer] != onplayerid)
 		return SendErrorMessage(playerid, va_return("Another kick-voting is in progress (on playerid: %d), please wait!", VoteData[votetype][VotingOnPlayer]));
 
-	if (!IsPlayerConnected(onplayerid))
+	if (onplayerid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 
 	// Counting players who are able to vote

@@ -7,14 +7,11 @@ YCMD: dm(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "teleport you to a deathmatch arena.");
-	if (isnull(params))
+	new DMID;
+	if (sscanf(params, "i", DMID))
 		return SendUsageMessage(playerid, "/dm [DM ID]");
-	if (!IsNumeric(params))
-		return SendErrorMessage(playerid, "DM id can only be numeric.");
 	if (Player[playerid][Playing])
 		return 1;
-
-	new DMID = strval(params);
 
 	// Here I also added '=' after '>' so that if the DMID was Bigger than or Equal to MAX_DMS then you get that error message.
 	// Without this '=' (equal sign) if you type /dm 15 it will say the command is unkown which is a script error.

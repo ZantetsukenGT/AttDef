@@ -9,18 +9,15 @@ YCMD: unfreeze(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "unfreeze a player.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/unfreeze [Player ID]");
-
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/unfreeze [Player Name/ID]");
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isnt connected.");
 
 	TogglePlayerControllable(pID, 1);
 
 	LogAdminCommand("unfreeze", playerid, pID);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 }

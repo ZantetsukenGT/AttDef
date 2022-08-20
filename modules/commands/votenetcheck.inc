@@ -8,8 +8,8 @@ YCMD: votenetcheck(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "start a voting (toggle netcheck on a player)");
 	new pID;
-	if (sscanf(params, "i", pID))
-		return SendUsageMessage(playerid, "/votenetcheck [Player ID]");
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/votenetcheck [Player Name/ID]");
 
 	return PlayerVoteNetCheck(playerid, pID);
 }
@@ -28,7 +28,7 @@ PlayerVoteNetCheck(playerid, onplayerid)
 	if (playerid == onplayerid)
 		return SendErrorMessage(playerid, "You cannot vote to netcheck yourself. Try to ask people to vote netcheck you instead!");
 
-	if (!IsPlayerConnected(onplayerid))
+	if (onplayerid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 
 	// Counting players who are able to vote

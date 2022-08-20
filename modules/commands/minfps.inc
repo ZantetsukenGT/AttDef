@@ -9,16 +9,16 @@ YCMD: minfps(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "set minimum FPS limit.");
-	if (isnull(params) || !IsNumeric(params))
+	new iPacket;
+	if (sscanf(params, "i", iPacket))
 		return SendUsageMessage(playerid, "/minfps [Minimum FPS]");
 
-	new iPacket = strval(params);
 	if (iPacket < 20 || iPacket > 90)
 		return SendErrorMessage(playerid, "FPS limit can be between 20 and 90 maximum.");
 
 	Min_FPS = iPacket;
 
-	new iString[128];
+	new iString[144];
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Minimum FPS'", Min_FPS);
 	db_free_result(db_query(sqliteconnection, iString));
 

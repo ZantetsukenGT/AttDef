@@ -9,11 +9,11 @@ YCMD: goto(playerid, params[], help)
 		return SendErrorMessage(playerid, "You Need To Be An Admin.");
 	if (help)
 		return SendCommandHelpMessage(playerid, "teleport you to a player.");
-	if (isnull(params))
-		return SendUsageMessage(playerid, "/goto [Player ID]");
+	new gid;
+	if (sscanf(params, "r", gid))
+		return SendUsageMessage(playerid, "/goto [Player Name/ID]");
 
-	new gid = strval(params);
-	if (!IsPlayerConnected(gid) || gid == INVALID_PLAYER_ID)
+	if (gid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "Player isn't connected.");
 	if (gid == playerid)
 		return SendErrorMessage(playerid, "Can't go to yourself.");
@@ -35,7 +35,5 @@ YCMD: goto(playerid, params[], help)
 
 	LogAdminCommand("goto", playerid, gid);
 
-	new tstr[128];
-	format(tstr, sizeof(tstr), "{FFFFFF}%s " COL_PRIM "has teleported to {FFFFFF}%s", Player[playerid][Name], Player[gid][Name]);
-	return SendClientMessageToAll(-1, tstr);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has teleported to {FFFFFF}%s", Player[playerid][Name], Player[gid][Name]);
 }

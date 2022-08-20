@@ -32,13 +32,6 @@ public InlineChangePass(playerid, dialogid, response, listitem, string: inputtex
 		return 1;
 	}
 
-	if (strfind(inputtext, "%", true) != -1)
-	{
-		Dialog_ShowCallback(
-			playerid, using public InlineChangePass<iiiis>, DIALOG_STYLE_PASSWORD, "{FFFFFF}Password Change Dialog", "{FFFFFF}Type your new password below:",
-			"Modify", "Cancel");
-		return SendErrorMessage(playerid, va_return("This character '%s' is disallowed in user passwords.", "%%"));
-	}
 	bcrypt_hash(playerid, "OnChangePassHash", inputtext, BCRYPT_COST);
 	return 1;
 }

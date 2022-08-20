@@ -8,8 +8,8 @@ YCMD: votereadd(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "start a voting (re-add player to round)");
 	new pID;
-	if (sscanf(params, "i", pID))
-		return SendUsageMessage(playerid, "/votereadd [Player ID]");
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/votereadd [Player Name/ID]");
 
 	return PlayerVoteReadd(playerid, pID);
 }
@@ -28,7 +28,7 @@ PlayerVoteReadd(playerid, onplayerid)
 	if (VoteData[votetype][VoteCount] > 0 && VoteData[votetype][VotingOnPlayer] != onplayerid)
 		return SendErrorMessage(playerid, va_return("Another readd-voting is in progress (on playerid: %d), please wait!", VoteData[votetype][VotingOnPlayer]));
 
-	if (!IsPlayerConnected(onplayerid))
+	if (onplayerid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (!Player[onplayerid][Playing])
 		return SendErrorMessage(playerid, "This player is not even playing!");

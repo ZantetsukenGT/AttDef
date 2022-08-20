@@ -9,11 +9,11 @@ YCMD: setafk(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "force someone to go into AFK mode.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/setafk [Player ID]");
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/setafk [Player Name/ID]");
 
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (Player[pID][Playing])
 		return SendErrorMessage(playerid, "You cannot switch this player to AFK mode as he's playing");
@@ -31,7 +31,5 @@ YCMD: setafk(playerid, params[], help)
 
 	LogAdminCommand("setafk", playerid, pID);
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s " COL_PRIM "to AFK mode.", Player[playerid][Name], Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s " COL_PRIM "to AFK mode.", Player[playerid][Name], Player[pID][Name]);
 }

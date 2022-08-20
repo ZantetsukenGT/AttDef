@@ -11,12 +11,12 @@ YCMD: duel(playerid, params[], help)
 		return SendErrorMessage(playerid, "You are already dueling someone.");
 
 	new invitedid, Weapon1[23], Weapon2[23], duelarena[8], size;
-	if (sscanf(params, "is[*]s[*]S( )[8]I(90)", invitedid, sizeof(Weapon1), Weapon1, sizeof(Weapon2), Weapon2, duelarena, size))
+	if (sscanf(params, "rs[*]s[*]S( )[8]I(90)", invitedid, sizeof(Weapon1), Weapon1, sizeof(Weapon2), Weapon2, duelarena, size))
 	{
-		SendUsageMessage(playerid, "/duel [Player ID] [Weapon 1] [Weapon 2] [Optional: default/custom] [Optional: area size]");
+		SendUsageMessage(playerid, "/duel [Player Name/ID] [Weapon 1] [Weapon 2] [Optional: default/custom] [Optional: area size]");
 		return SendClientMessage(playerid, -1, "" COL_PRIM "Note: {FFFFFF}[custom] to play in your current place and [default] for default duel arena");
 	}
-	if (!IsPlayerConnected(invitedid))
+	if (invitedid == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player isn't connected.");
 	if (Player[invitedid][Playing])
 		return SendErrorMessage(playerid, "That player is in a round.");

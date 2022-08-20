@@ -9,21 +9,18 @@ YCMD: pingcheck(playerid, params[], help)
 		return SendErrorMessage(playerid, "You need to be a higher admin level to do that.");*/
 	if (help)
 		return SendCommandHelpMessage(playerid, "toggle ping status check on a specific player.");
-	if (isnull(params) || !IsNumeric(params))
-		return SendUsageMessage(playerid, "/pingcheck [Player ID]");
+	new pID;
+	if (sscanf(params, "r", pID))
+		return SendUsageMessage(playerid, "/pingcheck [Player Name/ID]");
 
-	new pID = strval(params);
-	if (!IsPlayerConnected(pID))
+	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 	if (!Player[pID][NetCheck])
 		return SendErrorMessage(playerid, "That player has netcheck disabled on him.");
 
 	LogAdminCommand("pingcheck", playerid, pID);
 
-	new iString[128];
-	format(
-		iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has %s Ping-Check on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PingCheck] ? "disabled" : "enabled",
-		Player[pID][Name]);
 	Player[pID][PingCheck] = !Player[pID][PingCheck];
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has %s Ping-Check on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PingCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
+		Player[pID][Name]);
 }
