@@ -1267,7 +1267,7 @@ RemovePlayerFromRound(playerid, bool: remove_iterator = true)
 
 	DisablePlayerCheckpoint(playerid);
 	SetPlayerScore(playerid, 0);
-	HideDialogs(playerid);
+	HidePlayerDialog(playerid);
 
 	PlayerTextDrawHide(playerid, AreaCheckTD[playerid]);
 	PlayerTextDrawHide(playerid, AreaCheckBG[playerid]);
@@ -2632,7 +2632,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				ShowEndRoundTextDraw(i);
 			DisablePlayerCheckpoint(i);
 			SetPlayerScore(i, 0);
-			HideDialogs(i);
+			HidePlayerDialog(i);
 			HidePlayerGunmenu(i);
 		}
 	}

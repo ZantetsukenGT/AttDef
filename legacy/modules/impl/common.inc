@@ -954,7 +954,6 @@ bool: IsPlayerInArea(playerid, Float: minx, Float: maxx, Float: miny, Float: max
 	return x > minx && x < maxx && y > miny && y < maxy;
 }
 
-HideDialogs(playerid) { ShowPlayerDialog(playerid, -1, 0, " ", " ", " ", " "); }
 /*
 GetPlayerHighestScores(array[][rankingEnum], left, right)
 {

@@ -65,7 +65,7 @@ YCMD: rr(playerid, params[], help)
 			Player[i][WeaponPicked] = 0;
 			Player[i][TimesSpawned] = 0;
 
-			HideDialogs(i);
+			HidePlayerDialog(i);
 			DisablePlayerCheckpoint(i);
 			RemovePlayerMapIcon(i, 59);
 

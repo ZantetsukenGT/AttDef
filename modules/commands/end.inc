@@ -78,7 +78,7 @@ YCMD: end(playerid, params[], help)
 
 		DisablePlayerCheckpoint(i);
 		SetPlayerScore(i, 0);
-		HideDialogs(i);
+		HidePlayerDialog(i);
 
 		PlayerTextDrawHide(i, AreaCheckTD[i]);
 		PlayerTextDrawHide(i, AreaCheckBG[i]);

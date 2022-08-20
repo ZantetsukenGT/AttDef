@@ -102,7 +102,7 @@ PlayerVoteEndMatch(playerid)
 
 					DisablePlayerCheckpoint(i);
 					SetPlayerScore(i, 0);
-					HideDialogs(i);
+					HidePlayerDialog(i);
 
 					PlayerTextDrawHide(i, AreaCheckTD[i]);
 					PlayerTextDrawHide(i, AreaCheckBG[i]);
