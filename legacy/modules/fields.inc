@@ -12,8 +12,8 @@
 */
 
 #define MAX_BASES		   300
-#define MAX_ARENAS		   100
-#define MAX_DMS			   50
+#define MAX_ARENAS		   300
+#define MAX_DMS			   100
 
 #define MAX_MAP_FIELD_NAME 64
 

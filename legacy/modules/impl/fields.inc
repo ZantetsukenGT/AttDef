@@ -45,6 +45,9 @@ LoadBases()
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
 
+		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
+		BInterior[i] = strval(iString);
+
 		db_get_field_assoc(res, "AttSpawn", iString, sizeof(iString));
 		sscanf(iString, "p<,>fff", BAttackerSpawn[i][0], BAttackerSpawn[i][1], BAttackerSpawn[i][2]);
 
@@ -53,9 +56,6 @@ LoadBases()
 
 		db_get_field_assoc(res, "CPSpawn", iString, sizeof(iString));
 		sscanf(iString, "p<,>fff", BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
-
-		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
-		BInterior[i] = strval(iString);
 
 		db_get_field_assoc(res, "Name", BName[i], MAX_MAP_FIELD_NAME);
 
@@ -82,6 +82,9 @@ LoadArenas()
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
 
+		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
+		AInterior[i] = strval(iString);
+
 		db_get_field_assoc(res, "AttSpawn", iString, sizeof(iString));
 		sscanf(iString, "p<,>fff", AAttackerSpawn[i][0], AAttackerSpawn[i][1], AAttackerSpawn[i][2]);
 
@@ -96,9 +99,6 @@ LoadArenas()
 
 		db_get_field_assoc(res, "Min", iString, sizeof(iString));
 		sscanf(iString, "p<,>ff", AMin[i][0], AMin[i][1]);
-
-		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
-		AInterior[i] = strval(iString);
 
 		db_get_field_assoc(res, "Name", AName[i], MAX_MAP_FIELD_NAME);
 
@@ -124,9 +124,6 @@ LoadDMs()
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
 
-		db_get_field_assoc(res, "Spawn", iString, sizeof(iString));
-		sscanf(iString, "p<,>ffff", DMSpawn[i][0], DMSpawn[i][1], DMSpawn[i][2], DMSpawn[i][3]);
-
 		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
 		DMInterior[i] = strval(iString);
 
@@ -137,6 +134,9 @@ LoadDMs()
 			db_get_field_assoc(res, fieldName, weapon, 128);
 			DMWeapons[i][j] = strval(weapon);
 		}
+
+		db_get_field_assoc(res, "Spawn", iString, sizeof(iString));
+		sscanf(iString, "p<,>ffff", DMSpawn[i][0], DMSpawn[i][1], DMSpawn[i][2], DMSpawn[i][3]);
 		DMExist[i] = true;
 
 		//db_next_row(res);
