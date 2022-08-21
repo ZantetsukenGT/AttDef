@@ -15,35 +15,16 @@
 	Fields related: bases, arenas... etc
 */
 
-/*FindFreeArenaSlot()
-{
-	for (new i = 1; i < MAX_ARENAS; i++)
-		if (!AExist[i])
-			return i;
-
-	return TotalArenas + 1;
-}*/
-
-FindFreeBaseSlot()
-{
-	for (new i = 1; i < MAX_BASES; i++)
-		if (!BExist[i])
-			return i;
-
-	return TotalBases + 1;
-}
-
 LoadBases()
 {
-	TotalBases = 0;
 	new iString[64];
-
 	new DBResult: res = db_query(sqliteconnection, va_return("SELECT * FROM `%q` ORDER BY ID ASC", CurrentBaseSet));
 
-	for (new i = 0; i < MAX_BASES; i++) BExist[i] = false;
+	Iter_Clear(CurrentBases);
 	do {
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
+		Iter_Add(CurrentBases, i);
 
 		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
 		BInterior[i] = strval(iString);
@@ -58,29 +39,27 @@ LoadBases()
 		sscanf(iString, "p<,>fff", BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
 
 		db_get_field_assoc(res, "Name", BName[i], MAX_MAP_FIELD_NAME);
-
-		TotalBases++;
-		BExist[i] = true;
 	}
 	while (db_next_row(res));
 
 	db_free_result(res);
 
-	SendClientMessageToAll(-1, va_return(COL_PRIM "Bases Loaded: {FFFFFF}%d " COL_PRIM "| Current base set: {FFFFFF}%s", TotalBases, CurrentBaseSet));
-	printf("Bases Loaded: %d (from table: %s)", TotalBases, CurrentBaseSet);
+	ForgetPlayedBases();
+	new totalBases = Iter_Count(CurrentBases);
+	va_SendClientMessageToAll(-1, COL_PRIM "Bases Loaded: {FFFFFF}%d " COL_PRIM "| Current base set: {FFFFFF}%s", totalBases, CurrentBaseSet);
+	printf("Bases Loaded: %d (from table: %s)", totalBases, CurrentBaseSet);
 }
 
 LoadArenas()
 {
-	TotalArenas = 0;
 	new iString[64];
-
 	new DBResult: res = db_query(sqliteconnection, va_return("SELECT * FROM `%q` ORDER BY ID ASC", CurrentArenaSet));
 
-	for (new i = 0; i < MAX_ARENAS; i++) AExist[i] = false;
+	Iter_Clear(CurrentArenas);
 	do {
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
+		Iter_Add(CurrentArenas, i);
 
 		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
 		AInterior[i] = strval(iString);
@@ -101,28 +80,27 @@ LoadArenas()
 		sscanf(iString, "p<,>ff", AMin[i][0], AMin[i][1]);
 
 		db_get_field_assoc(res, "Name", AName[i], MAX_MAP_FIELD_NAME);
-
-		AExist[i] = true;
-		TotalArenas++;
 	}
 	while (db_next_row(res));
 
 	db_free_result(res);
 
-	SendClientMessageToAll(-1, va_return(COL_PRIM "Arenas Loaded: {FFFFFF}%d " COL_PRIM "| Current arena set: {FFFFFF}%s", TotalArenas, CurrentArenaSet));
-	printf("Arenas Loaded: %d (from table: %s)", TotalArenas, CurrentArenaSet);
+	ForgetPlayedArenas();
+	new totalArenas = Iter_Count(CurrentArenas);
+	va_SendClientMessageToAll(-1, COL_PRIM "Arenas Loaded: {FFFFFF}%d " COL_PRIM "| Current arena set: {FFFFFF}%s", totalArenas, CurrentArenaSet);
+	printf("Arenas Loaded: %d (from table: %s)", totalArenas, CurrentArenaSet);
 }
 
 LoadDMs()
 {
-	new iString[64], TotalDMs;
-
+	new iString[64];
 	new DBResult: res = db_query(sqliteconnection, "SELECT * FROM DMs ORDER BY ID ASC");
 
-	for (new i = 0; i < MAX_DMS; i++) DMExist[i] = false;
+	Iter_Clear(CurrentDMs);
 	do {
 		db_get_field_assoc(res, "ID", iString, sizeof(iString));
 		new i = strval(iString);
+		Iter_Add(CurrentDMs, i);
 
 		db_get_field_assoc(res, "Interior", iString, sizeof(iString));
 		DMInterior[i] = strval(iString);
@@ -131,20 +109,17 @@ LoadDMs()
 		{
 			new fieldName[10], weapon[128];
 			format(fieldName, sizeof(fieldName), "Wep%d", j + 1);
-			db_get_field_assoc(res, fieldName, weapon, 128);
+			db_get_field_assoc(res, fieldName, weapon, sizeof(weapon));
 			DMWeapons[i][j] = strval(weapon);
 		}
 
 		db_get_field_assoc(res, "Spawn", iString, sizeof(iString));
 		sscanf(iString, "p<,>ffff", DMSpawn[i][0], DMSpawn[i][1], DMSpawn[i][2], DMSpawn[i][3]);
-		DMExist[i] = true;
-
-		//db_next_row(res);
-		TotalDMs++;
 	}
 	while (db_next_row(res));
 
 	db_free_result(res);
 
-	printf("DMs Loaded: %d", TotalDMs);
+	new totalDMs = Iter_Count(CurrentDMs);
+	printf("DMs Loaded: %d", totalDMs);
 }

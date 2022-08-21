@@ -18,29 +18,27 @@
 #define MAX_MAP_FIELD_NAME 64
 
 // - Base Variables -
+new Iterator: CurrentBases<MAX_BASES>;
+new BInterior[MAX_BASES];
 new Float: BAttackerSpawn[MAX_BASES][3];
 new Float: BDefenderSpawn[MAX_BASES][3];
 new Float: BCPSpawn[MAX_BASES][3];
-new BInterior[MAX_BASES];
 new BName[MAX_BASES][MAX_MAP_FIELD_NAME];
-new bool: BExist[MAX_BASES] = false;
-new TotalBases;
 new CurrentBaseSet[32] = "NewBulletproofBases";
 
 // - Arena Variables -
+new Iterator: CurrentArenas<MAX_ARENAS>;
+new AInterior[MAX_ARENAS];
 new Float: AAttackerSpawn[MAX_ARENAS][3];
 new Float: ADefenderSpawn[MAX_ARENAS][3];
 new Float: ACPSpawn[MAX_ARENAS][3];
-new AInterior[MAX_ARENAS];
 new AName[MAX_ARENAS][MAX_MAP_FIELD_NAME];
 new Float: AMax[MAX_ARENAS][2];
 new Float: AMin[MAX_ARENAS][2];
-new bool: AExist[MAX_ARENAS] = false;
-new TotalArenas;
 new CurrentArenaSet[32] = "Arenas";
 
 // - DM Variables -
+new Iterator: CurrentDMs<MAX_DMS>;
 new Float: DMSpawn[MAX_DMS][4];
 new DMInterior[MAX_DMS];
 new DMWeapons[MAX_DMS][3];
-new bool: DMExist[MAX_DMS] = false;

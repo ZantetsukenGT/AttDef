@@ -165,141 +165,77 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 
 	if (Player[playerid][SpectatingRound] != -1)
 	{
-		new iString[128];
 		switch (Player[playerid][SpectatingType])
 		{
 			case BASE:
 			{
-				if (PRESSED(KEY_FIRE))
+				if (Iter_Count(CurrentBases) > 1)
 				{
-					new searching;
-					for (new i = Player[playerid][SpectatingRound] + 1; i <= MAX_BASES; i++)
+					if (PRESSED(KEY_FIRE))
 					{
-						if (searching > 1)
-						{
-							break;
-						}
-						if (i == MAX_BASES)
-						{
-							i = 1;
-							searching++;
-						}
-						if (BExist[i] == true)
-						{
-							Player[playerid][SpectatingRound] = i;
-							SetPlayerInterior(playerid, BInterior[i]);
-							SetPlayerCameraLookAt(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
-							SetPlayerCameraPos(playerid, BCPSpawn[i][0] + 100, BCPSpawn[i][1], BCPSpawn[i][2] + 80);
-							SetPlayerPos(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
-							format(iString, sizeof(iString), "%sBase ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, BName[i], i, MAIN_TEXT_COLOUR);
-							PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], iString);
-							break;
-						}
+						new i = Player[playerid][SpectatingRound];
+						if (i == Iter_First(CurrentBases))
+							Player[playerid][SpectatingRound] = Iter_Last(CurrentBases);
+						else
+							Player[playerid][SpectatingRound] = Iter_Prev(CurrentBases, i);
+						i = Player[playerid][SpectatingRound];
+						SetPlayerInterior(playerid, BInterior[i]);
+						SetPlayerCameraLookAt(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
+						SetPlayerCameraPos(playerid, BCPSpawn[i][0] + 100, BCPSpawn[i][1], BCPSpawn[i][2] + 80);
+						SetPlayerPos(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
+
+						va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sBase ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, BName[i], i, MAIN_TEXT_COLOUR);
 					}
-				}
-				else if (PRESSED(KEY_HANDBRAKE))
-				{
-					new searching;
-					for (new i = Player[playerid][SpectatingRound] - 1; i >= 0; i--)
+					else if (PRESSED(KEY_HANDBRAKE))
 					{
-						if (searching > 1)
-						{
-							break;
-						}
-						if (i == 0)
-						{
-							i = MAX_BASES - 1;
-							searching++;
-						}
+						new i = Player[playerid][SpectatingRound];
+						if (i == Iter_Last(CurrentBases))
+							Player[playerid][SpectatingRound] = Iter_First(CurrentBases);
+						else
+							Player[playerid][SpectatingRound] = Iter_Next(CurrentBases, i);
+						i = Player[playerid][SpectatingRound];
+						SetPlayerInterior(playerid, BInterior[i]);
+						SetPlayerCameraLookAt(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
+						SetPlayerCameraPos(playerid, BCPSpawn[i][0] + 100, BCPSpawn[i][1], BCPSpawn[i][2] + 80);
+						SetPlayerPos(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
 
-						if (BExist[i] == true)
-						{
-							Player[playerid][SpectatingRound] = i;
-							SetPlayerInterior(playerid, BInterior[i]);
-							SetPlayerCameraLookAt(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
-							SetPlayerCameraPos(playerid, BCPSpawn[i][0] + 100, BCPSpawn[i][1], BCPSpawn[i][2] + 80);
-							SetPlayerPos(playerid, BCPSpawn[i][0], BCPSpawn[i][1], BCPSpawn[i][2]);
-
-							format(iString, sizeof(iString), "%sBase ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, BName[i], i, MAIN_TEXT_COLOUR);
-							PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], iString);
-							break;
-						}
+						va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sBase ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, BName[i], i, MAIN_TEXT_COLOUR);
 					}
 				}
 			}
 			case ARENA:
 			{
-				if (PRESSED(KEY_FIRE))
+				if (Iter_Count(CurrentArenas) > 1)
 				{
-					new searching;
-					for (new i = Player[playerid][SpectatingRound] + 1; i <= MAX_ARENAS; i++)
+					if (PRESSED(KEY_FIRE))
 					{
-						if (searching > 1)
-						{
-							break;
-						}
-						if (i == MAX_ARENAS)
-						{
-							i = 0;
-							searching++;
-						}
-						if (AExist[i] == true)
-						{
-							Player[playerid][SpectatingRound] = i;
-							SetPlayerCameraLookAt(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0], ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2]);
-							SetPlayerCameraPos(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0] + 100, ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2] + 80);
-							SetPlayerPos(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0], ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2]);
-							SetPlayerInterior(playerid, AInterior[Player[playerid][SpectatingRound]]);
+						new i = Player[playerid][SpectatingRound];
+						if (i == Iter_First(CurrentArenas))
+							Player[playerid][SpectatingRound] = Iter_Last(CurrentArenas);
+						else
+							Player[playerid][SpectatingRound] = Iter_Prev(CurrentArenas, i);
+						i = Player[playerid][SpectatingRound];
+						SetPlayerCameraLookAt(playerid, ACPSpawn[i][0], ACPSpawn[i][1], ACPSpawn[i][2]);
+						SetPlayerCameraPos(playerid, ACPSpawn[i][0] + 100, ACPSpawn[i][1], ACPSpawn[i][2] + 80);
+						SetPlayerPos(playerid, ACPSpawn[i][0], ACPSpawn[i][1], ACPSpawn[i][2]);
+						SetPlayerInterior(playerid, AInterior[i]);
 
-							format(
-								iString, sizeof(iString), "%sArena ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, AName[Player[playerid][SpectatingRound]],
-								Player[playerid][SpectatingRound], MAIN_TEXT_COLOUR);
-							PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], iString);
-							break;
-						}
+						va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sArena ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, AName[i], i, MAIN_TEXT_COLOUR);
 					}
-				}
-				else if (PRESSED(KEY_HANDBRAKE))
-				{
-					new searching;
-					for (new i = Player[playerid][SpectatingRound] - 1; i >= 0; i--)
+					else if (PRESSED(KEY_HANDBRAKE))
 					{
-						if (searching > 1)
-						{
-							break;
-						}
-						if (i == 0)
-						{
-							i = MAX_ARENAS - 1;
-							searching++;
-						}
+						new i = Player[playerid][SpectatingRound];
+						if (i == Iter_Last(CurrentArenas))
+							Player[playerid][SpectatingRound] = Iter_First(CurrentArenas);
+						else
+							Player[playerid][SpectatingRound] = Iter_Next(CurrentArenas, i);
+						i = Player[playerid][SpectatingRound];
+						SetPlayerCameraLookAt(playerid, ACPSpawn[i][0], ACPSpawn[i][1], ACPSpawn[i][2]);
+						SetPlayerCameraPos(playerid, ACPSpawn[i][0] + 100, ACPSpawn[i][1], ACPSpawn[i][2] + 80);
+						SetPlayerPos(playerid, ACPSpawn[i][0], ACPSpawn[i][1], ACPSpawn[i][2]);
+						SetPlayerInterior(playerid, AInterior[i]);
 
-						if (AExist[i] == true)
-						{
-							Player[playerid][SpectatingRound] = i;
-							SetPlayerCameraLookAt(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0], ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2]);
-							SetPlayerCameraPos(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0] + 100, ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2] + 80);
-							SetPlayerPos(
-								playerid, ACPSpawn[Player[playerid][SpectatingRound]][0], ACPSpawn[Player[playerid][SpectatingRound]][1],
-								ACPSpawn[Player[playerid][SpectatingRound]][2]);
-							SetPlayerInterior(playerid, AInterior[Player[playerid][SpectatingRound]]);
-
-							format(
-								iString, sizeof(iString), "%sArena ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, AName[Player[playerid][SpectatingRound]],
-								Player[playerid][SpectatingRound], MAIN_TEXT_COLOUR);
-							PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], iString);
-							break;
-						}
+						va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sArena ~n~%s%s (ID: ~r~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, AName[i], i, MAIN_TEXT_COLOUR);
 					}
 				}
 			}
@@ -309,13 +245,12 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			switch (Player[playerid][SpectatingType])
 			{
 				case BASE:
-					format(
-						iString, sizeof(iString), "" COL_PRIM "Spectating Base: {FFFFFF}%s (ID: %d)", BName[Player[playerid][SpectatingRound]], Player[playerid][SpectatingRound]);
+					va_SendClientMessage(
+						playerid, -1, COL_PRIM "Spectating Base: {FFFFFF}%s (ID: %d)", BName[Player[playerid][SpectatingRound]], Player[playerid][SpectatingRound]);
 				case ARENA:
-					format(
-						iString, sizeof(iString), "" COL_PRIM "Spectating Arena: {FFFFFF}%s (ID: %d)", AName[Player[playerid][SpectatingRound]], Player[playerid][SpectatingRound]);
+					va_SendClientMessage(
+						playerid, -1, COL_PRIM "Spectating Arena: {FFFFFF}%s (ID: %d)", AName[Player[playerid][SpectatingRound]], Player[playerid][SpectatingRound]);
 			}
-			SendClientMessage(playerid, -1, iString);
 			SetCameraBehindPlayer(playerid);
 			Player[playerid][SpectatingRound] = -1;
 			PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "_");

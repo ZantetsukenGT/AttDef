@@ -8,16 +8,12 @@ YCMD: dm(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "teleport you to a deathmatch arena.");
 	new DMID;
-	if (sscanf(params, "i", DMID))
+	if (sscanf(params, "I(-1)", DMID) || DMID < 0)
 		return SendUsageMessage(playerid, "/dm [DM ID]");
 	if (Player[playerid][Playing])
 		return 1;
 
-	// Here I also added '=' after '>' so that if the DMID was Bigger than or Equal to MAX_DMS then you get that error message.
-	// Without this '=' (equal sign) if you type /dm 15 it will say the command is unkown which is a script error.
-	if (DMID >= MAX_DMS)
-		return SendErrorMessage(playerid, "Invalid DM id."); // If you don't use this line and later on you use 'crashdetect' plugin for ur gamemode, it will give you an error.
-	if (!DMExist[DMID])
+	if (!Iter_Contains(CurrentDMs, DMID))
 		return SendErrorMessage(playerid, "This DM does not exist.");
 
 	if (Player[playerid][Spectating])
@@ -43,20 +39,18 @@ YCMD: dm(playerid, params[], help)
 	SetPlayerInterior(playerid, DMInterior[DMID]);
 	SetPlayerTeam(playerid, playerid);
 
-	new iString[140];
-
 	// If the second and third weapons are punch or no weapons then it'll show you just one weapon instead of saying (Deagle - Punch - Punch)
 	if (DMWeapons[DMID][1] == 0 && DMWeapons[DMID][2] == 0)
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]]);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]]);
 	//If only the third weapons is punch then it'll show two weapons e.g. (Deagle - Shotgun) instead of (Deagle - Shotgun - Punch)
 	else if (DMWeapons[DMID][2] == 0)
-		format(
-			iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
 			WeaponNames[DMWeapons[DMID][1]]);
 	//If all the weapons are known then it'll show u all three weapons e.g. (Deagle - Shotgun - Sniper)
 	else
-		format(
-			iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
+		va_SendClientMessageToAll(
+			-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
 			WeaponNames[DMWeapons[DMID][1]], WeaponNames[DMWeapons[DMID][2]]);
 
 	if (Player[playerid][BeingSpeced])
@@ -69,5 +63,5 @@ YCMD: dm(playerid, params[], help)
 			}
 		}
 	}
-	return SendClientMessageToAll(-1, iString); // Send the formatted message to everyone.
+	return 1;
 }

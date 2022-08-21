@@ -517,13 +517,13 @@ RestartGameLoop()
 // Delete arenas that are already played from memory (so they can be started again from random arena command)
 ForgetPlayedArenas()
 {
-	for (new i = 0; i <= TotalArenas; i++) IsArenaPlayed[i] = false;
+	foreach (new i : CurrentArenas) IsArenaPlayed[i] = false;
 }
 
 // Delete bases that are already played from memory (so they can be started again from random base command)
 ForgetPlayedBases()
 {
-	for (new i = 0; i <= TotalBases; i++) IsBasePlayed[i] = false;
+	foreach (new i : CurrentBases) IsBasePlayed[i] = false;
 }
 
 /*
@@ -547,32 +547,27 @@ DetermineRandomRound(mode = 0, bool: ignore = false, type = ARENA)
 	{
 		case ARENA:
 		{
-			if (TotalArenas == 0)
+			if (Iter_IsEmpty(CurrentArenas))
 				return -1;
-			if (TotalArenas == 1)
-				return TotalArenas;
 
 			new timesSearched,			 // How many times we searched for a map
 				id,						 // id of the map to start
 				completeLoops;			 // lets avoid an infinite loop if a base/arena set doesn't meet the criteria
-			new bool: extOrIntAllowance; // either an int or ext was requested
+			new bool: extOrIntAllowed;	 // either an int or ext was requested
 
 			// Will loop until a map is found valid to be played.
 			for (timesSearched = 1;; timesSearched++)
 			{
-				id = random(MAX_ARENAS); // Generate a random ID
-				if (AExist[id])
+				id = Iter_Random(CurrentArenas); // Generate a random ID
+				extOrIntAllowed = mode == 0 ? true : mode == 1 ? AInterior[id] != 0 : AInterior[id] == 0;
+				if (extOrIntAllowed && (ignore || !IsArenaPlayed[id]))
 				{
-					extOrIntAllowance = mode == 0 ? true : mode == 1 ? AInterior[id] != 0 : AInterior[id] == 0;
-					if (extOrIntAllowance && (ignore || !IsArenaPlayed[id]))
-					{
-						// Mark it as played
-						IsArenaPlayed[id] = true;
-						return id;
-					}
+					// Mark it as played
+					IsArenaPlayed[id] = true;
+					return id;
 				}
 				// if all the maps are already played
-				if (timesSearched >= TotalArenas)
+				if (timesSearched >= Iter_Count(CurrentArenas))
 				{
 					// We clear them and restart search
 					timesSearched = 0;
@@ -584,32 +579,27 @@ DetermineRandomRound(mode = 0, bool: ignore = false, type = ARENA)
 		}
 		case BASE:
 		{
-			if (TotalBases == 0)
+			if (Iter_IsEmpty(CurrentBases))
 				return -1;
-			if (TotalBases == 1)
-				return TotalBases;
 
 			new timesSearched,			 // How many times we searched for a map
 				id,						 // id of the map to start
 				completeLoops;			 // lets avoid an infinite loop if a base/arena set doesn't meet the criteria
-			new bool: extOrIntAllowance; // either an int or ext was requested
+			new bool: extOrIntAllowed;	 // either an int or ext was requested
 
 			// Will loop until a map is found valid to be played.
-			for (timesSearched = 0;; timesSearched++)
+			for (timesSearched = 1;; timesSearched++)
 			{
-				id = random(MAX_BASES); // Generate a random ID
-				if (BExist[id])
+				id = Iter_Random(CurrentBases); // Generate a random ID
+				extOrIntAllowed = mode == 0 ? true : mode == 1 ? BInterior[id] != 0 : BInterior[id] == 0;
+				if (extOrIntAllowed && (ignore || !IsBasePlayed[id]))
 				{
-					extOrIntAllowance = mode == 0 ? true : mode == 1 ? BInterior[id] != 0 : BInterior[id] == 0;
-					if (extOrIntAllowance && (ignore || !IsBasePlayed[id]))
-					{
-						// Mark it as played
-						IsBasePlayed[id] = true;
-						return id;
-					}
+					// Mark it as played
+					IsBasePlayed[id] = true;
+					return id;
 				}
 				// if all the maps are already played
-				if (timesSearched >= TotalBases)
+				if (timesSearched >= Iter_Count(CurrentBases))
 				{
 					// We clear them and restart search
 					timesSearched = 0;
