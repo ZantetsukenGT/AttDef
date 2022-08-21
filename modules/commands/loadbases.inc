@@ -10,7 +10,7 @@ YCMD: loadbases(playerid, params[], help)
 	if (Current != -1)
 		return SendErrorMessage(playerid, "Can't use this command while round is active.");
 	new baseset = 0;
-	if (sscanf(params, "d", baseset) || baseset < 0 || baseset > 5)
+	if (sscanf(params, "d", baseset) || baseset < 0 || baseset > 7)
 	{
 		SendUsageMessage(playerid, "/loadbases [base set id]");
 		SendClientMessage(playerid, -1, "Available base set IDs:");
