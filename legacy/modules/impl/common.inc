@@ -1318,7 +1318,7 @@ SpawnInDM(playerid, DMID)
 			9999, DMWeapons[DMID][1], 9999, DMWeapons[DMID][2], 9999);
 	else
 		SetSpawnInfo(
-			playerid, playerid, Skin[Player[playerid][Team]], Player[playerid][DmPosX], Player[playerid][DmPosY], Player[playerid][DmPosZ], Player[playerid][DmAngle],
+			playerid, playerid, Skin[Player[playerid][Team]], Player[playerid][DmPosX], Player[playerid][DmPosY], DMInterior[DMID] ? Player[playerid][DmPosZ] + 1 : Player[playerid][DmPosZ], Player[playerid][DmAngle],
 			DMWeapons[DMID][0], 9999, DMWeapons[DMID][1], 9999, DMWeapons[DMID][2], 9999);
 
 	SetPlayerInterior(playerid, DMInterior[DMID]);
