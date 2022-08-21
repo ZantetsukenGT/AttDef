@@ -28,6 +28,7 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, "{CCCCCC}\nReplacing someone should set its correct skin now.");
 				strcat(str, "{CCCCCC}\nFPS counter will not double or drop randomly.");
 				strcat(str, "{CCCCCC}\nCommands now can make use of either " COL_SEC "Player Names/ID's.");
+				strcat(str, "{CCCCCC}\nRestored all the original arenas, bases, and DMs; take a look at the " COL_PRIM "/" COL_SEC "loadbases {CCCCCC}command.");
 				strcat(str, "{CCCCCC}\nFixed some rare crashes and known errors.");
 				strcat(str, "{CCCCCC}\nPerformance should be overall better on less powerful servers.");
 				strcat(str, "{CCCCCC}\nweapon-config is not present, but will be introduced in v1.38.");
