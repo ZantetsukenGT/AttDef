@@ -139,10 +139,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if (Player[ToAddID][InDuel] == true)
 						return SendErrorMessage(playerid, "That player is in a duel."); //duel
 
-					if (Player[ToAddID][LastVehicle] != -1)
+					if (Player[ToAddID][LastVehicle])
 					{
+						foreach (new i : VehicleOccupant(Player[ToAddID][LastVehicle]))
+						{
+							RemovePlayerFromVehicle(i);
+						}
 						DestroyVehicle(Player[ToAddID][LastVehicle]);
-						Player[ToAddID][LastVehicle] = -1;
+						Player[ToAddID][LastVehicle] = 0;
 					}
 
 					if (Player[ToAddID][Spectating] == true)
@@ -177,10 +181,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (Player[ToAddID][InDuel] == true)
 							return SendErrorMessage(playerid, "That player is in a duel."); //duel
 
-						if (Player[ToAddID][LastVehicle] != -1)
+						if (Player[ToAddID][LastVehicle])
 						{
+							foreach (new i : VehicleOccupant(Player[ToAddID][LastVehicle]))
+							{
+								RemovePlayerFromVehicle(i);
+							}
 							DestroyVehicle(Player[ToAddID][LastVehicle]);
-							Player[ToAddID][LastVehicle] = -1;
+							Player[ToAddID][LastVehicle] = 0;
 						}
 
 						if (Player[ToAddID][Spectating] == true)

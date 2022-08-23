@@ -132,7 +132,7 @@ InitPlayer(playerid)
 	Player[playerid][FPSKick]				   = 0;
 	Player[playerid][PingKick]				   = 0;
 	Player[playerid][PacketKick]			   = 0;
-	Player[playerid][LastVehicle]			   = -1;
+	Player[playerid][LastVehicle]			   = 0;
 	Player[playerid][TimesSpawned]			   = 0;
 	Player[playerid][VWorld]				   = 1;
 	Player[playerid][lastChat]				   = GetTickCount();
