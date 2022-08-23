@@ -12,11 +12,6 @@
 #endif
 #define _attdef_header_incl
 
-// modules that consists of hooking must go first
-#include "modules/hooking/commonhooking.inc"
-#include "modules/hooking/safegametext.inc"
-#include "modules/hooking/vehicle.inc"
-
 // Att-Def' core modules modules
 #include "modules/antimacro.inc"
 #include "modules/colors.inc"
@@ -57,8 +52,6 @@
 
 // modules that consists of hooking must go first
 #include "modules/impl/hooking/commonhooking.inc"
-#include "modules/impl/hooking/safegametext.inc"
-#include "modules/impl/hooking/vehicle.inc"
 
 // Att-Def' core modules modules
 #include "modules/impl/antimacro.inc"
