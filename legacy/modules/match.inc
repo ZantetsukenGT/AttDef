@@ -56,10 +56,9 @@ new GameLoop			= 0;					 // The ID of the timer that handles everything about th
 new PauseStopWatchTimer = 0;					 // The ID of the timer that counts up on each round pause
 new PauseTimeElapsed;							 // Time elapsed since round pause (minutes and seconds)
 new TotalPausesInRound;							 // How many times the round has been paused in one round
-new PauseAirVehicles_Timer;						 // The ID of the timer that keeps air vehicles in the air when round is paused
 new TipTimerDuringPause = 0;					 // A timer which is used to send tips after a certain time since a round pause
-new Float: TempAirVehicles_Pos[MAX_VEHICLES][3]; // Temporarily store velocity of air vehicles when round is paused
-new Iterator: TempAirVehicles<MAX_VEHICLES>;	 // Temporarily contains IDs of air vehicles when round is paused
+new Iterator: FrozenCars<MAX_VEHICLES>;			 // Temporarily contains IDs of vehicles when round is paused
+new FrozenCarTimers[MAX_VEHICLES];				 // Contains IDs of timers for FrozenCars
 new Iterator: PlayersInRound<MAX_PLAYERS>;		 // The IDs of players in round (alive/playing) are to be stored in this array
 new ViewRoundCountdown;							 // This is used when viewing a round to players as a countdown
 new Float: ViewBaseCamPos[3];					 // Current position of base viewer camera

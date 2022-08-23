@@ -655,12 +655,15 @@ public UnpauseRound()
 				Player[i][ToGiveParachute] = false;
 			}
 		}
-		foreach (new g : DynamicVehicle)
+		foreach (new i : FrozenCars)
 		{
-			SetVehicleVelocity(g, VehicleVelc[g][0], VehicleVelc[g][1], VehicleVelc[g][2]);
+			KillTimer(FrozenCarTimers[i]);
+			if (!Iter_Contains(GMFrozenCars, i))
+			{
+				SetVehicleVelocity(i, VehicleVelc[i][0], VehicleVelc[i][1], VehicleVelc[i][2]);
+			}
 		}
-		KillTimer(PauseAirVehicles_Timer);
-		Iter_Clear(TempAirVehicles);
+		Iter_Clear(FrozenCars);
 
 		RoundPaused	   = false;
 		RoundUnpausing = false;
@@ -677,15 +680,10 @@ public UnpauseRound()
 	return 1;
 }
 
-forward PauseAirVehicles_Handler();
-public PauseAirVehicles_Handler()
+forward FreezeVehicleTimer(vehicleid, Float: x, Float: y, Float: z);
+public FreezeVehicleTimer(vehicleid, Float: x, Float: y, Float: z)
 {
-	if (Iter_Count(TempAirVehicles) == 0)
-		return KillTimer(PauseAirVehicles_Timer);
-
-	foreach (new i : TempAirVehicles)
-		SetVehiclePos(i, TempAirVehicles_Pos[i][0], TempAirVehicles_Pos[i][1], TempAirVehicles_Pos[i][2]);
-	return 1;
+	SetVehiclePos(vehicleid, x, y, z);
 }
 
 forward PauseStopWatch();
@@ -698,19 +696,19 @@ public PauseStopWatch()
 
 PauseRound()
 {
-	new airVehiclesFound = 0;
-	foreach (new g : DynamicVehicle)
+	foreach (new i : Vehicle)
 	{
-		if (IsAirVehicle(g))
+		new Float: x,
+			Float: y,
+			Float: z;
+		GetVehiclePos(i, x, y, z);
+		if (!Iter_Contains(GMFrozenCars, i))
 		{
-			airVehiclesFound++;
-			GetVehiclePos(g, TempAirVehicles_Pos[g][0], TempAirVehicles_Pos[g][1], TempAirVehicles_Pos[g][2]);
-			Iter_Add(TempAirVehicles, g);
+			GetVehicleVelocity(i, VehicleVelc[i][0], VehicleVelc[i][1], VehicleVelc[i][2]);
 		}
-		GetVehicleVelocity(g, VehicleVelc[g][0], VehicleVelc[g][1], VehicleVelc[g][2]);
+		Iter_Add(FrozenCars, i);
+		FrozenCarTimers[i] = SetTimerEx("FreezeVehicleTimer", 50, true, "ifff", i, x, y, z);
 	}
-	if (airVehiclesFound != 0)
-		PauseAirVehicles_Timer = SetTimer("PauseAirVehicles_Handler", 50, true);
 
 	if (TipTimerDuringPause)
 		KillTimer(TipTimerDuringPause);
@@ -1324,7 +1322,7 @@ public OnRCStart()
 	RCArena		= true;
 	new ArenaID = 72;		   // That's the ID of the RC arena (interior)
 	ClearKillList();		   // Clears the kill-list.
-	DestroyDynamicVehicles(1); // Destroys vehicles
+	DestroyUnusedVehicles(); // Destroys vehicles
 	DeleteAllDeadBodies();
 	GameType = ARENA;
 	Current	 = ArenaID; // Current will be the ID of the base that we just started. We do this so that we can use this ID later on (e.g. check /car command for the use).
@@ -1364,7 +1362,6 @@ public OnRCStart()
 
 	foreach (new i : Player)
 	{
-		Player[i][LastVehicle] = -1;
 		Player[i][WasInCP]	   = false;
 
 		ShowRoundStats(i);
@@ -1604,7 +1601,7 @@ public OnArenaStart(ArenaID)
 	PreStartRoundTimer = 0;
 	AutoAFKCheck();			   // Checks all players and set idle players to afk mode
 	ClearKillList();		   // Clears the kill-list.
-	DestroyDynamicVehicles(1); // Destroys vehicles
+	DestroyUnusedVehicles(); // Destroys vehicles
 	DeleteAllDeadBodies();
 	GameType = ARENA;
 	RCArena	 = false;
@@ -1639,7 +1636,6 @@ public OnArenaStart(ArenaID)
 
 	foreach (new i : Player)
 	{
-		Player[i][LastVehicle] = -1;
 		Player[i][WasInCP]	   = false;
 
 		ShowRoundStats(i);
@@ -1889,10 +1885,14 @@ public AddPlayerToArena(playerid)
 		Player[playerid][DMReadd] = 0;
 	}
 
-	if (Player[playerid][LastVehicle] != -1)
+	if (Player[playerid][LastVehicle])
 	{
-		RemoveVehicle(Player[playerid][LastVehicle]);
-		Player[playerid][LastVehicle] = -1;
+		foreach (new i : VehicleOccupant(Player[playerid][LastVehicle]))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		DestroyVehicle(Player[playerid][LastVehicle]);
+		Player[playerid][LastVehicle] = 0;
 	}
 
 	if (!Player[playerid][FakePacketRenovation] && Player[playerid][NetCheck] && NetStats_GetConnectedTime(playerid) < 300000)
@@ -1993,9 +1993,9 @@ forward OnBaseStart(BaseID);
 public OnBaseStart(BaseID)
 {
 	PreStartRoundTimer = 0;
-	AutoAFKCheck();			   // Checks all players and set idle players to afk mode
-	ClearKillList();		   // Clears the kill-list.
-	DestroyDynamicVehicles(1); // Destroys vehicles
+	AutoAFKCheck();			 // Checks all players and set idle players to afk mode
+	ClearKillList();		 // Clears the kill-list.
+	DestroyUnusedVehicles(); // Destroys vehicles
 	DeleteAllDeadBodies();
 	GameType = BASE;
 	RCArena	 = false;
@@ -2036,8 +2036,6 @@ public OnBaseStart(BaseID)
 
 	foreach (new i : Player)
 	{
-		Player[i][LastVehicle] = -1;
-
 		ShowRoundStats(i);
 		Player[i][WasInCP] = false;
 
@@ -2356,10 +2354,15 @@ public AddPlayerToBase(playerid)
 		Player[playerid][InDM]	  = false;
 		Player[playerid][DMReadd] = 0;
 	}
-	if (Player[playerid][LastVehicle] != -1)
+
+	if (Player[playerid][LastVehicle])
 	{
-		RemoveVehicle(Player[playerid][LastVehicle]);
-		Player[playerid][LastVehicle] = -1;
+		foreach (new i : VehicleOccupant(Player[playerid][LastVehicle]))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		DestroyVehicle(Player[playerid][LastVehicle]);
+		Player[playerid][LastVehicle] = 0;
 	}
 
 	if (!Player[playerid][WasInBase])
