@@ -2,7 +2,6 @@
 #pragma dynamic 3500000
 #define CGEN_MEMORY 40000
 #define MAX_PLAYERS 50
-#define MAX_VEHICLES (MAX_PLAYERS * 2)
 #define YSI_NO_HEAP_MALLOC
 
 #include <a_samp>
@@ -17,7 +16,6 @@
 #define FOREACH_NO_BOTS
 #define FOREACH_NO_ACTORS
 #define FOREACH_NO_STREAMED
-#define FOREACH_NO_VEHICLES
 #include <YSI_Players\y_groups>	   // Provides an abstraction for various collections of players; including factions, teams, admin levels, and more.
 #include <YSI_Coding\y_stringhash> // Performs compile-time hashing of strings, for use as array indexes, case values, and more.
 #include <YSI_Coding\y_timers>	   // SetTimer and SetTimerEx wrappers with task and ptask
