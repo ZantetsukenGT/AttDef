@@ -1145,65 +1145,30 @@ ClearKillList()
 	for (new i = 0; i < 5; i++) { SendDeathMessage(255, 50, 255); }
 }
 
-/*
-	whatvehicles:
-	0 to destroy all dynamic (spawned) vehicles
-	1 to destroy unoccupied vehicles only
-	2 to destroy occupied vehicles only
-*/
-DestroyDynamicVehicles(whatvehicles)
+DestroyUnusedVehicles()
 {
-	switch (whatvehicles)
+	foreach (new i : Vehicle)
 	{
-		case 0: // all
+		new bool: isOccupied = false;
+		foreach (new o : VehicleOccupant(i))
 		{
-			foreach (new i : DynamicVehicle)
+			#pragma unused o
+			isOccupied = true;
+			break;
+		}
+		if (isOccupied)
+			continue;
+		foreach(new p : Player)
+		{
+			if (Player[p][LastVehicle] == i)
 			{
-				RemoveVehicle(i, false);
-				Iter_SafeRemove(DynamicVehicle, i, i);
+				Player[p][LastVehicle] = 0;
+				break;
 			}
 		}
-		case 1: // unoccupied only
+		ITER_SAFE_REMOVE(Vehicle, i)
 		{
-			new bool: foundDriver;
-			foreach (new i : DynamicVehicle)
-			{
-				foundDriver = false;
-				foreach (new j : Player)
-				{
-					if (GetPlayerVehicleID(j) == i && GetPlayerState(j) == PLAYER_STATE_DRIVER)
-					{
-						foundDriver = true;
-						break;
-					}
-				}
-				if (!foundDriver)
-				{
-					RemoveVehicle(i, false);
-					Iter_SafeRemove(DynamicVehicle, i, i);
-				}
-			}
-		}
-		case 2: // occupied only
-		{
-			new bool: foundDriver;
-			foreach (new i : DynamicVehicle)
-			{
-				foundDriver = false;
-				foreach (new j : Player)
-				{
-					if (GetPlayerVehicleID(j) == i && GetPlayerState(j) == PLAYER_STATE_DRIVER)
-					{
-						foundDriver = true;
-						break;
-					}
-				}
-				if (foundDriver)
-				{
-					RemoveVehicle(i, false);
-					Iter_SafeRemove(DynamicVehicle, i, i);
-				}
-			}
+			DestroyVehicle(i);
 		}
 	}
 	return 1;
