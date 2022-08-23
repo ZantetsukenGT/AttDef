@@ -144,7 +144,16 @@ HidePlayerGunmenu(playerid)
 {
 	if (!Player[playerid][OnGunmenu])
 		return;
-
+	new vehicleid = GetPlayerVehicleID(playerid);
+	if (vehicleid && Iter_Contains(GMFrozenCars, vehicleid))
+	{
+		KillTimer(GMFrozenCarTimers[vehicleid]);
+		if (!Iter_Contains(FrozenCars, vehicleid))
+		{
+			SetVehicleVelocity(vehicleid, VehicleVelc[vehicleid][0], VehicleVelc[vehicleid][1], VehicleVelc[vehicleid][2]);
+		}
+		Iter_Remove(GMFrozenCars, vehicleid);
+	}
 	switch (Player[playerid][GunmenuStyle])
 	{
 		case GUNMENU_STYLE_OBJECT:
@@ -153,7 +162,6 @@ HidePlayerGunmenu(playerid)
 			{
 				SetCPForPlayer(playerid);
 			}
-			KillTimer(GunmenuData[playerid][GunFreezePlane]);
 			TextDrawHideForPlayer(playerid, GunmenuLimitsTD[Player[playerid][Team]]);
 			DestroyPlayerGunObjects(playerid);
 			CancelEdit(playerid);
@@ -412,16 +420,6 @@ ShowGunmenuDialog(playerid1)
 	return 1;
 }
 
-forward FreezePlayerPlane(playerid, planeid);
-public FreezePlayerPlane(playerid, planeid)
-{
-	if (GetPlayerVehicleID(playerid) != planeid)
-		KillTimer(GunmenuData[playerid][GunFreezePlane]);
-	else
-		SetVehiclePos(planeid, TempAirVehicles_Pos[planeid][0], TempAirVehicles_Pos[planeid][1], TempAirVehicles_Pos[planeid][2]);
-	return 1;
-}
-
 forward ShowPlayerGunmenu(playerid, delay);
 public ShowPlayerGunmenu(playerid, delay)
 {
@@ -435,18 +433,26 @@ public ShowPlayerGunmenu(playerid, delay)
 	}
 	Player[playerid][OnGunmenu] = true; // Indicate that they're on the gunmenu selection mode
 	ResetPlayerGunmenu(playerid, false);
+	new veh = GetPlayerVehicleID(playerid);
+	if (veh && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+	{
+		new Float: x,
+			Float: y,
+			Float: z;
+		GetVehiclePos(veh, x, y, z);
+		if (!Iter_Contains(FrozenCars, veh))
+		{
+			GetVehicleVelocity(veh, VehicleVelc[veh][0], VehicleVelc[veh][1], VehicleVelc[veh][2]);
+		}
+		Iter_Add(GMFrozenCars, veh);
+		GMFrozenCarTimers[veh] = SetTimerEx("FreezeVehicleTimer", 50, true, "ifff", veh, x, y, z);
+	}
 	switch (Player[playerid][GunmenuStyle])
 	{
 		case GUNMENU_STYLE_DIALOG: ShowGunmenuDialog(playerid);
 		case GUNMENU_STYLE_OBJECT:
 		{
-			new veh = GetPlayerVehicleID(playerid), bool: InAirVehicle = false;
-			if (IsAirVehicle(veh))
-			{
-				InAirVehicle = true;
-				GetVehiclePos(veh, TempAirVehicles_Pos[veh][0], TempAirVehicles_Pos[veh][1], TempAirVehicles_Pos[veh][2]);
-				GunmenuData[playerid][GunFreezePlane] = SetTimerEx("FreezePlayerPlane", 50, true, "ii", playerid, veh);
-			}
+			new bool: InAirVehicle = IsAirVehicle(veh);
 			TextDrawShowForPlayer(playerid, GunmenuLimitsTD[Player[playerid][Team]]);
 			DisablePlayerCheckpoint(playerid); // Checkpoints seem to make object selection gitched, disable them temporarily
 			SendClientMessage(playerid, -1, "" COL_PRIM "Type {FFFFFF}/reset " COL_PRIM "to restart selection!");

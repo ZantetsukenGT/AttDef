@@ -48,10 +48,11 @@ enum GunmenuData_STRUCT
 	GunMovingRoute[MAX_PLAYERS],	   // whether it's going down or up for each player
 	GunLimit,						   // how many times it can be selected (for each team)
 	GunAmmo,						   // ammo when given
-	GunFreezePlane					   // a timer to keep planes frozen
 }
 
 new GunmenuData[MAX_GUNMENU_GUNS][GunmenuData_STRUCT];
+new Iterator: GMFrozenCars<MAX_VEHICLES>; // Temporarily contains IDs of vehicles when in gunmenu
+new GMFrozenCarTimers[MAX_VEHICLES];	  // Contains IDs of timers for GMFrozenCars
 
 new Iterator: PlayerGunObjects[MAX_PLAYERS]<MAX_PLAYERS>;
 
