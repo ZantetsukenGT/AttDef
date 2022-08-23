@@ -23,12 +23,14 @@ YCMD: alladmins(playerid, params[], help)
 		new day, month, year;
 		getdate(year, month, day);
 		if (day == oneAdminDay && month == oneAdminMonth && year == oneAdminYear)
-			AddDialogListitem(playerid, va_return("{FFFFFF}%s\t{FF3333}%d\t{FFFFFF}today", oneAdmin, oneAdminLevel));
+			AddDialogListitem(playerid, "{FFFFFF}%s\t{FF3333}%d\t{FFFFFF}today", oneAdmin, oneAdminLevel);
 		else
-			AddDialogListitem(playerid, va_return("{FFFFFF}%s\t{FF3333}%d\t{FFFFFF}%02d/%02d/%d", oneAdmin, oneAdminLevel, oneAdminDay, oneAdminMonth, oneAdminYear));
+			AddDialogListitem(playerid, "{FFFFFF}%s\t{FF3333}%d\t{FFFFFF}%02d/%02d/%d", oneAdmin, oneAdminLevel, oneAdminDay, oneAdminMonth, oneAdminYear);
 	}
 	while (db_next_row(res));
 	db_free_result(res);
-	ShowPlayerDialog(playerid, DIALOG_NO_RESPONSE, DIALOG_STYLE_TABLIST_HEADERS, "All Server Admins", #, "Ok", "", 15);
+	ShowPlayerDialogPages(playerid, #ShowNoResponseDialog, DIALOG_STYLE_TABLIST_HEADERS, "All Server Admins", "Ok", "", 15);
 	return 1;
 }
+
+
