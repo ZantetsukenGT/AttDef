@@ -124,16 +124,13 @@ PlayerVoteEndMatch(playerid)
 				FixGamemodeText();
 				DeleteAllTeamBars();
 				DeleteAllDeadBodies();
-				if (CPZone)
-				{
-					GangZoneDestroy(CPZone);
-					CPZone = 0;
-				}
-				if (ArenaZone)
-				{
-					GangZoneDestroy(ArenaZone);
-					ArenaZone = 0;
-				}
+
+				GangZoneDestroy(CPZone);
+				CPZone = INVALID_GANG_ZONE;
+
+				GangZoneDestroy(ArenaZone);
+				ArenaZone = INVALID_GANG_ZONE;
+
 				ResetTeamLeaders();
 				Iter_Clear(PlayersInRound);
 			}
