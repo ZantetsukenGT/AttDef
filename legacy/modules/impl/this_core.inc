@@ -65,7 +65,7 @@ InitScriptSecondarySettings()
 	// Settings
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
-	IsSkinshot = bool:GetConsoleVarAsBool("game.use_lag_compensation");
+	IsSkinshot = GetConsoleVarAsInt("game.lag_compensation_mode") == 1;
 	CheckServerHostname();
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();
@@ -103,9 +103,9 @@ AddToServersDatabase()
 	}
 
 	new ServerIP[30];
-	GetConsoleVarAsString("bind", ServerIP, sizeof(ServerIP));
+	GetConsoleVarAsString("network.bind", ServerIP, sizeof(ServerIP));
 
-	new port = GetConsoleVarAsInt("port");
+	new port = GetConsoleVarAsInt("network.port");
 
 	if (!strlen(ServerIP))
 		ServerIP = "noip";
