@@ -11,9 +11,6 @@
 	Commands
 */
 
-#define MAX_ADMIN_LEVELS	   6				  // (0 = user, 1, 2, 3, 4, 5)
-#define MAX_COMMAND_NAME	   MAX_COMMAND_LENGTH // set it to the default length provided by y_commands
-#define COMMAND_SQL_QUERY_SIZE (50 + MAX_COMMAND_NAME)
-
+#define MAX_ADMIN_LEVELS 6									 // (0 = user, 1, 2, 3, 4, 5)
 new Group: AdminGroups[MAX_ADMIN_LEVELS];					 // A group for each level
 new Iterator: CommandsLevel[MAX_COMMANDS]<MAX_ADMIN_LEVELS>; // iterator array of commands ID with level
