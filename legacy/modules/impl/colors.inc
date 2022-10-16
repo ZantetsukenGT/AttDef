@@ -43,61 +43,62 @@ SaveThemeSettings()
 
 ChangeTheme(playerid, listitem)
 {
+	MAIN_TEXT_COLOUR[0] = EOS;
 	switch (listitem)
 	{
 		case 0: // White (Background) & Black (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~l~");
+			strcat(MAIN_TEXT_COLOUR, "~l~");
 			MAIN_BACKGROUND_COLOUR = 0xEEEEEE11;
 		}
 		case 1: // Black (Background) & White (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~w~");
+			strcat(MAIN_TEXT_COLOUR, "~w~");
 			MAIN_BACKGROUND_COLOUR = 0x00000044;
 		}
 		case 2: // White (Background) & Red (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~r~");
+			strcat(MAIN_TEXT_COLOUR, "~r~");
 			MAIN_BACKGROUND_COLOUR = 0xEEEEEE11;
 		}
 		case 3: // Black (Background) & Red (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~r~");
+			strcat(MAIN_TEXT_COLOUR, "~r~");
 			MAIN_BACKGROUND_COLOUR = 0x00000044;
 		}
 		case 4: // White (Background) & Blue (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~b~");
+			strcat(MAIN_TEXT_COLOUR, "~b~");
 			MAIN_BACKGROUND_COLOUR = 0xEEEEEE11;
 		}
 		case 5: // Black (Background) & Blue (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~b~");
+			strcat(MAIN_TEXT_COLOUR, "~b~");
 			MAIN_BACKGROUND_COLOUR = 0x00000044;
 		}
 		case 6: // White (Background) & Green (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~g~");
+			strcat(MAIN_TEXT_COLOUR, "~g~");
 			MAIN_BACKGROUND_COLOUR = 0xEEEEEE11;
 		}
 		case 7: // Black (Background) & Green (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~g~");
+			strcat(MAIN_TEXT_COLOUR, "~g~");
 			MAIN_BACKGROUND_COLOUR = 0x00000044;
 		}
 		case 8: // White (Background) & Purple (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~p~");
+			strcat(MAIN_TEXT_COLOUR, "~p~");
 			MAIN_BACKGROUND_COLOUR = 0xEEEEEE11;
 		}
 		case 9: // Black (Background) & Purple (Text)
 		{
-			format(MAIN_TEXT_COLOUR, sizeof MAIN_TEXT_COLOUR, "~p~");
+			strcat(MAIN_TEXT_COLOUR, "~p~");
 			MAIN_BACKGROUND_COLOUR = 0x00000044;
 		}
 	}
 	SaveThemeSettings();
-	SendClientMessageToAll(-1, va_return("%s has set up a new theme colour. Server is restarting so the changes can take effect.", Player[playerid][Name]));
+	va_SendClientMessageToAll(-1, "%s has set up a new theme colour. Server is restarting so the changes can take effect.", Player[playerid][Name]);
 	SendRconCommand("gmx");
 	return 1;
 }
