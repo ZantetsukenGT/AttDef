@@ -35,13 +35,13 @@
 // Client message color
 #define COL_PRIM_HEX		 0x01A2F8FF // Primary color used in client messages as integer
 #define COL_ERROR_HEX		 0xFF3333FF // Color used in cmd error messages as integer
-#define COL_WARNING_HEX		 0xAAAA00FF // Color used in cmd warning messages as integer
+#define COL_WARNING_HEX		 0xFFCC00FF // Color used in cmd warning messages as integer
 #define COL_USAGE_HEX		 0xCCCCCCFF // Color used in cmd usage messages as integer
 #define COL_TIP_PRIM_HEX	 0xFFEEB5FF // This color is used in tips messages as integer
 #define COL_PRIM			 "{01A2F8}" // Primary color used in client messages
 #define COL_SEC				 "{FFFFFF}" // Secondary color used in client messages
 #define COL_ERROR			 "{FF3333}" // Color used in cmd error messages
-#define COL_WARNING			 "{AAAA00}" // Color used in cmd warning messages
+#define COL_WARNING			 "{FFCC00}" // Color used in cmd warning messages
 #define COL_USAGE			 "{CCCCCC}" // Color used in cmd usage messages
 #define COL_TIP_PRIM		 "{FFEEB5}" // This color is used in tips messages
 #define COL_TIP				 "{FFC400}" // This color is used in tips messages
