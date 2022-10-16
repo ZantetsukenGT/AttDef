@@ -19,7 +19,6 @@
 
 // Options
 #define ANTIMACRO_BADNET_CHECK		   0 // 0 disable. If set to 1, antimacro will check player's net before checking sprint macros
-#define ANTIMACRO_DEBUG				   0 // 0 disable. If set to 1, server will send debug messages to all the online players
 
 #if ANTIMACRO_BADNET_CHECK == 1
 	// Net check settings
