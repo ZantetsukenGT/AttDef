@@ -37,8 +37,7 @@
 #define GUNMENU_MOD_TYPE_LIMIT					1
 #define GUNMENU_MOD_TYPE_AMMO					2
 
-enum GunmenuData_STRUCT
-{
+enum GunmenuData_STRUCT {
 	GunModel,						   // model id
 	GunID,							   // weapon id
 	GunPlayerObject[MAX_PLAYERS],	   // player object id

@@ -23,12 +23,11 @@
 #define TEAMBARS_ATTACKER_HELP_COLOR 0xFF919322
 #define TEAMBARS_DEFENDER_HELP_COLOR 0x9DF9FF22
 
-enum TeamBarsDataStruct
-{
-	PlayerBar: TeamBar,  // The progress bar that shows player health and armour for team
-	Text: TeamBarText,	 // The text that shows his name, damage and total hp for team
-	Float: TeamBar_Y,	 // His bar textdraws Y co-ordinates
-	TeamBar_Team		 // What team this bar is shown to
+enum TeamBarsDataStruct {
+	PlayerBar: TeamBar, // The progress bar that shows player health and armour for team
+	Text: TeamBarText,	// The text that shows his name, damage and total hp for team
+	Float: TeamBar_Y,	// His bar textdraws Y co-ordinates
+	TeamBar_Team		// What team this bar is shown to
 }
 
 new TeamBarsData[MAX_PLAYERS][TeamBarsDataStruct];

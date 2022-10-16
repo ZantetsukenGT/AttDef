@@ -11,8 +11,7 @@
 	Free camera script
 */
 
-enum noclipenum
-{
+enum noclipenum {
 	cameramode,
 	flyobject,
 	noclipcammode,

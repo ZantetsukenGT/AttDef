@@ -11,22 +11,6 @@
 	Fightstyle script
 */
 
-new FightStyleIDs[6]	   =
-{
-	4,
-	5,
-	6,
-	7,
-	15,
-	16
-};
+new FightStyleIDs[6]	   = { 4, 5, 6, 7, 15, 16 };
 
-new FightStyleNames[6][11] =
-{
-	"Normal",
-	"Boxing",
-	"KungFu",
-	"Knee-head",
-	"Grab-kick",
-	"Elbow-kick"
-};
+new FightStyleNames[6][11] = { "Normal", "Boxing", "KungFu", "Knee-head", "Grab-kick", "Elbow-kick" };

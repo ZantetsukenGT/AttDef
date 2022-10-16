@@ -169,7 +169,7 @@ MoveCamera(playerid)
 
 GetMoveDirectionFromKeys(ud, lr)
 {
-	switch(lr)
+	switch (lr)
 	{
 		case KEY_LEFT:
 		{

@@ -10,4 +10,3 @@
 /*
 	Database loading
 */
-

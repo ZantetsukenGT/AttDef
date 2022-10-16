@@ -21,42 +21,21 @@
 #define WEAPON_BIND_TEXTDRAW_STRING_SIZE (MAX_WEAPON_BINDS * 73 + 16)
 #define WEAPON_BIND_DIALOG_STRING_SIZE	 (MAX_WEAPON_BINDS * 40 + 45)
 
-enum WeaponBindData_STRUCT
-{
+enum WeaponBindData_STRUCT {
 	ModifyingWeaponBindIndex,		 // which index the player is coding/modifying
 	BindKeyWeapon[MAX_WEAPON_BINDS], // the weapon id for this key bind
-	PlayerText: WeaponBindTextDraw,  // textdraw that shows key binds
+	PlayerText: WeaponBindTextDraw,	 // textdraw that shows key binds
 	bool: WeaponBindTDShown			 // is the textdraw shown?
 }
 
 // Secondary keys values
-new const WeaponBindKeyValue[MAX_WEAPON_BINDS]		 =
-{
-	KEY_WALK,
-	KEY_CROUCH,
-	KEY_YES,
-	KEY_NO,
-	KEY_CTRL_BACK
-};
+new const WeaponBindKeyValue[MAX_WEAPON_BINDS]
+	= { KEY_WALK, KEY_CROUCH, KEY_YES, KEY_NO, KEY_CTRL_BACK };
 
 // Secondary keys gametexts
-new const WeaponBindKeyText[MAX_WEAPON_BINDS][23]	 =
-{
-	"~k~~SNEAK_ABOUT~",
-	"~k~~PED_DUCK~",
-	"~k~~CONVERSATION_YES~",
-	"~k~~CONVERSATION_NO~",
-	"~k~~GROUP_CONTROL_BWD~"
-};
+new const WeaponBindKeyText[MAX_WEAPON_BINDS][23]	 = { "~k~~SNEAK_ABOUT~", "~k~~PED_DUCK~", "~k~~CONVERSATION_YES~", "~k~~CONVERSATION_NO~", "~k~~GROUP_CONTROL_BWD~" };
 
 // Secondary keys alternative texts
-new const WeaponBindKeyText_ALT[MAX_WEAPON_BINDS][7] =
-{
-	"WALK",
-	"CROUCH",
-	"YES",
-	"NO",
-	"H"
-};
+new const WeaponBindKeyText_ALT[MAX_WEAPON_BINDS][7] = { "WALK", "CROUCH", "YES", "NO", "H" };
 
 new WeaponBindData[MAX_PLAYERS][WeaponBindData_STRUCT];

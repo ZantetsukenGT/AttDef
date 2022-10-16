@@ -31,8 +31,7 @@ enum
 	MAX_VOTE_TYPES = 11 // How many vote types we have
 }
 
-enum VoteData_STRUCT
-{
+enum VoteData_STRUCT {
 	bool: PlayerVoted[MAX_PLAYERS], // Whether a player voted or not
 	VoteCount,						// How many votes we got
 	VotingOnPlayer,					// On whom is this voting?
@@ -40,19 +39,7 @@ enum VoteData_STRUCT
 }
 
 // Vote types names
-new VoteTypeNames[MAX_VOTE_TYPES][] =
-{
-	"Pause",
-	"Unpause",
-	"Add",
-	"Readd",
-	"Rem",
-	"Kick",
-	"NetCheck",
-	"Match-End",
-	"Restart-Round",
-	"Team-Switch",
-	"Gunmenu-show"
-};
+new VoteTypeNames[MAX_VOTE_TYPES][]
+	= { "Pause", "Unpause", "Add", "Readd", "Rem", "Kick", "NetCheck", "Match-End", "Restart-Round", "Team-Switch", "Gunmenu-show" };
 
 new VoteData[MAX_VOTE_TYPES][VoteData_STRUCT];

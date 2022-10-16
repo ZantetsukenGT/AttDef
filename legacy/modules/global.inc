@@ -16,8 +16,7 @@
 
 #define MAX_SERVER_PASS_LENGTH			 21
 
-enum TargetInfoData_STRUCT
-{
+enum TargetInfoData_STRUCT {
 	PlayerText: TargetInfoTD,
 	TargetInfoTimer,
 	TargetInfoLastTick,

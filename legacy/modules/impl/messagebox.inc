@@ -82,7 +82,7 @@ CreateMessageBoxTextDraws(playerid)
 
 InitPlayerMessageBox(playerid)
 {
-	MsgBoxData[playerid][MsgBoxtimer][MSGBOX_TYPE_TOP] = PlayerText: 0;
+	MsgBoxData[playerid][MsgBoxtimer][MSGBOX_TYPE_TOP]	  = PlayerText: 0;
 	MsgBoxData[playerid][MsgBoxtimer][MSGBOX_TYPE_MIDDLE] = PlayerText: 0;
 	MsgBoxData[playerid][MsgBoxtimer][MSGBOX_TYPE_BOTTOM] = PlayerText: 0;
 	return 1;

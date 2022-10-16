@@ -13,15 +13,13 @@
 
 // Message box types
 
-enum MessageBoxType
-{
+enum MessageBoxType {
 	PlayerText: MSGBOX_TYPE_TOP,
 	PlayerText: MSGBOX_TYPE_MIDDLE,
 	PlayerText: MSGBOX_TYPE_BOTTOM
 }
 
-enum MsgBoxStruct
-{
+enum MsgBoxStruct {
 	PlayerText: caption_TD[MessageBoxType],
 	PlayerText: info_TD[MessageBoxType],
 	MsgBoxtimer[MessageBoxType]
