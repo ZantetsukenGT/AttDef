@@ -15,6 +15,6 @@ ToggleAutoPause(playerid)
 {
 	AutoPause = !AutoPause;
 	LogAdminCommand("autopause", playerid, INVALID_PLAYER_ID);
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Auto-Pause on player disconnect in war mode.", Player[playerid][Name],
-		AutoPause ? "{66FF66}enabled" : "{FF6666}disabled"));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}Auto-Pause " COL_PRIM "on player disconnect in war mode.", Player[playerid][Name],
+		AutoPause ? "{66FF66}enabled" : "{FF6666}disabled");
 }

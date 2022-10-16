@@ -24,6 +24,6 @@ YCMD: maxping(playerid, params[], help)
 
 	LogAdminCommand("maxping", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed maximum ping limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}maximum ping " COL_PRIM "limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
 	return SendClientMessageToAll(-1, iString);
 }

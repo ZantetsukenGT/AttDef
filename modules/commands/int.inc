@@ -43,7 +43,5 @@ YCMD: int(playerid, params[], help)
 		SetCameraBehindPlayer(playerid);
 	}
 
-	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has entered Interior ID: {FFFFFF}%d", Player[playerid][Name], id);
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has entered Interior ID: {FFFFFF}%d", Player[playerid][Name], id);
 }

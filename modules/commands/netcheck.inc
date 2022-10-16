@@ -21,6 +21,6 @@ YCMD: netcheck(playerid, params[], help)
 	LogAdminCommand("netcheck", playerid, pID);
 
 	Player[pID][NetCheck] = Player[pID][FPSCheck] = Player[pID][PingCheck] = Player[pID][PLCheck] = !Player[pID][NetCheck];
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has %s Net-Check on {FFFFFF}%s", Player[playerid][Name], Player[pID][NetCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}Net-Check " COL_PRIM "on {FFFFFF}%s", Player[playerid][Name], Player[pID][NetCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
 		Player[pID][Name]);
 }

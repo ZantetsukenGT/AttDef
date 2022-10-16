@@ -33,5 +33,5 @@ YCMD: setacclevel(playerid, params[], help)
 	format(iString, sizeof(iString), "UPDATE Players SET Level = %d WHERE Name = '%q'", lev, str);
 	db_free_result(db_query(sqliteconnection, iString));
 
-	return SendClientMessage(playerid, -1, va_return("{008800}Success: {FFFFFF}%s" COL_PRIM "'s admin level was set to {FF3333}%d" COL_PRIM ".", str, lev));
+	return va_SendClientMessage(playerid, -1, "{008800}Success: {FFFFFF}%s" COL_PRIM "'s admin level was set to {FF3333}%d" COL_PRIM ".", str, lev);
 }

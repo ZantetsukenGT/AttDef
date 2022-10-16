@@ -27,14 +27,14 @@ YCMD: setscore(playerid, params[], help)
 		if (Score + TeamScore[DEFENDER] >= TotalRounds)
 			return SendErrorMessage(playerid, "Attacker plus defender score is bigger than or equal to the total rounds.");
 		TeamScore[ATTACKER] = Score;
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has set attacker team score to: {FFFFFF}%d", Player[playerid][Name], TeamScore[ATTACKER]);
+		format(iString, sizeof(iString), "%s " COL_PRIM "has set {FFFFFF}attacker team score " COL_PRIM "to: {FFFFFF}%d", Player[playerid][Name], TeamScore[ATTACKER]);
 	}
 	else
 	{
 		if (Score + TeamScore[ATTACKER] >= TotalRounds)
 			return SendErrorMessage(playerid, "Attacker plus defender score is bigger than or equal to the total rounds.");
 		TeamScore[DEFENDER] = Score;
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has set defender team score to: {FFFFFF}%d", Player[playerid][Name], TeamScore[DEFENDER]);
+		format(iString, sizeof(iString), "%s " COL_PRIM "has set {FFFFFF}defender team score " COL_PRIM "to: {FFFFFF}%d", Player[playerid][Name], TeamScore[DEFENDER]);
 	}
 
 	CurrentRound = TeamScore[ATTACKER] + TeamScore[DEFENDER];

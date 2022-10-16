@@ -16,5 +16,5 @@ ToggleLobbyGuns(playerid)
 {
 	LobbyGuns = !LobbyGuns;
 	LogAdminCommand("lobbyguns", playerid, INVALID_PLAYER_ID);
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has {FFFFFF}%s " COL_PRIM "guns in lobby.", Player[playerid][Name], LobbyGuns ? "{66FF66}enabled" : "{FF6666}disabled");
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}guns in lobby" COL_PRIM ".", Player[playerid][Name], LobbyGuns ? "{66FF66}enabled" : "{FF6666}disabled");
 }

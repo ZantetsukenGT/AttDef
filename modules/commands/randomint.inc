@@ -40,7 +40,7 @@ YCMD: randomint(playerid, params[], help)
 			GameType = BASE;
 
 			new iString[144];
-			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started interior Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
+			format(iString, sizeof(iString), "%s " COL_PRIM "has randomly started interior Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
 			SendClientMessageToAll(-1, iString);
 		}
 		case _I<arena>:
@@ -64,7 +64,7 @@ YCMD: randomint(playerid, params[], help)
 			GameType = ARENA;
 
 			new iString[144];
-			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started interior Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
+			format(iString, sizeof(iString), "%s " COL_PRIM "has randomly started interior Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
 			SendClientMessageToAll(-1, iString);
 		}
 		default: return SendUsageMessage(playerid, "/randomint [base | arena]");

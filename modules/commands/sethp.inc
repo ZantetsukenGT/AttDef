@@ -22,5 +22,5 @@ YCMD: sethp(playerid, params[], help)
 
 	LogAdminCommand("sethp", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "HP to: {FFFFFF}%d", Player[playerid][Name], Player[pID][Name], Amount);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "HP to: {FFFFFF}%d", Player[playerid][Name], Player[pID][Name], Amount);
 }

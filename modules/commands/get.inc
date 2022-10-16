@@ -36,5 +36,5 @@ YCMD: get(playerid, params[], help)
 
 	LogAdminCommand("get", playerid, gid);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has teleported {FFFFFF}%s " COL_PRIM "to himself.", Player[playerid][Name], Player[gid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has teleported {FFFFFF}%s " COL_PRIM "to himself.", Player[playerid][Name], Player[gid][Name]);
 }

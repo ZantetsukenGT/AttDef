@@ -72,7 +72,7 @@ YCMD: teamskin(playerid, params[], help)
 	LogAdminCommand("teamskin", playerid, INVALID_PLAYER_ID);
 
 	format(
-		iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "skin to: {FFFFFF}%d", Player[playerid][Name], TeamName[ChangingSkinOfTeam[playerid]],
+		iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "skin to: {FFFFFF}%d", Player[playerid][Name], TeamName[ChangingSkinOfTeam[playerid]],
 		skinid);
 	ChangingSkinOfTeam[playerid] = -1;
 	return SendClientMessageToAll(-1, iString);

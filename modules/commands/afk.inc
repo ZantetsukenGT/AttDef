@@ -22,5 +22,5 @@ YCMD: afk(playerid, params[], help)
 	SetPlayerColor(playerid, 0xAAAAAAAA);
 	TogglePlayerControllable(playerid, 0);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set himself to AFK mode.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set himself to AFK mode.", Player[playerid][Name]);
 }

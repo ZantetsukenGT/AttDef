@@ -44,10 +44,10 @@ YCMD: addall(playerid, params[], help)
 		if (addDead)
 			return SendErrorMessage(playerid, "Found no players which could be added to the round!");
 		else
-			return SendErrorMessage(playerid, "No players to add! Did you want to add dead players? Use /addall dead");
+			return SendErrorMessage(playerid, "No players to add! Did you want to add dead players? Use " COL_PRIM "/addall dead");
 	}
 	if (!addDead)
-		SendUsageMessage(playerid, "to also add players who died, you can type /addall dead");
+		SendUsageMessage(playerid, "to also add players who died, you can type " COL_PRIM "/addall dead");
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has added everyone to the round.", Player[playerid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has added everyone to the round.", Player[playerid][Name]);
 }

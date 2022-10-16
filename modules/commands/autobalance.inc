@@ -15,5 +15,5 @@ ToggleAutoBalance(playerid)
 {
 	AutoBal = !AutoBal;
 	LogAdminCommand("autobalance", playerid, INVALID_PLAYER_ID);
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "auto-balance in non war mode.", Player[playerid][Name], AutoBal ? "{66FF66}enabled" : "{FF6666}disabled"));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}auto-balance " COL_PRIM "in non war mode.", Player[playerid][Name], AutoBal ? "{66FF66}enabled" : "{FF6666}disabled");
 }

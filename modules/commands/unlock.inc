@@ -20,5 +20,5 @@ YCMD: unlock(playerid, params[], help)
 
 	LogAdminCommand("unlock", playerid, INVALID_PLAYER_ID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unlocked the server.", Player[playerid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has {FFFFFF}unlocked " COL_PRIM "the server.", Player[playerid][Name]);
 }

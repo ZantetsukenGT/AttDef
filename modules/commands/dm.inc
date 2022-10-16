@@ -41,16 +41,16 @@ YCMD: dm(playerid, params[], help)
 
 	// If the second and third weapons are punch or no weapons then it'll show you just one weapon instead of saying (Deagle - Punch - Punch)
 	if (DMWeapons[DMID][1] == 0 && DMWeapons[DMID][2] == 0)
-		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]]);
+		va_SendClientMessageToAll(-1, "%s " COL_PRIM "has entered DM %d {FFFFFF}(%s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]]);
 	//If only the third weapons is punch then it'll show two weapons e.g. (Deagle - Shotgun) instead of (Deagle - Shotgun - Punch)
 	else if (DMWeapons[DMID][2] == 0)
 		va_SendClientMessageToAll(
-			-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
+			-1, "%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
 			WeaponNames[DMWeapons[DMID][1]]);
 	//If all the weapons are known then it'll show u all three weapons e.g. (Deagle - Shotgun - Sniper)
 	else
 		va_SendClientMessageToAll(
-			-1, "{FFFFFF}%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
+			-1, "%s " COL_PRIM "has entered DM %d {FFFFFF}(%s - %s - %s).", Player[playerid][Name], DMID, WeaponNames[DMWeapons[DMID][0]],
 			WeaponNames[DMWeapons[DMID][1]], WeaponNames[DMWeapons[DMID][2]]);
 
 	if (Player[playerid][BeingSpeced])

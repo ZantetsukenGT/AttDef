@@ -23,8 +23,8 @@ YCMD: mute(playerid, params[], help)
 	LogAdminCommand("mute", playerid, pID);
 
 	if (isnull(Reason))
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+		format(iString, sizeof(iString), "%s " COL_PRIM "has muted {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 	else
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has muted {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
+		format(iString, sizeof(iString), "%s " COL_PRIM "has muted {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
 	return SendClientMessageToAll(-1, iString);
 }

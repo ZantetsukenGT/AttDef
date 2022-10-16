@@ -28,6 +28,6 @@ YCMD: ann(playerid, params[], help)
 
 	LogAdminCommand("ann", playerid, INVALID_PLAYER_ID);
 
-	format(str, sizeof(str), "{FFFFFF}%s " COL_PRIM "showed an announcement.", Player[playerid][Name]);
+	format(str, sizeof(str), "%s " COL_PRIM "showed an announcement.", Player[playerid][Name]);
 	return SendClientMessageToAll(-1, str);
 }

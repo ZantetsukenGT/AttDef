@@ -20,5 +20,5 @@ YCMD: unmute(playerid, params[], help)
 
 	LogAdminCommand("unmute", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unmuted {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has unmuted {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 }

@@ -13,5 +13,5 @@ YCMD: balance(playerid, params[], help)
 
 	BalanceTeams();
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has balanced the teams.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has balanced the teams.", Player[playerid][Name]);
 }

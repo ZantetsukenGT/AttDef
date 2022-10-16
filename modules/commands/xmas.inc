@@ -15,12 +15,12 @@ YCMD: xmas(playerid, params[], help)
 		case _I<on>:
 		{
 			SendRconCommand("loadfs xmas");
-			return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has attempted to load Xmas filterscript!", Player[playerid][Name]));
+			return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has attempted to load {FFFFFF}Xmas filterscript" COL_PRIM ".", Player[playerid][Name]);
 		}
 		case _I<off>:
 		{
 			SendRconCommand("unloadfs xmas");
-			return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has attempted to unload Xmas filterscript!", Player[playerid][Name]));
+			return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has attempted to unload {FFFFFF}Xmas filterscript" COL_PRIM ".", Player[playerid][Name]);
 		}
 	}
 	return SendUsageMessage(playerid, "/xmas [on / off]");

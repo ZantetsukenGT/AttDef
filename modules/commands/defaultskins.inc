@@ -34,6 +34,6 @@ YCMD: defaultskins(playerid, params[], help)
 
 	LogAdminCommand("defaultskins", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed {FFFFFF}skins " COL_PRIM "to default.", Player[playerid][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}skins " COL_PRIM "to {FFFFFF}default" COL_PRIM ".", Player[playerid][Name]);
 	return SendClientMessageToAll(-1, iString);
 }

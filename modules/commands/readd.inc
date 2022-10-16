@@ -37,5 +37,5 @@ YCMD: readd(playerid, params[], help)
 
 	LogAdminCommand("readd", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has re-added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has re-added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[pID][Name]);
 }

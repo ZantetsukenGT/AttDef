@@ -25,6 +25,6 @@ YCMD: remove(playerid, params[], help)
 
 	LogAdminCommand("remove", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s (%d) " COL_PRIM "removed {FFFFFF}%s (%d) " COL_PRIM "from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid,
+	return va_SendClientMessageToAll(-1, "%s (%d) " COL_PRIM "removed {FFFFFF}%s (%d) " COL_PRIM "from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid,
 		Player[pID][Name], pID, HP[0], HP[1]);
 }

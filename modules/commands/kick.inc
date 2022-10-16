@@ -20,9 +20,9 @@ YCMD: kick(playerid, params[], help)
 		return SendErrorMessage(playerid, "Cannot kick someone of the same admin level as you or higher.");
 
 	if (isnull(reason))
-		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has kicked {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+		va_SendClientMessageToAll(-1, "%s " COL_PRIM "has kicked {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name], Player[pID][Name]);
 	else
-		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has kicked {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], reason);
+		va_SendClientMessageToAll(-1, "%s " COL_PRIM "has kicked {FFFFFF}%s" COL_PRIM ". | Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], reason);
 
 	SetTimerEx("OnPlayerKicked", 350, false, "i", pID);
 	LogAdminCommand("kick", playerid, pID);

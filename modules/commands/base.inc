@@ -67,7 +67,7 @@ YCMD: base(playerid, params[], help)
 
 			LoadBases();
 
-			return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has created base ID: {FFFFFF}%d " COL_PRIM "| in base set: {FFFFFF}%s", Player[playerid][Name], BaseID,
+			return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has created base ID: {FFFFFF}%d " COL_PRIM "| in base set: {FFFFFF}%s", Player[playerid][Name], BaseID,
 				CurrentBaseSet);
 		}
 	}
@@ -87,7 +87,7 @@ YCMD: base(playerid, params[], help)
 
 			LoadBases();
 
-			return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has deleted {FFFFFF}Base ID: %d from base set: %s", Player[playerid][Name], baseID, CurrentBaseSet);
+			return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has deleted {FFFFFF}Base ID: %d from base set: %s", Player[playerid][Name], baseID, CurrentBaseSet);
 		}
 		default:
 		{
@@ -107,5 +107,5 @@ YCMD: base(playerid, params[], help)
 
 	LoadBases();
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has configured the %s for {FFFFFF}Base ID: %d", Player[playerid][Name], finishedMessage, baseID);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has configured the %s for {FFFFFF}Base ID: %d", Player[playerid][Name], finishedMessage, baseID);
 }

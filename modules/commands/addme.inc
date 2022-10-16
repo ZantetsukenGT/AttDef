@@ -30,5 +30,5 @@ YCMD: addme(playerid, params[], help)
 	else if (GameType == ARENA)
 		AddPlayerToArena(playerid);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has added himself to the round {FFFFFF}(/addme).", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has added himself to the round {FFFFFF}(/addme)" COL_PRIM ".", Player[playerid][Name]);
 }

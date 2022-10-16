@@ -24,5 +24,5 @@ YCMD: explode(playerid, params[], help)
 
 	LogAdminCommand("explode", playerid, eid);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has exploded {FFFFFF}%s", Player[playerid][Name], Player[eid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has exploded {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name], Player[eid][Name]);
 }

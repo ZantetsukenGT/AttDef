@@ -27,5 +27,5 @@ YCMD: slap(playerid, params[], help)
 
 	LogAdminCommand("slap", playerid, sid);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has slapped {FFFFFF}%s", Player[playerid][Name], Player[sid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has slapped {FFFFFF}%s", Player[playerid][Name], Player[sid][Name]);
 }

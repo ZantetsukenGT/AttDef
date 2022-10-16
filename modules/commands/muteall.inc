@@ -14,5 +14,5 @@ YCMD: muteall(playerid, params[], help)
 
 	new admName[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, admName, sizeof(admName));
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has muted everyone! (Press {FFFFFF}Y " COL_PRIM "to ask for round pause)", admName));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has muted everyone! (Press {FFFFFF}Y " COL_PRIM "to ask for round pause)", admName);
 }

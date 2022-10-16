@@ -35,7 +35,7 @@ DoRandomBase(playerid)
 	PreStartRoundTimer = SetTimerEx("OnBaseStart", 4000, false, "i", BaseID);
 
 	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has randomly started Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[BaseID], BaseID);
 	SendClientMessageToAll(-1, iString);
 
 	foreach (new i : Player)

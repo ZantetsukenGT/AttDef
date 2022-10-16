@@ -23,6 +23,6 @@ YCMD: cptime(playerid, params[], help)
 
 	LogAdminCommand("cptime", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed the CP time to: {FFFFFF}%d seconds", Player[playerid][Name], cpTime);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed the {FFFFFF}CP time " COL_PRIM "to: {FFFFFF}%d seconds", Player[playerid][Name], cpTime);
 	return SendClientMessageToAll(-1, iString);
 }

@@ -16,7 +16,7 @@ YCMD: back(playerid, params[], help)
 	SetHP(playerid, 100);
 
 	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "is back from AFK mode.", Player[playerid][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "is back from {FFFFFF}AFK mode" COL_PRIM ".", Player[playerid][Name]);
 	SendClientMessageToAll(-1, iString);
 	format(
 		iString, sizeof(iString), "%s%s\n%s%s\n%sReferee\n%s%s Sub\n%s%s Sub", TextColor[ATTACKER], TeamName[ATTACKER], TextColor[DEFENDER], TeamName[DEFENDER], TextColor[REFEREE],

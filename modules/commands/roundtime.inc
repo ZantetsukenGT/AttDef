@@ -24,5 +24,5 @@ YCMD: roundtime(playerid, params[], help)
 	ConfigRoundTime = rTime;
 
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'Round Time'", rTime)));
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has changed the round time to: {FFFFFF}%d minutes" COL_PRIM ", previous setting: {FFFFFF}%d minutes" COL_PRIM ".", Player[playerid][Name], rTime, oldValue);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has changed {FFFFFF}the round time " COL_PRIM "to: {FFFFFF}%d minutes" COL_PRIM ", previous setting: {FFFFFF}%d minutes" COL_PRIM ".", Player[playerid][Name], rTime, oldValue);
 }

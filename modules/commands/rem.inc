@@ -17,5 +17,5 @@ YCMD: rem(playerid, params[], help)
 	GetAP(playerid, HP[1]);
 
 	RemovePlayerFromRound(playerid);
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s (%d) " COL_PRIM "removed himself from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid, HP[0], HP[1]);
+	return va_SendClientMessageToAll(-1, "%s (%d) " COL_PRIM "removed himself from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid, HP[0], HP[1]);
 }

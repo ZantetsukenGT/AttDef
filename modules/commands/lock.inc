@@ -29,6 +29,6 @@ YCMD: lock(playerid, params[], help)
 
 	LogAdminCommand("lock", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has locked the server with password: {FFFFFF}%s", Player[playerid][Name], params);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has {FFFFFF}locked " COL_PRIM "the server with password: {FFFFFF}%s", Player[playerid][Name], params);
 	return SendClientMessageToAll(-1, iString);
 }

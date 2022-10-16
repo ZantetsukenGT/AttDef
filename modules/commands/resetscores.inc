@@ -29,5 +29,5 @@ YCMD: resetscores(playerid, params[], help)
 		Player[i][TotalBulletsFired] = 0;
 		Player[i][TotalshotsHit]	 = 0;
 	}
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has reset the scores.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has reset the scores.", Player[playerid][Name]);
 }

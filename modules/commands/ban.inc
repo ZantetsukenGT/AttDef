@@ -20,9 +20,9 @@ YCMD: ban(playerid, params[], help)
 		return SendErrorMessage(playerid, "Cannot ban someone of the same or higher admin level as you.");
 
 	if (isnull(Reason))
-		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name], Player[pID][Name]);
 	else
-		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s " COL_PRIM "| Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
+		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s" COL_PRIM ". | Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
 
 	SetTimerEx("BanExDelayed", 350, false, "ds", pID, va_return("%s - %s", Player[playerid][Name], Reason));
 	return LogAdminCommand("ban", playerid, pID);

@@ -21,6 +21,6 @@ YCMD: plcheck(playerid, params[], help)
 	LogAdminCommand("plcheck", playerid, pID);
 
 	Player[pID][PLCheck] = !Player[pID][PLCheck];
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "PL-Check on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PLCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}PL-Check " COL_PRIM "on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PLCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
 		Player[pID][Name]);
 }

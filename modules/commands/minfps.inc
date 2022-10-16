@@ -24,6 +24,6 @@ YCMD: minfps(playerid, params[], help)
 
 	LogAdminCommand("minfps", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed minimum FPS limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}minimum FPS " COL_PRIM "limit to: {FFFFFF}%d", Player[playerid][Name], iPacket);
 	return SendClientMessageToAll(-1, iString);
 }

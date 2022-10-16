@@ -24,6 +24,6 @@ YCMD: maxpacket(playerid, params[], help)
 
 	LogAdminCommand("maxpacket", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed maximum packet-loss to: {FFFFFF}%.2f", Player[playerid][Name], iPacket);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}maximum packet-loss " COL_PRIM "to: {FFFFFF}%.2f", Player[playerid][Name], iPacket);
 	return SendClientMessageToAll(-1, iString);
 }

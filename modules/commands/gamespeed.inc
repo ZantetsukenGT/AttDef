@@ -35,5 +35,5 @@ YCMD: gamespeed(playerid, params[], help)
 
 	GAME_SPEED = speed;
 	RestartGameLoop();
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has changed game speed to %d {FFFFFF}(%s)", Player[playerid][Name], speed, speedStr);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has changed {FFFFFF}game speed " COL_PRIM "to {FFFFFF}%d ms " COL_PRIM "({FFFFFF}%s" COL_PRIM ")", Player[playerid][Name], speed, speedStr);
 }

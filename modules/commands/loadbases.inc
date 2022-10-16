@@ -37,5 +37,5 @@ YCMD: loadbases(playerid, params[], help)
 	}
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentBaseSet'", CurrentBaseSet)));
 	LoadBases();
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | %s", Player[playerid][Name], baseset, CurrentBaseSet);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | %s", Player[playerid][Name], baseset, CurrentBaseSet);
 }

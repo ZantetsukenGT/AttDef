@@ -16,5 +16,5 @@ ToggleAntiSpam(playerid)
 {
 	AntiSpam = !AntiSpam;
 	LogAdminCommand("antispam", playerid, INVALID_PLAYER_ID);
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "anti-spam.", Player[playerid][Name], AntiSpam ? "{66FF66}enabled" : "{FF6666}disabled"));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}anti-spam" COL_PRIM ".", Player[playerid][Name], AntiSpam ? "{66FF66}enabled" : "{FF6666}disabled");
 }

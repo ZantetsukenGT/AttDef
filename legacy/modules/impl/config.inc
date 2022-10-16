@@ -48,15 +48,15 @@ ShowConfigDialog(playerid1)
 			}
 			case 4:
 			{
-				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MAX_PING, DIALOG_STYLE_INPUT, COL_PRIM "Set max Ping", "Set the max ping:", "OK", "Back");
+				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MAX_PING, DIALOG_STYLE_INPUT, COL_PRIM "Set max ping", "Set the max ping:", "OK", "Back");
 			}
 			case 5:
 			{
-				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MAX_PACKET, DIALOG_STYLE_INPUT, COL_PRIM "Set max Packetloss", "Set the max packetloss:", "OK", "Back");
+				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MAX_PACKET, DIALOG_STYLE_INPUT, COL_PRIM "Set max packetloss", "Set the max packetloss:", "OK", "Back");
 			}
 			case 6:
 			{
-				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MIN_FPS, DIALOG_STYLE_INPUT, COL_PRIM "Set Minimum FPS", "Set the minimum FPS:", "OK", "Back");
+				ShowPlayerDialog(playerid, DIALOG_CONFIG_SET_MIN_FPS, DIALOG_STYLE_INPUT, COL_PRIM "Set minimum FPS", "Set the minimum FPS:", "OK", "Back");
 			}
 			case 7:
 			{
@@ -95,35 +95,32 @@ ShowConfigDialog(playerid1)
 			case 9:
 			{
 				AntiSpam = !AntiSpam;
-				SendClientMessageToAll(
-					-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "anti-spam.", Player[playerid][Name], AntiSpam ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}anti-spam" COL_PRIM ".", Player[playerid][Name], AntiSpam ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				ShowConfigDialog(playerid);
 			}
 			case 10:
 			{
 				AutoBal = !AutoBal;
-				SendClientMessageToAll(
-					-1,
-					va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "auto-balance in non war mode.", Player[playerid][Name], AutoBal ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}auto-balance " COL_PRIM "in non war mode.", Player[playerid][Name], AutoBal ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				ShowConfigDialog(playerid);
 			}
 			case 11:
 			{
 				AutoPause = !AutoPause;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Auto-Pause on player disconnect in war mode.", Player[playerid][Name],
-							AutoPause ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Auto-Pause " COL_PRIM "on player disconnect in war mode.", Player[playerid][Name],
+					AutoPause ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				ShowConfigDialog(playerid);
 			}
 			case 12:
 			{
 				LobbyGuns = !LobbyGuns;
-				SendClientMessageToAll(
-					-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "guns in lobby.", Player[playerid][Name], LobbyGuns ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}guns in lobby" COL_PRIM ".", Player[playerid][Name], LobbyGuns ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				ShowConfigDialog(playerid);
 			}
@@ -133,10 +130,8 @@ ShowConfigDialog(playerid1)
 					return SendErrorMessage(playerid, "Can't use this while a round is in progress.");
 
 				CPInArena = !CPInArena;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Checkpoint in arena{FFFFFF} option.", Player[playerid][Name],
-							CPInArena ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Checkpoint in arena " COL_PRIM "option.", Player[playerid][Name], CPInArena ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'CPInArena'", CPInArena)));
 				ShowConfigDialog(playerid);
@@ -144,9 +139,8 @@ ShowConfigDialog(playerid1)
 			case 14:
 			{
 				AntiMacros = !AntiMacros;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Anti-macros{FFFFFF} system.", Player[playerid][Name], AntiMacros ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Anti-macros " COL_PRIM "system.", Player[playerid][Name], AntiMacros ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AntiMacros'", AntiMacros)));
 				ShowConfigDialog(playerid);
@@ -156,9 +150,8 @@ ShowConfigDialog(playerid1)
 				DeadBodies = !DeadBodies;
 				if (!DeadBodies)
 					DeleteAllDeadBodies();
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Dead bodies{FFFFFF} option.", Player[playerid][Name], DeadBodies ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Dead bodies " COL_PRIM "option.", Player[playerid][Name], DeadBodies ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeadBodies'", DeadBodies)));
 				ShowConfigDialog(playerid);
@@ -166,10 +159,8 @@ ShowConfigDialog(playerid1)
 			case 16:
 			{
 				DeathCamera = !DeathCamera;
-				SendClientMessageToAll(
-					-1,
-					va_return(
-						"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Death camera{FFFFFF} system.", Player[playerid][Name], DeathCamera ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Death camera " COL_PRIM "system.", Player[playerid][Name], DeathCamera ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeathCamera'", DeathCamera)));
 				ShowConfigDialog(playerid);
@@ -180,9 +171,8 @@ ShowConfigDialog(playerid1)
 					return SendErrorMessage(playerid, "Can't do this while a round is in progress.");
 
 				ShowHPBars = !ShowHPBars;
-				SendClientMessageToAll(
-					-1,
-					va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "HP Bars{FFFFFF} system.", Player[playerid][Name], ShowHPBars ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}HP Bars " COL_PRIM "system.", Player[playerid][Name], ShowHPBars ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ShowHPBars'", ShowHPBars)));
 				ShowConfigDialog(playerid);
@@ -190,20 +180,16 @@ ShowConfigDialog(playerid1)
 			case 18:
 			{
 				GunmenuRestrictions = !GunmenuRestrictions;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Gunmenu selection restriction.", Player[playerid][Name],
-							GunmenuRestrictions ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Gunmenu restrictions" COL_PRIM ".", Player[playerid][Name], GunmenuRestrictions ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				ShowConfigDialog(playerid);
 			}
 			case 19:
 			{
 				MeleeAllowed = !MeleeAllowed;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "melee weapons menu{FFFFFF} option.", Player[playerid][Name],
-							MeleeAllowed ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}melee weapons menu " COL_PRIM "option.", Player[playerid][Name], MeleeAllowed ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'MeleeAllowed'", MeleeAllowed)));
 				ShowConfigDialog(playerid);
@@ -213,10 +199,8 @@ ShowConfigDialog(playerid1)
 				AutoRoundStarter = !AutoRoundStarter;
 				if (AutoRoundStarter && Current == -1 && AllowStartBase)
 					SetRoundAutoStart(0);
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "auto round start{FFFFFF} option.", Player[playerid][Name],
-							AutoRoundStarter ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}auto round start " COL_PRIM "option.", Player[playerid][Name], AutoRoundStarter ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AutoRoundStarter'", AutoRoundStarter)));
 				ShowConfigDialog(playerid);
@@ -224,10 +208,8 @@ ShowConfigDialog(playerid1)
 			case 21:
 			{
 				RandomDeathMessages = !RandomDeathMessages;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Random Death Messages{FFFFFF}.", Player[playerid][Name],
-							RandomDeathMessages ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Random Death Messages" COL_PRIM ".", Player[playerid][Name], RandomDeathMessages ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'RDeathMsg'", RandomDeathMessages)));
 				ShowConfigDialog(playerid);
@@ -235,10 +217,9 @@ ShowConfigDialog(playerid1)
 			case 22:
 			{
 				SightseeingInClassSelection = !SightseeingInClassSelection;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Sightseeing In Class Selection{FFFFFF}.", Player[playerid][Name],
-							SightseeingInClassSelection ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Sightseeing In Class Selection" COL_PRIM ".", Player[playerid][Name],
+					SightseeingInClassSelection ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SightseeingInCS'", SightseeingInClassSelection)));
 				ShowConfigDialog(playerid);
@@ -265,10 +246,9 @@ ShowConfigDialog(playerid1)
 							PlayerTextDrawHide(i, VInfo[i]);
 					}
 				}
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Vehicle Health Information{FFFFFF}.", Player[playerid][Name],
-							VehicleHealthTextdraw ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Vehicle Health Information" COL_PRIM ".", Player[playerid][Name],
+					VehicleHealthTextdraw ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'VehicleHealthTD'", VehicleHealthTextdraw)));
 				ShowConfigDialog(playerid);
@@ -276,8 +256,7 @@ ShowConfigDialog(playerid1)
 			case 24:
 			{
 				SyncAbuse = !SyncAbuse;
-				SendClientMessageToAll(
-					-1, va_return("{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Sync Abuse{FFFFFF}.", Player[playerid][Name], SyncAbuse ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}Sync Abuse" COL_PRIM ".", Player[playerid][Name], SyncAbuse ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SyncAbuse'", SyncAbuse)));
 				ShowConfigDialog(playerid);
@@ -285,9 +264,8 @@ ShowConfigDialog(playerid1)
 			case 25:
 			{
 				ScreenFlashing = !ScreenFlashing;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "Screen Flashing{FFFFFF}.", Player[playerid][Name], ScreenFlashing ? "{66FF66}enabled" : "{FF6666}disabled"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}Screen Flashing" COL_PRIM ".", Player[playerid][Name], ScreenFlashing ? "{66FF66}enabled" : "{FF6666}disabled");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ScreenFlash'", ScreenFlashing)));
 				ShowConfigDialog(playerid);
@@ -295,10 +273,9 @@ ShowConfigDialog(playerid1)
 			case 26:
 			{
 				DefendersWithVehicles = !DefendersWithVehicles;
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has %s " COL_PRIM "defenders to use vehicles{FFFFFF}.", Player[playerid][Name],
-							DefendersWithVehicles ? "{66FF66}allowed" : "{FF6666}disallowed"));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has %s {FFFFFF}defenders to use vehicles" COL_PRIM ".", Player[playerid][Name],
+					DefendersWithVehicles ? "{66FF66}allowed" : "{FF6666}disallowed");
 
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DefVehicles'", DefendersWithVehicles)));
 				ShowConfigDialog(playerid);
@@ -307,7 +284,7 @@ ShowConfigDialog(playerid1)
 		return 1;
 	}
 
-	new string[1840];
+	new string[1024];
 	strcat(string, COL_PRIM "Team Names");
 	strcat(string, "\n" COL_PRIM "Team Skins");
 	strcat(string, "\n" COL_PRIM "A/D Settings");
@@ -498,12 +475,11 @@ LoadConfig()
 	MAIN_BACKGROUND_COLOUR = strval(iString);
 	db_next_row(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Main Text Colour
-	sscanf(iString, "s[16]", MAIN_TEXT_COLOUR);
+	db_get_field_assoc(res, "Value", MAIN_TEXT_COLOUR, sizeof(MAIN_TEXT_COLOUR)); // Main Text Colour
 	db_next_row(res);
 
 	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Color Scheme ID
-	format(ColScheme, 10, "{%s}", iString);
+	format(ColScheme, sizeof(ColScheme), "{%s}", iString);
 	db_next_row(res);
 
 	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CP in arena
@@ -530,8 +506,7 @@ LoadConfig()
 	MeleeAllowed = strval(iString) == 1;
 	db_next_row(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CurrentBaseSet
-	sscanf(iString, "s[32]", CurrentBaseSet);
+	db_get_field_assoc(res, "Value", CurrentBaseSet, sizeof(CurrentBaseSet)); // CurrentBaseSet
 	db_next_row(res);
 
 	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // AutoRoundStarter
@@ -566,8 +541,7 @@ LoadConfig()
 	ScreenFlashing = strval(iString) == 1;
 	db_next_row(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Server Name
-	sscanf(iString, "s[50]", ServerName);
+	db_get_field_assoc(res, "Value", ServerName, sizeof(ServerName)); // Server Name
 	db_next_row(res);
 
 	//db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CurrentArenaSet

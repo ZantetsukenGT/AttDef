@@ -17,5 +17,5 @@ YCMD: resetallguns(playerid, params[], help)
 
 	LogAdminCommand("resetallguns", playerid, INVALID_PLAYER_ID);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has reset everyone's weapons.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has reset everyone's weapons.", Player[playerid][Name]);
 }

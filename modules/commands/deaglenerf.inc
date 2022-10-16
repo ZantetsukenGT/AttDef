@@ -36,7 +36,7 @@ DoDeagleNerf(playerid, bool: shouldNerfDeagle, Float: damageValue)
 		if (!ShouldNerfDeagle)
 			return SendErrorMessage(playerid, "Deagle nerf is already off.");
 		ShouldNerfDeagle = shouldNerfDeagle;
-		return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set deagle's damage to its default.", Player[playerid][Name]);
+		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to its {FFFFFF}default" COL_PRIM ".", Player[playerid][Name]);
 	}
 	if (damageValue > 46.200)
 		return SendErrorMessage(playerid, "This value is higher than the default, are you even nerfing it?");
@@ -47,6 +47,6 @@ DoDeagleNerf(playerid, bool: shouldNerfDeagle, Float: damageValue)
 	ShouldNerfDeagle = shouldNerfDeagle;
 	DeagleNerfValue	 = damageValue;
 	if (oldBoolean)
-		return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set deagle's damage to " COL_USAGE "%0.3f" COL_PRIM ", previous value: " COL_USAGE "%0.3f", Player[playerid][Name], damageValue, oldValue);
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set deagle's damage to " COL_USAGE "%0.3f{FFFFFF}", Player[playerid][Name], damageValue);
+		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to " COL_USAGE "%0.3f" COL_PRIM ", previous value: " COL_USAGE "%0.3f", Player[playerid][Name], damageValue, oldValue);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to " COL_USAGE "%0.3f{FFFFFF}", Player[playerid][Name], damageValue);
 }

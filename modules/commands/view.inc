@@ -59,7 +59,7 @@ YCMD: view(playerid, params[], help)
 			Player[playerid][SpectatingType] = BASE;
 			va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sBase ~n~%s%s (ID: ~r~~h~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, BName[Round], Round, MAIN_TEXT_COLOUR);
 
-			va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "is spectating Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[Round], Round);
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "is spectating {FFFFFF}base" COL_PRIM ": {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[Round], Round);
 		}
 		case 2: // Arena
 		{
@@ -71,7 +71,7 @@ YCMD: view(playerid, params[], help)
 			Player[playerid][SpectatingType] = ARENA;
 			va_PlayerTextDrawSetString(playerid, TD_RoundSpec[playerid], "%sArena ~n~%s%s (ID: ~r~~h~%d%s)", MAIN_TEXT_COLOUR, MAIN_TEXT_COLOUR, AName[Round], Round, MAIN_TEXT_COLOUR);
 
-			va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "is spectating Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[Round], Round);
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "is spectating {FFFFFF}arena" COL_PRIM ": {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[Round], Round);
 		}
 	}
 	SendClientMessage(playerid, -1, "Cycle through maps with ~k~~PED_FIREWEAPON~ & ~k~~PED_LOCK_TARGET~. Quit this with /specoff. Press the ~k~~PED_JUMPING~ key to spawn in CP.");

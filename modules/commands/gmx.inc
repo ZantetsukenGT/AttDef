@@ -10,7 +10,7 @@ YCMD: gmx(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "restart your server.");
 
-	va_SendClientMessageToAll(-1, "{FFFFFF}%s (%d) " COL_PRIM "has set the server to restart", Player[playerid][Name], playerid);
+	va_SendClientMessageToAll(-1, "%s (%d) " COL_PRIM "has set the server to restart", Player[playerid][Name], playerid);
 
 	db_close(sqliteconnection);
 	LogAdminCommand("gmx", playerid, INVALID_PLAYER_ID);

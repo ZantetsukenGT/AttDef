@@ -22,5 +22,5 @@ YCMD: givemenu(playerid, params[], help)
 
 	ShowPlayerGunmenu(pID, 0);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has showed {FFFFFF}%s " COL_PRIM "weapon menu.", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has showed {FFFFFF}%s " COL_PRIM "weapon menu.", Player[playerid][Name], Player[pID][Name]);
 }

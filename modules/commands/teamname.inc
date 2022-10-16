@@ -26,13 +26,13 @@ YCMD: teamname(playerid, params[], help)
 		{
 			format(TeamName[ATTACKER], 24, TeamNamee);
 			format(TeamName[ATTACKER_SUB], 24, "%s Sub", TeamNamee);
-			SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set attacker team name to: {FFFFFF}%s", Player[playerid][Name], TeamName[ATTACKER]));
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}attacker team name " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], TeamName[ATTACKER]);
 		}
 		case 1:
 		{
 			format(TeamName[DEFENDER], 24, TeamNamee);
 			format(TeamName[DEFENDER_SUB], 24, "%s Sub", TeamNamee);
-			SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set defender team name to: {FFFFFF}%s", Player[playerid][Name], TeamName[DEFENDER]));
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}defender team name " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], TeamName[DEFENDER]);
 		}
 	}
 

@@ -32,5 +32,5 @@ YCMD: setlevel(playerid, params[], help)
 
 	LogAdminCommand("setlevel", playerid, GiveID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "level to: {FFFFFF}%d", Player[playerid][Name], Player[GiveID][Name], NewLevel);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}%s's " COL_PRIM "level to: {FFFFFF}%d", Player[playerid][Name], Player[GiveID][Name], NewLevel);
 }

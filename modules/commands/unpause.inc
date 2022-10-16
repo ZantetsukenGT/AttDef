@@ -17,5 +17,5 @@ YCMD: unpause(playerid, params[], help)
 	PauseCountdown = 4;
 	UnpauseRound();
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unpaused the current round.", Player[playerid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has {FFFFFF}unpaused " COL_PRIM "the current round.", Player[playerid][Name]);
 }

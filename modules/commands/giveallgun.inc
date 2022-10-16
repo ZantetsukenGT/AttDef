@@ -29,6 +29,6 @@ YCMD: giveallgun(playerid, params[], help)
 
 	LogAdminCommand("giveallgun", playerid, INVALID_PLAYER_ID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has given everyone | Weapon: {FFFFFF}%s " COL_PRIM "- Ammo: {FFFFFF}%d", Player[playerid][Name], WeaponNames[WeaponID],
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has given everyone {FFFFFF}%s " COL_PRIM "with {FFFFFF}%d " COL_PRIM "ammo.", Player[playerid][Name], WeaponNames[WeaponID],
 		Ammo);
 }

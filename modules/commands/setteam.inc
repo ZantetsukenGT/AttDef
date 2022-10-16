@@ -49,5 +49,5 @@ YCMD: setteam(playerid, params[], help)
 
 	UpdateRoundKillDmgTDmg(pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has switched {FFFFFF}%s " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], TeamName[teamID + 1]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has switched {FFFFFF}%s " COL_PRIM "to: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], TeamName[teamID + 1]);
 }

@@ -9,5 +9,5 @@ YCMD: para(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "get rid of your parachute.");
 
 	RemovePlayerWeapon(playerid, 46);
-	return SendClientMessage(playerid, -1, "{FFFFFF}Parachute removed.");
+	return SendClientMessage(playerid, -1, "Parachute removed.");
 }

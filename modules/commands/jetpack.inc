@@ -21,5 +21,5 @@ YCMD: jetpack(playerid, params[], help)
 
 	SetPlayerSpecialAction(pID, 2);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "gave a jetpack to {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "gave a jetpack to {FFFFFF}%s.", Player[playerid][Name], Player[pID][Name]);
 }

@@ -33,6 +33,6 @@ YCMD: move(playerid, params[], help)
 	LogAdminCommand("move", playerid, pID[0]);
 
 	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has moved {FFFFFF}%s " COL_PRIM "to {FFFFFF}%s", Player[playerid][Name], Player[pID[0]][Name], Player[pID[1]][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has moved {FFFFFF}%s " COL_PRIM "to {FFFFFF}%s", Player[playerid][Name], Player[pID[0]][Name], Player[pID[1]][Name]);
 	return SendClientMessageToAll(-1, iString);
 }

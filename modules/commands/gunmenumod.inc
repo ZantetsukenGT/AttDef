@@ -31,10 +31,9 @@ ShowPlayerGunmenuModification(playerid1)
 						va_return("Current weapon: %s\n\nType new weapon name below to change!", WeaponNames[GunmenuData[idx][GunID]]), "Set", "Cancel");
 					return 1;
 				}
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has changed gunmenu index: {FFFFFF}%d " COL_PRIM "from [%s] to [%s]", Player[playerid][Name], idx,
-							WeaponNames[GunmenuData[idx][GunID]], WeaponNames[weaponID]));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has changed gunmenu index: {FFFFFF}%d " COL_PRIM "from [%s] to [%s]", Player[playerid][Name], idx,
+					WeaponNames[GunmenuData[idx][GunID]], WeaponNames[weaponID]);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Weapon`=%d WHERE `Weapon`=%d", weaponID, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunID] = weaponID;
 			}
@@ -50,9 +49,8 @@ ShowPlayerGunmenuModification(playerid1)
 						"Cancel");
 					return 1;
 				}
-				SendClientMessageToAll(
-					-1, va_return(
-							"{FFFFFF}%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "limit to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], limit));
+				va_SendClientMessageToAll(
+					-1, "%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "limit to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], limit);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Limit`=%d WHERE `Weapon`=%d", limit, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunLimit] = limit;
 			}
@@ -68,9 +66,9 @@ ShowPlayerGunmenuModification(playerid1)
 						"Cancel");
 					return 1;
 				}
-				SendClientMessageToAll(
+				va_SendClientMessageToAll(
 					-1,
-					va_return("{FFFFFF}%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "ammo to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], ammo));
+					"%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "ammo to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], ammo);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Ammo`=%d WHERE `Weapon`=%d", ammo, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunAmmo] = ammo;
 			}

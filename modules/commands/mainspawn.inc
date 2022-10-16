@@ -20,6 +20,6 @@ YCMD: mainspawn(playerid, params[], help)
 
 	LogAdminCommand("mainspawn", playerid, INVALID_PLAYER_ID);
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed the main spawn location.", Player[playerid][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has changed the {FFFFFF}main spawn " COL_PRIM "location.", Player[playerid][Name]);
 	return SendClientMessageToAll(-1, iString);
 }

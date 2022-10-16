@@ -20,5 +20,5 @@ YCMD: melee(playerid, params[], help)
 
 	ShowPlayerMeleeWeaponsMenu(playerid);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has displayed melee weapons menu (/melee).", Player[playerid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has displayed melee weapons menu (/melee).", Player[playerid][Name]);
 }

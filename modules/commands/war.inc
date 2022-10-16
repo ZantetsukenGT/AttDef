@@ -20,7 +20,7 @@ YCMD: war(playerid, params[], help)
 	{
 		WarModeEnding = true;
 		SetTimer("WarEnded", 5000, false);
-		SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has set the match to end!", Player[playerid][Name]));
+		va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set the match to end!", Player[playerid][Name]);
 		SendClientMessageToAll(-1, COL_PRIM "Preparing End Match Results..");
 		return SendClientMessageToAll(-1, COL_PRIM "If you missed the results, type {FFFFFF}/showagain");
 	}
@@ -106,5 +106,5 @@ YCMD: war(playerid, params[], help)
 		}
 	}
 	ShowMatchScoreBoard();
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has enabled the Match-Mode.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has enabled the Match-Mode.", Player[playerid][Name]);
 }

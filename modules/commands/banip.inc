@@ -16,5 +16,5 @@ YCMD: banip(playerid, params[], help)
 
 	LogAdminCommand("banip", playerid, INVALID_PLAYER_ID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned an IP address.", Player[playerid][Name], playerid);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has banned an {FFFFFF}IP address" COL_PRIM ".", Player[playerid][Name], playerid);
 }

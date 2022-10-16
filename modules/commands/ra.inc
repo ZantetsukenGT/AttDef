@@ -36,7 +36,7 @@ DoRandomArena(playerid)
 	PreStartRoundTimer = SetTimerEx("OnArenaStart", 4000, false, "i", ArenaID);
 
 	new iString[144];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has randomly started Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has randomly started Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[ArenaID], ArenaID);
 	SendClientMessageToAll(-1, iString);
 
 	foreach (new i : Player)

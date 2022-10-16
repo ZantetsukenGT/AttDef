@@ -9,5 +9,5 @@ YCMD: getpara(playerid, params[], help)
 		return SendCommandHelpMessage(playerid, "give you a parachute.");
 
 	GivePlayerWeapon(playerid, WEAPON_PARACHUTE, 1);
-	return SendClientMessage(playerid, -1, "{FFFFFF}Parachute given.");
+	return SendClientMessage(playerid, -1, "Parachute given.");
 }

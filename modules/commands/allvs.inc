@@ -80,5 +80,5 @@ YCMD: allvs(playerid, params[], help)
 		playerid, MSGBOX_TYPE_MIDDLE, "~b~~h~~h~all-vs result",
 		va_return("%d players were swapped to the team you specified whilst %d were swapped to the opposite team", playersSwitched[1], playersSwitched[0]), 4000);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has changed the teams to {FFFFFF}\"%s\" vs all.", Player[playerid][Name], TempTeamName));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has changed the teams to {FFFFFF}\"%s\" vs all.", Player[playerid][Name], TempTeamName);
 }

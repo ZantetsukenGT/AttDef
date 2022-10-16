@@ -35,5 +35,5 @@ YCMD: goto(playerid, params[], help)
 
 	LogAdminCommand("goto", playerid, gid);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has teleported to {FFFFFF}%s", Player[playerid][Name], Player[gid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has teleported to {FFFFFF}%s", Player[playerid][Name], Player[gid][Name]);
 }

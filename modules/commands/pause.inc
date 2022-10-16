@@ -28,13 +28,13 @@ ToggleRoundPause(playerid)
 		PauseCountdown = 4;
 		UnpauseRound();
 
-		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has unpaused the current round.", Player[playerid][Name]);
+		format(iString, sizeof(iString), "%s " COL_PRIM "has {FFFFFF}unpaused " COL_PRIM "the current round.", Player[playerid][Name]);
 		return SendClientMessageToAll(-1, iString);
 	}
 
 	PausePressed = GetTickCount();
 	PauseRound();
 
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has paused the current round.", Player[playerid][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has {FFFFFF}paused " COL_PRIM "the current round.", Player[playerid][Name]);
 	return SendClientMessageToAll(-1, iString);
 }

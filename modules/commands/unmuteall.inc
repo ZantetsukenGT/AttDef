@@ -12,5 +12,5 @@ YCMD: unmuteall(playerid, params[], help)
 
 	LogAdminCommand("unmuteall", playerid, INVALID_PLAYER_ID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unmuted everyone!", Player[playerid][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has unmuted everyone!", Player[playerid][Name]);
 }

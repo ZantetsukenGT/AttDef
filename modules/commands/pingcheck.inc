@@ -21,6 +21,6 @@ YCMD: pingcheck(playerid, params[], help)
 	LogAdminCommand("pingcheck", playerid, pID);
 
 	Player[pID][PingCheck] = !Player[pID][PingCheck];
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has %s Ping-Check on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PingCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}Ping-Check " COL_PRIM "on: {FFFFFF}%s", Player[playerid][Name], Player[pID][PingCheck] ? "{66FF66}enabled" : "{FF6666}disabled",
 		Player[pID][Name]);
 }

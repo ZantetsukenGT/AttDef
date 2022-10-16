@@ -35,7 +35,7 @@ YCMD: changename(playerid, params[], help)
 				return SendErrorMessage(playerid, "Name already registered!");
 			}
 
-			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed name to {FFFFFF}%s", Player[playerid][Name], params);
+			format(iString, sizeof(iString), "%s " COL_PRIM "has changed name to {FFFFFF}%s", Player[playerid][Name], params);
 			SendClientMessageToAll(-1, iString);
 
 			format(iString, sizeof(iString), "UPDATE `Players` SET `Name` = '%q' WHERE `Name` = '%q'", params, Player[playerid][Name]);

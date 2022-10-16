@@ -114,5 +114,5 @@ YCMD: end(playerid, params[], help)
 
 	LogAdminCommand("end", playerid, INVALID_PLAYER_ID);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has ended the round.", Player[playerid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has ended the round.", Player[playerid][Name]);
 }

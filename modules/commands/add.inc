@@ -40,5 +40,5 @@ PerformCommandAdd(playerid, targetid)
 
 	LogAdminCommand("add", playerid, targetid);
 
-	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[targetid][Name]));
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has added {FFFFFF}%s " COL_PRIM "to the round.", Player[playerid][Name], Player[targetid][Name]);
 }

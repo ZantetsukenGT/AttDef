@@ -21,5 +21,5 @@ YCMD: tunfreeze(playerid, params[], help)
 
 	LogAdminCommand("tunfreeze", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s" COL_PRIM " for 500ms.", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has unfrozen {FFFFFF}%s" COL_PRIM " for 500ms.", Player[playerid][Name], Player[pID][Name]);
 }

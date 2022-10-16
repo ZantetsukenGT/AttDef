@@ -31,5 +31,5 @@ YCMD: setafk(playerid, params[], help)
 
 	LogAdminCommand("setafk", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set {FFFFFF}%s " COL_PRIM "to AFK mode.", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}%s " COL_PRIM "to AFK mode" COL_PRIM ".", Player[playerid][Name], Player[pID][Name]);
 }

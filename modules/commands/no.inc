@@ -18,9 +18,7 @@ YCMD: no(playerid, params[], help)
 
 	Player[playerid][challengerid] = -1;
 
-	new iString[128];
-	format(
-		iString, sizeof(iString), "%s%s {FFFFFF}denied the duel challenge by %s%s", TextColor[Player[playerid][Team]], Player[playerid][Name], TextColor[Player[pID][Team]],
+	va_SendClientMessageToAll(-1, "%s%s {FFFFFF}denied the duel challenge by %s%s", TextColor[Player[playerid][Team]], Player[playerid][Name], TextColor[Player[pID][Team]],
 		Player[pID][Name]);
-	return SendClientMessageToAll(-1, iString);
+	return 1;
 }

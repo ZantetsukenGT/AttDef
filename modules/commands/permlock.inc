@@ -14,8 +14,6 @@ YCMD: permlock(playerid, params[], help)
 	if (!ServerLocked)
 		return SendErrorMessage(playerid, "Server must be locked first. Use /lock !");
 
-	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has %s the server permanent lock!", Player[playerid][Name], PermLocked ? "disabled" : "enabled");
 	PermLocked = !PermLocked;
-	return SendClientMessageToAll(-1, iString);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s " COL_PRIM "server's {FFFFFF}permanent lock" COL_PRIM ".", Player[playerid][Name], PermLocked ? "{66FF66}enabled" : "{FF6666}disabled");
 }

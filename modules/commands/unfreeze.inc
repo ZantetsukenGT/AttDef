@@ -19,5 +19,5 @@ YCMD: unfreeze(playerid, params[], help)
 
 	LogAdminCommand("unfreeze", playerid, pID);
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has unfrozen {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has unfrozen {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
 }

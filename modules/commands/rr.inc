@@ -29,7 +29,7 @@ YCMD: rr(playerid, params[], help)
 	ResetBackupRequests();
 
 	new iString[128];
-	format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has set the round to restart. Round restarting...", Player[playerid][Name]);
+	format(iString, sizeof(iString), "%s " COL_PRIM "has set the round to restart.", Player[playerid][Name]);
 	SendClientMessageToAll(-1, iString);
 
 	ResetGunmenuSelections();

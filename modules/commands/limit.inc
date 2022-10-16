@@ -41,7 +41,7 @@ YCMD: limit(playerid, params[], help)
 				}
 			}
 
-			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed weather limit to: {FFFFFF}%d", Player[playerid][Name], WeatherLimit);
+			format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}weather limit " COL_PRIM "to: {FFFFFF}%d" COL_PRIM ".", Player[playerid][Name], WeatherLimit);
 		}
 		case 2:
 		{
@@ -59,7 +59,7 @@ YCMD: limit(playerid, params[], help)
 				}
 			}
 
-			format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has changed time limit to: {FFFFFF}%d", Player[playerid][Name], TimeLimit);
+			format(iString, sizeof(iString), "%s " COL_PRIM "has changed {FFFFFF}time limit " COL_PRIM "to: {FFFFFF}%d" COL_PRIM ".", Player[playerid][Name], TimeLimit);
 		}
 	}
 	LogAdminCommand("limit", playerid, INVALID_PLAYER_ID);

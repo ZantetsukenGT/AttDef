@@ -19,5 +19,5 @@ YCMD: tr(playerid, params[], help)
 	TotalRounds = Value;
 	UpdateRoundsPlayedTextDraw();
 
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has changed the total rounds to: {FFFFFF}%d", Player[playerid][Name], TotalRounds);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has changed the {FFFFFF}total rounds " COL_PRIM "to: {FFFFFF}%d", Player[playerid][Name], TotalRounds);
 }

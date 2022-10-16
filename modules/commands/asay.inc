@@ -12,5 +12,5 @@ YCMD: asay(playerid, params[], help)
 		return SendUsageMessage(playerid, "/asay [Text]");
 
 	LogAdminCommand("asay", playerid, INVALID_PLAYER_ID);
-	return SendClientMessageToAll(-1, va_return("{6688FF}* Admin: %s", params));
+	return va_SendClientMessageToAll(-1, "{6688FF}* Admin: %s", params);
 }

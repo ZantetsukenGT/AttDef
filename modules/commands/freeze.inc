@@ -17,7 +17,7 @@ YCMD: freeze(playerid, params[], help)
 	TogglePlayerControllable(pID, 0);
 
 	LogAdminCommand("freeze", playerid, pID);
-	return va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has frozen {FFFFFF}%s", Player[playerid][Name], Player[pID][Name]);
+	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has frozen {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name], Player[pID][Name]);
 }
 
 forward DelayedFreeze(pID);
