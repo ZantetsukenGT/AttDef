@@ -20,13 +20,6 @@ public OnPlayerSpawn(playerid)
 		HidePlayerGunmenu(playerid);
 	}
 
-	// If the server sees this player frozen
-	if (Player[playerid][IsFrozen])
-	{
-		// Tell the script he is not frozen anymore
-		Player[playerid][IsFrozen] = false;
-	}
-
 	// If this player is just spawning regularly
 	if (!Player[playerid][Playing] && !Player[playerid][InDM] && !Player[playerid][InDuel])
 	{

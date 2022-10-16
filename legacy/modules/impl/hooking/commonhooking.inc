@@ -32,7 +32,6 @@ hook stock TogglePlayerCtrlable(playerid, toggle)
 		}
 	}
 
-	Player[playerid][IsFrozen] = !bool: toggle;
 	return continue(playerid, toggle);
 }
 

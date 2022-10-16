@@ -17,8 +17,7 @@
 #define SAVE_SLOTS MAX_PLAYERS
 
 // - Player Variables -
-enum PlayerVariables
-{
+enum PlayerVariables {
 	//added by zyph
 	Float: DmPosX,
 	Float: DmPosY,
@@ -39,7 +38,6 @@ enum PlayerVariables
 	bool: TextDrawOnScreen,
 	bool: Spawned,
 	bool: IsAFK,
-	bool: IsFrozen,
 	bool: AskingForHelp,
 	bool: Mute,
 	bool: ToAddInRound,

@@ -1198,7 +1198,7 @@ SyncPlayer(playerid)
 		return 1;
 	if (Player[playerid][OnGunmenu])
 		return SendErrorMessage(playerid, "Can't sync while in gunmenu");
-	if (Player[playerid][IsAFK] || Player[playerid][IsFrozen])
+	if (Player[playerid][IsAFK] || !IsPlayerControllable(playerid))
 		return SendErrorMessage(playerid, "Can't sync while frozen or in AFK mode");
 
 	// Set spectators to re-spectate

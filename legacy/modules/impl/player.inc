@@ -190,7 +190,6 @@ InitPlayer(playerid)
 	PlayerOnInterface { playerid }	   = false;
 	Player[playerid][Spawned]		   = false;
 	Player[playerid][IsAFK]			   = false;
-	Player[playerid][IsFrozen]		   = false;
 	Player[playerid][AskingForHelp]	   = false;
 	Player[playerid][Mute]			   = false;
 	Player[playerid][ToAddInRound]	   = false;
