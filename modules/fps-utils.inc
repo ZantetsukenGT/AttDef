@@ -20,7 +20,7 @@ stock GetPlayerFPS(playerid) { return s_FPS[playerid]; }
 
 IPacket:FPS_UPDATE_SYNC(playerid, BitStream:bs)
 {
-	new currentDrunkLevel;
+	static currentDrunkLevel;
 
 	BS_SetReadOffset(bs, 8 + 32);
 	BS_ReadInt32(bs, currentDrunkLevel);
@@ -30,12 +30,12 @@ IPacket:FPS_UPDATE_SYNC(playerid, BitStream:bs)
 
 	if (currentDrunkLevel <= 750)
 	{
-		new pingBasedCompensation = GetPlayerFPS(playerid) * GetPlayerPing(playerid) / 1000;
+		new pingBasedCompensation = s_FPS[playerid] * GetPlayerPing(playerid) / 1000;
 		SetPlayerDrunkLevel(playerid, currentDrunkLevel + 1250 - pingBasedCompensation);
 		s_LastDrunkLevel[playerid] += 1250;
 	}
 	// not using this function is sub optimal, but there's not much of a choice with this gamemode
 	// fps, ping and pl textdraws are tied together, i'll let this be updated by a timer instead
-	//CallLocalFunction(#OnFPSUpdate, #i, playerid);
+	//CallLocalFunction(#OnFPSUpdate, #ii, playerid, s_FPS[playerid]);
 	return 1;
 }
