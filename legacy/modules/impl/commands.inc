@@ -39,8 +39,8 @@ CreateAdminLevelGroups()
 	new str[8];
 	for (new i = 0; i < MAX_ADMIN_LEVELS; i++) // loop through all admin levels
 	{
-		format(str, sizeof str, "Level_%d", i); // initialize a good name
-		AdminGroups[i] = Group_Create(str);		// create a group for this level
+		format(str, sizeof(str), "Level_%d", i); // initialize a good name
+		AdminGroups[i] = Group_Create(str);		 // create a group for this level
 	}
 }
 
@@ -68,22 +68,13 @@ UpdatePlayerAdminGroup(playerid)
 
 // Return the level of 'commandid'
 // This function returns -2 if the iterator array is empty
-// This function returns -1 if the command has more than one value
+// This function returns -1 if the command was defined more than once with different admin level
 GetCommandLevel(commandid)
 {
-	new count = 0; // how many values are found
-	new value;
+	new count = Iter_Count(CommandsLevel[commandid]);
 
-	// loop through the iterator array OF ONLY 'commandid'
-	// this array should only have ONE value because we always clear it before adding a new level (see UpdateCommandsIteratorArray)
-	// so if there are more than 1 value or if 0 values were found
-	// there must be something wrong, we return unique values (negative)
-	foreach (new i : CommandsLevel[commandid])
-	{
-		value = i; // set it to the value we found, hopefully it'll be the only one otherwise we return errors
-		count++;   // increase count of how many values are found
-	}
-	if (count == 0) // empty iterator array
+	// array should only have ONE value because we always clear it before adding a new level (see UpdateCommandsIteratorArray)
+	if (!count) // empty iterator array
 	{
 		printf("DEBUG: Error: GetCommandLevel(commandid:%d) ~ CMD:%s: Returning -2, empty iterator array", commandid, Command_GetName(commandid));
 		return -2;
@@ -93,9 +84,7 @@ GetCommandLevel(commandid)
 		printf("DEBUG: Error: GetCommandLevel(commandid:%d) ~ CMD:%s: Returning -1, found more than a value. Command has different levels?", commandid, Command_GetName(commandid));
 		return -1;
 	}
-	// if passed, success: count is not 0 nor greater than 1 and it's pre-set to 0, so it's 1 which is very good
-	// return the lovely value (level) now
-	return value;
+	return Iter_First(CommandsLevel[commandid]);
 }
 
 // Set the level of a command
@@ -109,25 +98,23 @@ SetCommandLevel(command[], level, bool: updatedb)
 	if (level == 0) // if this command is to be set for normal users (level 0)
 	{
 		// then no need for much work just make it globally available
-		Group_SetGlobalCommand(id, E_GROUP_SET: ALLOW);
+		Group_SetGlobalCommand(id, ALLOW);
 	}
 	else
 	{
 		// we initialize everything by disabling this command for everyone
-		Group_SetGlobalCommand(id, E_GROUP_SET: UNDEF);
+		Group_SetGlobalCommand(id, UNDEF);
 		for (new i = 0; i < MAX_ADMIN_LEVELS; i++) // loop through all admin levels
 		{
 			// Enable this command for the given level or any level that is higher than it and disable it for lower levels.
-			Group_SetCommand(AdminGroups[i], id, i >= level ? (E_GROUP_SET: ALLOW) : (E_GROUP_SET: UNDEF));
+			Group_SetCommand(AdminGroups[i], id, i >= level ? ALLOW : UNDEF);
 		}
 	}
 	UpdateCommandsIteratorArray(id, level); // Update the iterator array that contains all commands ID and level
 	if (updatedb)
 	{
 		// The command's got a new level now, tell the database about that too?
-		new str[COMMAND_SQL_QUERY_SIZE];
-		format(str, sizeof(str), "UPDATE Commands SET Level = %d WHERE Command = '%q'", level, command);
-		db_free_result(db_query(sqliteconnection, str));
+		db_free_result(db_query(sqliteconnection, va_return("UPDATE Commands SET Level = %d WHERE Command = '%q'", level, command)));
 	}
 	return 1;
 }
@@ -137,9 +124,7 @@ SetCommandLevel(command[], level, bool: updatedb)
 // If a command doesn't exist, it gets inserted into the database
 CreateCommandConfig(cmd[], level)
 {
-	new query[COMMAND_SQL_QUERY_SIZE];
-	format(query, sizeof(query), "SELECT Level FROM Commands WHERE Command='%q'", cmd);
-	new DBResult: result = db_query(sqliteconnection, query);
+	new DBResult: result = db_query(sqliteconnection, va_return("SELECT Level FROM Commands WHERE Command='%q'", cmd));
 	if (db_num_rows(result)) // if the command already exists
 	{
 		// load the level
@@ -149,22 +134,21 @@ CreateCommandConfig(cmd[], level)
 	db_free_result(result);
 
 	// insert it into the database
-	format(query, sizeof(query), "INSERT INTO Commands (Command, Level) VALUES ('%q', %d)", cmd, level);
 	SetCommandLevel(cmd, level, false);
-	return db_free_result(db_query(sqliteconnection, query));
+	return db_free_result(db_query(sqliteconnection, va_return("INSERT INTO Commands (Command, Level) VALUES ('%q', %d)", cmd, level)));
 }
 
 // Initialize and load commands
 LoadCommands()
 {
-	new ct; // how many commands are found
+	new cmdCount; // how many commands are found
 	CreateAdminLevelGroups();
 	Iter_Init(CommandsLevel);
 	foreach (new i : Command())
 	{
-		ct++; // increase count
+		cmdCount++; // increase count
 		// Level parameter is ignored if the command already exists in the database
 		CreateCommandConfig(Command_GetName(i), 0);
 	}
-	printf("Commands Loaded: %d", ct);
+	printf("Commands Loaded: %d", cmdCount);
 }
