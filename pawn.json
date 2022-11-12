@@ -6,7 +6,7 @@
 	"dependencies": [
 		"pawn-lang/pawn-stdlib",
 		"pawn-lang/samp-stdlib",
-		"Y-Less/samp-plugin-crashdetect",
+		"Zeex/samp-plugin-crashdetect",
 		"katursis/Pawn.RakNet@omp",
 		"NexiusTailer/MapFix",
 		"Nickk888SAMP/Dialog-Pages",
