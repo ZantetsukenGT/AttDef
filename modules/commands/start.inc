@@ -73,7 +73,7 @@ YCMD: start(playerid, params[], help)
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
 			PreStartRoundTimer = SetTimerEx("OnBaseStart", 2000, false, "i", mapID);
 
-			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has started {FFFFFF}base" COL_PRIM ": {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[mapID], mapID);
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has started Base: {FFFFFF}%s (ID: %d)", Player[playerid][Name], BName[mapID], mapID);
 		}
 		case _I<arena>:
 		{
@@ -87,7 +87,7 @@ YCMD: start(playerid, params[], help)
 			AllowStartBase = false; // Make sure other player or you yourself is not able to start base on top of another base.
 			PreStartRoundTimer = SetTimerEx("OnArenaStart", 2000, false, "i", mapID);
 
-			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has started {FFFFFF}arena" COL_PRIM ": {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[mapID], mapID);
+			va_SendClientMessageToAll(-1, "%s " COL_PRIM "has started Arena: {FFFFFF}%s (ID: %d)", Player[playerid][Name], AName[mapID], mapID);
 		}
 		default: return SendUsageMessage(playerid, "/start [base | arena | rc | last] [ID]");
 	}
