@@ -45,6 +45,17 @@ YCMD: acar(playerid, params[], help)
 	if (vehicleid == INVALID_VEHICLE_ID)
 		return SendErrorMessage(playerid, "Server's vehicle limit was reached and cannot spawn any more.");
 
+	if (Iter_Contains(GMFrozenCars, vehicleid))
+	{
+		KillTimer(GMFrozenCarTimers[vehicleid]);
+		Iter_Remove(GMFrozenCars, vehicleid);
+	}
+	if (Iter_Contains(FrozenCars, vehicleid))
+	{
+		KillTimer(FrozenCarTimers[vehicleid]);
+		Iter_Remove(FrozenCars, vehicleid);
+	}
+
 	SetVehicleNumberPlate(vehicleid, Player[playerid][NameWithoutTag]);
 	LinkVehicleToInterior(vehicleid, GetPlayerInterior(playerid));		//Links vehicle interior to the current player interior.
 	SetVehicleVirtualWorld(vehicleid, GetPlayerVirtualWorld(playerid)); //Sets vehicle virtual world the the current virtual world of the player.

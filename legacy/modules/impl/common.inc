@@ -1147,6 +1147,18 @@ ClearKillList()
 
 DestroyUnusedVehicles()
 {
+	foreach (new i : FrozenCars)
+	{
+		KillTimer(FrozenCarTimers[i]);
+	}
+	Iter_Clear(FrozenCars);
+
+	foreach (new i : GMFrozenCars)
+	{
+		KillTimer(GMFrozenCarTimers[i]);
+	}
+	Iter_Clear(GMFrozenCars);
+
 	foreach (new i : Vehicle)
 	{
 		new bool: isOccupied = false;
