@@ -458,61 +458,49 @@ InitPlayerVisualDamage(playerid)
 // Usually placed in a frequently called timer
 CheckVisualDamageTextDraws()
 {
-	if (Iter_Count(PlayerHasGVisualDmg) != 0) // If there are players with given-damage textdraws
+	new tick = GetTickCount(); // current tick count
+	foreach (new i : PlayerHasGVisualDmg) // Loop through all players that has given-damage textdraw shown for them
 	{
-		new tick = GetTickCount(), // current tick count
-			ct;					   // will be used to indicate whether a iterator slot should be removed or not
-
-		foreach (new i : PlayerHasGVisualDmg) // Loop through all players that has given-damage textdraw shown for them
+		new ct = 0; // initialize the variable every time
+		for (new j = 0; j < MAX_VISUAL_DAMAGES; j++) // Loop through all the damage textdraws a single player can have
 		{
-			new cur = i;
-			ct		= 0;								 // initialize the variable every time
-			for (new j = 0; j < MAX_VISUAL_DAMAGES; j++) // Loop through all the damage textdraws a single player can have
+			// Check if this textdraw (by slot) is still shown while enough (PRE-DEFINED: HIDE_DAMAGE_TEXTDRAW_AFTER) time has passed
+			if (VisualDamage[i][ShownGivenDamage][j])
 			{
-				// Check if this textdraw (by slot) is still shown while enough (PRE-DEFINED: HIDE_DAMAGE_TEXTDRAW_AFTER) time has passed
-				if (VisualDamage[cur][ShownGivenDamage][j])
+				if (tick - VisualDamage[i][GivenDamageTick] > HIDE_DAMAGE_TEXTDRAW_AFTER)
 				{
-					if (tick - VisualDamage[cur][GivenDamageTick] > HIDE_DAMAGE_TEXTDRAW_AFTER)
-					{
-						VisualDamage[cur][ShownGivenDamage][j] = false; // Indicates that it's hidden now
-						if (VisualDamage[cur][DamagingWho][j] != NO_DAMAGER_UNIQUE_ID)
-							Iter_Remove(PlayersDamaged[cur], VisualDamage[cur][DamagingWho][j]); // Remove the player whom this player put damage on
-						PlayerTextDrawSetString(cur, DoingDamage[cur][j], "_");					 // Hide it
-						ct++;																	 // Increase count of textdraws found
-					}
+					VisualDamage[i][ShownGivenDamage][j] = false; // Indicates that it's hidden now
+					if (VisualDamage[i][DamagingWho][j] != NO_DAMAGER_UNIQUE_ID)
+						Iter_Remove(PlayersDamaged[i], VisualDamage[i][DamagingWho][j]); // Remove the player whom this player put damage on
+					PlayerTextDrawSetString(i, DoingDamage[i][j], "_"); // Hide it
+					ct++; // Increase count of textdraws found
 				}
 			}
-			if (ct != 0)									  // If found any textdraws, that should be hidden, shown to this player
-				Iter_SafeRemove(PlayerHasGVisualDmg, cur, i); // Safely remove him from the iterator array.
 		}
+		if (ct != 0) // If found any textdraws, that should be hidden, shown to this player
+			Iter_Remove(PlayerHasGVisualDmg, i); // Safely remove him from the iterator array.
 	}
-	if (Iter_Count(PlayerHasTVisualDmg) != 0) // If there are players with taken-damage textdraws
-	{
-		new tick = GetTickCount(), // current tick count
-			ct;					   // will be used to indicate whether a iterator slot should be removed or not
 
-		foreach (new i : PlayerHasTVisualDmg) // Loop through all players that has taken-damage textdraw shown for them
+	foreach (new i : PlayerHasTVisualDmg) // Loop through all players that has taken-damage textdraw shown for them
+	{
+		new ct = 0; // initialize the variable every time
+		for (new j = 0; j < MAX_VISUAL_DAMAGES; j++) // Loop through all the damage textdraws a single player can have
 		{
-			new cur = i;
-			ct		= 0;								 // initialize the variable every time
-			for (new j = 0; j < MAX_VISUAL_DAMAGES; j++) // Loop through all the damage textdraws a single player can have
+			// Check if this textdraw (by slot) is still shown while enough (PRE-DEFINED: HIDE_DAMAGE_TEXTDRAW_AFTER) time has passed
+			if (VisualDamage[i][ShownTakenDamage][j])
 			{
-				// Check if this textdraw (by slot) is still shown while enough (PRE-DEFINED: HIDE_DAMAGE_TEXTDRAW_AFTER) time has passed
-				if (VisualDamage[cur][ShownTakenDamage][j])
+				if (tick - VisualDamage[i][TakenDamageTick] > HIDE_DAMAGE_TEXTDRAW_AFTER)
 				{
-					if (tick - VisualDamage[cur][TakenDamageTick] > HIDE_DAMAGE_TEXTDRAW_AFTER)
-					{
-						VisualDamage[cur][ShownTakenDamage][j] = false; // Indicates that it's hidden now
-						if (VisualDamage[cur][WhoDamaging][j] != NO_DAMAGER_UNIQUE_ID)
-							Iter_Remove(PlayersDamagedBy[cur], VisualDamage[cur][WhoDamaging][j]); // Remove the player whom this player put damage on
-						PlayerTextDrawSetString(cur, GettingDamaged[cur][j], "_");				   // Hide it
-						ct++;																	   // Increase count of textdraws found
-					}
+					VisualDamage[i][ShownTakenDamage][j] = false; // Indicates that it's hidden now
+					if (VisualDamage[i][WhoDamaging][j] != NO_DAMAGER_UNIQUE_ID)
+						Iter_Remove(PlayersDamagedBy[i], VisualDamage[i][WhoDamaging][j]); // Remove the player whom this player put damage on
+					PlayerTextDrawSetString(i, GettingDamaged[i][j], "_"); // Hide it
+					ct++; // Increase count of textdraws found
 				}
 			}
-			if (ct != 0)									  // If found any textdraws, that should be hidden, shown to this player
-				Iter_SafeRemove(PlayerHasTVisualDmg, cur, i); // Safely remove him from the iterator array.
 		}
+		if (ct != 0) // If found any textdraws, that should be hidden, shown to this player
+			Iter_Remove(PlayerHasTVisualDmg, i); // Safely remove him from the iterator array.
 	}
 
 	UpdateDamageBubbles();
@@ -651,18 +639,15 @@ SetPlayerDamageBubble(playerid)
 UpdateDamageBubbles()
 {
 	// Update Damage Bubble
-	if (Iter_Count(PlayerHasDBubble) != 0)
+	foreach (new i : PlayerHasDBubble)
 	{
-		foreach (new i : PlayerHasDBubble)
-		{
-			Player[i][DamageBubbleTick]--;
+		Player[i][DamageBubbleTick]--;
 
-			// Hides damage bubble if tick is 0
-			if (Player[i][DamageBubbleTick] <= 0)
-			{
-				Update3DTextLabelText(Player[i][DamageLabel], -1, " ");
-				Iter_SafeRemove(PlayerHasDBubble, i, i);
-			}
+		// Hides damage bubble if tick is 0
+		if (Player[i][DamageBubbleTick] <= 0)
+		{
+			Update3DTextLabelText(Player[i][DamageLabel], -1, " ");
+			Iter_Remove(PlayerHasDBubble, i);
 		}
 	}
 }
