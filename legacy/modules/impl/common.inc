@@ -1166,10 +1166,7 @@ DestroyUnusedVehicles()
 				break;
 			}
 		}
-		ITER_SAFE_REMOVE(Vehicle, i)
-		{
-			DestroyVehicle(i);
-		}
+		DestroyVehicle(i);
 	}
 	return 1;
 }

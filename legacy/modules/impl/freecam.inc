@@ -31,9 +31,8 @@ PlayerFlyMode(playerid, bool: frozencamera)
 			{
 				if (Player[i][IsSpectatingID] == playerid)
 				{
-					new tmp = i;
-					Iter_SafeRemove(AllSpectators, i, i);
-					StopSpectate(tmp, false);
+					Iter_Remove(AllSpectators, i);
+					StopSpectate(i, false);
 				}
 			}
 		}

@@ -419,16 +419,14 @@ public GameLoopCallback()
 					{
 						SendClientMessageToAll(
 							-1,
-							va_return(
-								"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%d | %d)", Player[i][Name], Player[i][pHealth], Player[i][pArmour]));
+							"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%d | %d)", Player[i][Name], Player[i][pHealth], Player[i][pArmour]);
 
 						Player[i][OutOfArena] = MAX_ZONE_LIMIT_WARNINGS;
 
 						PlayerTextDrawHide(i, AreaCheckTD[i]);
 						PlayerTextDrawHide(i, AreaCheckBG[i]);
-						new tmp = i;
-						Iter_SafeRemove(PlayersInRound, i, i);
-						RemovePlayerFromRound(tmp, false);
+						Iter_Remove(PlayersInRound, i);
+						RemovePlayerFromRound(i, false);
 						break;
 					}
 				}
@@ -1219,16 +1217,6 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 	return 1;
 }
 
-/* Note:
-	set remove_iterator to false if you're using this in a loop
-	and safely remove, for example
-
-	foreach(new i : PlayersInRound)
-	{
-		RemovePlayerFromRound(i, false);
-		Iter_SafeRemove(PlayersInRound, i, i);
-	}
-*/
 RemovePlayerFromRound(playerid, bool: remove_iterator = true)
 {
 	Player[playerid][Playing] = false;

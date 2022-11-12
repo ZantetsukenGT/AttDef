@@ -175,9 +175,8 @@ SpectatePlayer(playerid, specid)
 		{
 			if (Player[i][IsSpectatingID] == playerid)
 			{
-				new tmp = i;
-				Iter_SafeRemove(AllSpectators, i, i);
-				StopSpectate(tmp, false);
+				Iter_Remove(AllSpectators, i);
+				StopSpectate(i, false);
 			}
 		}
 	}
@@ -245,18 +244,6 @@ SpectatePlayer(playerid, specid)
 	return 1;
 }
 
-/* Note:
-	set remove_iterator to false if you're using this in a loop
-	and safely remove, for example
-
-	new tmp
-	foreach(new i : AllSpectators)
-	{
-		tmp = i;
-		Iter_SafeRemove(AllSpectators, i, i);
-		StopSpectate(tmp, false);
-	}
-*/
 StopSpectate(playerid, bool: remove_iterator = true)
 {
 	if (!Player[playerid][Spectating])
@@ -283,9 +270,8 @@ StopSpectate(playerid, bool: remove_iterator = true)
 
 			if (Player[i][IsSpectatingID] == playerid)
 			{
-				new tmp = i;
-				Iter_SafeRemove(AllSpectators, i, i);
-				StopSpectate(tmp, false);
+				Iter_Remove(AllSpectators, i);
+				StopSpectate(i, false);
 			}
 		}
 	}
