@@ -33,9 +33,9 @@ DoSniperNerf(playerid, bool: shouldNerfSniper, Float: damageValue)
 {
 	if (!shouldNerfSniper)
 	{
-		if (!shouldNerfSniper)
+		if (!ShouldNerfSniper)
 			return SendErrorMessage(playerid, "Sniper nerf is already off.");
-		shouldNerfSniper = shouldNerfSniper;
+		ShouldNerfSniper = shouldNerfSniper;
 		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}sniper's damage " COL_PRIM "to its {FFFFFF}default" COL_PRIM ".", Player[playerid][Name]);
 	}
 	if (damageValue > 41.250)
