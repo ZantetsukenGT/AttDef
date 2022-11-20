@@ -211,6 +211,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 #include "commands/showagain.inc"
 #include "commands/skin.inc"
 #include "commands/slap.inc"
+#include "commands/snipernerf.inc"
 #include "commands/sound.inc"
 #include "commands/spas.inc"
 #include "commands/spec.inc"

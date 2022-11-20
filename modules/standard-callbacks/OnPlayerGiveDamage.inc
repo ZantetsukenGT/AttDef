@@ -41,10 +41,14 @@ HandlePlayerDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 		else if (amount < 30.0)
 			amount = GRENADE_LOW_DAMAGE;
 	}
-	// Deagle nerf
+	// Weapon nerfs
 	if (weaponid == WEAPON_DEAGLE && ShouldNerfDeagle)
 	{
 		amount = DeagleNerfValue;
+	}
+	else if (weaponid == WEAPON_SNIPER && ShouldNerfSniper)
+	{
+		amount = SniperNerfValue;
 	}
 
 	// Detect headshots

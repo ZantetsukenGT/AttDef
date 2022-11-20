@@ -72,6 +72,7 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, COL_SEC "\n  1.37.8 Features and fixes");
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				strcat(str, "{CCCCCC}\nAdded " COL_PRIM "/" COL_SEC "deaglenerf {CCCCCC} to configure deagle dmg.");
+				strcat(str, "{CCCCCC}\nAdded " COL_PRIM "/" COL_SEC "snipernerf {CCCCCC} to configure sniper dmg.");
 				strcat(str, "{CCCCCC}\nRound timer is now reduced properly (sadly timer bug is still around).");
 				strcat(str, "{CCCCCC}\nReplacing a player now sets the correct skin.");
 				strcat(str, COL_PRIM"\n\nPRO TIPS:");
