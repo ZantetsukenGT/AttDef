@@ -16,11 +16,7 @@ public OnGeoDataReady(playerid)
 		switch (IPBlock)
 		{
 			case 0: va_SendClientMessageToAll(-1, "%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
-			case 1:
-			{
-				va_SendClientMessageToAll(-1, "%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {FF6666}Proxy{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
-				SetTimerEx("_BanPlayerDelayed", GetPlayerPing(playerid), false, "i", playerid);
-			}
+			case 1: va_SendClientMessageToAll(-1, "%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s {FF6666}Proxy{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 			case 2: va_SendClientMessageToAll(-1, "%s {CCCCCC}(ID: %d) has connected [{FFFFFF}%s " COL_WARNING "Proxy?{CCCCCC}]", Player[playerid][Name], playerid, CountryName);
 		}
 	}
