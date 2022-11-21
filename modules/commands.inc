@@ -113,6 +113,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 #include "commands/cptime.inc"
 #include "commands/cr.inc"
 #include "commands/credits.inc"
+#include "commands/customtitle.inc"
 #include "commands/dance.inc"
 #include "commands/deaglenerf.inc"
 #include "commands/deathdiss.inc"
