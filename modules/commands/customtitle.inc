@@ -20,7 +20,7 @@ hook OnScriptInit()
 	strcat(dialogString, s_Titles[currentTitle]);
 }
 
-task UpdateTitle[1234]()
+task UpdateTitle[6543]()
 {
 	SendRconCommand("hostname .: %s :.", s_Titles[currentTitle]);
 	currentTitle = currentTitle == Iter_Last(s_ActiveTitles) ? Iter_First(s_ActiveTitles): Iter_Next(s_ActiveTitles, currentTitle);
