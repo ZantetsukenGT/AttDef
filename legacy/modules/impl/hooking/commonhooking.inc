@@ -14,6 +14,16 @@
 //defining an abbreviation to avoid method name truncation while generating y_hooks
 #include <YSI_Coding\y_hooks>
 
+static bool: s_Controllable[MAX_PLAYERS] = { true, ... };
+
+hook OnPlayerConnect(playerid)
+{
+	s_Controllable[playerid] = true;
+	return 1;
+}
+
+stock bool: IsPlayerControllable(playerid) { return s_Controllable[playerid]; }
+
 #define TogglePlayerCtrlable TogglePlayerControllable
 // Add "Frozen" variable to this function and fix parachute bug
 hook stock TogglePlayerCtrlable(playerid, toggle)
@@ -31,7 +41,7 @@ hook stock TogglePlayerCtrlable(playerid, toggle)
 			Player[playerid][HadParachuteBeforeFreeze] = false;
 		}
 	}
-
+	s_Controllable[playerid] = !!toggle;
 	return continue(playerid, toggle);
 }
 

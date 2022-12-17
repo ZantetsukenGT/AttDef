@@ -180,13 +180,13 @@ CreateDeadBody(playerid, killerid, reason, Float: distance = 0.0, Float: x = 0.0
 		case INVALID_PLAYER_ID:
 		{
 			format(str, sizeof str, "Dead body of: %s\nReason: %s", Player[playerid][Name], WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, true);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 		default:
 		{
 			format(str, sizeof str, "Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", Player[playerid][Name], Player[killerid][Name], distance, WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, true);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 	}
@@ -667,11 +667,65 @@ bool: DoesPlayerHaveWeaponInSlot(playerid, slot)
 	return ammo > 0;
 }
 
+GetWeaponSlot(weaponid)
+{
+	new slot;
+	switch (weaponid)
+	{
+		case 0, 1: slot = 0;
+		case 2 .. 9: slot = 1;
+		case 10 .. 15: slot = 10;
+		case 16 .. 18, 39: slot = 8;
+		case 22 .. 24: slot =2;
+		case 25 .. 27: slot = 3;
+		case 28, 29, 32: slot = 4;
+		case 30, 31: slot = 5;
+		case 33, 34: slot = 6;
+		case 35 .. 38: slot = 7;
+		case 40: slot = 12;
+		case 41 .. 43: slot = 9;
+		case 44 .. 46: slot = 11;
+	}
+	return slot;
+}
+
 bool: DoesPlayerHaveWeapon(playerid, weaponid)
 {
 	new wep, ammo;
 	GetPlayerWeaponData(playerid, GetWeaponSlot(weaponid), wep, ammo);
 	return wep == weaponid && ammo > 0;
+}
+
+RemovePlayerWeapon(playerid, weaponid)
+{
+	if(!DoesPlayerHaveWeapon(playerid, weaponid))
+		return 0;
+
+	new plyWeapons[12];
+	new plyAmmo[12], armedID;
+
+	new wep, ammo;
+	for(new slot = 0; slot != 12; slot++)
+	{
+		GetPlayerWeaponData(playerid, slot, wep, ammo);
+
+		if(wep != weaponid)
+		{
+			GetPlayerWeaponData(playerid, slot, plyWeapons[slot], plyAmmo[slot]);
+		}
+	}
+
+	armedID = GetPlayerWeapon(playerid);
+
+	ResetPlayerWeapons(playerid);
+	for(new slot = 0; slot != 12; slot++)
+	{
+		GivePlayerWeapon(playerid, plyWeapons[slot], plyAmmo[slot]);
+	}
+
+	if( armedID != weaponid ) SetPlayerArmedWeapon(playerid,armedID); //give last armedweapon
+	else SetPlayerArmedWeapon(playerid,0);//give fist if player armed weapon was knife
+	return 1;
 }
 
 GetCardinalPoint(Float: degree)

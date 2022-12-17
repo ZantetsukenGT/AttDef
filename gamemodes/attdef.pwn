@@ -4,8 +4,7 @@
 #define MAX_PLAYERS 50
 #define YSI_NO_HEAP_MALLOC
 
-#include <a_samp>
-#include <omp>			 // omp's native YSF implementations
+#include <a_ugmp>
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
 //#include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
@@ -29,8 +28,8 @@
 #include <mSelection> // Selection with preview models feature library
 #include <gBugFix>	  // Fix false vehicle entry as passenger (G (teleport/distance) bug)
 #include <md-sort>	  // Sorts multi dimensional arrays by Slice (Oscar Broman)
-#define MAPFIX_USE_STREAMER false
-#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
+//#define MAPFIX_USE_STREAMER false
+//#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
 #include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
 #define MAX_DIALOG_ITEMS 200
 #include <ndialog-pages> // https://github.com/Nickk888SAMP/Dialog-Pages
