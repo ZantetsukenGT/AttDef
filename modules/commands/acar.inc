@@ -19,10 +19,12 @@ YCMD: acar(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/acar [Vehicle Name/ID]");
 
-	new veh = IsNumeric(params) ? strval(params) : GetVehicleModelID(params);
+	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
+	if (veh > GetNumVehicleModels())
+		return SendErrorMessage(playerid, "This vehicle doesn't exist.");
 	new modelid = GetValidVehicleModelAt(veh);
 	if (modelid == -1)
-		return SendErrorMessage(playerid, "Invalid Vehicle Name/ID."); //In samp there is no vehile with ID below 400 or above 611
+		return SendErrorMessage(playerid, "This vehicle doesn't exist."); //In samp there is no vehile with ID below 400 or above 611
 
 	new pLastVehicle = Player[playerid][LastVehicle];
 	if (pLastVehicle)

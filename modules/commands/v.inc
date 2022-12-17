@@ -22,7 +22,9 @@ YCMD: v(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/v [Vehicle Name/ID]");
 
-	new veh = IsNumeric(params) ? strval(params) : GetVehicleModelID(params);
+	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
+	if (veh > GetNumVehicleModels())
+		return SendErrorMessage(playerid, "Invalid Vehicle Name.");
 	new modelid = GetValidVehicleModelAt(veh);
 	if (modelid == -1)
 		return SendErrorMessage(playerid, "Invalid Vehicle Name."); //In samp there is no vehile with ID below 400 or above 611
