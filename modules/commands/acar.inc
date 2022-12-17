@@ -20,7 +20,7 @@ YCMD: acar(playerid, params[], help)
 		return SendUsageMessage(playerid, "/acar [Vehicle Name/ID]");
 
 	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
-	if (veh == -1 || > GetNumVehicleModels())
+	if (veh == -1 || veh > GetNumVehicleModels())
 		return SendErrorMessage(playerid, "This vehicle doesn't exist.");
 	new modelid = GetValidVehicleModelAt(veh);
 	if (modelid == -1)
