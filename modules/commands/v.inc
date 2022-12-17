@@ -23,11 +23,11 @@ YCMD: v(playerid, params[], help)
 		return SendUsageMessage(playerid, "/v [Vehicle Name/ID]");
 
 	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
-	if (veh > GetNumVehicleModels())
-		return SendErrorMessage(playerid, "Invalid Vehicle Name.");
+	if (veh == -1 || > GetNumVehicleModels())
+		return SendErrorMessage(playerid, "This vehicle doesn't exist.");
 	new modelid = GetValidVehicleModelAt(veh);
 	if (modelid == -1)
-		return SendErrorMessage(playerid, "Invalid Vehicle Name."); //In samp there is no vehile with ID below 400 or above 611
+		return SendErrorMessage(playerid, "This vehicle doesn't exist."); //In samp there is no vehile with ID below 400 or above 611
 
 	//Block some vehiles that u don't like e.g. Tank, hunter. It wil be annoying in lobby. To search for more vehicle IDs try samp wiki.
 	if (modelid == 407 || modelid == 425 || modelid == 430 || modelid == 432 || modelid == 435 || modelid == 441 || modelid == 447 || modelid == 449
