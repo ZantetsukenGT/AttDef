@@ -1064,8 +1064,8 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 	Player[ToAddID][WasInBase] = true;
 	Iter_Add(PlayersInRound, ToAddID);
 
-	Player[ToAddID][Team]	   = Player[ToReplaceID][Team];
 	Player[ToAddID][WasInTeam] = Player[ToAddID][Team];
+	Player[ToAddID][Team]	   = Player[ToReplaceID][Team];
 	SwitchTeamFix(ToAddID, false, false, true);
 
 	SetSpawnInfo(ToAddID, Player[ToAddID][Team], Skin[Player[ToAddID][Team]], Pos[0], Pos[1], Pos[2] + 1, Pos[3], 0, 0, 0, 0, 0, 0);
@@ -1128,8 +1128,8 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 	Player[ToAddID][WasInBase] = true;
 	Iter_Add(PlayersInRound, ToAddID);
 
-	Player[ToAddID][Team]		= SaveVariables[i][pTeam];
-	Player[playerid][WasInTeam] = Player[ToAddID][Team];
+	Player[ToAddID][WasInTeam] = Player[ToAddID][Team];
+	Player[ToAddID][Team]	   = SaveVariables[i][pTeam];
 	SwitchTeamFix(ToAddID, false, false, true);
 
 	if (!SaveVariables[i][WasCrashedInStart])
