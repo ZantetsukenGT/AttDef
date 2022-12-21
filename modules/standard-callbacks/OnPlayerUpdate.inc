@@ -22,7 +22,7 @@ public OnPlayerUpdate(playerid)
 	GetPlayerWeaponData(playerid, PARACHUTE_SLOT, weaponid, ammo);
 	if (ammo && weaponid == WEAPON_PARACHUTE)
 	{
-		switch (GetPlayerAnimationIndex(playerid))
+		switch (GetPlayerAnimationIndex(playerid) + 1)
 		{
 			case 971: // PARA_open
 			{
