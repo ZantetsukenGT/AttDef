@@ -8,12 +8,12 @@
 		"pawn-lang/samp-stdlib",
 		"Zeex/samp-plugin-crashdetect",
 		"katursis/Pawn.RakNet:1.5.1",
-		"Nickk888SAMP/Dialog-Pages",
 		"pawn-lang/YSI-Includes@5.x",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",
 		"ZantetsukenGT/gBugFix",
 		"ZantetsukenGT/progress2",
+		"ZantetsukenGT/samp-dyn-dialog-pages",
 		"ZantetsukenGT/samp-geoip",
 		"ZantetsukenGT/ugmp-dl-stdlib"
 	],

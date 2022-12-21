@@ -2,7 +2,7 @@
 #pragma dynamic 3500000
 #define CGEN_MEMORY 40000
 #define MAX_PLAYERS 50
-#define YSI_NO_HEAP_MALLOC
+#define YSI_YES_HEAP_MALLOC
 
 #include <a_ugmp>
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
@@ -31,8 +31,8 @@
 //#define MAPFIX_USE_STREAMER false
 //#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
 #include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
-#define MAX_DIALOG_ITEMS 200
-#include <ndialog-pages> // https://github.com/Nickk888SAMP/Dialog-Pages
+#define MAX_DIALOG_ITEMS (1024 * 2)
+#include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
 // Att-Def's own stuff
 #include <fps-utils>
