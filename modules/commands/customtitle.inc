@@ -41,6 +41,7 @@ static CustomTitle_ShowDialog(playerid)
 		if (!response)
 			return 1;
 		Iter_Remove(s_ActiveTitles, additional_data);
+		currentTitle = Iter_First(s_ActiveTitles);
 		return 1;
 	}
 	inline const readOptions(pid, did, response, listitem, string: inputtext[])
