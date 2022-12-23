@@ -6,18 +6,22 @@
 static Iterator: s_ActiveTitles<MAX_PLAYERS>;
 static s_Titles[MAX_PLAYERS][64];
 static currentTitle;
+static Timer: updateTimer = Timer: 0;
 
 hook OnScriptInit()
 {
 	Iter_Clear(s_ActiveTitles);
 	currentTitle = Iter_Alloc(s_ActiveTitles);
-	format(s_Titles[currentTitle], sizeof(s_Titles[]), "Community -> %s", GM_WEBSITE);
+	GetConsoleVarAsString("name", s_Titles[currentTitle]);
+	if (Timer_IsRunning(updateTimer))
+		stop updateTimer;
+	updateTimer = Timer: 0;
 	return 1;
 }
 
-task UpdateTitle[5000]()
+timer UpdateTitle[5000]()
 {
-	SendRconCommand("hostname .: %s :.", s_Titles[currentTitle]);
+	SendRconCommand("hostname %s", s_Titles[currentTitle]);
 	currentTitle = currentTitle == Iter_Last(s_ActiveTitles) ? Iter_First(s_ActiveTitles) : Iter_Next(s_ActiveTitles, currentTitle);
 	return 1;
 }
@@ -32,6 +36,8 @@ static CustomTitle_ShowDialog(playerid)
 
 		new titleIndex = Iter_Alloc(s_ActiveTitles);
 		format(s_Titles[titleIndex], sizeof(s_Titles[]), "%s", inputtext);
+		if (!Timer_IsRunning(updateTimer))
+			updateTimer = repeat UpdateTitle();
 		return 1;
 	}
 	inline const removeTitle(pid, response, additional_data, listitem, string: inputtext[])
@@ -42,6 +48,11 @@ static CustomTitle_ShowDialog(playerid)
 		if (currentTitle == additional_data)
 			currentTitle = currentTitle == Iter_Last(s_ActiveTitles) ? Iter_First(s_ActiveTitles) : Iter_Next(s_ActiveTitles, currentTitle);
 		Iter_Remove(s_ActiveTitles, additional_data);
+		if (Iter_Count(s_ActiveTitles) == 1)
+		{
+			stop updateTimer;
+			UpdateTitle();
+		}
 		return 1;
 	}
 	inline const readOptions(pid, did, response, listitem, string: inputtext[])
