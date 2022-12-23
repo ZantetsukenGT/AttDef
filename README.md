@@ -6,7 +6,7 @@
 * Follow [Semantic Versioning](https://semver.org/)
 -->
 
-## Installation FOR DEVELOPMENT OR CONTRIBUTIONS
+## Installation FOR DEVELOPMENT OR CONTRIBUTIONS. Otherwise you're looking for the [latest release.](https://github.com/ZantetsukenGT/AttDef/releases/latest)
 
 Clone the project or download the project in a zip archive:
 
