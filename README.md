@@ -45,7 +45,7 @@ Then in the `plugins/` folder:
 
 Then in the `scriptfiles/` folder:
 
-1. Copy the `AttDefDatabase.db.example` file to `AttDefDatabase.db` or the server won't start properly.
+1. Make a copy of the `AttDefDatabase.db.example` file and rename it to `AttDefDatabase.db` or the server won't start properly.
 
 ## Build
 
@@ -96,4 +96,4 @@ This project is open for collaboration, following a few guidelines:
 5. String literals need to be modified into 1-liners.
 6. Pawn Tags cannot have a space between the `Tag` and the `:`, example: (Tag: good, Tag : bad).
 7. The formatter adds a NewLine character after the keyword `public`, remove it so that the keyword and the function name is in the same line.
-8. Macros which make use of %0 or any number really, will be separated as % 0 and need to be joined again.
+8. Macros which make use of `%0` or any number really, will be separated as `% 0` and need to be joined again.
