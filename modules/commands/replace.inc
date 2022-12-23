@@ -14,7 +14,6 @@ YCMD: replace(playerid, params[], help)
 
 	LogAdminCommand("replace", playerid, INVALID_PLAYER_ID);
 
-	DynDialog_Clear(playerid);
 	foreach (new i : Player)
 	{
 		if (Player[i][InDuel] || Player[i][IsAFK] || !Player[i][Spawned])
@@ -28,7 +27,6 @@ YCMD: replace(playerid, params[], help)
 
 hook ReplaceFirstDialog(playerid, response, additional_data, listitem, string: inputtext[])
 {
-	DynDialog_Clear(playerid);
 	if (!response)
 		return 1;
 	
@@ -53,7 +51,6 @@ hook ReplaceFirstDialog(playerid, response, additional_data, listitem, string: i
 
 hook ReplaceSecondDialog(playerid, response, additional_data, listitem, string: inputtext[])
 {
-	DynDialog_Clear(playerid);
 	if (!response)
 		return 1;
 	new ToReplaceID = additional_data;

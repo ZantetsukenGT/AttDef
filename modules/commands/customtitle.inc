@@ -36,8 +36,7 @@ static CustomTitle_ShowDialog(playerid)
 	}
 	inline const removeTitle(pid, response, additional_data, listitem, string: inputtext[])
 	{
-#pragma unused listitem, inputtext
-		DynDialog_Clear(pid);
+#pragma unused pid, listitem, inputtext
 		if (!response)
 			return 1;
 		if (currentTitle == additional_data)
