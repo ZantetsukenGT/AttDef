@@ -3,8 +3,6 @@
 #endif
 #define _attdef_OnDResponse
 
-DialogPages:NoResponseDialog(playerid, response, listitem, inputtext[]){}
-
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if (dialogid == DIALOG_NO_RESPONSE)
