@@ -40,14 +40,14 @@ static CustomTitle_ShowDialog(playerid)
 			updateTimer = repeat UpdateTitle();
 		return 1;
 	}
-	inline const removeTitle(pid, response, additional_data, listitem, string: inputtext[])
+	inline const removeTitle(pid, response, item_value, string: inputtext[])
 	{
-#pragma unused pid, listitem, inputtext
+#pragma unused pid, inputtext
 		if (!response)
 			return 1;
-		if (currentTitle == additional_data)
+		if (currentTitle == item_value)
 			currentTitle = currentTitle == Iter_Last(s_ActiveTitles) ? Iter_First(s_ActiveTitles) : Iter_Next(s_ActiveTitles, currentTitle);
-		Iter_Remove(s_ActiveTitles, additional_data);
+		Iter_Remove(s_ActiveTitles, item_value);
 		if (Iter_Count(s_ActiveTitles) == 1)
 		{
 			stop updateTimer;

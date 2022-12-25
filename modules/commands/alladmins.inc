@@ -7,9 +7,9 @@ YCMD: alladmins(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "display a list of all server admins (offline and online).");
-	inline const dialog_response(pid, response, additional_data, listitem, string: inputtext[])
+	inline const dialog_response(pid, response, item_value, string: inputtext[])
 	{
-		#pragma unused pid, response, additional_data, listitem, inputtext
+		#pragma unused pid, response, item_value, inputtext
 		return 1;
 	}
 

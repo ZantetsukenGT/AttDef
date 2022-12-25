@@ -21,39 +21,39 @@ YCMD: replace(playerid, params[], help)
 
 		DynDialog_AddItem(playerid, i, Player[i][Name]);
 	}
-	DynDialog_Show(playerid, using public ReplaceFirstDialog<iiiis>, DIALOG_STYLE_LIST, COL_PRIM "Player to add", "Process", "Cancel", 15);
+	DynDialog_Show(playerid, using public ReplaceFirstDialog<iiis>, DIALOG_STYLE_LIST, COL_PRIM "Player to add", "Process", "Cancel", 15);
 	return 1;
 }
 
-hook ReplaceFirstDialog(playerid, response, additional_data, listitem, string: inputtext[])
+hook ReplaceFirstDialog(playerid, response, item_value, string: inputtext[])
 {
 	if (!response)
 		return 1;
 	
-	REPLACE_ToAddID[playerid] = additional_data;
+	REPLACE_ToAddID[playerid] = item_value;
 	foreach (new i : Player)
 	{
 		if (!Player[i][Playing])
 			continue;
 
-		DynDialog_AddItem(playerid, i, Player[i][Name]); // additional_data = playerid = [0, MAX_PLAYERS - 1] for online players
+		DynDialog_AddItem(playerid, i, Player[i][Name]); // item_value = playerid = [0, MAX_PLAYERS - 1] for online players
 	}
 	for (new i = 0; i < SAVE_SLOTS; i++)
 	{
 		if (SaveVariables[i][pName][0] && SaveVariables[i][RoundID] == Current && SaveVariables[i][ToBeAdded] == true)
 		{
-			DynDialog_AddItem(playerid, -i - 1, SaveVariables[i][pName]); // additional_data = -slot - 1 = [-SAVE_SLOTS, -1] for offline players
+			DynDialog_AddItem(playerid, -i - 1, SaveVariables[i][pName]); // item_value = -slot - 1 = [-SAVE_SLOTS, -1] for offline players
 		}
 	}
-	DynDialog_Show(playerid, using public ReplaceSecondDialog<iiiis>, DIALOG_STYLE_LIST, COL_PRIM "Player to replace", "Process", "Cancel", 15);
+	DynDialog_Show(playerid, using public ReplaceSecondDialog<iiis>, DIALOG_STYLE_LIST, COL_PRIM "Player to replace", "Process", "Cancel", 15);
 	return 1;
 }
 
-hook ReplaceSecondDialog(playerid, response, additional_data, listitem, string: inputtext[])
+hook ReplaceSecondDialog(playerid, response, item_value, string: inputtext[])
 {
 	if (!response)
 		return 1;
-	new ToReplaceID = additional_data;
+	new ToReplaceID = item_value;
 	if (ToReplaceID >= 0)
 	{
 		new ToAddID = REPLACE_ToAddID[playerid];
@@ -90,7 +90,7 @@ hook ReplaceSecondDialog(playerid, response, additional_data, listitem, string: 
 	}
 	else
 	{
-		ToReplaceID = -ToReplaceID - 1; // reversing the transformation we did to the additional_data
+		ToReplaceID = -ToReplaceID - 1; // reversing the transformation we did to the item_value
 		new ToAddID = REPLACE_ToAddID[playerid];
 		if (!IsPlayerConnected(ToAddID))
 			return SendErrorMessage(playerid, "Player is not connected anymore.");
