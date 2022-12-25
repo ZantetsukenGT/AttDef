@@ -180,13 +180,13 @@ CreateDeadBody(playerid, killerid, reason, Float: distance = 0.0, Float: x = 0.0
 		case INVALID_PLAYER_ID:
 		{
 			format(str, sizeof str, "Dead body of: %s\nReason: %s", Player[playerid][Name], WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, true);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 		default:
 		{
 			format(str, sizeof str, "Dead body of: %s\nMurderer: %s\nDistance: %.1f\nReason: %s", Player[playerid][Name], Player[killerid][Name], distance, WeaponNames[reason]);
-			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, 1);
+			new Text3D: textlabel = Create3DTextLabel(str, color, x, y, z - 0.3, 20.0, worldid, true);
 			Iter_Add(DeadBodyLabels, _: textlabel);
 		}
 	}
