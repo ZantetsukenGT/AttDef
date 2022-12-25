@@ -1162,11 +1162,19 @@ DestroyUnusedVehicles()
 	foreach (new i : Vehicle)
 	{
 		new bool: isOccupied = false;
-		foreach (new o : VehicleOccupant(i))
+		foreach (new o : VehicleDriver(i))
 		{
 			#pragma unused o
 			isOccupied = true;
-			break;
+		}
+		if (!isOccupied)
+		{
+			foreach (new o : VehiclePassenger(i))
+			{
+				#pragma unused o
+				isOccupied = true;
+				break;
+			}
 		}
 		if (isOccupied)
 			continue;

@@ -40,7 +40,11 @@ public OnPlayerDisconnect(playerid, reason)
 	new vehicleid = Player[playerid][LastVehicle];
 	if (vehicleid)
 	{
-		foreach (new i : VehicleOccupant(vehicleid))
+		foreach (new i : VehicleDriver(vehicleid))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		foreach (new i : VehiclePassenger(vehicleid))
 		{
 			RemovePlayerFromVehicle(i);
 		}

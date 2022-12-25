@@ -26,7 +26,11 @@ YCMD: acar(playerid, params[], help)
 	new pLastVehicle = Player[playerid][LastVehicle];
 	if (pLastVehicle)
 	{
-		foreach (new i : VehicleOccupant(pLastVehicle))
+		foreach (new i : VehicleDriver(pLastVehicle))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		foreach (new i : VehiclePassenger(pLastVehicle))
 		{
 			RemovePlayerFromVehicle(i);
 		}

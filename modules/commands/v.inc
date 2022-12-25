@@ -43,7 +43,11 @@ YCMD: v(playerid, params[], help)
 	new pLastVehicle = Player[playerid][LastVehicle];
 	if (pLastVehicle)
 	{
-		foreach (new i : VehicleOccupant(pLastVehicle))
+		foreach (new i : VehicleDriver(pLastVehicle))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		foreach (new i : VehiclePassenger(pLastVehicle))
 		{
 			RemovePlayerFromVehicle(i);
 		}
@@ -65,7 +69,11 @@ YCMD: v(playerid, params[], help)
 		new vehicleid = GetPlayerVehicleID(playerid);
 		if (vehicleid)
 		{
-			foreach (new i : VehicleOccupant(vehicleid))
+			foreach (new i : VehicleDriver(vehicleid))
+			{
+				RemovePlayerFromVehicle(i);
+			}
+			foreach (new i : VehiclePassenger(vehicleid))
 			{
 				RemovePlayerFromVehicle(i);
 			}

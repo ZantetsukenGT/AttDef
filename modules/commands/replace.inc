@@ -71,7 +71,11 @@ hook ReplaceSecondDialog(playerid, response, additional_data, listitem, string: 
 
 		if (Player[ToAddID][LastVehicle])
 		{
-			foreach (new i : VehicleOccupant(Player[ToAddID][LastVehicle]))
+			foreach (new i : VehicleDriver(Player[ToAddID][LastVehicle]))
+			{
+				RemovePlayerFromVehicle(i);
+			}
+			foreach (new i : VehiclePassenger(Player[ToAddID][LastVehicle]))
 			{
 				RemovePlayerFromVehicle(i);
 			}
@@ -102,7 +106,11 @@ hook ReplaceSecondDialog(playerid, response, additional_data, listitem, string: 
 
 		if (Player[ToAddID][LastVehicle])
 		{
-			foreach (new i : VehicleOccupant(Player[ToAddID][LastVehicle]))
+			foreach (new i : VehicleDriver(Player[ToAddID][LastVehicle]))
+			{
+				RemovePlayerFromVehicle(i);
+			}
+			foreach (new i : VehiclePassenger(Player[ToAddID][LastVehicle]))
 			{
 				RemovePlayerFromVehicle(i);
 			}

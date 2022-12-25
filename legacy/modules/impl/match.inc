@@ -1875,7 +1875,11 @@ public AddPlayerToArena(playerid)
 
 	if (Player[playerid][LastVehicle])
 	{
-		foreach (new i : VehicleOccupant(Player[playerid][LastVehicle]))
+		foreach (new i : VehicleDriver(Player[playerid][LastVehicle]))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		foreach (new i : VehiclePassenger(Player[playerid][LastVehicle]))
 		{
 			RemovePlayerFromVehicle(i);
 		}
@@ -2345,7 +2349,11 @@ public AddPlayerToBase(playerid)
 
 	if (Player[playerid][LastVehicle])
 	{
-		foreach (new i : VehicleOccupant(Player[playerid][LastVehicle]))
+		foreach (new i : VehicleDriver(Player[playerid][LastVehicle]))
+		{
+			RemovePlayerFromVehicle(i);
+		}
+		foreach (new i : VehiclePassenger(Player[playerid][LastVehicle]))
 		{
 			RemovePlayerFromVehicle(i);
 		}
