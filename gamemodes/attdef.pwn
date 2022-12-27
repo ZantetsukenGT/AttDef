@@ -8,7 +8,7 @@
 #include <omp>			 // omp's native YSF implementations
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-//#include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
+#include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
 
 // YSI Libraries 5.x
 // See https://github.com/pawn-lang/YSI-Includes for all the documentation.
@@ -40,6 +40,7 @@
 #include <fake-ping>
 #include <modules>
 #include <commands>
+#include <wc-callbacks>		  // Weapon-config's callback handling
 #include <other-callbacks>	  // Dependencies and miscellaneous callbacks, organized in different files
 #include <standard-callbacks> // SA-MP default callbacks, organized in different files, must be the last include
 

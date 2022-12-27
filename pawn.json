@@ -10,6 +10,7 @@
 		"katursis/Pawn.RakNet@omp",
 		"NexiusTailer/MapFix",
 		"openmultiplayer/server-beta",
+		"oscar-broman/samp-weapon-config",
 		"pawn-lang/YSI-Includes@5.x",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",

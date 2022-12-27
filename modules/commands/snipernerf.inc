@@ -25,7 +25,7 @@ static UsageSniperNerf(playerid)
 	if (ShouldNerfSniper)
 		return SendUsageMessage(
 			playerid,
-			va_return("/snipernerf [off | on [optional new damage, default if empty: 25, Min: 0.5, Max: 41.25, " COL_PRIM "current: " COL_USAGE "%0.3f{FFFFFF}]]", SniperNerfValue));
+			va_return("/snipernerf [off | on [optional new damage, default if empty: 25, Min: 0.5, Max: 41.25, " COL_PRIM "current: " COL_USAGE "%0.3f{FFFFFF}]]", GetWeaponDamage(WEAPON_SNIPER)));
 	return SendUsageMessage(playerid, "/snipernerf [off | on [optional new damage, default if empty: 25, Min: 0.5, Max: 41.25, " COL_PRIM "current: " COL_USAGE "off{FFFFFF}]]");
 }
 
@@ -36,6 +36,7 @@ DoSniperNerf(playerid, bool: shouldNerfSniper, Float: damageValue)
 		if (!ShouldNerfSniper)
 			return SendErrorMessage(playerid, "Sniper nerf is already off.");
 		ShouldNerfSniper = shouldNerfSniper;
+		SetWeaponDamage(WEAPON_DEAGLE, DAMAGE_TYPE_STATIC, 41.25);
 		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}sniper's damage " COL_PRIM "to its {FFFFFF}default" COL_PRIM ".", Player[playerid][Name]);
 	}
 	if (damageValue > 41.250)
@@ -43,9 +44,9 @@ DoSniperNerf(playerid, bool: shouldNerfSniper, Float: damageValue)
 	if (damageValue < 0.500)
 		return SendErrorMessage(playerid, "This value is too low, even bare fists do more damage.");
 	new bool: oldBoolean = ShouldNerfSniper;
-	new Float: oldValue = SniperNerfValue;
+	new Float: oldValue = GetWeaponDamage(WEAPON_SNIPER);
 	ShouldNerfSniper = shouldNerfSniper;
-	SniperNerfValue	 = damageValue;
+	SetWeaponDamage(WEAPON_SNIPER, DAMAGE_TYPE_STATIC, damageValue);
 	if (oldBoolean)
 		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}sniper's damage " COL_PRIM "to " COL_USAGE "%0.3f" COL_PRIM ", previous value: " COL_USAGE "%0.3f", Player[playerid][Name], damageValue, oldValue);
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}sniper's damage " COL_PRIM "to " COL_USAGE "%0.3f{FFFFFF}", Player[playerid][Name], damageValue);

@@ -25,7 +25,7 @@ static UsageDeagleNerf(playerid)
 	if (ShouldNerfDeagle)
 		return SendUsageMessage(
 			playerid,
-			va_return("/deaglenerf [off | on [optional new damage, default if empty: 35, Min: 0.5, Max: 46.2, " COL_PRIM "current: " COL_USAGE "%0.3f{FFFFFF}]]", DeagleNerfValue));
+			va_return("/deaglenerf [off | on [optional new damage, default if empty: 35, Min: 0.5, Max: 46.2, " COL_PRIM "current: " COL_USAGE "%0.3f{FFFFFF}]]", GetWeaponDamage(WEAPON_DEAGLE)));
 	return SendUsageMessage(playerid, "/deaglenerf [off | on [optional new damage, default if empty: 35, Min: 0.5, Max: 46.2, " COL_PRIM "current: " COL_USAGE "off{FFFFFF}]]");
 }
 
@@ -36,6 +36,7 @@ DoDeagleNerf(playerid, bool: shouldNerfDeagle, Float: damageValue)
 		if (!ShouldNerfDeagle)
 			return SendErrorMessage(playerid, "Deagle nerf is already off.");
 		ShouldNerfDeagle = shouldNerfDeagle;
+		SetWeaponDamage(WEAPON_DEAGLE, DAMAGE_TYPE_STATIC, 46.2);
 		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to its {FFFFFF}default" COL_PRIM ".", Player[playerid][Name]);
 	}
 	if (damageValue > 46.200)
@@ -43,9 +44,9 @@ DoDeagleNerf(playerid, bool: shouldNerfDeagle, Float: damageValue)
 	if (damageValue < 0.500)
 		return SendErrorMessage(playerid, "This value is too low, even bare fists do more damage.");
 	new bool: oldBoolean = ShouldNerfDeagle;
-	new Float: oldValue = DeagleNerfValue;
+	new Float: oldValue = GetWeaponDamage(WEAPON_DEAGLE);
 	ShouldNerfDeagle = shouldNerfDeagle;
-	DeagleNerfValue	 = damageValue;
+	SetWeaponDamage(WEAPON_DEAGLE, DAMAGE_TYPE_STATIC, damageValue);
 	if (oldBoolean)
 		return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to " COL_USAGE "%0.3f" COL_PRIM ", previous value: " COL_USAGE "%0.3f", Player[playerid][Name], damageValue, oldValue);
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has set {FFFFFF}deagle's damage " COL_PRIM "to " COL_USAGE "%0.3f{FFFFFF}", Player[playerid][Name], damageValue);
