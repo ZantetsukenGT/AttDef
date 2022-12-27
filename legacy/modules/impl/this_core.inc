@@ -65,7 +65,9 @@ InitScriptSecondarySettings()
 	// Settings
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
+#if !defined opws_fix_included_
 	IsSkinshot = GetConsoleVarAsInt("game.lag_compensation_mode") == 1;
+#endif
 	CheckServerHostname();
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();

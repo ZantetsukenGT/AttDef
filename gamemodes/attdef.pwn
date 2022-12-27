@@ -1,5 +1,5 @@
 
-#pragma dynamic 3500000
+#define DYNAMIC_MEMORY 3500000
 #define CGEN_MEMORY 40000
 #define MAX_PLAYERS 50
 #define YSI_YES_HEAP_MALLOC
@@ -26,17 +26,18 @@
 // Libraries
 #include <sscanf2>	  // Sscanf 2.11.x
 #include <progress2>  // A SA:MP UI library for rendering progress bars
-#include <mSelection> // Selection with preview models feature library
+//#include <mSelection> // Selection with preview models feature library
 #include <gBugFix>	  // Fix false vehicle entry as passenger (G (teleport/distance) bug)
 #include <md-sort>	  // Sorts multi dimensional arrays by Slice (Oscar Broman)
 #define MAPFIX_USE_STREAMER false
-#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
+//#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
 #include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
-#define MAX_DIALOG_ITEMS (1024 * 2)
 #include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
 // Att-Def's own stuff
 #include <fps-utils>
+#tryinclude <opws-fix>
+#include <fake-ping>
 #include <modules>
 #include <commands>
 #include <other-callbacks>	  // Dependencies and miscellaneous callbacks, organized in different files

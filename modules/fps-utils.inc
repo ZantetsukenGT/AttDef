@@ -14,6 +14,7 @@ hook OnPlayerConnect(playerid)
 {
 	s_FPS[playerid]			   = 0;
 	s_LastDrunkLevel[playerid] = 0;
+	return 1;
 }
 
 stock GetPlayerFPS(playerid) { return s_FPS[playerid]; }
