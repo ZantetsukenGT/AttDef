@@ -49,7 +49,7 @@ Then in the `scriptfiles/` folder:
 
 Then in the `config.json` file:
 
-1. In the `"pawn"."legacy_plugins"` array, add `"samp_bcrypt"`.
+1. In the `"pawn"."legacy_plugins"` array, add `"samp_bcrypt"` if you're in windows or `"samp_bcrypt.so"` if you're in linux.
 2. In the `"pawn"."main_scripts"` array, remove `"test 1"` and add `"attdef"`.
 3. In the `"rcon"."password"` property, change it from the default `changeme`.
 
