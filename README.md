@@ -47,6 +47,12 @@ Then in the `scriptfiles/` folder:
 
 1. Make a copy of the `AttDefDatabase.db.example` file and rename it to `AttDefDatabase.db` or the server won't start properly.
 
+Then in the `config.json` file:
+
+1. In the `"pawn"."legacy_plugins"` array, add `"samp_bcrypt"`.
+2. In the `"pawn"."main_scripts"` array, remove `"test 1"` and add `"attdef"`.
+3. In the `"rcon"."password"` property, change it from the default `changeme`.
+
 ## Build
 
 Will generate the attdef.amx file needed to run the server:
