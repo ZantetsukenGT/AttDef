@@ -32,6 +32,7 @@ hook OnPlayerDisconnect(playerid, reason)
 		// Optimize and clean database
 		OptimizeDatabase();
 	}
+	return 1;
 }
 
 InitScriptCoreSettings()

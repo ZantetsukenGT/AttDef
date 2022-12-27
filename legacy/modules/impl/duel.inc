@@ -16,7 +16,7 @@
 hook OnPlayerDisconnect(playerid, reason)
 {
 	if (!Player[playerid][InDuel])
-		return;
+		return 1;
 
 	va_SendClientMessageToAll(-1, "%s left server during a duel {757575}| HP %d | Armour %d", Player[playerid][Name], Player[playerid][pHealth], Player[playerid][pArmour]);
 
@@ -28,6 +28,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	ResetDuellers(winner, playerid);
 	UpdateDuellersStats(winner, playerid);
 	Player[winner][challengerid] = -1;
+	return 1;
 }
 
 ResetDuellers(dueller1, dueller2, bool: respawn = true)

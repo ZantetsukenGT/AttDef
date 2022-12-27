@@ -305,6 +305,7 @@ hook OnPlayerDisconnect(playerid, reason)
 {
 	DestroyPlayerLabels(playerid);
 	Iter_Remove(PlayersInVehicles, playerid);
+	return 1;
 }
 
 CreatePlayerLabels(playerid)

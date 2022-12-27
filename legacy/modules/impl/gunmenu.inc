@@ -21,6 +21,7 @@ hook OnPlayerDisconnect(playerid, reason)
 {
 	// Reset player weapons on gunmenu
 	ResetPlayerGunmenu(playerid, false);
+	return 1;
 }
 
 LoadGunmenuData()

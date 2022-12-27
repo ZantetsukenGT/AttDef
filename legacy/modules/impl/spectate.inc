@@ -22,6 +22,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	// Handle spectate when a player disconnects
 	StopSpectate(playerid);
 	HandleSpectatedPlayerDisconnect(playerid);
+	return 1;
 }
 
 UpdateSpectateInfoForPlayer(spectatorid)

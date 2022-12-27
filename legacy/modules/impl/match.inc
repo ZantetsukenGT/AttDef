@@ -51,6 +51,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	// Call OnPlayerLeaveCheckpoint to see if this player was in the checkpoint and fix issues
 	if (Current != -1)
 		CallLocalFunction("OnPlayerLeaveCheckpoint", "i", playerid);
+	return 1;
 }
 
 hook OnGameModeInit()

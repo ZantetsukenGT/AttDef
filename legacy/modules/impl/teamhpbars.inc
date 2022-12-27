@@ -17,7 +17,11 @@
 
 #include <YSI_Coding\y_hooks>
 
-hook OnPlayerDisconnect(playerid, reason) { DeletePlayerTeamBar(playerid); }
+hook OnPlayerDisconnect(playerid, reason)
+{
+	DeletePlayerTeamBar(playerid);
+	return 1;
+}
 
 // This finds the Y co-ordinate of the next free place for the team HP bar textdraw
 FindPlayerTeamBarY(playerid, &Float: y)
