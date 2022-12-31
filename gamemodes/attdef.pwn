@@ -37,6 +37,7 @@
 #include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
 // Att-Def's own stuff
+#tryinclude <pwac>
 #include <fps-utils>
 #include <fake-ping>
 #include <anti-secrets>
