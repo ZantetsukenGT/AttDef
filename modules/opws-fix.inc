@@ -4,6 +4,7 @@
 #define opws_fix_included_
 
 #include <Pawn.RakNet>
+#include <YSI_Coding\y_timers>
 #include <YSI_Coding\y_hooks>
 
 static const BULLET_SYNC					= 206;
