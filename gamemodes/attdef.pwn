@@ -32,7 +32,7 @@
 #include <gBugFix>	  // Fix false vehicle entry as passenger (G (teleport/distance) bug)
 #include <md-sort>	  // Sorts multi dimensional arrays by Slice (Oscar Broman)
 #define MAPFIX_USE_STREAMER false
-//#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
+#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
 #include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
 #include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
