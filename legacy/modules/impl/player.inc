@@ -121,11 +121,11 @@ InitPlayer(playerid)
 	Player[playerid][ChatChannel]			   = -1;
 	Player[playerid][RoundKills]			   = 0;
 	Player[playerid][RoundDeaths]			   = 0;
-	Player[playerid][RoundDamage]			   = 0;
+	Player[playerid][RoundDamage]			   = 0.0;
 	Player[playerid][WeaponPicked]			   = 0;
 	Player[playerid][TotalKills]			   = 0;
 	Player[playerid][TotalDeaths]			   = 0;
-	Player[playerid][TotalDamage]			   = 0;
+	Player[playerid][TotalDamage]			   = 0.0;
 	Player[playerid][ACKick]				   = 0;
 	Player[playerid][IsSpectatingID]		   = -1;
 	Player[playerid][OutOfArena]			   = MAX_ZONE_LIMIT_WARNINGS;
@@ -815,10 +815,10 @@ ResetSaveVariables(index)
 	SaveVariables[index][pTeam]				= 0;
 	SaveVariables[index][RKills]			= 0;
 	SaveVariables[index][RDeaths]			= 0;
-	SaveVariables[index][RDamage]			= 0;
+	SaveVariables[index][RDamage]			= 0.0;
 	SaveVariables[index][TKills]			= 0;
 	SaveVariables[index][TDeaths]			= 0;
-	SaveVariables[index][TDamage]			= 0;
+	SaveVariables[index][TDamage]			= 0.0;
 	SaveVariables[index][sWasInBase]		= false;
 	SaveVariables[index][RoundID]			= -1;
 	SaveVariables[index][WasCrashedInStart] = false;

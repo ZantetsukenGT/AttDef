@@ -30,7 +30,6 @@ static HandleHeadshot(playerid, issuerid, weaponid)
 
 public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 {
-	new amount_int = floatround(amount);
 	if (issuerid != INVALID_PLAYER_ID) // If the damager is a HUMAN
 	{
 		// Detect headshots
@@ -45,8 +44,8 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 		if (Player[issuerid][Playing] && Player[playerid][Playing])
 		{
 			Player[issuerid][shotsHit]++;
-			Player[issuerid][RoundDamage] += amount_int;
-			Player[issuerid][TotalDamage] += amount_int;
+			Player[issuerid][RoundDamage] += amount;
+			Player[issuerid][TotalDamage] += amount;
 			UpdateRoundKillDmgTDmg(issuerid);
 		}
 	}
@@ -75,8 +74,8 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 				{
 					va_TextDrawSetString(AttHpLose, "~r~~h~%s", Player[playerid][NameWithoutTag]);
 
-					TempDamage[ATTACKER] += amount_int;
-					va_TextDrawSetString(TeamHpLose[0], "~r~-%d", TempDamage[ATTACKER]);
+					TempDamage[ATTACKER] += amount;
+					va_TextDrawSetString(TeamHpLose[0], "~r~-%d", floatround(TempDamage[ATTACKER]));
 
 					ModernTextDrawFlash(ATTACKER);
 
@@ -88,8 +87,8 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 				{
 					va_TextDrawSetString(DefHpLose, "~b~~h~%s", Player[playerid][NameWithoutTag]);
 
-					TempDamage[DEFENDER] += amount_int;
-					va_TextDrawSetString(TeamHpLose[1], "~b~-%d", TempDamage[DEFENDER]);
+					TempDamage[DEFENDER] += amount;
+					va_TextDrawSetString(TeamHpLose[1], "~b~-%d", floatround(TempDamage[DEFENDER]));
 
 					ModernTextDrawFlash(DEFENDER);
 

@@ -1013,7 +1013,7 @@ public HideHpTextForAtt()
 	TextDrawSetString(TeamHpLose[0], " ");
 	TextDrawSetString(AttHpLose, " ");
 	StopModernTextDrawFlash(ATTACKER);
-	TempDamage[ATTACKER] = 0;
+	TempDamage[ATTACKER] = 0.0;
 	return 1;
 }
 
@@ -1024,7 +1024,7 @@ public HideHpTextForDef()
 	TextDrawSetString(TeamHpLose[1], " ");
 	TextDrawSetString(DefHpLose, " ");
 	StopModernTextDrawFlash(DEFENDER);
-	TempDamage[DEFENDER] = 0;
+	TempDamage[DEFENDER] = 0.0;
 	return 1;
 }
 
@@ -1262,7 +1262,7 @@ ResetPlayerRoundVariables(playerid, bool: resetTotals = false)
 	{
 		Player[playerid][TotalKills]		= 0;
 		Player[playerid][TotalDeaths]		= 0;
-		Player[playerid][TotalDamage]		= 0;
+		Player[playerid][TotalDamage]		= 0.0;
 		Player[playerid][RoundPlayed]		= 0;
 		Player[playerid][TotalBulletsFired] = 0;
 		Player[playerid][TotalshotsHit]		= 0;
@@ -1271,7 +1271,7 @@ ResetPlayerRoundVariables(playerid, bool: resetTotals = false)
 	{
 		Player[playerid][RoundKills]  = 0;
 		Player[playerid][RoundDeaths] = 0;
-		Player[playerid][RoundDamage] = 0;
+		Player[playerid][RoundDamage] = 0.0;
 		Player[playerid][shotsHit]	  = 0;
 	}
 }
@@ -1284,7 +1284,7 @@ ResetRoundVariablesInSlots()
 		{
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
-			SaveVariables[i][RDamage]	 = 0;
+			SaveVariables[i][RDamage]	 = 0.0;
 			SaveVariables[i][sWasInBase] = false;
 		}
 	}
@@ -2561,7 +2561,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 						dalive++;
 					}
 				}
-				playerScores[index][player_Score]  = Player[i][RoundDamage];
+				playerScores[index][player_Score]  = floatround(Player[i][RoundDamage]);
 				playerScores[index][player_Team]   = Player[i][Team];
 				playerScores[index][player_Kills]  = Player[i][RoundKills];
 				playerScores[index][player_Deaths] = Player[i][RoundDeaths];
@@ -2626,7 +2626,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	{
 		if (SaveVariables[i][pName][0] && Current == SaveVariables[i][RoundID] && SaveVariables[i][CheckScore])
 		{
-			playerScores[index][player_Score]  = SaveVariables[i][RDamage];
+			playerScores[index][player_Score]  = floatround(SaveVariables[i][RDamage]);
 			playerScores[index][player_Team]   = SaveVariables[i][pTeam];
 			playerScores[index][player_Kills]  = SaveVariables[i][RKills];
 			playerScores[index][player_Deaths] = SaveVariables[i][RDeaths];
@@ -2643,7 +2643,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 			SaveVariables[i][RKills]	 = 0;
 			SaveVariables[i][RDeaths]	 = 0;
-			SaveVariables[i][RDamage]	 = 0;
+			SaveVariables[i][RDamage]	 = 0.0;
 
 			SaveVariables[i][RoundID]	 = -1;
 			SaveVariables[i][CheckScore] = false;
@@ -2886,9 +2886,9 @@ public WarEnded()
 
 	foreach (new i : Player)
 	{
-		if (Player[i][TotalDamage] > 0)
+		if (Player[i][TotalDamage] > 0.0)
 		{
-			playerScores[index][player_Score]	= Player[i][TotalDamage];
+			playerScores[index][player_Score]	= floatround(Player[i][TotalDamage]);
 			playerScores[index][player_Team]	= Player[i][Team];
 			playerScores[index][player_Kills]	= Player[i][TotalKills];
 			playerScores[index][player_Deaths]	= Player[i][TotalDeaths];
@@ -2923,9 +2923,9 @@ public WarEnded()
 	}
 	for (new i = 0; i < SAVE_SLOTS; ++i)
 	{
-		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0)
+		if (SaveVariables[i][pName][0] && SaveVariables[i][TDamage] > 0.0)
 		{
-			playerScores[index][player_Score]	= SaveVariables[i][TDamage];
+			playerScores[index][player_Score]	= floatround(SaveVariables[i][TDamage]);
 			playerScores[index][player_Team]	= SaveVariables[i][pTeam];
 			playerScores[index][player_Kills]	= SaveVariables[i][TKills];
 			playerScores[index][player_Deaths]	= SaveVariables[i][TDeaths];
@@ -2949,7 +2949,7 @@ public WarEnded()
 
 			SaveVariables[i][RKills]  = 0;
 			SaveVariables[i][RDeaths] = 0;
-			SaveVariables[i][RDamage] = 0;
+			SaveVariables[i][RDamage] = 0.0;
 
 			SaveVariables[i][RoundID] = -1;
 			index++;

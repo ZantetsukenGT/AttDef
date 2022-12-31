@@ -123,7 +123,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						format(
 							statsSTR[1], sizeof(statsSTR[]),
 							COL_PRIM "- {FFFFFF}Round Damage: \t%d\t\t" COL_PRIM "- {FFFFFF}Total Damage:   \t%d\t\t" COL_PRIM "- {FFFFFF}Packet-Loss:   \t%.1f\n\n" COL_PRIM "- {FFFFFF}Player Weather: \t%d\t\t" COL_PRIM "- {FFFFFF}Chat Channel: \t%d\t\t" COL_PRIM "- {FFFFFF}In Round: \t\t%s\n",
-							Player[CID][RoundDamage], Player[CID][TotalDamage], NetStats_PacketLossPercent(CID), Player[CID][Weather], (MC == YC ? YC : -1),
+							floatround(Player[CID][RoundDamage]), floatround(Player[CID][TotalDamage]), NetStats_PacketLossPercent(CID), Player[CID][Weather], (MC == YC ? YC : -1),
 							(Player[CID][Playing] == true ? ("Yes") : ("No")));
 						format(
 							statsSTR[2], sizeof(statsSTR[]),
@@ -296,7 +296,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							Player[i][TotalKills]		 = 0;
 							Player[i][TotalDeaths]		 = 0;
-							Player[i][TotalDamage]		 = 0;
+							Player[i][TotalDamage]		 = 0.0;
 							Player[i][RoundPlayed]		 = 0;
 							Player[i][TotalBulletsFired] = 0;
 							Player[i][TotalshotsHit]	 = 0;
@@ -340,7 +340,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					Player[i][TotalKills]		 = 0;
 					Player[i][TotalDeaths]		 = 0;
-					Player[i][TotalDamage]		 = 0;
+					Player[i][TotalDamage]		 = 0.0;
 					Player[i][RoundPlayed]		 = 0;
 					Player[i][TotalBulletsFired] = 0;
 					Player[i][TotalshotsHit]	 = 0;

@@ -36,7 +36,7 @@ UpdateSpectateInfoForPlayer(spectatorid)
 		"%s%s ~r~~h~%d~n~~n~%s(%d) (~r~~h~%d%s)~n~FPS: ~r~~h~%d %sPing: ~r~~h~%d~n~%sPacket-Loss: ~r~~h~%.1f~n~%sKills: ~r~~h~%d~n~%sDamage: ~r~~h~%d~n~%sTotal Dmg: ~r~~h~%d",
 		MAIN_TEXT_COLOUR, Player[specid][Name], specid, MAIN_TEXT_COLOUR, GetAP(specid), GetHP(specid), MAIN_TEXT_COLOUR, GetPlayerFPS(specid),
 		MAIN_TEXT_COLOUR, GetPlayerPing(specid), MAIN_TEXT_COLOUR, NetStats_PacketLossPercent(specid), MAIN_TEXT_COLOUR, Player[specid][RoundKills], MAIN_TEXT_COLOUR,
-		Player[specid][RoundDamage], MAIN_TEXT_COLOUR, Player[specid][TotalDamage]);
+		floatround(Player[specid][RoundDamage]), MAIN_TEXT_COLOUR, floatround(Player[specid][TotalDamage]));
 
 	PlayerTextDrawSetString(spectatorid, SpecText[spectatorid][1], specStr);
 	PlayerTextDrawSetString(spectatorid, SpecText[spectatorid][3], ListWeapsSpec(specid));
