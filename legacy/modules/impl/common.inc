@@ -1208,32 +1208,7 @@ SyncPlayer(playerid)
 	if (Player[playerid][BeingSpeced])
 		SetTimerEx("ForceRespectate", GetPlayerPing(playerid) + 10, false, "i", playerid);
 
-	// Store info before re-spawn
-	new Float: x,Float: y, Float: z, Float: r,
-		Float: vX, Float: vY, Float: vZ,
-		CurrWep;
-	CurrWep = GetPlayerWeapon(playerid);
-	GetPlayerPos(playerid, x, y, z);
-	GetPlayerFacingAngle(playerid, r);
-	GetPlayerVelocity(playerid, vX, vY, vZ);
-	new Weapons[13][2];
-	for (new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, Weapons[i][0], Weapons[i][1]);
-
-	// Set spawn info and spawn player
-	SetSpawnInfo(playerid, GetPlayerTeam(playerid), GetPlayerSkin(playerid), x, y, z - 0.4, r, 0, 0, 0, 0, 0, 0);
-	Player[playerid][IgnoreSpawn] = true;
-	SpawnPlayer(playerid);
-
-	// Set info back after re-spawn
-	SetHP(playerid, Player[playerid][pHealth]);
-	SetAP(playerid, Player[playerid][pArmour]);
-	SetPlayerInterior(playerid, GetPlayerInterior(playerid));
-	SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(playerid));
-	for (new i = 0; i < 13; i++) GivePlayerWeapon(playerid, Weapons[i][0], Weapons[i][1]);
-	SetPlayerArmedWeapon(playerid, CurrWep);
-
-	if (!SyncAbuse)
-		SetPlayerVelocity(playerid, vX, vY, vZ);
+	ResyncPlayer(playerid);
 	return 1;
 }
 
