@@ -27,4 +27,4 @@ new GM_WEBSITE[50] = "discord.io/attackdefend";
 
 new DB: sqliteconnection; // SQLite Databases
 new teamskinlist = mS_INVALID_LISTID, playerskinlist = mS_INVALID_LISTID;
-new bool: IsSkinshot = false;
+new stock bool: IsSkinshot = false;
