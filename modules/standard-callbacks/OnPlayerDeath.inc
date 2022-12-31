@@ -3,25 +3,18 @@
 #endif
 #define _attdef_OnPDeath
 
-
-
-forward ServerOnPlayerDeath(playerid, killerid, reason);
-public ServerOnPlayerDeath(playerid, killerid, reason)
+public OnPlayerDeath(playerid, killerid, reason)
 {
-	Player[playerid][AlreadyDying] = false; // Player is no longer dying, server-sided death is taking place
-	Player[playerid][HitBy]		   = INVALID_PLAYER_ID;
-	Player[playerid][HitWith]	   = 47;
-
-	new KillerConnected			   = IsPlayerConnected(killerid);
+	new KillerConnected = IsPlayerConnected(killerid);
 	if (!KillerConnected)
 	{
-		if (Player[playerid][Playing] == true)
+		if (Player[playerid][Playing])
 		{
 			SendDeathMessage(INVALID_PLAYER_ID, playerid, reason);
 			Player[playerid][RoundDeaths]++;
 			Player[playerid][TotalDeaths]++;
 
-			SendClientMessageToAll(-1, va_return("%s%s {FFFFFF}has died by: {FFFFFF}%s", TextColor[Player[playerid][Team]], Player[playerid][Name], WeaponNames[reason]));
+			SendClientMessageToAll(-1, "%s%s {FFFFFF}has died by: {FFFFFF}%s", TextColor[Player[playerid][Team]], Player[playerid][Name], ReturnWeaponName(reason));
 			MessageBox(playerid, MSGBOX_TYPE_TOP, "wasted", "_", 3000, false);
 			OnPlayerAmmoUpdate(playerid);
 		}
@@ -32,8 +25,8 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 	{
 		if (!RandomDeathMessages)
 		{
-			PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("%sKilled By: ~r~%s", MAIN_TEXT_COLOUR, Player[killerid][Name]));
-			PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou Killed: ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+			PlayerTextDrawSetString(playerid, DeathText[playerid][1], "%sKilled By: ~r~%s", MAIN_TEXT_COLOUR, Player[killerid][Name]);
+			PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou Killed: ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 		}
 		else
 		{
@@ -41,13 +34,13 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 			{
 				case WEAPON_KNIFE:
 				{
-					PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~rp~%s%s knifed you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-					PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou knifed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+					PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~rp~%s%s knifed you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+					PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou knifed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 				}
 				case WEAPON_GRENADE:
 				{
-					PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s bombed you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-					PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou bombed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+					PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s bombed you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+					PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou bombed ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 				}
 				default:
 				{
@@ -55,24 +48,24 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 					{
 						case 0:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s raped you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou raped ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s raped you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou raped ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 1:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s owned you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou owned ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s owned you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou owned ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 2:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s murdered you", Player[killerid][Name], MAIN_TEXT_COLOUR));
-							PlayerTextDrawSetString(killerid, DeathText[killerid][0], va_return("%sYou murdered ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]));
+							PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s murdered you", Player[killerid][Name], MAIN_TEXT_COLOUR);
+							PlayerTextDrawSetString(killerid, DeathText[killerid][0], "%sYou murdered ~r~%s", MAIN_TEXT_COLOUR, Player[playerid][Name]);
 						}
 						case 3:
 						{
-							PlayerTextDrawSetString(playerid, DeathText[playerid][1], va_return("~r~%s%s sent you to cemetery", Player[killerid][Name], MAIN_TEXT_COLOUR));
+							PlayerTextDrawSetString(playerid, DeathText[playerid][1], "~r~%s%s sent you to cemetery", Player[killerid][Name], MAIN_TEXT_COLOUR);
 							PlayerTextDrawSetString(
-								killerid, DeathText[killerid][0], va_return("%sYou sent ~r~%s%s to cemetery", MAIN_TEXT_COLOUR, Player[playerid][Name], MAIN_TEXT_COLOUR));
+								killerid, DeathText[killerid][0], "%sYou sent ~r~%s%s to cemetery", MAIN_TEXT_COLOUR, Player[playerid][Name], MAIN_TEXT_COLOUR);
 						}
 					}
 				}
@@ -94,12 +87,9 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 			Player[playerid][RoundDeaths]++;
 			Player[playerid][TotalDeaths]++;
 
-			new str[150];
-			format(
-				str, sizeof(str), "%s%s {FFFFFF}killed %s%s {FFFFFF}with %s [%.1f ft] [%d HP]", TextColor[Player[killerid][Team]], Player[killerid][Name],
-				TextColor[Player[playerid][Team]], Player[playerid][Name], WeaponNames[reason], GetDistanceBetweenPlayers(killerid, playerid),
-				(Player[killerid][pHealth] + Player[killerid][pArmour]));
-			SendClientMessageToAll(-1, str);
+			SendClientMessageToAll(
+				-1, "%s%s {FFFFFF}killed %s%s {FFFFFF}with %s [%d ft] [%d HP]", TextColor[Player[killerid][Team]], Player[killerid][Name], TextColor[Player[playerid][Team]],
+				Player[playerid][Name], ReturnWeaponName(reason), GetDistanceBetweenPlayers(killerid, playerid), GetHP(killerid) + GetAP(killerid));
 			UpdateRoundKillDmgTDmg(killerid);
 
 			OnPlayerAmmoUpdate(playerid);
@@ -120,8 +110,8 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 	if (Player[playerid][Playing])
 	{
 		new Float: x,
-				   Float: y,
-						  Float: z;
+			Float: y,
+			Float: z;
 		GetPlayerPos(playerid, x, y, z);
 		PlayersDead[Player[playerid][Team]]++;
 		CreateDeadBody(playerid, killerid, reason, 0.0, x, y, z);
@@ -174,9 +164,6 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 	// Reset player gunmenu selections
 	ResetPlayerGunmenu(playerid, false);
 
-	// Call OnPlayerLeaveCheckpoint to see if player was in CP and fix issues
-	CallLocalFunction("OnPlayerLeaveCheckpoint", "i", playerid);
-
 	// If he's spectating, stop it
 	if (Player[playerid][Spectating])
 		StopSpectate(playerid);
@@ -193,43 +180,6 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 		}
 		else // Spawn player in a lobby
 			SpawnInLobby(playerid);
-	}
-	return 1;
-}
-
-public OnPlayerDeath(playerid, killerid, reason)
-{
-	// todo: test if this callback should be used under any weird circumstances. e.g: falling from a large cliff, exploding while driving a car, etc...
-
-	if (Player[playerid][AlreadyDying])
-		return 1; // Stop! Server-sided death system is already handling this.
-
-	// case: died while driving a vehicle which exploded
-	if (GetPlayerVehicleID(playerid) != 0)
-	{
-		ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, 51);
-		return 1;
-	}
-
-	switch (reason)
-	{
-		case WEAPON_PARACHUTE: // case: died while diving with a parachute?
-		{
-			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_PARACHUTE);
-		}
-		case WEAPON_COLLISION: // case: fell down
-		{
-			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_COLLISION);
-		}
-		case 255: // case: weird suicide
-		{
-			ServerOnPlayerDeath(playerid, INVALID_PLAYER_ID, WEAPON_COLLISION + 1);
-		}
-		default: // unknown cases
-		{
-			SendClientMessageToAll(-1, va_return("DEBUG:Client:OnPlayerDeath(playerid:%d, killerid:%d, reason:%d)", playerid, killerid, reason));
-			ServerOnPlayerDeath(playerid, killerid, reason);
-		}
 	}
 	return 1;
 }

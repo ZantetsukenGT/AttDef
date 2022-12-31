@@ -150,8 +150,6 @@ InitPlayer(playerid)
 	Player[playerid][SpectatingRound]		   = -1;
 	InitPlayerSpectate(playerid);
 	ForgetSpectator(playerid);
-	Player[playerid][HitBy]				 = INVALID_PLAYER_ID;
-	Player[playerid][HitWith]			 = 47;
 	Player[playerid][HitSound]			 = 17802;
 	Player[playerid][GetHitSound]		 = 1131;
 	Player[playerid][LastEditWepLimit]	 = -1;
@@ -197,7 +195,6 @@ InitPlayer(playerid)
 	Player[playerid][blockedall]			   = false;
 	Player[playerid][OnGunmenu]				   = false;
 	Player[playerid][GunmenuStyle]			   = GUNMENU_STYLE_DIALOG;
-	Player[playerid][AlreadyDying]			   = false;
 	Player[playerid][TempNetcheck]			   = false;
 	Player[playerid][InDeathCamera]			   = false;
 	Player[playerid][HasDeathQuote]			   = false;
