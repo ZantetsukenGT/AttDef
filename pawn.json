@@ -10,14 +10,14 @@
 		"katursis/Pawn.RakNet@omp",
 		"NexiusTailer/MapFix",
 		"openmultiplayer/server-beta",
-		"oscar-broman/samp-weapon-config",
 		"pawn-lang/YSI-Includes@5.x",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",
 		"ZantetsukenGT/gBugFix",
 		"ZantetsukenGT/progress2",
 		"ZantetsukenGT/samp-dyn-dialog-pages",
-		"ZantetsukenGT/samp-geoip"
+		"ZantetsukenGT/samp-geoip",
+		"ZantetsukenGT/samp-weapon-config"
 	],
 	"local": true,
 	"runtime": {
