@@ -4,18 +4,20 @@
 #define MAX_PLAYERS 50
 #define YSI_YES_HEAP_MALLOC
 
-#include <a_samp>
-#include <omp>			 // omp's native YSF implementations
-#include <geoip>		 // A simple library that provide information from IP-API for connected players.
-#include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-#include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
-
-// YSI Libraries 5.x
-// See https://github.com/pawn-lang/YSI-Includes for all the documentation.
 #define FOREACH_NO_LOCALS
 #define FOREACH_NO_BOTS
 #define FOREACH_NO_ACTORS
 #define FOREACH_NO_STREAMED
+
+#include <a_samp>
+#include <omp>			 // omp's native YSF implementations
+#include <geoip>		 // A simple library that provide information from IP-API for connected players.
+#include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
+#tryinclude <opws-fix>
+#include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
+
+// YSI Libraries 5.x
+// See https://github.com/pawn-lang/YSI-Includes for all the documentation.
 #include <YSI_Players\y_groups>	   // Provides an abstraction for various collections of players; including factions, teams, admin levels, and more.
 #include <YSI_Coding\y_stringhash> // Performs compile-time hashing of strings, for use as array indexes, case values, and more.
 #include <YSI_Coding\y_timers>	   // SetTimer and SetTimerEx wrappers with task and ptask
@@ -36,8 +38,8 @@
 
 // Att-Def's own stuff
 #include <fps-utils>
-#tryinclude <opws-fix>
 #include <fake-ping>
+#include <anti-secrets>
 #include <modules>
 #include <commands>
 #include <wc-callbacks>		  // Weapon-config's callback handling
