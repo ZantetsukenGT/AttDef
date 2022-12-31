@@ -44,8 +44,6 @@ new bool: VehicleHealthTextdraw		  = false;
 new bool: SyncAbuse					  = true;
 new bool: ScreenFlashing			  = true;
 new bool: DefendersWithVehicles		  = false;
-new bool: ShouldNerfDeagle			  = false;
-new bool: ShouldNerfSniper			  = false;
 
 new RoundHP							  = 100;
 new RoundAR							  = 100;

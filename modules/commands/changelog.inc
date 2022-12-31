@@ -28,7 +28,7 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, "{CCCCCC}\nAdded weapon-config.");
 				strcat(str, "{CCCCCC}\nFPS independent lagshoot.");
 				strcat(str, "{CCCCCC}\nAdded several samp patches for gameplay integrity.");
-				strcat(str, "{CCCCCC}\nDamage modification for any weapon available through " COL_PRIM "/" COL_SEC "weaponnerf");
+				strcat(str, "{CCCCCC}\nDamage modification for most weapons available through " COL_PRIM "/" COL_SEC "weapondmg");
 				strcat(str, "{CCCCCC}\nGeneral improvements and fixes.");
 				strcat(str, COL_PRIM"\n\nPRO TIPS:");
 				strcat(str, COL_SEC "\n{FFD700}Sniper bug fix available! " COL_SEC "shorturl.at/bgpH1");
