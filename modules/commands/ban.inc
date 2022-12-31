@@ -24,7 +24,7 @@ YCMD: ban(playerid, params[], help)
 	else
 		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has banned {FFFFFF}%s" COL_PRIM ". | Reason: {FFFFFF}%s", Player[playerid][Name], Player[pID][Name], Reason);
 
-	SetTimerEx("BanExDelayed", 350, false, "ds", pID, va_return("%s - %s", Player[playerid][Name], Reason));
+	SetTimerEx("BanExDelayed", GetPlayerPing(playerid) + 10, false, "ds", pID, va_return("%s - %s", Player[playerid][Name], Reason));
 	return LogAdminCommand("ban", playerid, pID);
 }
 

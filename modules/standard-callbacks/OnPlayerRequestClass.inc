@@ -34,7 +34,7 @@ public InlineLogin(playerid, dialogid, response, listitem, string: inputtext[])
 		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has been kicked from the server for not logging in.", Player[playerid][Name]);
 		SendClientMessageToAll(-1, iString);
 
-		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", GetPlayerPing(playerid) + 10, false, "i", playerid);
 	}
 	return 1;
 }
@@ -68,7 +68,7 @@ public InlineRegister(playerid, dialogid, response, listitem, string: inputtext[
 		format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has been kicked from the server for not registering.", Player[playerid][Name]);
 		SendClientMessageToAll(-1, iString);
 
-		SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+		SetTimerEx("OnPlayerKicked", GetPlayerPing(playerid) + 10, false, "i", playerid);
 	}
 	return 1;
 }

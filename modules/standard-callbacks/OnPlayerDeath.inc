@@ -134,7 +134,7 @@ public ServerOnPlayerDeath(playerid, killerid, reason)
 			PlayDeathCamera(playerid, x, y, z, showdeathquote);
 		}
 		else // If not
-			SetTimerEx("SpectateAnyPlayerT", 1000, false, "i", playerid);
+			SetTimerEx("SpectateAnyPlayerT", GetPlayerPing(playerid) + 10, false, "i", playerid);
 		// Create an icon on radar where the player died
 		CreateTeamDeathMapIcon(Player[playerid][Team], x, y, z);
 	}

@@ -74,7 +74,7 @@ PlayerVoteKick(playerid, onplayerid)
 			SendClientMessageToAll(-1, va_return("" COL_PRIM "Voting result on {FFFFFF}%s: " COL_PRIM "kicked from the server!", Player[onplayerid][Name]));
 			KillTimer(VoteData[votetype][VotingExpireTimer]);
 			ResetVoting(votetype, false);
-			SetTimerEx("OnPlayerKicked", 500, false, "i", onplayerid);
+			SetTimerEx("OnPlayerKicked", GetPlayerPing(playerid) + 10, false, "i", onplayerid);
 		}
 	}
 	return 1;

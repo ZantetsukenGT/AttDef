@@ -228,7 +228,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1,
 				"{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}Low FPS | %d/%d " COL_PRIM ":.", Player[playerid][Name], pFPS, Min_FPS);
-			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", pPing + 10, false, "i", playerid);
 		}
 	}
 	else
@@ -246,7 +246,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Packetloss | %.2f/%.2f " COL_PRIM ":.", Player[playerid][Name],
 						pPL, Max_Packetloss);
-			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", pPing + 10, false, "i", playerid);
 		}
 	}
 	else
@@ -264,7 +264,7 @@ CheckPlayerNet(playerid)
 			va_SendClientMessageToAll(
 				-1, "{FFFFFF}%s " COL_PRIM "has been kicked from the server .: {FFFFFF}High Ping | %d/%d " COL_PRIM ":.", Player[playerid][Name], pPing,
 						Max_Ping);
-			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", pPing + 10, false, "i", playerid);
 		}
 	}
 	else
@@ -1220,7 +1220,7 @@ SyncPlayer(playerid)
 
 	// Set spectators to re-spectate
 	if (Player[playerid][BeingSpeced])
-		SetTimerEx("ForceRespectate", 1000, false, "i", playerid);
+		SetTimerEx("ForceRespectate", GetPlayerPing(playerid) + 10, false, "i", playerid);
 
 	// Store info before re-spawn
 	new Float: x,Float: y, Float: z, Float: r,

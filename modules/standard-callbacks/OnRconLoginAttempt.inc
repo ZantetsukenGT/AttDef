@@ -27,7 +27,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 		{
 			format(Str, sizeof(Str), "{FFFFFF}%s " COL_PRIM "has been kicked for several fail attempts to log into rcon", iName);
 			SendClientMessageToAll(-1, Str);
-			SetTimerEx("OnPlayerKicked", 500, false, "i", playerid);
+			SetTimerEx("OnPlayerKicked", GetPlayerPing(playerid) + 10, false, "i", playerid);
 			return 1;
 		}
 		else
