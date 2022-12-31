@@ -17,14 +17,13 @@ YCMD: remove(playerid, params[], help)
 	if (!Player[pID][Playing])
 		return SendErrorMessage(playerid, "That player is not playing.");
 
-	new HP[2];
-	GetHP(pID, HP[0]);
-	GetAP(pID, HP[1]);
+	new health = GetHP(pID);
+	new armour = GetAP(pID);
 
 	RemovePlayerFromRound(pID);
 
 	LogAdminCommand("remove", playerid, pID);
 
 	return va_SendClientMessageToAll(-1, "%s (%d) " COL_PRIM "removed {FFFFFF}%s (%d) " COL_PRIM "from round. {FFFFFF}(HP %d | AP %d)", Player[playerid][Name], playerid,
-		Player[pID][Name], pID, HP[0], HP[1]);
+		Player[pID][Name], pID, health, armour);
 }

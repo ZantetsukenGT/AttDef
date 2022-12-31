@@ -297,7 +297,7 @@ UpdateTeamHP(teamid, exception = -1)
 			continue; // Skip this index
 
 		// Add total HP of this player (at this index) to team total HP
-		TeamHP[teamid] += Player[i][pHealth] + Player[i][pArmour];
+		TeamHP[teamid] += GetHP(i) + GetAP(i);
 	}
 	// Update round textdraws with correct info
 	new str[150];
@@ -420,7 +420,7 @@ public GameLoopCallback()
 					{
 						SendClientMessageToAll(
 							-1,
-							"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%d | %d)", Player[i][Name], Player[i][pHealth], Player[i][pArmour]);
+							"{FFFFFF}%s " COL_PRIM "has been removed for not staying in Arena. {FFFFFF}(%d | %d)", Player[i][Name], GetHP(i), GetAP(i));
 
 						Player[i][OutOfArena] = MAX_ZONE_LIMIT_WARNINGS;
 
@@ -900,7 +900,7 @@ PlayerRequestBackup(playerid)
 		return 0; // fail
 
 	// Calculate the player's total HP
-	new totHP = Player[playerid][pHealth] + Player[playerid][pArmour];
+	new totHP = GetHP(playerid) + GetAP(playerid);
 
 	// Get the player's facing angle
 	new Float: facingAngle;
@@ -1055,8 +1055,8 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 	GetPlayerPos(ToReplaceID, Pos[0], Pos[1], Pos[2]);
 	GetPlayerFacingAngle(ToReplaceID, Pos[3]);
 
-	GetHP(ToReplaceID, HP[0]);
-	GetAP(ToReplaceID, HP[1]);
+	HP[0] = GetHP(ToReplaceID);
+	HP[1] = GetAP(ToReplaceID);
 
 	new Weapons[13], Ammo[13];
 	for (new i = 0; i < 13; i++) { GetPlayerWeaponData(ToReplaceID, i, Weapons[i], Ammo[i]); }
@@ -2552,12 +2552,12 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 
 					if (Player[i][Team] == ATTACKER)
 					{
-						ahpleft = ahpleft + (Player[i][pHealth] + Player[i][pArmour]);
+						ahpleft = ahpleft + (GetHP(i) + GetAP(i));
 						aalive++;
 					}
 					else if (Player[i][Team] == DEFENDER)
 					{
-						dhpleft = dhpleft + (Player[i][pHealth] + Player[i][pArmour]);
+						dhpleft = dhpleft + (GetHP(i) + GetAP(i));
 						dalive++;
 					}
 				}
@@ -2565,7 +2565,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				playerScores[index][player_Team]   = Player[i][Team];
 				playerScores[index][player_Kills]  = Player[i][RoundKills];
 				playerScores[index][player_Deaths] = Player[i][RoundDeaths];
-				playerScores[index][player_HP]	   = Player[i][pHealth] + Player[i][pArmour];
+				playerScores[index][player_HP]	   = GetHP(i) + GetAP(i);
 				playerScores[index][player_Acc]	   = floatround(Player[i][Accuracy], floatround_round);
 
 				if (playerScores[index][player_Deaths] > 0)
@@ -2893,7 +2893,7 @@ public WarEnded()
 			playerScores[index][player_Kills]	= Player[i][TotalKills];
 			playerScores[index][player_Deaths]	= Player[i][TotalDeaths];
 			playerScores[index][player_TPlayed] = Player[i][RoundPlayed];
-			playerScores[index][player_HP]		= Player[i][pHealth] + Player[i][pArmour];
+			playerScores[index][player_HP]		= GetHP(i) + GetAP(i);
 
 			new Float: nTotalAccuracy;
 			if (Player[i][TotalBulletsFired] == 0)

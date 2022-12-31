@@ -509,8 +509,8 @@ StorePlayerVariables(playerid)
 
 		if (!Player[i][ToAddInRound])
 		{
-			GetHP(playerid, SaveVariables[i][gHealth]);
-			GetAP(playerid, SaveVariables[i][gArmour]);
+			SaveVariables[i][gHealth] = GetHP(playerid);
+			SaveVariables[i][gArmour] = GetAP(playerid);
 		}
 		else
 		{

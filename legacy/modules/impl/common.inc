@@ -543,7 +543,7 @@ ShowTargetInfo(playerid, targetid)
 
 	va_PlayerTextDrawSetString(playerid, TargetInfoData[playerid][TargetInfoTD], "%sName: %s%s~n~%sPing: %s%d   %sFPS: %s%d~n~%sPL: %s%.1f   %sHP: %s%d", MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][NameWithoutTag],
 		MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerPing(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetPlayerFPS(targetid), MAIN_TEXT_COLOUR,
-		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], Player[targetid][pHealth] + Player[targetid][pArmour]);
+		TDC[Player[targetid][Team]], NetStats_PacketLossPercent(targetid), MAIN_TEXT_COLOUR, TDC[Player[targetid][Team]], GetHP(targetid) + GetAP(targetid));
 
 	PlayerTextDrawShow(playerid, TargetInfoData[playerid][TargetInfoTD]);
 	TargetInfoData[playerid][TargetInfoLastTick]   = currentTick;

@@ -169,7 +169,7 @@ UpdateTeamCornerInfo()
 		if (Player[AttackersArray[i][playerID]][Playing])
 			format(
 				PlayersSecondString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%d ~w~- ~r~%d~n~", PlayersSecondString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				Player[AttackersArray[i][playerID]][pHealth] + Player[AttackersArray[i][playerID]][pArmour], AttackersArray[i][playerDamage]);
+				GetHP(AttackersArray[i][playerID]) + GetAP(AttackersArray[i][playerID]), AttackersArray[i][playerDamage]);
 		else
 			format(
 				PlayersSecondString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~Dead ~w~- ~r~%d~n~", PlayersSecondString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
@@ -192,7 +192,7 @@ UpdateTeamCornerInfo()
 		if (Player[AttackersArray[i][playerID]][Playing])
 			format(
 				PlayersFirstString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~%d ~w~- ~r~%d~n~", PlayersFirstString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
-				Player[AttackersArray[i][playerID]][pHealth] + Player[AttackersArray[i][playerID]][pArmour], AttackersArray[i][playerDamage]);
+				GetHP(AttackersArray[i][playerID]) + GetAP(AttackersArray[i][playerID]), AttackersArray[i][playerDamage]);
 		else
 			format(
 				PlayersFirstString[0], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~r~~h~Dead ~w~- ~r~%d~n~", PlayersFirstString[0], Player[AttackersArray[i][playerID]][NameWithoutTag],
@@ -214,7 +214,7 @@ UpdateTeamCornerInfo()
 		if (Player[DefendersArray[i][playerID]][Playing])
 			format(
 				PlayersSecondString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%d ~w~- ~b~%d~n~", PlayersSecondString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				Player[DefendersArray[i][playerID]][pHealth] + Player[DefendersArray[i][playerID]][pArmour], DefendersArray[i][playerDamage]);
+				GetHP(DefendersArray[i][playerID]) + GetAP(DefendersArray[i][playerID]), DefendersArray[i][playerDamage]);
 		else
 			format(
 				PlayersSecondString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~Dead ~w~- ~b~%d~n~", PlayersSecondString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
@@ -237,7 +237,7 @@ UpdateTeamCornerInfo()
 		if (Player[DefendersArray[i][playerID]][Playing])
 			format(
 				PlayersFirstString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~%d ~w~- ~b~%d~n~", PlayersFirstString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],
-				Player[DefendersArray[i][playerID]][pHealth] + Player[DefendersArray[i][playerID]][pArmour], DefendersArray[i][playerDamage]);
+				GetHP(DefendersArray[i][playerID]) + GetAP(DefendersArray[i][playerID]), DefendersArray[i][playerDamage]);
 		else
 			format(
 				PlayersFirstString[1], MAX_PLAYERS_STRING_SIZE, "%s~w~| %s ~b~~h~Dead ~w~- ~b~%d~n~", PlayersFirstString[1], Player[DefendersArray[i][playerID]][NameWithoutTag],

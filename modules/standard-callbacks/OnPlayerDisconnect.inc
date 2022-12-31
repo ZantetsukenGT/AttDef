@@ -13,8 +13,8 @@ public OnPlayerDisconnect(playerid, reason)
 				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has had a crash/timeout.", Player[playerid][Name]);
 			else
 				va_SendClientMessageToAll(
-					-1, "{FFFFFF}%s {CCCCCC}has had a crash/timeout {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+					-1, "{FFFFFF}%s {CCCCCC}has had a crash/timeout {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], GetHP(playerid),
+					GetAP(playerid));
 		}
 		case 1:
 		{
@@ -22,8 +22,8 @@ public OnPlayerDisconnect(playerid, reason)
 				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has quit the server.", Player[playerid][Name]);
 			else
 				va_SendClientMessageToAll(
-					-1, "{FFFFFF}%s {CCCCCC}has quit the server {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+					-1, "{FFFFFF}%s {CCCCCC}has quit the server {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], GetHP(playerid),
+					GetAP(playerid));
 		}
 		case 2:
 		{
@@ -31,8 +31,8 @@ public OnPlayerDisconnect(playerid, reason)
 				va_SendClientMessageToAll(-1, "{FFFFFF}%s {CCCCCC}has been kicked or banned.", Player[playerid][Name]);
 			else
 				va_SendClientMessageToAll(
-					-1, "{FFFFFF}%s {CCCCCC}has been kicked or banned {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], Player[playerid][pHealth],
-					Player[playerid][pArmour]);
+					-1, "{FFFFFF}%s {CCCCCC}has been kicked or banned {FFFFFF}(HP %d | AP %d).", Player[playerid][Name], GetHP(playerid),
+					GetAP(playerid));
 		}
 	}
 	// Check player spawned vehicle

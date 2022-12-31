@@ -18,10 +18,10 @@ hook OnPlayerDisconnect(playerid, reason)
 	if (!Player[playerid][InDuel])
 		return 1;
 
-	va_SendClientMessageToAll(-1, "%s left server during a duel {757575}| HP %d | Armour %d", Player[playerid][Name], Player[playerid][pHealth], Player[playerid][pArmour]);
+	va_SendClientMessageToAll(-1, "%s left server during a duel {757575}| HP %d | Armour %d", Player[playerid][Name], GetHP(playerid), GetAP(playerid));
 
 	new winner = Player[playerid][challengerid];
-	va_SendClientMessageToAll(-1, "His opponent %s had {757575}%d HP and %d Armour", Player[winner][Name], Player[winner][pHealth], Player[winner][pArmour]);
+	va_SendClientMessageToAll(-1, "His opponent %s had {757575}%d HP and %d Armour", Player[winner][Name], GetHP(winner), GetAP(winner));
 	Player[winner][InDuel] = false;
 	Player[playerid][DuelsLost]++;
 	Player[winner][DuelsWon]++;
@@ -199,9 +199,9 @@ StartDuel(dueller1, dueller2, weapon1, weapon2, Float: centerx, Float: centery, 
 
 PlayerDuelQuit(playerid)
 {
-	new winner = Player[playerid][challengerid], health, armour;
-	GetHP(playerid, health);
-	GetAP(playerid, armour);
+	new winner = Player[playerid][challengerid];
+	new health = GetHP(playerid);
+	new armour = GetAP(playerid);
 
 	va_SendClientMessageToAll(
 		-1, "%s%s {FFFFFF}rage-quit from a duel | {757575}HP %d | Armour %d", TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], health, armour);
@@ -222,9 +222,8 @@ ProcessDuellerDeath(playerid, killerid, reason)
 	if (killerid == -1 || killerid == INVALID_PLAYER_ID)
 		killerid = Player[playerid][challengerid];
 
-	new health, armour;
-	GetHP(killerid, health);
-	GetAP(killerid, armour);
+	new health = GetHP(killerid);
+	new armour = GetAP(killerid);
 	va_SendClientMessageToAll(
 		-1, "%s%s " COL_PRIM "raped %s%s " COL_PRIM "in a duel with %s | {FFFFFF}%d HP", TextColor[Player[killerid][TeamBeforeDuel]], Player[killerid][Name],
 		TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], ReturnWeaponName(reason), health + armour);

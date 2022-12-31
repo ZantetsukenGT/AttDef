@@ -81,8 +81,6 @@ enum PlayerVariables {
 	TeamBeforeDuel,
 	DLlast,
 	FPS,
-	pHealth,
-	pArmour,
 	DMReadd,
 	RoundKills,
 	RoundDeaths,
