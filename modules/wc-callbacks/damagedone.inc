@@ -82,7 +82,7 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 
 					if (AttHpTimer)
 						KillTimer(AttHpTimer);
-					AttHpTimer = SetTimer("HideHpTextForAtt", 2500, false);
+					AttHpTimer = SetTimer("HideHpTextForAtt", HIDE_DAMAGE_TEXTDRAW_AFTER, false);
 				}
 				case DEFENDER:
 				{
@@ -95,7 +95,7 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 
 					if (DefHpTimer)
 						KillTimer(DefHpTimer);
-					DefHpTimer = SetTimer("HideHpTextForDef", 2500, false);
+					DefHpTimer = SetTimer("HideHpTextForDef", HIDE_DAMAGE_TEXTDRAW_AFTER, false);
 				}
 			}
 		}
