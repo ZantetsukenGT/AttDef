@@ -28,16 +28,10 @@ public OnPlayerDeathCameraEnd(playerid)
 	HideMessageBox(playerid, MSGBOX_TYPE_MIDDLE);
 	HideMessageBox(playerid, MSGBOX_TYPE_BOTTOM);
 	TextDrawHideForPlayer(playerid, RedDeathScreen);
-	if (PlayerInterface[playerid][INTERFACE_HP])
-	{
-		PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
-	}
 	PlayerTextDrawShow(playerid, RoundKillDmgTDmg[playerid]);
 	if (PlayerInterface[playerid][INTERFACE_NET])
 		PlayerTextDrawShow(playerid, FPSPingPacket[playerid]);
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
-	ShowPlayerProgressBar(playerid, HealthBar[playerid]);
 	if (Current != -1)
 		SetTimerEx("SpectateAnyPlayerT", 1000, false, "i", playerid);
 	return 1;
@@ -54,8 +48,6 @@ PlayDeathCamera(playerid, Float: deathX, Float: deathY, Float: deathZ, bool: dea
 	TextDrawShowForPlayer(playerid, RedDeathScreen);
 	// Hide some HUD textdraws
 	PlayerTextDrawHide(playerid, RoundKillDmgTDmg[playerid]);
-	PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-	HidePlayerProgressBar(playerid, HealthBar[playerid]);
 
 	TogglePlayerSpectating(playerid, true);
 	switch (random(3))

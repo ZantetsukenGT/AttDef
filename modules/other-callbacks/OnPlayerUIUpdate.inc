@@ -9,6 +9,9 @@ ptask OnPlayerUIUpdate[1000](playerid)
 	// AFK Variable Update
 	Player[playerid][PauseCount]++;
 
+	// This basically hides damage bubbles that should be hidden
+	UpdateDamageBubbles(playerid);
+
 	// Show target info
 	ShowTargetInfo(playerid, GetPlayerTargetPlayer(playerid));
 

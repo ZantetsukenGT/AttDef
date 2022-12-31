@@ -197,16 +197,6 @@ SpectatePlayer(playerid, specid)
 
 		// Hide some HUD textdraws
 		PlayerTextDrawHide(playerid, RoundKillDmgTDmg[playerid]);
-		PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
-		PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-		HidePlayerProgressBar(playerid, HealthBar[playerid]);
-	}
-
-	// This will hide any damage textdraws shown for the spectator sooner
-	for (new i = 0; i < MAX_VISUAL_DAMAGES; i++)
-	{
-		VisualDamage[playerid][TakenDamageTick][i] = 0;
-		VisualDamage[playerid][GivenDamageTick][i] = 0;
 	}
 
 	// Update variables
@@ -294,17 +284,10 @@ StopSpectate(playerid, bool: remove_iterator = true)
 	HideTeamCornerInfo(playerid);
 	// Reset text
 	PlayerTextDrawSetString(playerid, WhoSpec[playerid], " ");
-	// Reshow HUD textdraws
-	if (PlayerInterface[playerid][INTERFACE_HP])
-	{
-		PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
-	}
 	PlayerTextDrawShow(playerid, RoundKillDmgTDmg[playerid]);
 	if (PlayerInterface[playerid][INTERFACE_NET])
 		PlayerTextDrawShow(playerid, FPSPingPacket[playerid]);
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
-	ShowPlayerProgressBar(playerid, HealthBar[playerid]);
 
 	// Cancel spectating mode
 	// This will be called if he was spectating normally, not /freecam mode

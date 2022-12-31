@@ -6,7 +6,6 @@
 // OnScriptUpdate - interval: 1000 ms
 task OnScriptUpdate[1000]()
 {
-	CheckVisualDamageTextDraws(); // This basically hides damage textdraws and damage bubbles that should be hidden
 	// Update Vehicle Information
 	if (VehicleHealthTextdraw)
 	{

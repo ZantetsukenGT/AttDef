@@ -384,10 +384,6 @@ LoginPlayer(playerid, DBResult: res)
 	db_get_field_assoc(res, "InterfaceNet", iString, sizeof(iString));
 	PlayerInterface[playerid][INTERFACE_NET] = strval(iString) != 0;
 
-	// Load Show HP textdraws
-	db_get_field_assoc(res, "InterfaceHP", iString, sizeof(iString));
-	PlayerInterface[playerid][INTERFACE_HP] = strval(iString) != 0;
-
 	// Load weapon key binds
 	new fieldName[12], value;
 	for (new i = 0; i < MAX_WEAPON_BINDS; i++)

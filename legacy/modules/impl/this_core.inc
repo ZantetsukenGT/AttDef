@@ -73,7 +73,6 @@ InitScriptSecondarySettings()
 	SetTeamDefaultColors();
 	SetTeamDefaultNames();
 	InitSpectate();
-	InitVisualDamage();
 	InitGunmenu();
 	InitVoting();
 	AdjustWeaponRanges();

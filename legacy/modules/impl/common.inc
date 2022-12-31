@@ -342,18 +342,6 @@ public SpawnConnectedPlayer(playerid, team)
 	SetPlayerWeather(playerid, Player[playerid][Weather]);
 	SetPlayerTime(playerid, Player[playerid][Time], 0);
 
-	ShowPlayerProgressBar(playerid, HealthBar[playerid]);
-	if (PlayerInterface[playerid][INTERFACE_HP])
-	{
-		PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
-	}
-	else
-	{
-		PlayerTextDrawHide(playerid, HPTextDraw_TD[playerid]);
-		PlayerTextDrawHide(playerid, ArmourTextDraw[playerid]);
-	}
-
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
 
 	if (PlayerInterface[playerid][INTERFACE_NET])
@@ -377,8 +365,6 @@ public SpawnConnectedPlayer(playerid, team)
 	TextDrawShowForPlayer(playerid, DefHpLose);
 
 	PlayerTextDrawShow(playerid, TD_RoundSpec[playerid]);
-	PlayerTextDrawShow(playerid, HPTextDraw_TD[playerid]);
-	PlayerTextDrawShow(playerid, ArmourTextDraw[playerid]);
 	PlayerTextDrawShow(playerid, BaseID_VS[playerid]);
 
 	if (WarMode)
