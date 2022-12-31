@@ -17,7 +17,7 @@ IPacket:EL_PACKET(playerid, BitStream: bs)
 	if (currentDrunkLevel == EL_PACKET & 85)
 	{
 		printf("EL_PACKET OnNiggaDetected called for %s", ReturnPlayerName(playerid));
-		CallRemoteFunction(#OnNiggaDetected, #ii, playerid, 15);
+		CallRemoteFunction(#OnNiggaDetected, #ii, playerid, 16);
 		return 0;
 	}
 	return 1;
