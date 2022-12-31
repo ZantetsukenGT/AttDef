@@ -94,9 +94,9 @@ ProcessDuelRequest(duel_host, duel_guest, weapon1, weapon2, arena, size)
 	SendClientMessage(duel_guest, -1, "{FF8800}Type {FFFFFF}/yes {FF8800}to accept the duel challenge or {FFFFFF}/no {FF8800}to deny the duel challenge.");
 	PlayerPlaySound(duel_guest, 1137, 0.0, 0.0, 0.0);
 
-	return va_SendClientMessageToAll(
+	return SendClientMessageToAll(
 		-1, "%s%s {FFFFFF}challenged %s%s {FFFFFF}to a duel with: %s and %s", TextColor[Player[duel_host][Team]], Player[duel_host][Name], TextColor[Player[duel_guest][Team]],
-		Player[duel_guest][Name], WeaponNames[weapon1], WeaponNames[weapon2]);
+		Player[duel_guest][Name], ReturnWeaponName(weapon1), ReturnWeaponName(weapon2));
 }
 
 DetermineDuelArena(Float: centerx, Float: centery, size, &Float: minx, &Float: miny, &Float: maxx, &Float: maxy)
@@ -227,7 +227,7 @@ ProcessDuellerDeath(playerid, killerid, reason)
 	GetAP(killerid, armour);
 	va_SendClientMessageToAll(
 		-1, "%s%s " COL_PRIM "raped %s%s " COL_PRIM "in a duel with %s | {FFFFFF}%d HP", TextColor[Player[killerid][TeamBeforeDuel]], Player[killerid][Name],
-		TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], WeaponNames[reason], health + armour);
+		TextColor[Player[playerid][TeamBeforeDuel]], Player[playerid][Name], ReturnWeaponName(reason), health + armour);
 	Player[playerid][challengerid] = -1;
 	Player[killerid][challengerid] = -1;
 	Player[playerid][duelweap1]	   = 0;

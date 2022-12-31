@@ -29,5 +29,5 @@ YCMD: getgun(playerid, params[], help)
 	GivePlayerWeapon(playerid, WeaponID, Ammo);
 
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has given himself {FFFFFF}%s " COL_PRIM "with {FFFFFF}%d " COL_PRIM "ammo.", Player[playerid][Name],
-		WeaponNames[WeaponID], Ammo);
+		ReturnWeaponName(WeaponID), Ammo);
 }

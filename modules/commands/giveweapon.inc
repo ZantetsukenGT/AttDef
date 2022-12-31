@@ -27,5 +27,5 @@ YCMD: giveweapon(playerid, params[], help)
 	LogAdminCommand("giveweapon", playerid, pID);
 
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has given {FFFFFF}%s " COL_PRIM "a {FFFFFF}%s" COL_PRIM ".", Player[playerid][Name],
-		Player[pID][Name], WeaponNames[WeaponID]);
+		Player[pID][Name], ReturnWeaponName(WeaponID));
 }

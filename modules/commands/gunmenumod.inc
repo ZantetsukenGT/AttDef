@@ -28,12 +28,12 @@ ShowPlayerGunmenuModification(playerid1)
 					SendErrorMessage(playerid, "Invalid weapon", MSGBOX_TYPE_BOTTOM);
 					Dialog_ShowCallback(
 						playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing weapon...",
-						va_return("Current weapon: %s\n\nType new weapon name below to change!", WeaponNames[GunmenuData[idx][GunID]]), "Set", "Cancel");
+						va_return("Current weapon: %s\n\nType new weapon name below to change!", ReturnWeaponName(GunmenuData[idx][GunID])), "Set", "Cancel");
 					return 1;
 				}
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has changed gunmenu index: {FFFFFF}%d " COL_PRIM "from [%s] to [%s]", Player[playerid][Name], idx,
-					WeaponNames[GunmenuData[idx][GunID]], WeaponNames[weaponID]);
+					ReturnWeaponName(GunmenuData[idx][GunID]), ReturnWeaponName(weaponID));
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Weapon`=%d WHERE `Weapon`=%d", weaponID, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunID] = weaponID;
 			}
@@ -45,12 +45,12 @@ ShowPlayerGunmenuModification(playerid1)
 					SendErrorMessage(playerid, "Selection limit cannot be less than 0", MSGBOX_TYPE_BOTTOM);
 					Dialog_ShowCallback(
 						playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing limit...",
-						va_return("Current limit of %s: %d\n\nType new limit value below to change!", WeaponNames[GunmenuData[idx][GunID]], GunmenuData[idx][GunLimit]), "Set",
+						va_return("Current limit of %s: %d\n\nType new limit value below to change!", ReturnWeaponName(GunmenuData[idx][GunID]), GunmenuData[idx][GunLimit]), "Set",
 						"Cancel");
 					return 1;
 				}
 				va_SendClientMessageToAll(
-					-1, "%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "limit to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], limit);
+					-1, "%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "limit to {FFFFFF}%d", Player[playerid][Name], ReturnWeaponName(GunmenuData[idx][GunID]), limit);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Limit`=%d WHERE `Weapon`=%d", limit, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunLimit] = limit;
 			}
@@ -62,13 +62,13 @@ ShowPlayerGunmenuModification(playerid1)
 					SendErrorMessage(playerid, "Weapon ammo must be equal to or between 1 and 9999", MSGBOX_TYPE_BOTTOM);
 					Dialog_ShowCallback(
 						playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing ammo...",
-						va_return("Current ammo of %s: %d\n\nType new ammo value below to change!", WeaponNames[GunmenuData[idx][GunID]], GunmenuData[idx][GunAmmo]), "Set",
+						va_return("Current ammo of %s: %d\n\nType new ammo value below to change!", ReturnWeaponName(GunmenuData[idx][GunID]), GunmenuData[idx][GunAmmo]), "Set",
 						"Cancel");
 					return 1;
 				}
 				va_SendClientMessageToAll(
 					-1,
-					"%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "ammo to {FFFFFF}%d", Player[playerid][Name], WeaponNames[GunmenuData[idx][GunID]], ammo);
+					"%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "ammo to {FFFFFF}%d", Player[playerid][Name], ReturnWeaponName(GunmenuData[idx][GunID]), ammo);
 				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Ammo`=%d WHERE `Weapon`=%d", ammo, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunAmmo] = ammo;
 			}
@@ -91,14 +91,14 @@ ShowPlayerGunmenuModification(playerid1)
 				Player[playerid][GunmenuModdingType] = GUNMENU_MOD_TYPE_WEAPON;
 				Dialog_ShowCallback(
 					playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing weapon...",
-					va_return("Current weapon: %s\n\nType new weapon name below to change!", WeaponNames[GunmenuData[idx][GunID]]), "Set", "Cancel");
+					va_return("Current weapon: %s\n\nType new weapon name below to change!", ReturnWeaponName(GunmenuData[idx][GunID])), "Set", "Cancel");
 			}
 			case 1:
 			{
 				Player[playerid][GunmenuModdingType] = GUNMENU_MOD_TYPE_LIMIT;
 				Dialog_ShowCallback(
 					playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing limit...",
-					va_return("Current limit of %s: %d\n\nType new limit value below to change!", WeaponNames[GunmenuData[idx][GunID]], GunmenuData[idx][GunLimit]), "Set",
+					va_return("Current limit of %s: %d\n\nType new limit value below to change!", ReturnWeaponName(GunmenuData[idx][GunID]), GunmenuData[idx][GunLimit]), "Set",
 					"Cancel");
 			}
 			case 2:
@@ -106,7 +106,7 @@ ShowPlayerGunmenuModification(playerid1)
 				Player[playerid][GunmenuModdingType] = GUNMENU_MOD_TYPE_AMMO;
 				Dialog_ShowCallback(
 					playerid, using inline InlineGunmenuModifySet, DIALOG_STYLE_INPUT, "Changing ammo...",
-					va_return("Current ammo of %s: %d\n\nType new ammo value below to change!", WeaponNames[GunmenuData[idx][GunID]], GunmenuData[idx][GunAmmo]), "Set", "Cancel");
+					va_return("Current ammo of %s: %d\n\nType new ammo value below to change!", ReturnWeaponName(GunmenuData[idx][GunID]), GunmenuData[idx][GunAmmo]), "Set", "Cancel");
 			}
 		}
 	}
@@ -117,7 +117,7 @@ ShowPlayerGunmenuModification(playerid1)
 			return 1;
 		Player[playerid][GunmenuModdingIndex] = listitem;
 		Dialog_ShowCallback(
-			playerid, using inline InlineGunmenuModifySub, DIALOG_STYLE_LIST, va_return("Modifying: %s", WeaponNames[GunmenuData[listitem][GunID]]), "Weapon\nLimit\nAmmo",
+			playerid, using inline InlineGunmenuModifySub, DIALOG_STYLE_LIST, va_return("Modifying: %s", ReturnWeaponName(GunmenuData[listitem][GunID])), "Weapon\nLimit\nAmmo",
 			"Select", "Back");
 	}
 
@@ -125,7 +125,7 @@ ShowPlayerGunmenuModification(playerid1)
 	strcat(str, "Weapon\tAmmo\tLimit");
 	for (new i = 0; i < MAX_GUNMENU_GUNS; i++)
 	{
-		strcat(str, va_return("\n{50EB50}%s\t%d\t%d", WeaponNames[GunmenuData[i][GunID]], GunmenuData[i][GunAmmo], GunmenuData[i][GunLimit]));
+		strcat(str, va_return("\n{50EB50}%s\t%d\t%d", ReturnWeaponName(GunmenuData[i][GunID]), GunmenuData[i][GunAmmo], GunmenuData[i][GunLimit]));
 	}
 	Dialog_ShowCallback(playerid1, using inline InlineGunmenuModifyMain, DIALOG_STYLE_TABLIST_HEADERS, "Gunmenu Modification Mode", str, "Modify", "Cancel");
 	return 1;

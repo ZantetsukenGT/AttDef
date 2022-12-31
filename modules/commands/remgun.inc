@@ -12,5 +12,5 @@ YCMD: remgun(playerid, params[], help)
 		return SendErrorMessage(playerid, "You wanna remove your hand? Visit a doctor, we don't do surgery here!");
 
 	RemovePlayerWeapon(playerid, weaponID);
-	return va_SendClientMessage(playerid, -1, "Removed %s from your gun inventory!", WeaponNames[weaponID]);
+	return va_SendClientMessage(playerid, -1, "Removed %s from your gun inventory!", ReturnWeaponName(weaponID));
 }

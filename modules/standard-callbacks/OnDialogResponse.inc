@@ -44,7 +44,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new str[140];
 				format(
 					str, sizeof str, "Key: %s+%s\nCurrent weapon: %s\n\nType weapon name or ID below to code this key bind for it", WEAPON_BIND_PRIMARY_KEY_TEXT_ALT,
-					WeaponBindKeyText_ALT[index], WeaponNames[WeaponBindData[playerid][BindKeyWeapon][index]]);
+					WeaponBindKeyText_ALT[index], ReturnWeaponName(WeaponBindData[playerid][BindKeyWeapon][index]));
 				ShowPlayerDialog(playerid, DIALOG_WEAPONBIND_MODIFY, DIALOG_STYLE_INPUT, "Coding weapon key bind", str, "Code it", "Cancel");
 			}
 			return 1;

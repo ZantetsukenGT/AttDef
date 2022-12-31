@@ -102,7 +102,7 @@ ListWeapsSpec(playerid)
 		GetPlayerWeaponData(playerid, slt, wep, ammo); // fetch the weapon data in this slot
 		if (ammo > 0)								   // if it isn't out of ammo
 			if (IsValidWeapon(wep))					   // ignore some weapons like fist and bruss knuckless..etc
-				format(str, sizeof(str), "%s%s%s ~r~~h~%d~n~", str, MAIN_TEXT_COLOUR, WeaponNames[wep], ammo);
+				format(str, sizeof(str), "%s%s%s ~r~~h~%d~n~", str, MAIN_TEXT_COLOUR, ReturnWeaponName(wep), ammo);
 	}
 	return str;
 }
