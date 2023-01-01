@@ -88,7 +88,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			Player[playerid][TotalDeaths]++;
 
 			SendClientMessageToAll(
-				-1, "%s%s {FFFFFF}killed %s%s {FFFFFF}with %s [%d ft] [%d HP]", TextColor[Player[killerid][Team]], Player[killerid][Name], TextColor[Player[playerid][Team]],
+				-1, "%s%s {FFFFFF}killed %s%s {FFFFFF}with %s [%.1f ft] [%d HP]", TextColor[Player[killerid][Team]], Player[killerid][Name], TextColor[Player[playerid][Team]],
 				Player[playerid][Name], ReturnWeaponName(reason), GetDistanceBetweenPlayers(killerid, playerid), GetHP(killerid) + GetAP(killerid));
 			UpdateRoundKillDmgTDmg(killerid);
 
