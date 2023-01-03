@@ -11,8 +11,7 @@ hook GOOD_OnPlayerConnect(playerid)
 	SendClientMessage(playerid, COL_PRIM_HEX, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}Welcome to " COL_PRIM "%s {FFFFFF}Server!", ServerName);
 	SendClientMessage(playerid, COL_PRIM_HEX, "PRO TIPS:");
-	SendClientMessage(playerid, COL_PRIM_HEX, "{FFD700}Sniper bug fix available! {FFFFFF}shorturl.at/bgpH1");
-	SendClientMessage(playerid, COL_PRIM_HEX, "{FFD700}Silent ASI Loader required: {FFFFFF}shorturl.at/szCR0");
+	SendClientMessage(playerid, COL_PRIM_HEX, "You can use F2 to access PWAC settings!");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}/changelog");
 	SendClientMessage(playerid, COL_PRIM_HEX, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	return 1;
