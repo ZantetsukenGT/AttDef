@@ -27,6 +27,8 @@ static UsageWeaponDMG(playerid) { return SendUsageMessage(playerid, "/weapondmg 
 
 DoWeaponDMG(playerid, const weapon_name_id[WC_MAX_WEAPON_NAME], Float: damageValue)
 {
+	if (Current != -1)
+		return SendErrorMessage(playerid, "Can't use this while a round is in progress.");
 	new weaponid = IsNumeric(weapon_name_id) ? strval(weapon_name_id) : GetWeaponID(weapon_name_id);
 	if (!IsBulletWeapon(weaponid) && !IsMeleeWeapon(weaponid) && !IsHighRateWeapon(weaponid))
 		return SendErrorMessage(playerid, "That weapon doesn't exist or its damage is not allowed to be changed.");
