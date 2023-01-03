@@ -39,7 +39,7 @@ public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
 		// Show target player info for the shooter (HP, PL, Ping and many other things)
 		ShowTargetInfo(issuerid, playerid);
 
-		SetPlayerDamageBubble(playerid, issuerid, amount, weapon);
+		//SetPlayerDamageBubble(playerid, issuerid, amount, weapon);
 
 		if (Player[issuerid][Playing] && Player[playerid][Playing])
 		{

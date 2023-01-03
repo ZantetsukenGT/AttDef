@@ -10,7 +10,7 @@ ptask OnPlayerUIUpdate[1000](playerid)
 	Player[playerid][PauseCount]++;
 
 	// This basically hides damage bubbles that should be hidden
-	UpdateDamageBubbles(playerid);
+	//UpdateDamageBubbles(playerid);
 
 	// Show target info
 	ShowTargetInfo(playerid, GetPlayerTargetPlayer(playerid));
