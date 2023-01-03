@@ -85,3 +85,16 @@ hook native SpawnPlayer(playerid)
 		SetPlayerPos(playerid, 0.0, 0.0, 0.0);
 	return continue(playerid);
 }
+
+#if defined _YSF_included
+// Hook GetPlayerWeaponData to fix a bug: "old weapons with no ammo left are still returned"
+hook native GetPlayerWeaponData(playerid, slot, &weapons, &ammo)
+{
+	// This reuses the "slot" variable so we don't have to declare a new one
+	// and can put all the code in a single statement.
+	return
+		slot = continue(playerid, slot, weapons, ammo),
+		weapons = ammo ? weapons : 0,
+		slot;
+}
+#endif
