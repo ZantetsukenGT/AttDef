@@ -13,6 +13,7 @@ hook GOOD_OnPlayerConnect(playerid)
 	SendClientMessage(playerid, COL_PRIM_HEX, "PRO TIPS:");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFD700}You can use F2 to access PWAC settings!");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}/changelog");
+	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}Past, present and future.");
 	SendClientMessage(playerid, COL_PRIM_HEX, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	return 1;
 }

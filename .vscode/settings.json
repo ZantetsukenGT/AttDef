@@ -9,5 +9,8 @@
 		"*.inc": "cpp",
 		"*.pwn": "cpp",
 		"*.pawn": "cpp"
+	},
+	"[cpp]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
 	}
 }
