@@ -10,7 +10,7 @@
 #define FOREACH_NO_STREAMED
 
 #include <a_samp>
-#include <YSF>
+// #include <YSF>
 #if !defined _YSF_included
 	#include <omp>		 // omp's native YSF implementations
 #endif
