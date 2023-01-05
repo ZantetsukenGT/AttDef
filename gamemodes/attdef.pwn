@@ -49,6 +49,7 @@
 #include <wc-callbacks>		  // Weapon-config's callback handling
 #include <other-callbacks>	  // Dependencies and miscellaneous callbacks, organized in different files
 #include <standard-callbacks> // SA-MP default callbacks, organized in different files, must be the last include
+#include <middlewares/svehicles>		  // Middlewares, functions 
 
 /*
 	Useful resources:

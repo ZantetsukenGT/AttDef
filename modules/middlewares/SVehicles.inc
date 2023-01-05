@@ -1,4 +1,6 @@
-public OnGameModeInit()
+#include <YSI_Coding\y_hooks>
+
+hook OnScriptInit()
 {
 	/* Add a Hydra (520) and many others to the game that will respawn 120 seconds after being left 
 	with own colors */
