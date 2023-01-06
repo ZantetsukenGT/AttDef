@@ -139,6 +139,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	}
 	Player[playerid][InDM]	  = false;
 	Player[playerid][Playing] = false;
+	ColorFix(playerid);
 	Iter_Remove(PlayersInRound, playerid);
 	UpdateTeamPlayerCount(Player[playerid][Team], true, playerid);
 	UpdateTeamHP(Player[playerid][Team], playerid);
