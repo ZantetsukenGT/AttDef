@@ -5,6 +5,6 @@
 
 public OnPlayerPrepareDeath(playerid, animlib[32], animname[32], &anim_lock, &respawn_time)
 {
-	respawn_time = 500;
+	respawn_time = GetPlayerPing(playerid);
 	return 1;
 }

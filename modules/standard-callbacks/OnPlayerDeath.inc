@@ -124,7 +124,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			PlayDeathCamera(playerid, x, y, z, showdeathquote);
 		}
 		else // If not
-			SetTimerEx("SpectateAnyPlayerT", GetPlayerPing(playerid) + 10, false, "i", playerid);
+			SetTimerEx("SpectateAnyPlayerT", GetPlayerPing(playerid) + 30, false, "i", playerid);
 		// Create an icon on radar where the player died
 		CreateTeamDeathMapIcon(Player[playerid][Team], x, y, z);
 	}
@@ -139,7 +139,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 	}
 	Player[playerid][InDM]	  = false;
 	Player[playerid][Playing] = false;
-	ColorFix(playerid);
 	Iter_Remove(PlayersInRound, playerid);
 	UpdateTeamPlayerCount(Player[playerid][Team], true, playerid);
 	UpdateTeamHP(Player[playerid][Team], playerid);
