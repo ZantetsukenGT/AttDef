@@ -26,15 +26,11 @@ SetAP(playerid, Float: amount)
 
 UpdatePlayerHPAPVariables(playerid, bool: WasPlaying)
 {
-	new Float: armour = GetPlayerArmour(playerid);
-	new Float: health = GetPlayerHealth(playerid);
+	new Float: health = GetPlayerArmour(playerid) + GetPlayerHealth(playerid);
 
 	if (WasPlaying)
 	{
-		if (Player[playerid][Team] == ATTACKER)
-			SetPlayerScore(playerid, floatround(health + armour));
-		else
-			SetPlayerScore(playerid, -floatround(health + armour));
+		SetPlayerScore(playerid, health < 1.000 ? floatround(health, floatround_ceil) : floatround(health));
 	}
 }
 
