@@ -1080,7 +1080,7 @@ public OnPlayerReplace(ToAddID, ToReplaceID, playerid)
 	SetPlayerFacingAngle(ToAddID, Pos[3]);
 	SetPlayerInterior(ToAddID, GetPlayerInterior(ToReplaceID));
 	SetPlayerVirtualWorld(ToAddID, GetPlayerVirtualWorld(ToReplaceID));
-	SetPlayerTeam(ToAddID, Player[ToAddID][Team]);
+	SetPlayerTeam(ToAddID, NO_TEAM);
 
 	ColorFix(ToAddID);
 
@@ -1183,7 +1183,7 @@ public OnPlayerInGameReplace(ToAddID, i, playerid)
 	SetHP(ToAddID, SaveVariables[i][gHealth]);
 	SetAP(ToAddID, SaveVariables[i][gArmour]);
 
-	SetPlayerTeam(ToAddID, Player[ToAddID][Team]);
+	SetPlayerTeam(ToAddID, NO_TEAM);
 
 	ColorFix(ToAddID);
 	SetCPForPlayer(ToAddID);
@@ -1521,7 +1521,7 @@ SpawnPlayersInRC()
 
 					SetPlayerColor(i, ATTACKER_PLAYING);
 					SpawnPlayer(i);
-					SetPlayerTeam(i, 1);
+					SetPlayerTeam(i, NO_TEAM);
 
 					ShowTeamBarsForPlayer(i);
 				}
@@ -1538,7 +1538,7 @@ SpawnPlayersInRC()
 
 					SetPlayerColor(i, DEFENDER_PLAYING);
 					SpawnPlayer(i);
-					SetPlayerTeam(i, 2);
+					SetPlayerTeam(i, NO_TEAM);
 
 					ShowTeamBarsForPlayer(i);
 				}
@@ -1800,7 +1800,7 @@ SpawnPlayersInArena()
 
 					SetPlayerColor(i, ATTACKER_PLAYING);
 					SpawnPlayer(i);
-					SetPlayerTeam(i, 1);
+					SetPlayerTeam(i, NO_TEAM);
 
 					ShowTeamBarsForPlayer(i);
 				}
@@ -1817,7 +1817,7 @@ SpawnPlayersInArena()
 
 					SetPlayerColor(i, DEFENDER_PLAYING);
 					SpawnPlayer(i);
-					SetPlayerTeam(i, 2);
+					SetPlayerTeam(i, NO_TEAM);
 
 					ShowTeamBarsForPlayer(i);
 				}
@@ -1930,7 +1930,7 @@ public AddPlayerToArena(playerid)
 			SpawnPlayer(playerid);
 			SetPlayerColor(playerid, ATTACKER_PLAYING);
 
-			SetPlayerTeam(playerid, 1);
+			SetPlayerTeam(playerid, NO_TEAM);
 
 			ShowTeamBarsForPlayer(playerid);
 		}
@@ -1942,7 +1942,7 @@ public AddPlayerToArena(playerid)
 
 			SpawnPlayer(playerid);
 			SetPlayerColor(playerid, DEFENDER_PLAYING);
-			SetPlayerTeam(playerid, 2);
+			SetPlayerTeam(playerid, NO_TEAM);
 
 			ShowTeamBarsForPlayer(playerid);
 		}
@@ -1953,7 +1953,7 @@ public AddPlayerToArena(playerid)
 				0, 0, 0, 0, 0, 0);
 			SpawnPlayer(playerid);
 			SetPlayerColor(playerid, REFEREE_COLOR);
-			SetPlayerTeam(playerid, 3);
+			SetPlayerTeam(playerid, NO_TEAM);
 		}
 	}
 
@@ -2259,7 +2259,7 @@ SpawnPlayersInBase()
 					SetPlayerColor(i, ATTACKER_PLAYING);
 					SpawnPlayer(i);
 					SetPlayerMapIcon(i, 59, BAttackerSpawn[Current][0], BAttackerSpawn[Current][1], BAttackerSpawn[Current][2], 59, 0, MAPICON_GLOBAL);
-					SetPlayerTeam(i, ATTACKER);
+					SetPlayerTeam(i, NO_TEAM);
 
 					DisableRemoteVehicleCollisions(i, 1);
 					SetTimerEx("EnableVehicleCollisions", 15000, false, "i", i);
@@ -2283,7 +2283,7 @@ SpawnPlayersInBase()
 					SetCPForPlayer(i);
 					SetPlayerColor(i, DEFENDER_PLAYING);
 					SpawnPlayer(i);
-					SetPlayerTeam(i, DEFENDER);
+					SetPlayerTeam(i, NO_TEAM);
 
 					ShowTeamBarsForPlayer(i);
 				}
@@ -2403,7 +2403,7 @@ public AddPlayerToBase(playerid)
 			SetCPForPlayer(playerid);
 			SetPlayerColor(playerid, ATTACKER_PLAYING);
 			SetPlayerMapIcon(playerid, 59, BAttackerSpawn[Current][0], BAttackerSpawn[Current][1], BAttackerSpawn[Current][2], 59, 0, MAPICON_GLOBAL);
-			SetPlayerTeam(playerid, ATTACKER);
+			SetPlayerTeam(playerid, NO_TEAM);
 
 			ShowTeamBarsForPlayer(playerid);
 		}
@@ -2415,7 +2415,7 @@ public AddPlayerToBase(playerid)
 			SpawnPlayer(playerid);
 			SetCPForPlayer(playerid);
 			SetPlayerColor(playerid, DEFENDER_PLAYING);
-			SetPlayerTeam(playerid, DEFENDER);
+			SetPlayerTeam(playerid, NO_TEAM);
 
 			ShowTeamBarsForPlayer(playerid);
 		}
@@ -2427,7 +2427,7 @@ public AddPlayerToBase(playerid)
 			SpawnPlayer(playerid);
 			SetCPForPlayer(playerid);
 			SetPlayerColor(playerid, REFEREE_COLOR);
-			SetPlayerTeam(playerid, REFEREE);
+			SetPlayerTeam(playerid, NO_TEAM);
 		}
 	}
 

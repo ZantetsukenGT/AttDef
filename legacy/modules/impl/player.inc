@@ -709,7 +709,7 @@ LoadPlayerVariables(playerid)
 			UpdateTeamHP(Player[playerid][Team]);
 
 			ColorFix(playerid);
-			SetPlayerTeam(playerid, Player[playerid][Team]);
+			SetPlayerTeam(playerid, NO_TEAM);
 			RadarFix();
 			SetCPForPlayer(playerid);
 

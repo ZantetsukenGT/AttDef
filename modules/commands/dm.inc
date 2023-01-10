@@ -37,7 +37,7 @@ YCMD: dm(playerid, params[], help)
 	Player[playerid][IgnoreSpawn] = true; //Make sure you ignore OnPlayerSpawn, else you will just spawn in lobby (because u are about to use SpawnPlayer).
 	SpawnPlayer(playerid);				  //Spawns players, in this case we have SetSpawnInfo (but still you need to make sure OnPlayerSpawn is ignored);
 	SetPlayerInterior(playerid, DMInterior[DMID]);
-	SetPlayerTeam(playerid, playerid);
+	SetPlayerTeam(playerid, NO_TEAM);
 
 	// If the second and third weapons are punch or no weapons then it'll show you just one weapon instead of saying (Deagle - Punch - Punch)
 	if (DMWeapons[DMID][1] == 0 && DMWeapons[DMID][2] == 0)
