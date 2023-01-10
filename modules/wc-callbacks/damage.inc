@@ -30,7 +30,13 @@ static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 	{
 		// Reject damage if one is playing and the other is not
 		if (Player[playerid][Playing] != Player[issuerid][Playing])
+		{
+			HandleFriendlyVisualDamage(issuerid, playerid, .rejected = true);
+
+			PlayerPlaySound(issuerid, 1135, 0.0, 0.0, 0.0);
+			PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0);
 			return false;
+		}
 
 		// If they are not playing, just allow the dmg
 		if (!Player[playerid][Playing])
@@ -47,7 +53,13 @@ static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 		}
 		// If it's a referee trying to do damage
 		if (Player[issuerid][Team] == REFEREE)
+		{
+			HandleFriendlyVisualDamage(issuerid, playerid, .rejected = true);
+
+			PlayerPlaySound(issuerid, 1135, 0.0, 0.0, 0.0);
+			PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0);
 			return false;
+		}
 	}
 	return true;
 }

@@ -59,10 +59,13 @@ public HideFriendlyVisualDmg(playerid)
 	return 1;
 }
 
-HandleFriendlyVisualDamage(hitterid, hittedid)
+HandleFriendlyVisualDamage(hitterid, hittedid, bool: rejected = false)
 {
 	new str[44];
-	format(str, sizeof str, "~y~~h~%s (team-fire)", Player[hittedid][NameWithoutTag]);
+	if (rejected)
+		format(str, sizeof str, "~y~~h~%s (rejected-fire)", Player[hittedid][NameWithoutTag]);
+	else
+		format(str, sizeof str, "~y~~h~%s (team-fire)", Player[hittedid][NameWithoutTag]);
 
 	PlayerTextDrawSetString(hitterid, FriendlyDamage[hitterid][0], str);
 
@@ -80,7 +83,10 @@ HandleFriendlyVisualDamage(hitterid, hittedid)
 		FriendlyDamageTimer[i] = SetTimerEx("HideFriendlyVisualDmg", HIDE_DAMAGE_TEXTDRAW_AFTER, false, "i", i);
 	}
 
-	format(str, sizeof str, "~y~~h~%s (team-fire)", Player[hitterid][NameWithoutTag]);
+	if (rejected)
+		format(str, sizeof str, "~y~~h~%s (rejected-fire)", Player[hitterid][NameWithoutTag]);
+	else
+		format(str, sizeof str, "~y~~h~%s (team-fire)", Player[hitterid][NameWithoutTag]);
 
 	PlayerTextDrawSetString(hittedid, FriendlyDamage[hittedid][1], str);
 
