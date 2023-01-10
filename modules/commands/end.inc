@@ -93,7 +93,7 @@ YCMD: end(playerid, params[], help)
 	ArenaStarted = false;
 
 	SendRconCommand("mapname Lobby");
-	FixGamemodeText();
+	//FixGamemodeText();
 
 	DeleteAllTeamBars();
 	HideTeamCornerInfoForAll();

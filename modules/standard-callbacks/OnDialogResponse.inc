@@ -352,6 +352,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 				WarMode = false;
 
+				FixGamemodeText();
 				format(iString, sizeof(iString), "{FFFFFF}%s " COL_PRIM "has disabled the Match-Mode.", Player[playerid][Name]);
 				SendClientMessageToAll(-1, iString);
 			}

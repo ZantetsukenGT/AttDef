@@ -2530,7 +2530,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 	TextDrawSetString(rightText, iString);
 
 	SendRconCommand("mapname Lobby");
-	FixGamemodeText();
+	//FixGamemodeText();
 
 	new playerScores[MAX_PLAYERS][rankingEnum], index, p, names[MAX_PLAYERS][MAX_PLAYER_NAME];
 
@@ -2829,6 +2829,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 forward WarEnded();
 public WarEnded()
 {
+	FixGamemodeText();
 	ClearKillList(); // Clears the kill-list.
 
 	new iString[256], TopString[3][128];
