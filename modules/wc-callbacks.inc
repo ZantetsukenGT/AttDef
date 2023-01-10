@@ -10,3 +10,5 @@
 //#include "wc-callbacks\finished.inc"
 #include "wc-callbacks\invalid.inc"
 #include "wc-callbacks\prepare.inc"
+#include "wc-callbacks\rejected.inc"
+
