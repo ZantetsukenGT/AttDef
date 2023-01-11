@@ -81,6 +81,7 @@ hook native SetPlayerSkin(playerid, skinid)
 // Hook SpawnPlayer to fix spawning player when in vehicle
 hook native SpawnPlayer(playerid)
 {
+	TogglePlayerSpectating(playerid, false);
 	if (IsPlayerInAnyVehicle(playerid))
 		SetPlayerPos(playerid, 0.0, 0.0, 0.0);
 	return continue(playerid);
