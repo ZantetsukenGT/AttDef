@@ -3,40 +3,11 @@
 #endif
 #define opws_fix_included_
 
+// Credits to Boorz for the original include
+
 #include <Pawn.RakNet>
 #include <YSI_Coding\y_timers>
 #include <YSI_Coding\y_hooks>
-
-static const BULLET_SYNC					= 206;
-static const INITGAME_ORPC					= 139;
-
-// skips: 11 boolean bits, 2 int8, 1 int16, 3 floats, 7 ints32
-static const LAGCOMP_WRITE_OFFSET			= 11 * 1 + 2 * 8 + 1 * 16 + 3 * 32 + 7 * 32;
-
-static BitStream: s_BitStreamCopy[MAX_PLAYERS];
-
-timer DeferredOnPlayerConnect[0](playerid)
-{
-	new originalWO, BitStream: bs = s_BitStreamCopy[playerid];
-
-	BS_GetWriteOffset(bs, originalWO);
-	BS_SetWriteOffset(bs, LAGCOMP_WRITE_OFFSET);
-
-	BS_WriteValue(bs, PR_UINT8, 0);
-
-	BS_SetWriteOffset(bs, originalWO);
-
-	PR_SendRPC(bs, playerid, INITGAME_ORPC, PR_HIGH_PRIORITY, PR_RELIABLE_ORDERED);
-	BS_Delete(bs);
-	CallLocalFunction(#GOOD_OnPlayerConnect, #i, playerid);
-	return 1;
-}
-
-hook OnPlayerConnect(playerid)
-{
-	defer DeferredOnPlayerConnect(playerid);
-	return 1;
-}
 
 timer DeferredOnScriptInit[0]()
 {
@@ -50,12 +21,27 @@ hook OnScriptInit()
 	return 1;
 }
 
+// skips: 11 boolean bits, 2 int8, 1 int16, 3 floats, 7 ints32
+static const LAGCOMP_WRITE_OFFSET = 11 * 1 + 2 * 8 + 1 * 16 + 3 * 32 + 7 * 32;
+static const INITGAME_ORPC		  = 139;
 ORPC:INITGAME_ORPC(playerid, BitStream: bs)
 {
-	s_BitStreamCopy[playerid] = BS_NewCopy(bs);
-	return 1;
+	new originalWO;
+	PR_SendRPC(bs, playerid, INITGAME_ORPC, PR_HIGH_PRIORITY, PR_RELIABLE_ORDERED);
+
+	BS_GetWriteOffset(bs, originalWO);
+	BS_SetWriteOffset(bs, LAGCOMP_WRITE_OFFSET);
+
+	BS_WriteValue(bs, PR_UINT8, 0);
+
+	BS_SetWriteOffset(bs, originalWO);
+
+	PR_SendRPC(bs, playerid, INITGAME_ORPC, PR_HIGH_PRIORITY, PR_RELIABLE_ORDERED);
+	CallLocalFunction(#GOOD_OnPlayerConnect, #i, playerid);
+	return 0;
 }
 
+static const BULLET_SYNC = 206;
 IPacket:BULLET_SYNC(playerid, BitStream: bs)
 {
 	new bData[PR_BulletSync];
