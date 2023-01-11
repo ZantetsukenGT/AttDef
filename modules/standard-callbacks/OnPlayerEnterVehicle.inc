@@ -12,8 +12,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 			Float: z;
 		GetPlayerPos(playerid, x, y, z);
 		SetPlayerPos(playerid, x, y, z);
-		return 1;
 	}
-	Player[playerid][LastEnterVehicleAttempt] = GetTickCount();
 	return 1;
 }

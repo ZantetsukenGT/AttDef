@@ -95,7 +95,6 @@ enum PlayerVariables {
 	ACKick,
 	LastVehicle,
 	LastTimeSynced,
-	LastEnterVehicleAttempt,
 	TimesSpawned,
 	VWorld,
 	lastChat,

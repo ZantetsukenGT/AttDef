@@ -1225,13 +1225,11 @@ SyncPlayer(playerid)
 	if (currentTick - Player[playerid][LastTimeSynced] < 1000)
 		return 1;
 	Player[playerid][LastTimeSynced] = currentTick;
-	if (currentTick - Player[playerid][LastEnterVehicleAttempt] < 5000)
+	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 		return 1;
-	if (Player[playerid][Spectating])
+	if (GBUG_IsPerformingEntering(playerid))
 		return 1;
 	if ((RoundPaused || !AllowSync) && Player[playerid][Playing])
-		return 1;
-	if (GetPlayerVehicleID(playerid))
 		return 1;
 	if (Player[playerid][OnGunmenu])
 		return SendErrorMessage(playerid, "Can't sync while in gunmenu");

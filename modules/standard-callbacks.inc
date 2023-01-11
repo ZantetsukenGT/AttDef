@@ -26,7 +26,6 @@
 #tryinclude "standard-callbacks\OnPlayerEnterCheckpoint.inc"
 #tryinclude "standard-callbacks\OnPlayerEnterRaceCheckpoint.inc"
 #tryinclude "standard-callbacks\OnPlayerEnterVehicle.inc"
-#tryinclude "standard-callbacks\OnPlayerExitVehicle.inc"
 #tryinclude "standard-callbacks\OnPlayerExitedMenu.inc"
 #tryinclude "standard-callbacks\OnPlayerFinishedDownloading.inc"
 //#tryinclude "standard-callbacks\OnPlayerGiveDamage.inc"
