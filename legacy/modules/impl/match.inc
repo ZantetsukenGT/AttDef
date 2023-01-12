@@ -1390,11 +1390,10 @@ public OnRCStart()
 	ViewRoundCountdown = 4;
 	ViewRCForPlayers();
 
-	format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
-	SetGameModeText(iString);
-
 	if (WarMode)
 	{
+		format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
+		SetGameModeText(iString);
 		MatchRoundsStarted++;
 		if (MatchRoundsStarted > 100)
 			MatchRoundsStarted = 1;
@@ -1665,11 +1664,10 @@ public OnArenaStart(ArenaID)
 	ViewRoundCountdown = 4;
 	ViewArenaForPlayers();
 
-	format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
-	SetGameModeText(iString);
-
 	if (WarMode)
 	{
+		format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
+		SetGameModeText(iString);
 		MatchRoundsStarted++;
 		if (MatchRoundsStarted > 100)
 			MatchRoundsStarted = 1;
@@ -2070,11 +2068,10 @@ public OnBaseStart(BaseID)
 	format(iString, sizeof(iString), "mapname Base: %d", Current); //Will change the map name in samp.exe to your base id (e.g. Base: 4)
 	SendRconCommand(iString);
 
-	format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
-	SetGameModeText(iString);
-
 	if (WarMode)
 	{
+		format(iString, sizeof(iString), "%s: %d - %s: %d", TeamName[ATTACKER], TeamScore[ATTACKER], TeamName[DEFENDER], TeamScore[DEFENDER]);
+		SetGameModeText(iString);
 		MatchRoundsStarted++;
 		if (MatchRoundsStarted > 100)
 			MatchRoundsStarted = 1;
