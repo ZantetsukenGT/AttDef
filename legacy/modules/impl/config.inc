@@ -544,9 +544,8 @@ LoadConfig()
 	db_get_field_assoc(res, "Value", ServerName, sizeof(ServerName)); // Server Name
 	db_next_row(res);
 
-	//db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CurrentArenaSet
-	//sscanf(iString, "s[32]", CurrentArenaSet);
-	//db_next_row(res);
+	db_get_field_assoc(res, "Value", CurrentArenaSet, sizeof(CurrentArenaSet)); // CurrentArenaSet
+	db_next_row(res);
 
 	db_free_result(res);
 	print("Server Config Loaded.");

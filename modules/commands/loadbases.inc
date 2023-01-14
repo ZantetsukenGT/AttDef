@@ -10,7 +10,7 @@ YCMD: loadbases(playerid, params[], help)
 	if (Current != -1)
 		return SendErrorMessage(playerid, "Can't use this command while round is active.");
 	new baseset = 0;
-	if (sscanf(params, "d", baseset) || baseset < 0 || baseset > 7)
+	if (sscanf(params, "d", baseset) || baseset < 0 || baseset > 8)
 	{
 		SendUsageMessage(playerid, "/loadbases [base set id]");
 		SendClientMessage(playerid, -1, "Available base set IDs:");
@@ -21,7 +21,8 @@ YCMD: loadbases(playerid, params[], help)
 		SendClientMessage(playerid, -1, "4 = ESL Bases");
 		SendClientMessage(playerid, -1, "5 = New Bulletproof Bases (original complete set)");
 		SendClientMessage(playerid, -1, "6 = Old Bulletproof Bases (original complete set)");
-		return SendClientMessage(playerid, -1, "7 = Wargrounds bases (uL server)");
+		SendClientMessage(playerid, -1, "7 = Wargrounds bases (uL server)");
+		return SendClientMessage(playerid, -1, "8 = UGMP bases");
 	}
 	CurrentBaseSet[0] = EOS;
 	switch (baseset)
@@ -34,6 +35,7 @@ YCMD: loadbases(playerid, params[], help)
 		case 5: strcat(CurrentBaseSet, "NewBulletproofBases");
 		case 6: strcat(CurrentBaseSet, "OldBulletproofBases");
 		case 7: strcat(CurrentBaseSet, "Wargrounds");
+		case 8: strcat(CurrentBaseSet, "UGMPBases");
 	}
 	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentBaseSet'", CurrentBaseSet)));
 	LoadBases();
