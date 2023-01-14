@@ -201,8 +201,8 @@ InitPlayer(playerid)
 
 	ResetPlayerMoney(playerid);
 	SetPlayerColor(playerid, 0xAAAAAAAA);
-	RemoveUselessObjectsForPlayer(playerid);
-	RemoveBuildingForPlayer(playerid, 1227, 0.0, 0.0, 0.0, 6000.0); // green bin
+	//RemoveUselessObjectsForPlayer(playerid);
+	/*RemoveBuildingForPlayer(playerid, 1227, 0.0, 0.0, 0.0, 6000.0); // green bin
 	RemoveBuildingForPlayer(playerid, 1432, 0.0, 0.0, 0.0, 6000.0); // dining table
 	RemoveBuildingForPlayer(playerid, 1281, 0.0, 0.0, 0.0, 6000.0); // dining table 2
 	RemoveBuildingForPlayer(playerid, 1594, 0.0, 0.0, 0.0, 6000.0); // chairs && table
@@ -213,7 +213,7 @@ InitPlayer(playerid)
 	RemoveBuildingForPlayer(playerid, 1450, 0.0, 0.0, 0.0, 6000.0); // boxes
 	RemoveBuildingForPlayer(playerid, 1264, 0.0, 0.0, 0.0, 6000.0); // trash bag 2
 	RemoveBuildingForPlayer(playerid, 1280, 0.0, 0.0, 0.0, 6000.0); // bench
-	/*RemoveBuildingForPlayer(playerid, 625, 0.0, 0.0, 0.0, 6000.0); // small trees
+	RemoveBuildingForPlayer(playerid, 625, 0.0, 0.0, 0.0, 6000.0); // small trees
 	RemoveBuildingForPlayer(playerid, 626, 0.0, 0.0, 0.0, 6000.0); 
 	RemoveBuildingForPlayer(playerid, 627, 0.0, 0.0, 0.0, 6000.0);
 	RemoveBuildingForPlayer(playerid, 628, 0.0, 0.0, 0.0, 6000.0);
@@ -221,7 +221,7 @@ InitPlayer(playerid)
 	RemoveBuildingForPlayer(playerid, 630, 0.0, 0.0, 0.0, 6000.0);
 	RemoveBuildingForPlayer(playerid, 631, 0.0, 0.0, 0.0, 6000.0);
 	RemoveBuildingForPlayer(playerid, 632, 0.0, 0.0, 0.0, 6000.0);
-	RemoveBuildingForPlayer(playerid, 643, 0.0, 0.0, 0.0, 6000.0);*/
+	RemoveBuildingForPlayer(playerid, 643, 0.0, 0.0, 0.0, 6000.0);
 	RemoveBuildingForPlayer(playerid, 1649, 0.0, 0.0, 0.0, 6000.0); // small glass
 	RemoveBuildingForPlayer(playerid, 3857, 0.0, 0.0, 0.0, 6000.0); // smash glasses
 	//RemoveBuildingForPlayer(playerid, 3858, 0.0, 0.0, 0.0, 6000.0);
@@ -236,7 +236,7 @@ InitPlayer(playerid)
 	RemoveBuildingForPlayer(playerid, 1418, 0.0, 0.0, 0.0, 6000.0);		  // fence3
 	RemoveBuildingForPlayer(playerid, 1446, 0.0, 0.0, 0.0, 6000.0);		  // fence4
 	RemoveBuildingForPlayer(playerid, 3036, -2176.0, 660.0, 50.0, 200.0); //chinatown gate
-	/*RemoveBuildingForPlayer(playerid, 726, 819.0, -1527.0, 13.0, 75.0); // base 207 object
+	RemoveBuildingForPlayer(playerid, 726, 819.0, -1527.0, 13.0, 75.0); // base 207 object
 	RemoveBuildingForPlayer(playerid, 789, 819.0, -1527.0, 13.0, 75.0); // base 207 object
 	RemoveBuildingForPlayer(playerid, 803, 819.0, -1527.0, 13.0, 75.0); // base 207 object
 	RemoveBuildingForPlayer(playerid, 805, 819.0, -1527.0, 13.0, 75.0); // base 207 object
@@ -269,8 +269,8 @@ InitPlayer(playerid)
 	RemoveBuildingForPlayer(playerid, 640, -2563, 323, 10, 80.0); // gardening base
 	RemoveBuildingForPlayer(playerid, 625, -2563, 323, 10, 80.0); // gardening base
 	RemoveBuildingForPlayer(playerid, 1418, -2563, 323, 10, 80.0); // gardening base
-	RemoveBuildingForPlayer(playerid, 741, -2563, 323, 10, 80.0); // gardening base*/
-	RemoveBuildingForPlayer(playerid, 5464, 1902, -1309, 29, 200.0); // jeff constr
+	RemoveBuildingForPlayer(playerid, 741, -2563, 323, 10, 80.0); // gardening base
+	RemoveBuildingForPlayer(playerid, 5464, 1902, -1309, 29, 200.0); // jeff constr*/
 
 	LoadPlayerTextDraws(playerid);
 
