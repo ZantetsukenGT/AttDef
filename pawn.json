@@ -7,9 +7,8 @@
 		"pawn-lang/pawn-stdlib",
 		"pawn-lang/samp-stdlib",
 		"Zeex/samp-plugin-crashdetect",
-		"katursis/Pawn.RakNet@omp",
-		"NexiusTailer/MapFix",
-		"openmultiplayer/server-beta",
+		"katursis/Pawn.RakNet:1.5.1",
+		"IllidanS4/YSF",
 		"pawn-lang/YSI-Includes@5.x",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",
@@ -17,11 +16,12 @@
 		"ZantetsukenGT/progress2",
 		"ZantetsukenGT/samp-dyn-dialog-pages",
 		"ZantetsukenGT/samp-geoip",
-		"ZantetsukenGT/samp-weapon-config"
+		"ZantetsukenGT/samp-weapon-config",
+		"ZantetsukenGT/ugmp-dl-stdlib"
 	],
 	"local": true,
 	"runtime": {
-		"version": "openmp",
+		"version": "UGMP",
 		"weburl": "discord.io/attackdefend"
 	},
 	"builds": [

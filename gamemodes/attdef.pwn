@@ -9,14 +9,14 @@
 #define FOREACH_NO_ACTORS
 #define FOREACH_NO_STREAMED
 
-#include <a_samp>
+#include <a_ugmp>
 #include <YSF>
 #if !defined _YSF_included
 	#include <omp>		 // omp's native YSF implementations
 #endif
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-#tryinclude <opws-fix>
+//#tryinclude <opws-fix>
 #define WC_CUSTOM_VENDING_MACHINES false
 #include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
 
@@ -35,8 +35,8 @@
 //#include <mSelection> // Selection with preview models feature library
 #include <gBugFix>	  // Fix false vehicle entry as passenger (G (teleport/distance) bug)
 #include <md-sort>	  // Sorts multi dimensional arrays by Slice (Oscar Broman)
-#define MAPFIX_USE_STREAMER false
-#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
+//#define MAPFIX_USE_STREAMER false
+//#include <mapfix>	   // Texture bug fixes of the GTA San Andreas map such as passing through some walls, windows, floors etc.
 #include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
 #include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
