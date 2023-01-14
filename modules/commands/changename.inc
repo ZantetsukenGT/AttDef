@@ -13,8 +13,8 @@ YCMD: changename(playerid, params[], help)
 		return SendErrorMessage(playerid, "Cannot use this command when you're muted.");
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/changename [New Name]");
-	if (!IsValidNickName(params))
-		return SendErrorMessage(playerid, "Invalid nickname!");
+	//if (!IsValidNickName(params))
+	//	return SendErrorMessage(playerid, "Invalid nickname!");
 
 	switch (SetPlayerName(playerid, params))
 	{

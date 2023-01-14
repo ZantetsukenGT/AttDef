@@ -10,10 +10,10 @@
 #define FOREACH_NO_STREAMED
 
 #include <a_ugmp>
-#include <YSF>
-#if !defined _YSF_included
-	#include <omp>		 // omp's native YSF implementations
-#endif
+//#include <YSF>
+//#if !defined _YSF_included
+	//#include <omp>		 // omp's native YSF implementations
+//#endif
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
 #tryinclude <opws-fix>

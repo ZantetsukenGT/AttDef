@@ -16,6 +16,8 @@
 
 #define TogglePlayerCtrlable TogglePlayerControllable
 // Add "Frozen" variable to this function and fix parachute bug
+
+static bool:s_Controllable[MAX_PLAYERS] = { true, ... };
 hook native TogglePlayerCtrlable(playerid, toggle)
 {
 	if (!toggle)
@@ -31,8 +33,13 @@ hook native TogglePlayerCtrlable(playerid, toggle)
 			Player[playerid][HadParachuteBeforeFreeze] = false;
 		}
 	}
-
+	s_Controllable[playerid] = !!toggle;
 	return continue(playerid, toggle);
+}
+
+stock bool:IsPlayerControllable(playerid)
+{
+	return s_Controllable[playerid];
 }
 
 // Hook SetPlayerSkin to fix crashes
@@ -87,7 +94,7 @@ hook native SpawnPlayer(playerid)
 	return continue(playerid);
 }
 
-#if defined _YSF_included
+//#if defined _YSF_included
 // Hook GetPlayerWeaponData to fix a bug: "old weapons with no ammo left are still returned"
 hook native GetPlayerWeaponData(playerid, slot, &weapons, &ammo)
 {
@@ -98,4 +105,4 @@ hook native GetPlayerWeaponData(playerid, slot, &weapons, &ammo)
 		weapons = ammo ? weapons : 0,
 		slot;
 }
-#endif
+//#endif
