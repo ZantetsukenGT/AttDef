@@ -1,7 +1,7 @@
-#if defined opws_fix_included_
+#if defined no_opws_fix_included_
 	#endinput
 #endif
-#define opws_fix_included_
+#define no_opws_fix_included_
 
 #include <YSI_Coding\y_hooks>
 
