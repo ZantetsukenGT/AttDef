@@ -17,7 +17,7 @@ task OnScriptUpdate[1000]()
 			{
 				new Float: vHealth;
 				GetVehicleHealth(vID, vHealth);
-				va_PlayerTextDrawSetString(i, VInfo[i], "~w~%s ~r~%.0f%%", aVehicleNames[vModelID - 400], vHealth / 10);
+				va_PlayerTextDrawSetString(i, VInfo[i], "~w~%s ~r~%.0f%%", aVehicleNames[GetVehicleIndexFromModelID(vModelID)], vHealth / 10);
 			}
 		}
 	}

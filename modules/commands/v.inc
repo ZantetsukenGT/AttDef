@@ -22,15 +22,18 @@ YCMD: v(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/v [Vehicle Name/ID]");
 
-	new veh = IsNumeric(params) ? strval(params) : GetVehicleModelID(params);
-	if (veh < 400 || veh > 611)
-		return SendErrorMessage(playerid, "Invalid Vehicle Name."); //In samp there is no vehile with ID below 400 or above 611
+	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
+	if (veh == -1 || veh > GetNumVehicleModels())
+		return SendErrorMessage(playerid, "This vehicle doesn't exist.");
+	new modelid = GetValidVehicleModelAt(veh);
+	if (modelid == -1)
+		return SendErrorMessage(playerid, "This vehicle doesn't exist."); //In samp there is no vehile with ID below 400 or above 611
 
 	//Block some vehiles that u don't like e.g. Tank, hunter. It wil be annoying in lobby. To search for more vehicle IDs try samp wiki.
-	if (veh == 407 || veh == 425 || veh == 430 || veh == 432 || veh == 435 || veh == 441 || veh == 447 || veh == 449
-		|| veh == 450 || veh == 464 || veh == 465 || veh == 476 || veh == 501 || veh == 512 || veh == 520 || veh == 537
-		|| veh == 538 || veh == 564 || veh == 569 || veh == 570 || veh == 577 || veh == 584 || veh == 590 || veh == 591
-		|| veh == 592 || veh == 594 || veh == 601 || veh == 606 || veh == 607 || veh == 608 || veh == 610 || veh == 611)
+	if (modelid == 407 || modelid == 425 || modelid == 430 || modelid == 432 || modelid == 435 || modelid == 441 || modelid == 447 || modelid == 449
+		|| modelid == 450 || modelid == 464 || modelid == 465 || modelid == 476 || modelid == 501 || modelid == 512 || modelid == 520 || modelid == 537
+		|| modelid == 538 || modelid == 564 || modelid == 569 || modelid == 570 || modelid == 577 || modelid == 584 || modelid == 590 || modelid == 591
+		|| modelid == 592 || modelid == 594 || modelid == 601 || modelid == 606 || modelid == 607 || modelid == 608 || modelid == 610 || modelid == 611)
 		return SendErrorMessage(playerid, "This vehicle is blocked.");
 
 	new Float: x,
@@ -43,11 +46,7 @@ YCMD: v(playerid, params[], help)
 	new pLastVehicle = Player[playerid][LastVehicle];
 	if (pLastVehicle)
 	{
-		foreach (new i : VehicleDriver(pLastVehicle))
-		{
-			RemovePlayerFromVehicle(i);
-		}
-		foreach (new i : VehiclePassenger(pLastVehicle))
+		foreach (new i : VehicleOccupant(pLastVehicle))
 		{
 			RemovePlayerFromVehicle(i);
 		}
@@ -69,11 +68,7 @@ YCMD: v(playerid, params[], help)
 		new vehicleid = GetPlayerVehicleID(playerid);
 		if (vehicleid)
 		{
-			foreach (new i : VehicleDriver(vehicleid))
-			{
-				RemovePlayerFromVehicle(i);
-			}
-			foreach (new i : VehiclePassenger(vehicleid))
+			foreach (new i : VehicleOccupant(vehicleid))
 			{
 				RemovePlayerFromVehicle(i);
 			}
@@ -81,7 +76,7 @@ YCMD: v(playerid, params[], help)
 		}
 	}
 
-	new vehicleid = CreateVehicle(veh, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
+	new vehicleid = CreateVehicle(modelid, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
 	if (vehicleid == INVALID_VEHICLE_ID)
 		return SendErrorMessage(playerid, "Server's vehicle limit was reached and cannot spawn any more.");
 
@@ -106,7 +101,7 @@ YCMD: v(playerid, params[], help)
 	else
 		Player[playerid][LastVehicle] = vehicleid;
 
-	switch (veh)
+	switch (modelid)
 	{
 		case 560: // Sultan mods (most spawned car)
 		{
@@ -131,7 +126,7 @@ YCMD: v(playerid, params[], help)
 		new iString[144];
 		format(
 			iString, sizeof(iString), "%s%s{FFFFFF} has spawned a(n) %s%s", TextColor[Player[playerid][Team]], Player[playerid][Name], TextColor[Player[playerid][Team]],
-			aVehicleNames[veh - 400]);
+			aVehicleNames[veh]);
 
 		foreach (new i : Player)
 		{

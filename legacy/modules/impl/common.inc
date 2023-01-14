@@ -1135,12 +1135,22 @@ ClearChat()
 	for (new i = 0; i < 10; i++) SendClientMessageToAll(-1, " ");
 }
 
+GetVehicleIndexFromModelID(modelid)
+{
+	for (new i = 0; i < sizeof(aVehicleModelID); i++)
+	{
+		if (aVehicleModelID[i] == modelid)
+			return i;
+	}
+	return -1;
+}
+
 GetVehicleModelID(const vehiclename[])
 {
-	for (new i = 0; i < 211; i++)
+	for (new i = 0; i < sizeof(aVehicleNames); i++)
 	{
 		if (strfind(aVehicleNames[i], vehiclename, true) != -1)
-			return i + 400;
+			return i;
 	}
 	return -1;
 }

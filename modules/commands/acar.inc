@@ -19,18 +19,17 @@ YCMD: acar(playerid, params[], help)
 	if (isnull(params))
 		return SendUsageMessage(playerid, "/acar [Vehicle Name/ID]");
 
-	new veh = IsNumeric(params) ? strval(params) : GetVehicleModelID(params);
-	if (veh < 400 || veh > 611)
-		return SendErrorMessage(playerid, "Invalid Vehicle Name/ID."); //In samp there is no vehile with ID below 400 or above 611
+	new veh = IsNumeric(params) ? max(strval(params), 0) : GetVehicleModelID(params);
+	if (veh == -1 || veh > GetNumVehicleModels())
+		return SendErrorMessage(playerid, "This vehicle doesn't exist.");
+	new modelid = GetValidVehicleModelAt(veh);
+	if (modelid == -1)
+		return SendErrorMessage(playerid, "This vehicle doesn't exist."); //In samp there is no vehile with ID below 400 or above 611
 
 	new pLastVehicle = Player[playerid][LastVehicle];
 	if (pLastVehicle)
 	{
-		foreach (new i : VehicleDriver(pLastVehicle))
-		{
-			RemovePlayerFromVehicle(i);
-		}
-		foreach (new i : VehiclePassenger(pLastVehicle))
+		foreach (new i : VehicleOccupant(pLastVehicle))
 		{
 			RemovePlayerFromVehicle(i);
 		}
@@ -45,7 +44,7 @@ YCMD: acar(playerid, params[], help)
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, r);
 
-	new vehicleid = CreateVehicle(veh, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
+	new vehicleid = CreateVehicle(modelid, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
 	if (vehicleid == INVALID_VEHICLE_ID)
 		return SendErrorMessage(playerid, "Server's vehicle limit was reached and cannot spawn any more.");
 
@@ -67,7 +66,7 @@ YCMD: acar(playerid, params[], help)
 
 	Player[playerid][LastVehicle] = vehicleid;
 
-	switch (veh)
+	switch (modelid)
 	{
 		case 560: // Sultan mods (most spawned car)
 		{
@@ -90,5 +89,5 @@ YCMD: acar(playerid, params[], help)
 	LogAdminCommand("acar", playerid, INVALID_PLAYER_ID);
 
 	return va_SendClientMessageToAll(-1, "%s%s{FFFFFF} has spawned a(n) %s%s {FFFFFF}as admin", TextColor[Player[playerid][Team]], Player[playerid][Name],
-		TextColor[Player[playerid][Team]], aVehicleNames[veh - 400]);
+		TextColor[Player[playerid][Team]], aVehicleNames[veh]);
 }
