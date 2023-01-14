@@ -17,7 +17,7 @@ static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 		case WEAPON_VEHICLE, WEAPON_HELIBLADES: return false;
 		case WEAPON_COLLISION:
 		{
-			new anim = GetPlayerAnimationIndex(playerid);
+			new anim = GetPlayerAnimationIndex(playerid) + 1;
 			// apply death when the player splats with a parachute
 			if (958 <= anim <= 979)
 				return true;
