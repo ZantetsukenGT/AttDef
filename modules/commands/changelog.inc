@@ -26,7 +26,7 @@ YCMD: changelog(playerid1, params[], help)
 				strcat(str, COL_SEC "\n  1.38.0 Features and fixes");
 				strcat(str, COL_PRIM "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				strcat(str, "{CCCCCC}\nAdded weapon-config.");
-				strcat(str, "{CCCCCC}\nFPS independent lagshoot.");
+				//strcat(str, "{CCCCCC}\nFPS independent lagshoot.");
 				strcat(str, "{CCCCCC}\nAdded several samp patches for gameplay integrity.");
 				strcat(str, "{CCCCCC}\nDamage modification for most weapons available through " COL_PRIM "/" COL_SEC "weapondmg");
 				strcat(str, "{CCCCCC}\nGeneral improvements and fixes.");

@@ -10,8 +10,8 @@ hook GOOD_OnPlayerConnect(playerid)
 
 	SendClientMessage(playerid, COL_PRIM_HEX, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}Welcome to " COL_PRIM "%s {FFFFFF}Server!", ServerName);
-	SendClientMessage(playerid, COL_PRIM_HEX, "PRO TIPS:");
-	SendClientMessage(playerid, COL_PRIM_HEX, "{FFD700}You can use F2 to access PWAC settings!");
+	//SendClientMessage(playerid, COL_PRIM_HEX, "PRO TIPS:");
+	//SendClientMessage(playerid, COL_PRIM_HEX, "{FFD700}You can use F2 to access PWAC settings!");
 	SendClientMessage(playerid, COL_PRIM_HEX, "{FFFFFF}/changelog");
 	SendClientMessage(playerid, COL_PRIM_HEX, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	return 1;
