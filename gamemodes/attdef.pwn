@@ -16,7 +16,7 @@
 #endif
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-//#tryinclude <opws-fix>
+#tryinclude <opws-fix>
 #define WC_CUSTOM_VENDING_MACHINES false
 #include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
 
