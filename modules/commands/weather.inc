@@ -11,9 +11,6 @@ YCMD: weather(playerid, params[], help)
 	if (sscanf(params, "i", myweather))
 		return SendUsageMessage(playerid, "/weather [ID]");
 
-	if (myweather < 0 || myweather > WeatherLimit)
-		return SendErrorMessage(playerid, "Invalid weather ID.");
-
 	SetPlayerWeather(playerid, myweather);
 	Player[playerid][Weather] = myweather;
 
