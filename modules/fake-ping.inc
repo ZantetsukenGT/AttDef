@@ -18,7 +18,7 @@ hook OnScriptInit()
 
 static UpdateFakePings()
 {
-	foreach (new i : Player) { s_FakePing[i] = RandomMinMax(0, 0x10000) | 0x4000; }
+	for (new i = 0, limit = Iter_Count(Player); i < limit; i++) { s_FakePing[i] = RandomMinMax(0, 0x10000) | 0x4000; }
 }
 
 ORPC:UPDATE_SCORES_PINGS(playerid, BitStream: bs)
