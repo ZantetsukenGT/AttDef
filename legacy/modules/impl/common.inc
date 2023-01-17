@@ -1224,7 +1224,6 @@ SyncPlayer(playerid)
 	new currentTick = GetTickCount();
 	if (currentTick - Player[playerid][LastTimeSynced] < 1000)
 		return 1;
-	Player[playerid][LastTimeSynced] = currentTick;
 	if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT)
 		return 1;
 	if (GBUG_IsPerformingEntering(playerid))
@@ -1236,6 +1235,7 @@ SyncPlayer(playerid)
 	if (Player[playerid][IsAFK] || !IsPlayerControllable(playerid))
 		return SendErrorMessage(playerid, "Can't sync while frozen or in AFK mode");
 
+	Player[playerid][LastTimeSynced] = currentTick;
 	// Set spectators to re-spectate
 	if (Player[playerid][BeingSpeced])
 		SetTimerEx("ForceRespectate", GetPlayerPing(playerid) + 10, false, "i", playerid);
