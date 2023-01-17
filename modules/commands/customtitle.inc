@@ -3,6 +3,8 @@
 #endif
 #define _attdef_cmd_customtitle
 
+#include <YSI_Coding\y_hooks>
+
 static Iterator: s_ActiveTitles<MAX_PLAYERS>;
 static s_Titles[MAX_PLAYERS][64];
 static currentTitle;
