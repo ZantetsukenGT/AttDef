@@ -265,11 +265,11 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			EnableMatchInterface(playerid);
 			return 1;
 		}
-		else if (PRESSED(KEY_NO) && !vehicleid)
-		{
-			ShowEndRoundTextDraw(playerid);
-			return 1;
-		}
+	}
+	if (PRESSED(KEY_NO) && !Player[playerid][Playing])
+	{
+		ShowEndRoundTextDraw(playerid);
+		return 1;
 	}
 	return 1;
 }
