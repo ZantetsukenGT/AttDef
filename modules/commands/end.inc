@@ -54,7 +54,7 @@ YCMD: end(playerid, params[], help)
 
 	foreach (new i : Player)
 	{
-		if (Player[i][InDuel] || Player[i][IsAFK] || !Player[i][Spawned])
+		if (Player[i][InDM] || Player[i][InDuel] || Player[i][IsAFK] || !Player[i][Spawned])
 			continue;
 
 		Player[i][Playing] = false;
