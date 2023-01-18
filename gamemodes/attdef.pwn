@@ -45,6 +45,7 @@
 #include <fps-utils>
 #include <fake-ping>
 #include <anti-secrets>
+#include <vehicle-freeze>
 #include <modules>
 #include <commands>
 #include <wc-callbacks>		  // Weapon-config's callback handling

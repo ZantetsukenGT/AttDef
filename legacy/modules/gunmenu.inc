@@ -50,8 +50,6 @@ enum GunmenuData_STRUCT {
 }
 
 new GunmenuData[MAX_GUNMENU_GUNS][GunmenuData_STRUCT];
-new Iterator: GMFrozenCars<MAX_VEHICLES>; // Temporarily contains IDs of vehicles when in gunmenu
-new GMFrozenCarTimers[MAX_VEHICLES];	  // Contains IDs of timers for GMFrozenCars
 
 new Iterator: PlayerGunObjects[MAX_PLAYERS]<MAX_PLAYERS>;
 

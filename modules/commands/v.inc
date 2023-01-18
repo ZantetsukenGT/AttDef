@@ -65,36 +65,11 @@ YCMD: v(playerid, params[], help)
 			return SendErrorMessage(playerid, "You can't spawn vehicle in interior base.");
 		if (!IsPlayerInRangeOfPoint(playerid, 100.0, BAttackerSpawn[Current][0], BAttackerSpawn[Current][1], BAttackerSpawn[Current][2]))
 			return SendErrorMessage(playerid, "You are too far from attacker spawn."); //If attacker is too far away from his spawn.
-
-		new vehicleid = GetPlayerVehicleID(playerid);
-		if (vehicleid)
-		{
-			foreach (new i : VehicleDriver(vehicleid))
-			{
-				RemovePlayerFromVehicle(i);
-			}
-			foreach (new i : VehiclePassenger(vehicleid))
-			{
-				RemovePlayerFromVehicle(i);
-			}
-			DestroyVehicle(vehicleid);
-		}
 	}
 
-	new vehicleid = CreateVehicle(veh, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
+	new vehicleid = FreezeV_CreateVehicle(Player[playerid][Playing], veh, x, y, z, r, -1, -1, -1); //Creates the specific vehicle u were looking for (veh).
 	if (vehicleid == INVALID_VEHICLE_ID)
 		return SendErrorMessage(playerid, "Server's vehicle limit was reached and cannot spawn any more.");
-
-	if (Iter_Contains(GMFrozenCars, vehicleid))
-	{
-		KillTimer(GMFrozenCarTimers[vehicleid]);
-		Iter_Remove(GMFrozenCars, vehicleid);
-	}
-	if (Iter_Contains(FrozenCars, vehicleid))
-	{
-		KillTimer(FrozenCarTimers[vehicleid]);
-		Iter_Remove(FrozenCars, vehicleid);
-	}
 
 	SetVehicleNumberPlate(vehicleid, Player[playerid][NameWithoutTag]);
 	LinkVehicleToInterior(vehicleid, GetPlayerInterior(playerid));		//Links vehicle interior to the current player interior.

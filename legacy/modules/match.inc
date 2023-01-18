@@ -57,8 +57,6 @@ new PauseStopWatchTimer = 0;			   // The ID of the timer that counts up on each 
 new PauseTimeElapsed;					   // Time elapsed since round pause (minutes and seconds)
 new TotalPausesInRound;					   // How many times the round has been paused in one round
 new TipTimerDuringPause = 0;			   // A timer which is used to send tips after a certain time since a round pause
-new Iterator: FrozenCars<MAX_VEHICLES>;	   // Temporarily contains IDs of vehicles when round is paused
-new FrozenCarTimers[MAX_VEHICLES];		   // Contains IDs of timers for FrozenCars
 new Iterator: PlayersInRound<MAX_PLAYERS>; // The IDs of players in round (alive/playing) are to be stored in this array
 new ViewRoundCountdown;					   // This is used when viewing a round to players as a countdown
 new Float: ViewBaseCamPos[3];			   // Current position of base viewer camera
@@ -82,7 +80,6 @@ new RoundSeconds;						   // Round seconds (countdown)
 new GameType;							   // Currently played round game type
 new TotalRounds;						   // Total rounds
 new CurrentRound;						   // Current round count (i.e how many rounds have been played)
-new Float: VehicleVelc[MAX_VEHICLES][3];   // Holds vehicle velocity info. This is used when a round gets unpaused, vehicles are set to their original speed
 new CPZone;								   // Holds the ID of an CP gangzone
 new ArenaZone;							   // Holds the ID of an arena gangzone
 new ElapsedTime;						   // Holds the time elapsed since a round was started

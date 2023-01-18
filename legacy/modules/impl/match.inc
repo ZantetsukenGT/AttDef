@@ -654,15 +654,7 @@ public UnpauseRound()
 				Player[i][ToGiveParachute] = false;
 			}
 		}
-		foreach (new i : FrozenCars)
-		{
-			KillTimer(FrozenCarTimers[i]);
-			if (!Iter_Contains(GMFrozenCars, i))
-			{
-				SetVehicleVelocity(i, VehicleVelc[i][0], VehicleVelc[i][1], VehicleVelc[i][2]);
-			}
-		}
-		Iter_Clear(FrozenCars);
+		FreezeV_UnpauseRound();
 
 		RoundPaused	   = false;
 		RoundUnpausing = false;
@@ -679,12 +671,6 @@ public UnpauseRound()
 	return 1;
 }
 
-forward FreezeVehicleTimer(vehicleid, Float: x, Float: y, Float: z);
-public FreezeVehicleTimer(vehicleid, Float: x, Float: y, Float: z)
-{
-	SetVehiclePos(vehicleid, x, y, z);
-}
-
 forward PauseStopWatch();
 public PauseStopWatch()
 {
@@ -695,19 +681,7 @@ public PauseStopWatch()
 
 PauseRound()
 {
-	foreach (new i : Vehicle)
-	{
-		new Float: x,
-			Float: y,
-			Float: z;
-		GetVehiclePos(i, x, y, z);
-		if (!Iter_Contains(GMFrozenCars, i))
-		{
-			GetVehicleVelocity(i, VehicleVelc[i][0], VehicleVelc[i][1], VehicleVelc[i][2]);
-		}
-		Iter_Add(FrozenCars, i);
-		FrozenCarTimers[i] = SetTimerEx("FreezeVehicleTimer", 50, true, "ifff", i, x, y, z);
-	}
+	FreezeV_PauseRound();
 
 	if (TipTimerDuringPause)
 		KillTimer(TipTimerDuringPause);
@@ -2593,7 +2567,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 			PlayerTextDrawHide(i, AreaCheckTD[i]);
 			PlayerTextDrawHide(i, AreaCheckBG[i]);
 
-			if (!Player[i][InDuel])
+			if (!Player[i][InDuel] && !Player[i][InDM])
 			{
 				SetHP(i, 100);
 				SetAP(i, 100);
@@ -2610,7 +2584,7 @@ EndRound(WinID) //WinID: 0 = CP, 1 = RoundTime, 2 = NoAttackersLeft, 3 = NoDefen
 				PlayerTextDrawHide(i, DeathText[i][1]);
 			}
 
-			if (!Player[i][InDuel])
+			if (!Player[i][InDuel] && !Player[i][InDM])
 				ShowEndRoundTextDraw(i);
 			DisablePlayerCheckpoint(i);
 			SetPlayerScore(i, 0);

@@ -146,14 +146,9 @@ HidePlayerGunmenu(playerid)
 	if (!Player[playerid][OnGunmenu])
 		return;
 	new vehicleid = GetPlayerVehicleID(playerid);
-	if (vehicleid && Iter_Contains(GMFrozenCars, vehicleid))
+	if (vehicleid && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	{
-		KillTimer(GMFrozenCarTimers[vehicleid]);
-		if (!Iter_Contains(FrozenCars, vehicleid))
-		{
-			SetVehicleVelocity(vehicleid, VehicleVelc[vehicleid][0], VehicleVelc[vehicleid][1], VehicleVelc[vehicleid][2]);
-		}
-		Iter_Remove(GMFrozenCars, vehicleid);
+		FreezeV_GunmenuClose(vehicleid);
 	}
 	switch (Player[playerid][GunmenuStyle])
 	{
@@ -437,16 +432,7 @@ public ShowPlayerGunmenu(playerid, delay)
 	new veh = GetPlayerVehicleID(playerid);
 	if (veh && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	{
-		new Float: x,
-			Float: y,
-			Float: z;
-		GetVehiclePos(veh, x, y, z);
-		if (!Iter_Contains(FrozenCars, veh))
-		{
-			GetVehicleVelocity(veh, VehicleVelc[veh][0], VehicleVelc[veh][1], VehicleVelc[veh][2]);
-		}
-		Iter_Add(GMFrozenCars, veh);
-		GMFrozenCarTimers[veh] = SetTimerEx("FreezeVehicleTimer", 50, true, "ifff", veh, x, y, z);
+		FreezeV_GunmenuOpen(veh);
 	}
 	switch (Player[playerid][GunmenuStyle])
 	{

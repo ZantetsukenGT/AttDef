@@ -1165,51 +1165,7 @@ ClearKillList()
 	for (new i = 0; i < 5; i++) { SendDeathMessage(255, 50, 255); }
 }
 
-DestroyUnusedVehicles()
-{
-	foreach (new i : FrozenCars)
-	{
-		KillTimer(FrozenCarTimers[i]);
-	}
-	Iter_Clear(FrozenCars);
-
-	foreach (new i : GMFrozenCars)
-	{
-		KillTimer(GMFrozenCarTimers[i]);
-	}
-	Iter_Clear(GMFrozenCars);
-
-	foreach (new i : Vehicle)
-	{
-		new bool: isOccupied = false;
-		foreach (new o : VehicleDriver(i))
-		{
-			#pragma unused o
-			isOccupied = true;
-		}
-		if (!isOccupied)
-		{
-			foreach (new o : VehiclePassenger(i))
-			{
-				#pragma unused o
-				isOccupied = true;
-				break;
-			}
-		}
-		if (isOccupied)
-			continue;
-		foreach(new p : Player)
-		{
-			if (Player[p][LastVehicle] == i)
-			{
-				Player[p][LastVehicle] = 0;
-				break;
-			}
-		}
-		DestroyVehicle(i);
-	}
-	return 1;
-}
+DestroyUnusedVehicles() { FreezeV_DestroyAll(); }
 
 forward ForceRespectate(playerid);
 public ForceRespectate(playerid)
