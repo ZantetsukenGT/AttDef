@@ -19,7 +19,10 @@ PerformCommandSpeedcap(playerid, Float: speedcap)
 {
 	speedcap = speedcap < 1.0 ? 1.0 : speedcap;
 	speedcap = speedcap > 100.0 ? 100.0 : speedcap;
-	SetSprintCap(playerid, speedcap);
+	foreach (new i : Player)
+	{
+		SetPlayerSprintCap(i, speedcap);
+	}
 	SendClientMessageToAll(-1, "%s " COL_PRIM "has set the sprint speedcap to {FFFFFF}%f", Player[playerid][Name], speedcap);
 	return 1;
 }
