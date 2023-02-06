@@ -3,6 +3,10 @@
 #endif
 #define _attdef_cmd_speedcap
 
+#include <YSI_Coding\y_hooks>
+
+static s_speedcap = 1.0;
+
 YCMD: speedcap(playerid, params[], help)
 {
 	if (help)
@@ -24,5 +28,12 @@ PerformCommandSpeedcap(playerid, Float: speedcap)
 		SetPlayerSprintCap(i, speedcap);
 	}
 	SendClientMessageToAll(-1, "%s " COL_PRIM "has set the sprint speedcap to {FFFFFF}%f", Player[playerid][Name], speedcap);
+	s_speedcap = speedcap;
+	return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	SetPlayerSprintCap(playerid, s_speedcap);
 	return 1;
 }
