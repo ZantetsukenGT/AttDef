@@ -215,7 +215,7 @@ public e_COMMAND_ERRORS: OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_
 #include "commands/spas.inc"
 #include "commands/spec.inc"
 #include "commands/specoff.inc"
-#include "commands/speedcap.inc"
+//#include "commands/speedcap.inc" //pwac only
 #include "commands/start.inc"
 #include "commands/style.inc"
 #include "commands/swap.inc"

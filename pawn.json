@@ -8,20 +8,20 @@
 		"pawn-lang/samp-stdlib",
 		"Zeex/samp-plugin-crashdetect",
 		"katursis/Pawn.RakNet@omp",
-		"NexiusTailer/MapFix",
-		"openmultiplayer/server-beta",
+		"openmultiplayer/server-beta-old",
 		"pawn-lang/YSI-Includes@5.x",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",
 		"ZantetsukenGT/gBugFix",
+		"ZantetsukenGT/MapFix",
 		"ZantetsukenGT/progress2",
-		"ZantetsukenGT/samp-dyn-dialog-pages",
+		"ZantetsukenGT/samp-dyn-dialog-pages@samp-compat",
 		"ZantetsukenGT/samp-geoip",
 		"ZantetsukenGT/samp-weapon-config"
 	],
 	"local": true,
 	"runtime": {
-		"version": "openmp",
+		"version": "openmp-beta-v11",
 		"weburl": "discord.io/attackdefend"
 	},
 	"builds": [

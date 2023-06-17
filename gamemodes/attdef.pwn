@@ -10,13 +10,14 @@
 #define FOREACH_NO_STREAMED
 
 #include <a_samp>
-#include <YSF>
+
+#tryinclude <YSF> 		 // not included by default, and shall not be included if using open.mp
 #if !defined _YSF_included
 	#include <omp>		 // omp's native YSF implementations
 #endif
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-#tryinclude <opws-fix>
+//#tryinclude <opws-fix> // pwac only
 #define WC_CUSTOM_VENDING_MACHINES false
 #include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
 
