@@ -52,10 +52,10 @@ InitScriptCoreSettings()
 	return 1;
 }
 
-#if defined _YSF_included
-CheckServerHostname() { GetConsoleVarAsString("hostname", hostname); }
-#else
+#if defined _INC_open_mp
 CheckServerHostname() { GetConsoleVarAsString("name", hostname); }
+#else
+CheckServerHostname() { GetConsoleVarAsString("hostname", hostname); }
 #endif
 
 InitScriptSecondarySettings()
@@ -71,10 +71,10 @@ InitScriptSecondarySettings()
 	FixGamemodeText(); // Text that appears on 'Mode' column when you click on a server in samp.exe
 	SendRconCommand("mapname Lobby");
 #if !defined opws_fix_included_
-	#if defined _YSF_included
-		IsSkinshot = GetConsoleVarAsInt("lagcompmode") == 1;
-	#else
+	#if defined _INC_open_mp
 		IsSkinshot = GetConsoleVarAsInt("game.lag_compensation_mode") == 1;
+	#else
+		IsSkinshot = GetConsoleVarAsInt("lagcompmode") == 1;
 	#endif
 #endif
 	CheckServerHostname();
@@ -112,14 +112,14 @@ AddToServersDatabase()
 	}
 
 	new ServerIP[30];
-#if defined _YSF_included
-	GetConsoleVarAsString("bind", ServerIP, sizeof(ServerIP));
-
-	new port = GetConsoleVarAsInt("port");
-#else
+#if defined _INC_open_mp
 	GetConsoleVarAsString("network.bind", ServerIP, sizeof(ServerIP));
 
 	new port = GetConsoleVarAsInt("network.port");
+#else
+	GetConsoleVarAsString("bind", ServerIP, sizeof(ServerIP));
+
+	new port = GetConsoleVarAsInt("port");
 #endif
 
 	if (!strlen(ServerIP))

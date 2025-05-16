@@ -3,17 +3,22 @@
 #endif
 #define _attdef_cmd_speedcap
 
+#if !defined pwac_included
+	#endinput
+#endif
+
 #include <YSI_Coding\y_hooks>
 
-static s_speedcap = 1.0;
+static Float: s_speedcap = 100.0;
 
+// will only work if the player has PWAC installed 
 YCMD: speedcap(playerid, params[], help)
 {
 	if (help)
 		return SendCommandHelpMessage(playerid, "change the global speedcap value.");
 
 	new Float: speedcap;
-	if (sscanf(params, "F(1.0)", speedcap))
+	if (sscanf(params, "F(100.0)", speedcap))
 		return SendUsageMessage(playerid, "/speedcap [sprint speedcap value]");
 
 	return PerformCommandSpeedcap(playerid, speedcap);

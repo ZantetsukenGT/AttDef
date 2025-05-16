@@ -4,24 +4,25 @@
 	"entry": "gamemodes/attdef.pwn",
 	"output": "gamemodes/attdef.amx",
 	"dependencies": [
-		"pawn-lang/pawn-stdlib",
-		"pawn-lang/samp-stdlib",
+		"openmultiplayer/omp-stdlib",
+		"pawn-lang/samp-stdlib@open.mp",
+		"pawn-lang/pawn-stdlib@open.mp",
 		"Zeex/samp-plugin-crashdetect",
 		"katursis/Pawn.RakNet@omp",
-		"openmultiplayer/server-beta-old",
-		"pawn-lang/YSI-Includes@5.x",
+		"ZantetsukenGT/samp-discord-connector:v0.3.6",
+		"pawn-lang/YSI-Includes:v5.09.0982",
 		"Sreyas-Sreelal/samp-bcrypt",
 		"Y-Less/sscanf",
 		"ZantetsukenGT/gBugFix",
 		"ZantetsukenGT/MapFix",
 		"ZantetsukenGT/progress2",
-		"ZantetsukenGT/samp-dyn-dialog-pages@samp-compat",
+		"ZantetsukenGT/samp-dyn-dialog-pages",
 		"ZantetsukenGT/samp-geoip",
 		"ZantetsukenGT/samp-weapon-config"
 	],
 	"local": true,
 	"runtime": {
-		"version": "openmp-beta-v11",
+		"version": "openmp",
 		"weburl": "discord.io/attackdefend"
 	},
 	"builds": [

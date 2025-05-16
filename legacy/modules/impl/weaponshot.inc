@@ -113,7 +113,7 @@ InitPlayerVisualDamage(playerid)
 
 // Creates and updates damage label above player's head.
 // Note: SetPlayerChatBubble doesn't work as it's line length is too small with color formatting.
-SetPlayerDamageBubble(playerid, issuerid, Float: amount, weaponid)
+stock SetPlayerDamageBubble(playerid, issuerid, Float: amount, weaponid)
 {
 	DamageBubbleLastTick[playerid][issuerid] = GetTickCount();
 	DamageBubbleWeapon[playerid][issuerid] = weaponid;
@@ -126,7 +126,7 @@ SetPlayerDamageBubble(playerid, issuerid, Float: amount, weaponid)
 }
 
 // Updates damage label time.
-UpdateDamageBubbles(playerid, bool: force = false)
+stock UpdateDamageBubbles(playerid, bool: force = false)
 {
 	new currentTick = GetTickCount();
 

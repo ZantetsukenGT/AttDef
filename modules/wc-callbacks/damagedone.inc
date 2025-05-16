@@ -8,7 +8,7 @@ This is used to make sure a head-shot is legit and successful
 then announce it. This function has return values as well.
 Returns 0 on failure (illegal/rejected headshots) and returns 1 on success.
 */
-static HandleHeadshot(playerid, issuerid, weaponid)
+static HandleHeadshot(playerid, issuerid, WEAPON:weaponid)
 {
 	switch (weaponid)
 	{
@@ -28,7 +28,7 @@ static HandleHeadshot(playerid, issuerid, weaponid)
 	return 1;
 }
 
-public OnPlayerDamageDone(playerid, Float: amount, issuerid, weapon, bodypart)
+public OnPlayerDamageDone(playerid, Float: amount, issuerid, WEAPON:weapon, bodypart)
 {
 	if (issuerid != INVALID_PLAYER_ID) // If the damager is a HUMAN
 	{

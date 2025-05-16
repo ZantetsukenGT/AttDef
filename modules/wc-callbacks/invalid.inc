@@ -3,7 +3,7 @@
 #endif
 #define _attdef_OnInvalidWeaponDamage
 
-public OnInvalidWeaponDamage(playerid, damagedid, Float: amount, weaponid, bodypart, error, bool: given)
+public OnInvalidWeaponDamage(playerid, damagedid, Float: amount, WEAPON:weaponid, bodypart, error, bool: given)
 {
 	switch (error)
 	{

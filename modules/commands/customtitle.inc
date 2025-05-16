@@ -14,10 +14,10 @@ hook OnScriptInit()
 {
 	Iter_Clear(s_ActiveTitles);
 	currentTitle = Iter_Alloc(s_ActiveTitles);
-#if defined _YSF_included
-	GetConsoleVarAsString("hostname", s_Titles[currentTitle]);
-#else
+#if defined _INC_open_mp
 	GetConsoleVarAsString("name", s_Titles[currentTitle]);
+#else
+	GetConsoleVarAsString("hostname", s_Titles[currentTitle]);
 #endif
 	if (Timer_IsRunning(updateTimer))
 		stop updateTimer;

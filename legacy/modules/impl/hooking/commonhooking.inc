@@ -87,7 +87,7 @@ hook native SpawnPlayer(playerid)
 	return continue(playerid);
 }
 
-#if defined _YSF_included
+#if !defined _INC_open_mp
 // Hook GetPlayerWeaponData to fix a bug: "old weapons with no ammo left are still returned"
 hook native GetPlayerWeaponData(playerid, slot, &weapons, &ammo)
 {

@@ -9,15 +9,13 @@
 #define FOREACH_NO_ACTORS
 #define FOREACH_NO_STREAMED
 
-#include <a_samp>
+#define NO_TAGS
+#include <open.mp>
 
-#tryinclude <YSF> 		 // not included by default, and shall not be included if using open.mp
-#if !defined _YSF_included
-	#include <omp>		 // omp's native YSF implementations
-#endif
 #include <geoip>		 // A simple library that provide information from IP-API for connected players.
 #include <Pawn.RakNet>	 // Allows you to capture and analyze RakNet traffic
-//#tryinclude <opws-fix> // pwac only
+#define OPWS_FIX_USE_BSYNC false
+#include <opws-fix>		 // 90% bsync (optional), best sniper bug detection
 #define WC_CUSTOM_VENDING_MACHINES false
 #include <weapon-config> // Provides a more consistent and responsive damage system with many new features.
 
@@ -42,12 +40,14 @@
 #include <dyn-dialog-pages> // https://github.com/ZantetsukenGT/samp-dyn-dialog-pages
 
 // Att-Def's own stuff
-#tryinclude <pwac>
+//#tryinclude <player-conns> // used for external services, more specifically, used for a iptables whitelist orchestrated by a NodeJS project
+//#tryinclude <pwac>
 #include <fps-utils>
 #include <fake-ping>
 #include <anti-secrets>
 #include <vehicle-freeze>
 #include <modules>
+//#include <anims-broadcast> // experimenting with anim broadcasting, stun animations, more specifically 
 #include <commands>
 #include <wc-callbacks>		  // Weapon-config's callback handling
 #include <other-callbacks>	  // Dependencies and miscellaneous callbacks, organized in different files

@@ -660,40 +660,6 @@ bool: DoesPlayerHaveWeapon(playerid, weaponid)
 	return wep == weaponid && ammo > 0;
 }
 
-#if defined _YSF_included
-RemovePlayerWeapon(playerid, weaponid)
-{
-	if(!DoesPlayerHaveWeapon(playerid, weaponid))
-		return 0;
-
-	new plyWeapons[12];
-	new plyAmmo[12], armedID;
-
-	new wep, ammo;
-	for(new slot = 0; slot != 12; slot++)
-	{
-		GetPlayerWeaponData(playerid, slot, wep, ammo);
-
-		if(wep != weaponid)
-		{
-			GetPlayerWeaponData(playerid, slot, plyWeapons[slot], plyAmmo[slot]);
-		}
-	}
-
-	armedID = GetPlayerWeapon(playerid);
-
-	ResetPlayerWeapons(playerid);
-	for(new slot = 0; slot != 12; slot++)
-	{
-		GivePlayerWeapon(playerid, plyWeapons[slot], plyAmmo[slot]);
-	}
-
-	if( armedID != weaponid ) SetPlayerArmedWeapon(playerid,armedID); //give last armedweapon
-	else SetPlayerArmedWeapon(playerid,0);//give fist if player armed weapon was knife
-	return 1;
-}
-#endif 
-
 GetCardinalPoint(Float: degree)
 {
 	// this function return a string that contain the Cardinal point of a heading direction

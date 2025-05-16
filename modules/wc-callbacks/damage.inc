@@ -3,7 +3,7 @@
 #endif
 #define _attdef_OnPDamage
 
-static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
+static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &WEAPON:weaponid)
 {
 	if (Player[playerid][IsAFK]) // Players who are in AFK mode should not be damaged
 		return false;
@@ -64,7 +64,7 @@ static bool: ShouldDamagePlayer(&playerid, &issuerid, &Float: amount, &weaponid)
 	return true;
 }
 
-public OnPlayerDamage(&playerid, &Float: amount, &issuerid, &weapon, &bodypart)
+public OnPlayerDamage(&playerid, &Float: amount, &issuerid, &WEAPON:weapon, &bodypart)
 {
 	if (amount <= 0.0005) // any damage dealing 0.0 must be applied or bugs will occur
 		return 1;
