@@ -15,7 +15,7 @@ YCMD: servername(playerid, params[], help)
 
 	ServerName[0] = EOS;
 	strcat(ServerName, svname);
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = '%q' WHERE Option = 'Server Name'", ServerName)));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = '%q' WHERE Option = 'Server Name'", ServerName)));
 
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has changed {FFFFFF}the server name " COL_PRIM "to {FFFFFF}%s", Player[playerid][Name], ServerName);
 }

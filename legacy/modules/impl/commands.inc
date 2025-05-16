@@ -114,7 +114,7 @@ SetCommandLevel(command[], level, bool: updatedb)
 	if (updatedb)
 	{
 		// The command's got a new level now, tell the database about that too?
-		db_free_result(db_query(sqliteconnection, va_return("UPDATE Commands SET Level = %d WHERE Command = '%q'", level, command)));
+		DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Commands SET Level = %d WHERE Command = '%q'", level, command)));
 	}
 	return 1;
 }
@@ -124,18 +124,18 @@ SetCommandLevel(command[], level, bool: updatedb)
 // If a command doesn't exist, it gets inserted into the database
 CreateCommandConfig(cmd[], level)
 {
-	new DBResult: result = db_query(sqliteconnection, va_return("SELECT Level FROM Commands WHERE Command='%q'", cmd));
-	if (db_num_rows(result)) // if the command already exists
+	new DBResult: result = DB_ExecuteQuery(sqliteconnection, va_return("SELECT Level FROM Commands WHERE Command='%q'", cmd));
+	if (DB_GetRowCount(result)) // if the command already exists
 	{
 		// load the level
-		SetCommandLevel(cmd, db_get_field_assoc_int(result, "Level"), false);
-		return db_free_result(result);
+		SetCommandLevel(cmd, DB_GetFieldIntByName(result, "Level"), false);
+		return DB_FreeResultSet(result);
 	}
-	db_free_result(result);
+	DB_FreeResultSet(result);
 
 	// insert it into the database
 	SetCommandLevel(cmd, level, false);
-	return db_free_result(db_query(sqliteconnection, va_return("INSERT INTO Commands (Command, Level) VALUES ('%q', %d)", cmd, level)));
+	return DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("INSERT INTO Commands (Command, Level) VALUES ('%q', %d)", cmd, level)));
 }
 
 // Initialize and load commands

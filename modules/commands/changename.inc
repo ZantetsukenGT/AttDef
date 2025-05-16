@@ -25,9 +25,9 @@ YCMD: changename(playerid, params[], help)
 			//success
 			new iString[144];
 			format(iString, sizeof(iString), "SELECT * FROM `Players` WHERE `Name` = '%q'", params);
-			new DBResult: result = db_query(sqliteconnection, iString);
-			new num_rows		  = db_num_rows(result);
-			db_free_result(result);
+			new DBResult: result = DB_ExecuteQuery(sqliteconnection, iString);
+			new num_rows		  = DB_GetRowCount(result);
+			DB_FreeResultSet(result);
 
 			if (num_rows > 0) //name in Use in DB.
 			{
@@ -39,7 +39,7 @@ YCMD: changename(playerid, params[], help)
 			SendClientMessageToAll(-1, iString);
 
 			format(iString, sizeof(iString), "UPDATE `Players` SET `Name` = '%q' WHERE `Name` = '%q'", params, Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 			format(Player[playerid][Name], MAX_PLAYER_NAME, "%s", params);
 

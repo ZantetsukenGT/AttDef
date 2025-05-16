@@ -14,5 +14,5 @@ YCMD: vc(playerid, params[], help)
 		return SendErrorMessage(playerid, "You are not in any vehicle!");
 	if (GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
 		return SendErrorMessage(playerid, "You have to be the driver!");
-	return ChangeVehicleColor(GetPlayerVehicleID(playerid), color1, color2);
+	return ChangeVehicleColours(GetPlayerVehicleID(playerid), color1, color2);
 }

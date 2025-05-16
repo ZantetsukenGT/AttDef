@@ -18,7 +18,7 @@ YCMD: fightstyle(playerid, params[], help)
 
 	new iString[144];
 	format(iString, sizeof(iString), "UPDATE `Players` SET `FightStyle` = '%d' WHERE `Name` = '%q'", Player[playerid][FightStyle], Player[playerid][Name]);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	return va_SendClientMessage(playerid, -1, COL_PRIM "FightStyle changed to: {FFFFFF}%s", FightStyleNames[fsID]);
 }

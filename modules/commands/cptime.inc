@@ -19,7 +19,7 @@ YCMD: cptime(playerid, params[], help)
 
 	new iString[144];
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'CP Time'", cpTime);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	LogAdminCommand("cptime", playerid, INVALID_PLAYER_ID);
 

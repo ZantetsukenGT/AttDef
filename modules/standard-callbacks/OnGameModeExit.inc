@@ -5,6 +5,6 @@
 
 public OnGameModeExit()
 {
-	db_close(sqliteconnection);
+	DB_Close(sqliteconnection);
 	return 1;
 }

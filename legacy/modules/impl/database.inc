@@ -20,21 +20,21 @@ SetDatabaseToReload(playerid = INVALID_PLAYER_ID)
 	if (playerid != INVALID_PLAYER_ID)
 		va_SendClientMessageToAll(-1, "{FFFFFF}%s " COL_PRIM "has set the SQLite database to reload.", Player[playerid][Name]);
 
-	db_close(sqliteconnection);
-	sqliteconnection = db_open("AttDefDatabase.db");
+	DB_Close(sqliteconnection);
+	sqliteconnection = DB_Open("AttDefDatabase.db");
 	return SendClientMessageToAll(-1, COL_PRIM "SQLite database has been reloaded successfully.");
 }
 
 LoadDatabase()
 {
-	sqliteconnection = db_open("AttDefDatabase.db");
+	sqliteconnection = DB_Open("AttDefDatabase.db");
 	if (!sqliteconnection)
 	{
 		printf("Warning: database is not loaded. Make sure 'AttDefDatabase.db' file is inside the '/scriptfiles' directory and restart. Visit %s for further help!", GM_WEBSITE);
 		return 0;
 	}
 	// Vacuum SQL database
-	db_free_result(db_query(sqliteconnection, "VACUUM"));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, "VACUUM"));
 
 	LoadConfig();	 // Loads server configuration
 	LoadTextDraws(); // Loads all global textdraws
@@ -48,5 +48,5 @@ LoadDatabase()
 OptimizeDatabase()
 {
 	// Vacuum SQL database
-	db_free_result(db_query(sqliteconnection, "VACUUM"));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, "VACUUM"));
 }

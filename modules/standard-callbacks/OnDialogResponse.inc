@@ -36,7 +36,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					Player[playerid][WeaponBinding] = !Player[playerid][WeaponBinding];
 					new str[80];
 					format(str, sizeof(str), "UPDATE Players SET WeaponBinding = %d WHERE Name = '%q'", Player[playerid][WeaponBinding], Player[playerid][Name]);
-					db_free_result(db_query(sqliteconnection, str));
+					DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 					return 1;
 				}
 				new index										   = listitem - 1;
@@ -68,7 +68,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					WeaponBindData[playerid][BindKeyWeapon][index] = weaponid;
 					new str[80];
 					format(str, sizeof(str), "UPDATE Players SET WeaponBind%d = %d WHERE Name = '%q'", index, weaponid, Player[playerid][Name]);
-					db_free_result(db_query(sqliteconnection, str));
+					DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 					ShowPlayerWeaponBindTextDraw(playerid, 5000);
 				}
 			}
@@ -316,13 +316,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				TeamScore[DEFENDER] = 0;
 				CurrentRound		= 0;
 
-				new DBResult: res	= db_query(sqliteconnection, "SELECT * FROM Configs WHERE Option = 'Total Rounds'");
+				new DBResult: res	= DB_ExecuteQuery(sqliteconnection, "SELECT * FROM Configs WHERE Option = 'Total Rounds'");
 
 				new iString[144];
 
-				db_get_field_assoc(res, "Value", iString, sizeof(iString));
+				DB_GetFieldStringByName(res, "Value", iString, sizeof(iString));
 				TotalRounds = strval(iString);
-				db_free_result(res);
+				DB_FreeResultSet(res);
 
 				TeamName[ATTACKER]	   = "Alpha";
 				TeamName[ATTACKER_SUB] = "Alpha Sub";
@@ -782,7 +782,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SendClientMessageToAll(-1, str);
 
 			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%d,%d' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 
 			ShowConfigDialog(playerid);
 			return 1;
@@ -804,7 +804,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SendClientMessageToAll(-1, str);
 
 			format(str, sizeof(str), "UPDATE `Configs` SET `Value` = '%d,%d' WHERE `Option` = 'RoundHPAR'", RoundHP, RoundAR);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 
 			ShowConfigDialog(playerid);
 			return 1;
@@ -950,7 +950,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			HideRoundStats(playerid);
 
 			Player[playerid][RoundTDStyle] = listitem;
-			db_free_result(db_query(sqliteconnection, va_return("UPDATE `Players` SET `RoundTDStyle`=%d WHERE `Name`='%q'", Player[playerid][RoundTDStyle], Player[playerid][Name])));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Players` SET `RoundTDStyle`=%d WHERE `Name`='%q'", Player[playerid][RoundTDStyle], Player[playerid][Name])));
 
 			switch (Player[playerid][RoundTDStyle])
 			{

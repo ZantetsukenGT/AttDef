@@ -26,28 +26,28 @@ hook OnPlayerDisconnect(playerid, reason)
 
 LoadGunmenuData()
 {
-	new str[64], DBResult: res = db_query(sqliteconnection, "SELECT * FROM 'Gunmenu' ORDER BY Weapon ASC"),
+	new str[64], DBResult: res = DB_ExecuteQuery(sqliteconnection, "SELECT * FROM 'Gunmenu' ORDER BY Weapon ASC"),
 						   weaponID,
 						   idx = 0;
 
 	do {
-		db_get_field_assoc(res, "Weapon", str, sizeof(str));
+		DB_GetFieldStringByName(res, "Weapon", str, sizeof(str));
 		weaponID				   = strval(str);
 
 		GunmenuData[idx][GunID]	   = weaponID;
 		GunmenuData[idx][GunModel] = GetWeaponModelFromID(weaponID);
 
-		db_get_field_assoc(res, "Limit", str, sizeof(str));
+		DB_GetFieldStringByName(res, "Limit", str, sizeof(str));
 		GunmenuData[idx][GunLimit] = strval(str);
 
-		db_get_field_assoc(res, "Ammo", str, sizeof(str));
+		DB_GetFieldStringByName(res, "Ammo", str, sizeof(str));
 		GunmenuData[idx][GunAmmo] = strval(str);
 
 		idx++;
 	}
-	while (db_next_row(res) && idx < MAX_GUNMENU_GUNS);
+	while (DB_SelectNextRow(res) && idx < MAX_GUNMENU_GUNS);
 
-	db_free_result(res);
+	DB_FreeResultSet(res);
 }
 
 ResetGunmenuSelections(team = -1)
@@ -160,7 +160,7 @@ HidePlayerGunmenu(playerid)
 			}
 			TextDrawHideForPlayer(playerid, GunmenuLimitsTD[Player[playerid][Team]]);
 			DestroyPlayerGunObjects(playerid);
-			CancelEdit(playerid);
+			EndObjectEditing(playerid);
 		}
 	}
 	SetCameraBehindPlayer(playerid);
@@ -495,7 +495,7 @@ public ShowPlayerGunmenu(playerid, delay)
 			TogglePlayerControllable(playerid, 0);
 			SetPlayerCameraPos(playerid, centerX + 2.0, centerY - 2.0, originZ + camHeight);
 			SetPlayerCameraLookAt(playerid, centerX, centerY, originZ);
-			SelectObject(playerid); // Enables mouse cursor so they can select guns (objects)
+			BeginObjectSelecting(playerid); // Enables mouse cursor so they can select guns (objects)
 			while (i != MAX_GUNMENU_GUNS)
 			{
 				// Specify points as a function of angle
@@ -619,7 +619,7 @@ OnPlayerSelectGunmenuObject(playerid, objectid, modelid)
 	if (IsGunSelectionOkay(playerid, GunmenuData[gunmenuIndex][GunID], gunmenuIndex))
 	{
 		GivePlayerGunmenuWeapon(playerid, gunmenuIndex);
-		SelectObject(playerid);
+		BeginObjectSelecting(playerid);
 		PlayerPlaySound(playerid, 5203, 0.0, 0.0, 0.0);
 		// Movement
 		if (IsPlayerObjectMoving(playerid, objectid))

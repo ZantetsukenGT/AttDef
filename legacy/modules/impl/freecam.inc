@@ -73,7 +73,7 @@ CancelFlyMode(playerid)
 
 	noclipdata[playerid][FlyMode] = false;
 
-	CancelEdit(playerid);
+	EndObjectEditing(playerid);
 	TogglePlayerSpectating(playerid, false);
 
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);

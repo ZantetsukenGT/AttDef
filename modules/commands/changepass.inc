@@ -40,7 +40,7 @@ public OnChangePassHash(playerid)
 {
 	new dest[BCRYPT_HASH_LENGTH];
 	bcrypt_get_hash(dest);
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET Password = '%q' WHERE Name = '%q'", dest, Player[playerid][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET Password = '%q' WHERE Name = '%q'", dest, Player[playerid][Name])));
 	SendClientMessage(playerid, -1, "Your password has been changed.");
 	return 1;
 }

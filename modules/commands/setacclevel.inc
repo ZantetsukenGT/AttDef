@@ -20,9 +20,9 @@ YCMD: setacclevel(playerid, params[], help)
 
 	new iString[164];
 	format(iString, sizeof(iString), "SELECT Level FROM Players WHERE Name = '%q'", str);
-	new DBResult: result = db_query(sqliteconnection, iString);
-	new db_rows			 = db_num_rows(result);
-	db_free_result(result);
+	new DBResult: result = DB_ExecuteQuery(sqliteconnection, iString);
+	new db_rows			 = DB_GetRowCount(result);
+	DB_FreeResultSet(result);
 
 	if (db_rows == 0)
 		return SendErrorMessage(playerid, va_return("%s" COL_PRIM "'s account wasn't found in the database.", str));
@@ -31,7 +31,7 @@ YCMD: setacclevel(playerid, params[], help)
 			playerid, va_return("%s" COL_PRIM "'s admin level was set, but the account was found {FF3333}%d" COL_PRIM " times in the database.", str, db_rows));
 
 	format(iString, sizeof(iString), "UPDATE Players SET Level = %d WHERE Name = '%q'", lev, str);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	return va_SendClientMessage(playerid, -1, "{008800}Success: {FFFFFF}%s" COL_PRIM "'s admin level was set to {FF3333}%d" COL_PRIM ".", str, lev);
 }

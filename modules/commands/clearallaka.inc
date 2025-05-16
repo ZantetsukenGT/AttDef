@@ -8,6 +8,6 @@ YCMD: clearallaka(playerid, params[], help)
 	if (help)
 		return SendCommandHelpMessage(playerid, "clear all players aka logs from database");
 
-	db_free_result(db_query(sqliteconnection, "DELETE FROM `AKAs`"));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, "DELETE FROM `AKAs`"));
 	return SendClientMessage(playerid, -1, "AKA logs have been successfully cleared!");
 }

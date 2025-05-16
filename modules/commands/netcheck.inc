@@ -16,7 +16,7 @@ YCMD: netcheck(playerid, params[], help)
 	if (pID == INVALID_PLAYER_ID)
 		return SendErrorMessage(playerid, "That player is not connected.");
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET NetCheck = %d WHERE Name = '%q'", !Player[pID][NetCheck], Player[pID][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET NetCheck = %d WHERE Name = '%q'", !Player[pID][NetCheck], Player[pID][Name])));
 
 	LogAdminCommand("netcheck", playerid, pID);
 

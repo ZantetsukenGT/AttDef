@@ -29,7 +29,7 @@ YCMD: cchannel(playerid, params[], help)
 	new previousChannel			  = Player[playerid][ChatChannel];
 	Player[playerid][ChatChannel] = Channel;
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET ChatChannel = %d WHERE Name = '%q'", Channel, Player[playerid][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET ChatChannel = %d WHERE Name = '%q'", Channel, Player[playerid][Name])));
 
 	new str[144];
 	if (previousChannel != -1)

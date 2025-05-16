@@ -12,7 +12,7 @@ YCMD: playermarkers(playerid, params[], help)
 	{
 		CallLocalFunction("OnPlayerStreamIn", "ii", i, playerid);
 	}
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Players` SET `PlayerMarkers` = '%d' WHERE `Name` = '%q'", Player[playerid][PlayerMarkers], Player[playerid][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Players` SET `PlayerMarkers` = '%d' WHERE `Name` = '%q'", Player[playerid][PlayerMarkers], Player[playerid][Name])));
 	if (Player[playerid][PlayerMarkers])
 		return SendClientMessage(playerid, -1, "Changed player markers setting: each player has a unique marker color on radar now.");
 	return SendClientMessage(playerid, -1, "Changed player markers setting: you will now see marker color based on team color.");

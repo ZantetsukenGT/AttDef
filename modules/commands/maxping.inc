@@ -20,7 +20,7 @@ YCMD: maxping(playerid, params[], help)
 
 	new iString[144];
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Maximum Ping'", Max_Ping);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	LogAdminCommand("maxping", playerid, INVALID_PLAYER_ID);
 

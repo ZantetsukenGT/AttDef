@@ -12,15 +12,15 @@ YCMD: defaultskins(playerid, params[], help)
 	new iString[128];
 	Skin[ATTACKER] = 170;
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Attacker Skin'", 170);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	Skin[DEFENDER] = 177;
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Defender Skin'", 177);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	Skin[REFEREE] = 51;
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Referee Skin'", 51);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	foreach (new i : Player)
 	{

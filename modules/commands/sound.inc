@@ -51,7 +51,7 @@ YCMD: sound(playerid, params[], help)
 				Player[playerid][HitSound] = Val;
 			}
 			format(iString, sizeof(iString), "UPDATE Players SET HitSound = %d WHERE Name = '%q'", Player[playerid][HitSound], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 			PlayerPlaySound(playerid, Player[playerid][HitSound], 0, 0, 0);
 		}
@@ -81,7 +81,7 @@ YCMD: sound(playerid, params[], help)
 				Player[playerid][GetHitSound] = Val;
 			}
 			format(iString, sizeof(iString), "UPDATE Players SET GetHitSound = %d WHERE Name = '%q'", Player[playerid][GetHitSound], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 			PlayerPlaySound(playerid, Player[playerid][GetHitSound], 0, 0, 0);
 		}

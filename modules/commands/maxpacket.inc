@@ -20,7 +20,7 @@ YCMD: maxpacket(playerid, params[], help)
 
 	new iString[144];
 	format(iString, sizeof(iString), "UPDATE Configs SET Value = %.2f WHERE Option = 'Maximum Packetloss'", iPacket);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	LogAdminCommand("maxpacket", playerid, INVALID_PLAYER_ID);
 

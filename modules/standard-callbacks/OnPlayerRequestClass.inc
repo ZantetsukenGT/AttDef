@@ -23,9 +23,9 @@ public InlineLogin(playerid, dialogid, response, listitem, string: inputtext[])
 			return SendErrorMessage(playerid, va_return("This character '%s' is disallowed in user passwords.", "%%"));
 		}
 		new iString[BCRYPT_HASH_LENGTH];
-		new DBResult: res = db_query(sqliteconnection, va_return("SELECT `Password` FROM `Players` WHERE `Name` = '%q'", Player[playerid][Name]));
-		db_get_field_assoc(res, "Password", iString);
-		db_free_result(res);
+		new DBResult: res = DB_ExecuteQuery(sqliteconnection, va_return("SELECT `Password` FROM `Players` WHERE `Name` = '%q'", Player[playerid][Name]));
+		DB_GetFieldStringByName(res, "Password", iString);
+		DB_FreeResultSet(res);
 		bcrypt_verify(playerid, "OnLoginPassHash", inputtext, iString);
 	}
 	else
@@ -83,9 +83,9 @@ public OnLoginPassHash(playerid, bool: success)
 			playerid, using public InlineLogin<iiiis>, DIALOG_STYLE_PASSWORD, "{FFFFFF}Login Dialog", "{FFFFFF}Type your password below to log in:", "Login", "Leave");
 		return 1;
 	}
-	new DBResult: res = db_query(sqliteconnection, va_return("SELECT * FROM `Players` WHERE `Name` = '%q'", Player[playerid][Name]));
+	new DBResult: res = DB_ExecuteQuery(sqliteconnection, va_return("SELECT * FROM `Players` WHERE `Name` = '%q'", Player[playerid][Name]));
 	LoginPlayer(playerid, res);
-	db_free_result(res);
+	DB_FreeResultSet(res);
 	new teamid = ShouldPlayerBeReadded(playerid);
 	if (teamid != -1)
 	{
@@ -111,7 +111,7 @@ public OnRegisterPassHash(playerid)
 	format(
 		query, sizeof(query), "INSERT INTO Players (Name, Password, IP, LastSeen_Day, LastSeen_Month, LastSeen_Year) VALUES('%q', '%q', '%s', %d, %d, %d)",
 		Player[playerid][Name], dest, IP, day, month, year);
-	db_free_result(db_query(sqliteconnection, query));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, query));
 
 	SendClientMessage(playerid, -1, "{009933}Server account: {FFFFFF}successfully registered your account:");
 
@@ -239,16 +239,16 @@ public OnPlayerRequestClass(playerid, classid)
 	{
 		new Query[128];
 		format(Query, sizeof(Query), "SELECT Name FROM Players WHERE Name = '%q'", Player[playerid][Name]);
-		new DBResult: result = db_query(sqliteconnection, Query);
+		new DBResult: result = DB_ExecuteQuery(sqliteconnection, Query);
 
-		if (!db_num_rows(result))
+		if (!DB_GetRowCount(result))
 		{
 			Dialog_ShowCallback(
 				playerid, using public InlineRegister<iiiis>, DIALOG_STYLE_PASSWORD, "{FFFFFF}Registration Dialog", "{FFFFFF}Type your password below to register:",
 				"Register", "Leave");
-			return db_free_result(result);
+			return DB_FreeResultSet(result);
 		}
-		db_free_result(result);
+		DB_FreeResultSet(result);
 		// Get IP
 		new IP[16];
 		GetPlayerIp(playerid, IP, sizeof(IP));
@@ -257,14 +257,14 @@ public OnPlayerRequestClass(playerid, classid)
 		format(Query, sizeof(Query), "SELECT * FROM `Players` WHERE `Name` = '%q' AND `IP` = '%q'", Player[playerid][Name], IP);
 
 		// execute
-		new DBResult: res = db_query(sqliteconnection, Query);
+		new DBResult: res = DB_ExecuteQuery(sqliteconnection, Query);
 
 		// If result returns any registered users with the same name and IP that have connected to this server before, log them in
-		if (db_num_rows(res))
+		if (DB_GetRowCount(res))
 		{
 			SendClientMessage(playerid, -1, "{009933}Server account: {FFFFFF}automatically logged in!");
 			LoginPlayer(playerid, res);
-			db_free_result(res);
+			DB_FreeResultSet(res);
 			new teamid = ShouldPlayerBeReadded(playerid);
 			if (teamid != -1)
 			{
@@ -278,7 +278,7 @@ public OnPlayerRequestClass(playerid, classid)
 		}
 		Dialog_ShowCallback(
 			playerid, using public InlineLogin<iiiis>, DIALOG_STYLE_PASSWORD, "{FFFFFF}Login Dialog", "{FFFFFF}Type your password below to log in:", "Login", "Leave");
-		return db_free_result(res);
+		return DB_FreeResultSet(res);
 	}
 
 	new teamid = ShouldPlayerBeReadded(playerid);

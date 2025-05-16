@@ -17,7 +17,7 @@ YCMD: weather(playerid, params[], help)
 	SetPlayerWeather(playerid, myweather);
 	Player[playerid][Weather] = myweather;
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET Weather = %d WHERE Name = '%q'", myweather, Player[playerid][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET Weather = %d WHERE Name = '%q'", myweather, Player[playerid][Name])));
 
 	return va_SendClientMessage(playerid, -1, "Weather changed to: %d", myweather);
 }

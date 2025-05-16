@@ -2834,11 +2834,11 @@ public WarEnded()
 
 	CurrentRound  = 0;
 	format(iString, sizeof(iString), "SELECT * FROM Configs WHERE Option = 'Total Rounds'");
-	new DBResult: res = db_query(sqliteconnection, iString);
+	new DBResult: res = DB_ExecuteQuery(sqliteconnection, iString);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString));
 	TotalRounds = strval(iString);
-	db_free_result(res);
+	DB_FreeResultSet(res);
 
 	UpdateRoundsPlayedTextDraw();
 

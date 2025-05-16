@@ -36,7 +36,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 	else
 	{
 		format(Str, sizeof(Str), "UPDATE Players SET Level = %d WHERE Name = '%q' AND Level != %d", Player[playerid][Level], Player[playerid][Name], Player[playerid][Level]);
-		db_free_result(db_query(sqliteconnection, Str));
+		DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, Str));
 		if (Player[playerid][Level] != 5)
 		{
 			if (Player[playerid][Level] == 0)
@@ -47,7 +47,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			Player[playerid][Level] = 5;
 			UpdatePlayerAdminGroup(playerid);
 			format(Str, sizeof(Str), "UPDATE Players SET Level = %d WHERE Name = '%q'", Player[playerid][Level], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, Str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, Str));
 
 			format(Str, sizeof(Str), "{FFFFFF}%s " COL_PRIM "has successfully logged into rcon and got level 5.", iName);
 		}

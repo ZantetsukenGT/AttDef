@@ -31,7 +31,7 @@
 		case 0: strcat(CurrentArenaSet, "Arenas");
 		case 1: strcat(CurrentArenaSet, "UGMPArenas");
 	}
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentArenaSet'", CurrentArenaSet)));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentArenaSet'", CurrentArenaSet)));
 	LoadArenas();
 	return SendClientMessageToAll(-1, va_return("{FFFFFF}%s " COL_PRIM "has loaded arena set ID: {FFFFFF}%d | %s", Player[playerid][Name], arenaset, CurrentArenaSet));
 }*/

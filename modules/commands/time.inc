@@ -18,7 +18,7 @@ YCMD: time(playerid, params[], help)
 	SetPlayerTime(playerid, mytime, 0);
 	Player[playerid][Time] = mytime;
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET Time = %d WHERE Name = '%q'", mytime, Player[playerid][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET Time = %d WHERE Name = '%q'", mytime, Player[playerid][Name])));
 
 	return va_SendClientMessage(playerid, -1, "Time changed to: %d", mytime);
 }

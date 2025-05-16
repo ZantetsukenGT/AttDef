@@ -45,21 +45,21 @@ YCMD: teamskin(playerid, params[], help)
 			Skin[ATTACKER] = skinid;
 
 			format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Attacker Skin'", Skin[ATTACKER]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 		}
 		case DEFENDER:
 		{
 			Skin[DEFENDER] = skinid;
 
 			format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Defender Skin'", Skin[DEFENDER]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 		}
 		case REFEREE:
 		{
 			Skin[REFEREE] = skinid;
 
 			format(iString, sizeof(iString), "UPDATE Configs SET Value = %d WHERE Option = 'Referee Skin'", Skin[REFEREE]);
-			db_free_result(db_query(sqliteconnection, iString));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 		}
 	}
 

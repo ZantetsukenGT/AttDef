@@ -35,10 +35,10 @@ SaveThemeSettings()
 {
 	new query[128];
 	format(query, sizeof(query), "UPDATE `Configs` SET `Value` = '%q' WHERE `Option` = 'MainTextColour'", MAIN_TEXT_COLOUR);
-	db_free_result(db_query(sqliteconnection, query));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, query));
 
 	format(query, sizeof(query), "UPDATE `Configs` SET `Value` = %d WHERE `Option` = 'MainBackgroundColour'", MAIN_BACKGROUND_COLOUR);
-	db_free_result(db_query(sqliteconnection, query));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, query));
 }
 
 ChangeTheme(playerid, listitem)

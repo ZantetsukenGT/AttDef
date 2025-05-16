@@ -18,7 +18,7 @@ YCMD: deathdiss(playerid, params[], help)
 
 	new iString[128];
 	format(iString, sizeof(iString), "UPDATE `Players` SET `DeathMessage` = '%q' WHERE `Name` = '%q'", params, Player[playerid][Name]);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 	Player[playerid][HasDeathQuote] = true;
 	return SendClientMessage(playerid, -1, "Death diss message has been changed successfully!");
 }

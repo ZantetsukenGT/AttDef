@@ -16,7 +16,7 @@ YCMD: mainspawn(playerid, params[], help)
 	new iString[128], query[256];
 	format(iString, sizeof(iString), "%.0f,%.0f,%.0f,%.0f,%d", MainSpawn[0], MainSpawn[1], MainSpawn[2], MainSpawn[3], MainInterior);
 	format(query, sizeof(query), "UPDATE Configs SET Value = '%q' WHERE Option = 'Main Spawn'", iString);
-	db_free_result(db_query(sqliteconnection, query));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, query));
 
 	LogAdminCommand("mainspawn", playerid, INVALID_PLAYER_ID);
 

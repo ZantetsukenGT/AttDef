@@ -64,8 +64,8 @@ UpdateDuellersStats(winner, loser)
 		-1, COL_PRIM "Duel stats: {FFFFFF}%s [W: %d / L: %d] & %s [W: %d / L: %d]", Player[winner][NameWithoutTag], Player[winner][DuelsWon], Player[winner][DuelsLost],
 		Player[loser][NameWithoutTag], Player[loser][DuelsWon], Player[loser][DuelsLost]);
 	// database
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET DLost = %d WHERE Name = '%q'", Player[loser][DuelsLost], Player[loser][Name])));
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET DWon = %d WHERE Name = '%q'", Player[winner][DuelsWon], Player[winner][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET DLost = %d WHERE Name = '%q'", Player[loser][DuelsLost], Player[loser][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET DWon = %d WHERE Name = '%q'", Player[winner][DuelsWon], Player[winner][Name])));
 }
 
 ProcessDuelRequest(duel_host, duel_guest, weapon1, weapon2, arena, size)

@@ -31,7 +31,7 @@ YCMD: gamespeed(playerid, params[], help)
 	else
 		strcat(speedStr, "Very Slow");
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'GameSpeed'", speed)));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'GameSpeed'", speed)));
 
 	GAME_SPEED = speed;
 	RestartGameLoop();

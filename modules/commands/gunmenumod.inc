@@ -34,7 +34,7 @@ ShowPlayerGunmenuModification(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has changed gunmenu index: {FFFFFF}%d " COL_PRIM "from [%s] to [%s]", Player[playerid][Name], idx,
 					ReturnWeaponName(GunmenuData[idx][GunID]), ReturnWeaponName(weaponID));
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Weapon`=%d WHERE `Weapon`=%d", weaponID, GunmenuData[idx][GunID])));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Weapon`=%d WHERE `Weapon`=%d", weaponID, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunID] = weaponID;
 			}
 			case GUNMENU_MOD_TYPE_LIMIT:
@@ -51,7 +51,7 @@ ShowPlayerGunmenuModification(playerid1)
 				}
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "limit to {FFFFFF}%d", Player[playerid][Name], ReturnWeaponName(GunmenuData[idx][GunID]), limit);
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Limit`=%d WHERE `Weapon`=%d", limit, GunmenuData[idx][GunID])));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Limit`=%d WHERE `Weapon`=%d", limit, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunLimit] = limit;
 			}
 			case GUNMENU_MOD_TYPE_AMMO:
@@ -69,7 +69,7 @@ ShowPlayerGunmenuModification(playerid1)
 				va_SendClientMessageToAll(
 					-1,
 					"%s " COL_PRIM "has changed {FFFFFF}%s " COL_PRIM "ammo to {FFFFFF}%d", Player[playerid][Name], ReturnWeaponName(GunmenuData[idx][GunID]), ammo);
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Ammo`=%d WHERE `Weapon`=%d", ammo, GunmenuData[idx][GunID])));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Gunmenu` SET `Ammo`=%d WHERE `Weapon`=%d", ammo, GunmenuData[idx][GunID])));
 				GunmenuData[idx][GunAmmo] = ammo;
 			}
 		}

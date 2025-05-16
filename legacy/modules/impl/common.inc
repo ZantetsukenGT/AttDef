@@ -162,7 +162,7 @@ CreateDeadBody(playerid, killerid, reason, Float: distance = 0.0, Float: x = 0.0
 	new Float: angle;
 	GetPlayerFacingAngle(playerid, angle);
 	new actorid = CreateActor(GetPlayerSkin(playerid), x, y, z, angle);
-	SetActorInvulnerable(actorid, 0);
+	SetActorInvulnerable(actorid, false);
 	SetActorHealth(actorid, 0.0);
 	new worldid = GetPlayerVirtualWorld(playerid);
 	SetActorVirtualWorld(actorid, worldid);

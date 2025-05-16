@@ -25,7 +25,7 @@ YCMD: setlevel(playerid, params[], help)
 	if (Player[GiveID][Level] == 0) // Previous level was 0. This means it's a new admin. Guide them.
 		SendClientMessage(GiveID, -1, COL_PRIM "Looks like you're a new admin. Type {FFFFFF}/acmds " COL_PRIM " to see a list of admin commands!");
 
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE Players SET Level = %d WHERE Name = '%q'", NewLevel, Player[GiveID][Name])));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Players SET Level = %d WHERE Name = '%q'", NewLevel, Player[GiveID][Name])));
 
 	Player[GiveID][Level] = NewLevel;
 	UpdatePlayerAdminGroup(GiveID);

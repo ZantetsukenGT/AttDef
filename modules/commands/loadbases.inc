@@ -35,7 +35,7 @@ YCMD: loadbases(playerid, params[], help)
 		case 6: strcat(CurrentBaseSet, "OldBulletproofBases");
 		case 7: strcat(CurrentBaseSet, "Wargrounds");
 	}
-	db_free_result(db_query(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentBaseSet'", CurrentBaseSet)));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `Configs` SET `Value`='%q' WHERE `Option`='CurrentBaseSet'", CurrentBaseSet)));
 	LoadBases();
 	return va_SendClientMessageToAll(-1, "%s " COL_PRIM "has loaded base set ID: {FFFFFF}%d | %s", Player[playerid][Name], baseset, CurrentBaseSet);
 }

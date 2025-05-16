@@ -133,7 +133,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Checkpoint in arena " COL_PRIM "option.", Player[playerid][Name], CPInArena ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'CPInArena'", CPInArena)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'CPInArena'", CPInArena)));
 				ShowConfigDialog(playerid);
 			}
 			case 14:
@@ -142,7 +142,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Anti-macros " COL_PRIM "system.", Player[playerid][Name], AntiMacros ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AntiMacros'", AntiMacros)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AntiMacros'", AntiMacros)));
 				ShowConfigDialog(playerid);
 			}
 			case 15:
@@ -153,7 +153,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Dead bodies " COL_PRIM "option.", Player[playerid][Name], DeadBodies ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeadBodies'", DeadBodies)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeadBodies'", DeadBodies)));
 				ShowConfigDialog(playerid);
 			}
 			case 16:
@@ -162,7 +162,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Death camera " COL_PRIM "system.", Player[playerid][Name], DeathCamera ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeathCamera'", DeathCamera)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DeathCamera'", DeathCamera)));
 				ShowConfigDialog(playerid);
 			}
 			case 17:
@@ -174,7 +174,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}HP Bars " COL_PRIM "system.", Player[playerid][Name], ShowHPBars ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ShowHPBars'", ShowHPBars)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ShowHPBars'", ShowHPBars)));
 				ShowConfigDialog(playerid);
 			}
 			case 18:
@@ -191,7 +191,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}melee weapons menu " COL_PRIM "option.", Player[playerid][Name], MeleeAllowed ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'MeleeAllowed'", MeleeAllowed)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'MeleeAllowed'", MeleeAllowed)));
 				ShowConfigDialog(playerid);
 			}
 			case 20:
@@ -202,7 +202,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}auto round start " COL_PRIM "option.", Player[playerid][Name], AutoRoundStarter ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AutoRoundStarter'", AutoRoundStarter)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'AutoRoundStarter'", AutoRoundStarter)));
 				ShowConfigDialog(playerid);
 			}
 			case 21:
@@ -211,7 +211,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Random Death Messages" COL_PRIM ".", Player[playerid][Name], RandomDeathMessages ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'RDeathMsg'", RandomDeathMessages)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'RDeathMsg'", RandomDeathMessages)));
 				ShowConfigDialog(playerid);
 			}
 			case 22:
@@ -221,7 +221,7 @@ ShowConfigDialog(playerid1)
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Sightseeing In Class Selection" COL_PRIM ".", Player[playerid][Name],
 					SightseeingInClassSelection ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SightseeingInCS'", SightseeingInClassSelection)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SightseeingInCS'", SightseeingInClassSelection)));
 				ShowConfigDialog(playerid);
 			}
 			case 23:
@@ -250,7 +250,7 @@ ShowConfigDialog(playerid1)
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Vehicle Health Information" COL_PRIM ".", Player[playerid][Name],
 					VehicleHealthTextdraw ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'VehicleHealthTD'", VehicleHealthTextdraw)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'VehicleHealthTD'", VehicleHealthTextdraw)));
 				ShowConfigDialog(playerid);
 			}
 			case 24:
@@ -258,7 +258,7 @@ ShowConfigDialog(playerid1)
 				SyncAbuse = !SyncAbuse;
 				va_SendClientMessageToAll(-1, "%s " COL_PRIM "has %s {FFFFFF}Sync Abuse" COL_PRIM ".", Player[playerid][Name], SyncAbuse ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SyncAbuse'", SyncAbuse)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'SyncAbuse'", SyncAbuse)));
 				ShowConfigDialog(playerid);
 			}
 			case 25:
@@ -267,7 +267,7 @@ ShowConfigDialog(playerid1)
 				va_SendClientMessageToAll(
 					-1, "%s " COL_PRIM "has %s {FFFFFF}Screen Flashing" COL_PRIM ".", Player[playerid][Name], ScreenFlashing ? "{66FF66}enabled" : "{FF6666}disabled");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ScreenFlash'", ScreenFlashing)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'ScreenFlash'", ScreenFlashing)));
 				ShowConfigDialog(playerid);
 			}
 			case 26:
@@ -277,7 +277,7 @@ ShowConfigDialog(playerid1)
 					-1, "%s " COL_PRIM "has %s {FFFFFF}defenders to use vehicles" COL_PRIM ".", Player[playerid][Name],
 					DefendersWithVehicles ? "{66FF66}allowed" : "{FF6666}disallowed");
 
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DefVehicles'", DefendersWithVehicles)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE Configs SET Value = %d WHERE Option = 'DefVehicles'", DefendersWithVehicles)));
 				ShowConfigDialog(playerid);
 			}
 		}
@@ -408,146 +408,146 @@ ShowConfigDialog(playerid1)
 LoadConfig()
 {
 	new iString[128];
-	new DBResult: res = db_query(sqliteconnection, "SELECT * FROM Configs");
+	new DBResult: res = DB_ExecuteQuery(sqliteconnection, "SELECT * FROM Configs");
 	Skin[NON]		  = 0;
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Attacker Skin
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Attacker Skin
 	Skin[ATTACKER] = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Attacker Sub Skin
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Attacker Sub Skin
 	Skin[ATTACKER_SUB] = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Defender Skin
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Defender Skin
 	Skin[DEFENDER] = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Defender Sub Skin
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Defender Sub Skin
 	Skin[DEFENDER_SUB] = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Referee Skin
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Referee Skin
 	Skin[REFEREE] = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Server Weather
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Server Weather
 	MainWeather = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Server Time
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Server Time
 	MainTime = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CP Time
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // CP Time
 	ConfigCPTime = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Round Time
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Round Time
 	ConfigRoundTime = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Total Rounds
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Total Rounds
 	TotalRounds = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Maximum Packetloss
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Maximum Packetloss
 	Max_Packetloss = floatstr(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Maximum Ping
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Maximum Ping
 	Max_Ping = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Minimum FPS
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Minimum FPS
 	Min_FPS = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Main Spawn
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Main Spawn
 	sscanf(iString, "p<,>ffffd", MainSpawn[0], MainSpawn[1], MainSpawn[2], MainSpawn[3], MainInterior);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Round HP AR
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Round HP AR
 	sscanf(iString, "p<,>dd", RoundAR, RoundHP);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Main Background Colour
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Main Background Colour
 	MAIN_BACKGROUND_COLOUR = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", MAIN_TEXT_COLOUR, sizeof(MAIN_TEXT_COLOUR)); // Main Text Colour
-	db_next_row(res);
+	DB_GetFieldStringByName(res, "Value", MAIN_TEXT_COLOUR, sizeof(MAIN_TEXT_COLOUR)); // Main Text Colour
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Color Scheme ID
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Color Scheme ID
 	format(ColScheme, sizeof(ColScheme), "{%s}", iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CP in arena
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // CP in arena
 	CPInArena = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // AntiMacros
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // AntiMacros
 	AntiMacros = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // DeadBodies
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // DeadBodies
 	DeadBodies = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // DeathCamera
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // DeathCamera
 	DeathCamera = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // ShowHPBars
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // ShowHPBars
 	ShowHPBars = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // MeleeAllowed
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // MeleeAllowed
 	MeleeAllowed = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", CurrentBaseSet, sizeof(CurrentBaseSet)); // CurrentBaseSet
-	db_next_row(res);
+	DB_GetFieldStringByName(res, "Value", CurrentBaseSet, sizeof(CurrentBaseSet)); // CurrentBaseSet
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // AutoRoundStarter
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // AutoRoundStarter
 	AutoRoundStarter = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Game speed
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Game speed
 	GAME_SPEED = strval(iString);
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // RandomDeathMessages
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // RandomDeathMessages
 	RandomDeathMessages = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // SightseeingInClassSelection
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // SightseeingInClassSelection
 	SightseeingInClassSelection = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // VehicleHealthTextdraw
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // VehicleHealthTextdraw
 	VehicleHealthTextdraw = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Defenders With Vehicle
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Defenders With Vehicle
 	DefendersWithVehicles = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Sync Abuse
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Sync Abuse
 	SyncAbuse = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", iString, sizeof(iString)); // Screen Flash
+	DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // Screen Flash
 	ScreenFlashing = strval(iString) == 1;
-	db_next_row(res);
+	DB_SelectNextRow(res);
 
-	db_get_field_assoc(res, "Value", ServerName, sizeof(ServerName)); // Server Name
-	db_next_row(res);
+	DB_GetFieldStringByName(res, "Value", ServerName, sizeof(ServerName)); // Server Name
+	DB_SelectNextRow(res);
 
-	//db_get_field_assoc(res, "Value", iString, sizeof(iString)); // CurrentArenaSet
+	//DB_GetFieldStringByName(res, "Value", iString, sizeof(iString)); // CurrentArenaSet
 	//sscanf(iString, "s[32]", CurrentArenaSet);
-	//db_next_row(res);
+	//DB_SelectNextRow(res);
 
-	db_free_result(res);
+	DB_FreeResultSet(res);
 	print("Server Config Loaded.");
 }

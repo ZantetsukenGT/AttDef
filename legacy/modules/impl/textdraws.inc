@@ -1458,9 +1458,9 @@ TogglePlayerInterface(playerid, bool: toggle, interface = -1)
 				PlayerTextDrawHide(playerid, FPSPingPacket[playerid]);
 			}
 			format(str, sizeof(str), "UPDATE Players SET InterfaceSpec = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_SPEC], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 			format(str, sizeof(str), "UPDATE Players SET InterfaceNet = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_NET], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 		}
 		case INTERFACE_SPEC:
 		{
@@ -1471,7 +1471,7 @@ TogglePlayerInterface(playerid, bool: toggle, interface = -1)
 				PlayerTextDrawHide(playerid, WhoSpec[playerid]);
 
 			format(str, sizeof(str), "UPDATE Players SET InterfaceSpec = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_SPEC], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 		}
 		case INTERFACE_NET:
 		{
@@ -1482,7 +1482,7 @@ TogglePlayerInterface(playerid, bool: toggle, interface = -1)
 				PlayerTextDrawHide(playerid, FPSPingPacket[playerid]);
 
 			format(str, sizeof(str), "UPDATE Players SET InterfaceNet = %d WHERE Name = '%q'", PlayerInterface[playerid][INTERFACE_NET], Player[playerid][Name]);
-			db_free_result(db_query(sqliteconnection, str));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, str));
 		}
 	}
 }

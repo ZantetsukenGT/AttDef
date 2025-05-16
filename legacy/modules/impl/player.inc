@@ -22,16 +22,16 @@ GetPlayerAKA(playerid, str[], len)
 {
 	new IP[16];
 	GetPlayerIp(playerid, IP, sizeof(IP));
-	new DBResult: dbres = db_query(sqliteconnection, va_return("SELECT `Names` FROM `AKAs` WHERE `IP` = '%q'", IP));
+	new DBResult: dbres = DB_ExecuteQuery(sqliteconnection, va_return("SELECT `Names` FROM `AKAs` WHERE `IP` = '%q'", IP));
 
-	if (db_num_rows(dbres) > 0)
+	if (DB_GetRowCount(dbres) > 0)
 	{
-		db_get_field_assoc(dbres, "Names", str, len);
-		return db_free_result(dbres);
+		DB_GetFieldStringByName(dbres, "Names", str, len);
+		return DB_FreeResultSet(dbres);
 	}
-	db_free_result(dbres);
+	DB_FreeResultSet(dbres);
 	strcat(str, "NULL", len);
-	return db_free_result(db_query(sqliteconnection, va_return("INSERT INTO `AKAs` (`IP`, `Names`) VALUES ('%q', '%q')", IP, "")));
+	return DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("INSERT INTO `AKAs` (`IP`, `Names`) VALUES ('%q', '%q')", IP, "")));
 }
 
 MatchAKA(playerid)
@@ -71,7 +71,7 @@ CheckPlayerAKA(playerid)
 
 		new query[128];
 		format(query, sizeof(query), "UPDATE `AKAs` SET `Names` = '%q' WHERE `IP` = '%q'", AKAString, str);
-		db_free_result(db_query(sqliteconnection, query));
+		DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, query));
 	}
 }
 
@@ -324,60 +324,60 @@ LoginPlayer(playerid, DBResult: res)
 	new iString[128];
 
 	// Load level
-	db_get_field_assoc(res, "Level", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "Level", iString, sizeof(iString));
 	Player[playerid][Level] = strval(iString);
 	UpdatePlayerAdminGroup(playerid);
 
 	// Load Weather
-	db_get_field_assoc(res, "Weather", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "Weather", iString, sizeof(iString));
 	Player[playerid][Weather] = strval(iString);
 
 	// Load time
-	db_get_field_assoc(res, "Time", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "Time", iString, sizeof(iString));
 	Player[playerid][Time] = strval(iString);
 
 	// Load ChatChannel
-	db_get_field_assoc(res, "ChatChannel", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "ChatChannel", iString, sizeof(iString));
 	Player[playerid][ChatChannel] = strval(iString);
 
 	// Load NetCheck
-	db_get_field_assoc(res, "NetCheck", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "NetCheck", iString, sizeof(iString));
 	Player[playerid][NetCheck] = bool: strval(iString);
 
 	// Load HitSound
-	db_get_field_assoc(res, "HitSound", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "HitSound", iString, sizeof(iString));
 	Player[playerid][HitSound] = strval(iString);
 
 	// Load GetHitSound
-	db_get_field_assoc(res, "GetHitSound", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "GetHitSound", iString, sizeof(iString));
 	Player[playerid][GetHitSound] = strval(iString);
 
 	// Load Duels won
-	db_get_field_assoc(res, "DWon", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "DWon", iString, sizeof(iString));
 	Player[playerid][DuelsWon] = strval(iString);
 
 	// Load Duels Lost
-	db_get_field_assoc(res, "DLost", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "DLost", iString, sizeof(iString));
 	Player[playerid][DuelsLost] = strval(iString);
 
 	// Load ShowSpecs
-	db_get_field_assoc(res, "InterfaceSpec", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "InterfaceSpec", iString, sizeof(iString));
 	PlayerInterface[playerid][INTERFACE_SPEC] = strval(iString) != 0;
 
 	// Load Fighting Style
-	db_get_field_assoc(res, "FightStyle", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "FightStyle", iString, sizeof(iString));
 	Player[playerid][FightStyle] = strval(iString);
 	SetPlayerFightingStyle(playerid, Player[playerid][FightStyle]);
 
 	// Load Death Messages
-	db_get_field_assoc(res, "DeathMessage", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "DeathMessage", iString, sizeof(iString));
 	DeathMessageStr[playerid][0] = EOS;
 	strcat(DeathMessageStr[playerid], iString, 64);
 	if (strcmp("NO_DEATH_MESSAGE", DeathMessageStr[playerid], false) != 0)
 		Player[playerid][HasDeathQuote] = true;
 
 	// Load Show net textdraws
-	db_get_field_assoc(res, "InterfaceNet", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "InterfaceNet", iString, sizeof(iString));
 	PlayerInterface[playerid][INTERFACE_NET] = strval(iString) != 0;
 
 	// Load weapon key binds
@@ -385,26 +385,26 @@ LoginPlayer(playerid, DBResult: res)
 	for (new i = 0; i < MAX_WEAPON_BINDS; i++)
 	{
 		format(fieldName, sizeof fieldName, "WeaponBind%d", i);
-		db_get_field_assoc(res, fieldName, iString, sizeof(iString));
+		DB_GetFieldStringByName(res, fieldName, iString, sizeof(iString));
 		value = strval(iString);
 		if (value != -1)
 			WeaponBindData[playerid][BindKeyWeapon][i] = value;
 	}
 
 	// Load Gunmenu Style
-	db_get_field_assoc(res, "GunmenuStyle", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "GunmenuStyle", iString, sizeof(iString));
 	Player[playerid][GunmenuStyle] = strval(iString);
 
 	// Load Weapon Binding
-	db_get_field_assoc(res, "WeaponBinding", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "WeaponBinding", iString, sizeof(iString));
 	Player[playerid][WeaponBinding] = strval(iString) != 0;
 
 	// Load player markers setting
-	db_get_field_assoc(res, "PlayerMarkers", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "PlayerMarkers", iString, sizeof(iString));
 	Player[playerid][PlayerMarkers] = strval(iString) != 0;
 
 	// Load round textdraws style
-	db_get_field_assoc(res, "RoundTDStyle", iString, sizeof(iString));
+	DB_GetFieldStringByName(res, "RoundTDStyle", iString, sizeof(iString));
 	Player[playerid][RoundTDStyle] = strval(iString);
 
 	// Get current IP address
@@ -413,7 +413,7 @@ LoginPlayer(playerid, DBResult: res)
 
 	// Update players table with new IP address for auto login if they reconnect.
 	format(iString, sizeof(iString), "UPDATE `Players` SET `IP` = '%q' WHERE `Name` = '%q' AND IP != '%q'", IP, Player[playerid][Name], IP);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	// Update last seen/logged in
 	new day, month, year;
@@ -421,7 +421,7 @@ LoginPlayer(playerid, DBResult: res)
 	format(
 		iString, sizeof(iString), "UPDATE `Players` SET `LastSeen_Day` = %d, `LastSeen_Month` = %d, `LastSeen_Year` = %d WHERE `Name` = '%q'", day, month, year,
 		Player[playerid][Name]);
-	db_free_result(db_query(sqliteconnection, iString));
+	DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 
 	Player[playerid][Logged] = true;
 }

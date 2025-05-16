@@ -63,7 +63,7 @@ YCMD: base(playerid, params[], help)
 				return SendErrorMessage(playerid, "Too many bases already created. You can use /loadbases to create this base in another set.");
 
 			new BaseID = Iter_Alloc(CurrentBases);
-			db_free_result(db_query(sqliteconnection, va_return("INSERT INTO `%q` (ID, AttSpawn, CPSpawn, DefSpawn, Interior, Name) VALUES (%d, 0, 0, 0, 0, 'No Name')", CurrentBaseSet, BaseID)));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("INSERT INTO `%q` (ID, AttSpawn, CPSpawn, DefSpawn, Interior, Name) VALUES (%d, 0, 0, 0, 0, 'No Name')", CurrentBaseSet, BaseID)));
 
 			LoadBases();
 
@@ -80,10 +80,10 @@ YCMD: base(playerid, params[], help)
 	// the queries here are already escaped with %q, don't panic if you see a %s
 	switch (CommandID)
 	{
-		case 5: db_free_result(db_query(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, BaseName), baseID)));
+		case 5: DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, BaseName), baseID)));
 		case 6:
 		{
-			db_free_result(db_query(sqliteconnection, va_return("DELETE FROM `%q` WHERE ID = %d", CurrentBaseSet, baseID)));
+			DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("DELETE FROM `%q` WHERE ID = %d", CurrentBaseSet, baseID)));
 
 			LoadBases();
 
@@ -99,9 +99,9 @@ YCMD: base(playerid, params[], help)
 			format(CoordenatesXYZ, sizeof(CoordenatesXYZ), "%f,%f,%f", x, y, z);
 
 			if (CommandID == 4)
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, CoordenatesXYZ, GetPlayerInterior(playerid)), baseID)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, CoordenatesXYZ, GetPlayerInterior(playerid)), baseID)));
 			else
-				db_free_result(db_query(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, CoordenatesXYZ), baseID)));
+				DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, va_return("UPDATE `%q` SET %s WHERE ID = %d", CurrentBaseSet, va_return(updateQuery, CoordenatesXYZ), baseID)));
 		}
 	}
 

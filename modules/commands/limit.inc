@@ -37,7 +37,7 @@ YCMD: limit(playerid, params[], help)
 					SetPlayerWeather(i, Player[i][Weather]);
 
 					format(iString, sizeof(iString), "UPDATE Players SET Weather = %d WHERE Name = '%q'", Player[i][Weather], Player[i][Name]);
-					db_free_result(db_query(sqliteconnection, iString));
+					DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 				}
 			}
 
@@ -55,7 +55,7 @@ YCMD: limit(playerid, params[], help)
 					SetPlayerTime(playerid, Player[i][Time], 12);
 
 					format(iString, sizeof(iString), "UPDATE Players SET Time = %d WHERE Name = '%q'", Player[i][Time], Player[i][Name]);
-					db_free_result(db_query(sqliteconnection, iString));
+					DB_FreeResultSet(DB_ExecuteQuery(sqliteconnection, iString));
 				}
 			}
 
