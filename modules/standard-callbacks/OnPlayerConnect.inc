@@ -19,7 +19,7 @@ hook GOOD_OnPlayerConnect(playerid)
 
 hook OnPlayerConnect(playerid)
 {
-	EnablePlayerCameraTarget(playerid, 1);
+	EnablePlayerCameraTarget(playerid, true);
 
 	// Initialize the new player
 	InitPlayer(playerid);

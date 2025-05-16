@@ -41,9 +41,9 @@ InitScriptCoreSettings()
 	SetAltCommands();
 	LoadDatabase();
 	UsePlayerPedAnims();				   // Player movement
-	AllowInteriorWeapons(1);			   // Allow weapons in interiors
+	AllowInteriorWeapons(true);			   // Allow weapons in interiors
 	DisableInteriorEnterExits();		   // Disables entering interiors (e.g. Burger shots)
-	EnableStuntBonusForAll(0);			   // If you stunt you won't get any points (Value = 0)
+	EnableStuntBonusForAll(false);			   // If you stunt you won't get any points (Value = 0)
 	SetNameTagDrawDistance(DRAW_DISTANCE); // Distance to see other players name and Hp
 	EnableVehicleFriendlyFire();		   // Enable friendly fire for team vehicles
 	SetGravity(0.008);					   // Gravity

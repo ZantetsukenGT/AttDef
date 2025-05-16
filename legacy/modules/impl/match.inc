@@ -942,7 +942,7 @@ PlayerRequestBackup(playerid)
 	SetPlayerColor(playerid, team == ATTACKER ? ATTACKER_ASKING_HELP : DEFENDER_ASKING_HELP);
 
 	// Set a timer to end backup request later
-	SetTimerEx("EndTeamBackupRequest", 7000, 0, "i", playerid);
+	SetTimerEx("EndTeamBackupRequest", 7000, false, "i", playerid);
 
 	// Set values to tell that this team has someone requesting for backup now
 	TeamHelp[team]					= true;
@@ -2161,7 +2161,7 @@ public EnableVehicleCollisions(playerid)
 {
 	if(Current != - 1)
 	{
-		DisableRemoteVehicleCollisions(playerid, 0);
+		DisableRemoteVehicleCollisions(playerid, false);
 		SendClientMessage(playerid, -1, "Vehicle collisions " COL_PRIM "have been {00FF00}enabled");
 	}
 	return 1;
@@ -2232,7 +2232,7 @@ SpawnPlayersInBase()
 					SetPlayerMapIcon(i, 59, BAttackerSpawn[Current][0], BAttackerSpawn[Current][1], BAttackerSpawn[Current][2], 59, 0, MAPICON_GLOBAL);
 					SetPlayerTeam(i, NO_TEAM);
 
-					DisableRemoteVehicleCollisions(i, 1);
+					DisableRemoteVehicleCollisions(i, true);
 					SetTimerEx("EnableVehicleCollisions", 15000, false, "i", i);
 					SendClientMessage(i, -1, "Vehicle collisions "COL_PRIM"have been {FF0000}disabled"COL_PRIM" for 15 seconds");
 
