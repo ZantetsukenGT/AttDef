@@ -7,7 +7,7 @@
 		"openmultiplayer/omp-stdlib",
 		"pawn-lang/samp-stdlib@open.mp",
 		"pawn-lang/pawn-stdlib@open.mp",
-		"Zeex/samp-plugin-crashdetect",
+		"AmyrAhmady/samp-plugin-crashdetect",
 		"katursis/Pawn.RakNet@omp",
 		"ZantetsukenGT/samp-discord-connector:v0.3.6",
 		"pawn-lang/YSI-Includes:v5.09.0982",
@@ -27,7 +27,7 @@
 	},
 	"builds": [
 		{
-			"name": "main",
+			"name": "dev",
 			"args": [
 				"-d3",
 				"-O1",
