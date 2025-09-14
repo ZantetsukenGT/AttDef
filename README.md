@@ -29,7 +29,7 @@ Install the following in order to compile the gamemode:
 
 # Runtime prerrequisites
 ## Linux
-If you're planning to run the server on a Linux machine, keep in mind that omp-server is still a 32bit process as of now.
+If you're planning to run the server on a Linux machine, keep in mind that samp-server is still a 32bit process as of now.
 
 You may need to install the i386 architecture and install the 32bit version of the C++ Standard Library runtime, the installation procedure may vary depending on your distro:
 
@@ -125,10 +125,10 @@ Use your preferred way to start the server:
 
 ```bash
 #On Windows
-.\omp-server.exe
+.\samp-server.exe
 
 #On Linux
-./omp-server
+./samp-server
 ```
 
 This works fine until you need to log off, on Windows, the process will stay alive as long as the machine is turned on and in Linux the process will be terminated.
@@ -168,7 +168,7 @@ pm2 startup
 ```bash
 # very important to be inside the correct folder
 cd path/to/server
-pm2 start "./omp-server" --name myAttdef
+pm2 start "./samp-server" --name myAttdef
 pm2 save
 ```
 
