@@ -1,12 +1,56 @@
 # AttDef
 
-[![sampctl](https://img.shields.io/badge/sampctl-AttDef-2f2f2f.svg?style=for-the-badge)](https://github.com/ZantetsukenGT/AttDef)
+## If you just want to run the server, you're looking for the [latest release](https://github.com/ZantetsukenGT/AttDef/releases/latest), you may also want to read the [Runtime prerrequisites](#runtime-prerrequisites) and [Actually running the server](#actually-running-the-server) sections
 
-<!--
-* Follow [Semantic Versioning](https://semver.org/)
--->
+# Table of Contents
 
-## Installation FOR DEVELOPMENT OR CONTRIBUTIONS. Otherwise you're looking for the [latest release.](https://github.com/ZantetsukenGT/AttDef/releases/latest)
+- [Build prerrequisites](#build-prerrequisites)
+- [Runtime prerrequisites](#runtime-prerrequisites)
+  - [Linux](#linux)
+  - [Windows](#windows)
+- [How to build](#how-to-build)
+- [Just before running the server](#just-before-running-the-server)
+  - [Delete server.cfg](#delete-servercfg)
+  - [Plugins and components](#plugins-and-components)
+  - [Scriptfiles](#scriptfiles)
+  - [config.json](#configjson)
+- [Actually running the server](#actually-running-the-server)
+  - [Setting up the server to automatically start](#setting-up-the-server-to-automatically-start)
+- [Collaboration and Pull Requests](#collaboration-and-pull-requests)
+
+
+# Build prerrequisites
+Install the following in order to compile the gamemode:
+- Git v2.39.x, because sampctl requires it
+- [sampctl version 1.11.3 installed, manual installation recommended](https://github.com/Southclaws/sampctl/wiki/Windows#installing-manually)
+  - Following [sampctl's config wiki](https://github.com/Southclaws/sampctl/wiki/Configuration), configure `git_username` and `github_token` within `config.json` or you may hit github's rate limits.
+    - [`C:\Users\<User>\AppData\Roaming\sampctl`] on Windows
+    - Possibly [`~/.sampctl`] on linux
+
+# Runtime prerrequisites
+## Linux
+If you're planning to run the server on a Linux machine, keep in mind that omp-server is still a 32bit process as of now.
+
+You may need to install the i386 architecture and install the 32bit version of the C++ Standard Library runtime, the installation procedure may vary depending on your distro:
+
+If your package manager is APT (Debian, Ubuntu, etc), you can achieve this by running:
+
+```bash
+dpkg --add-architecture i386 && apt-get update && apt-get install libstdc++6:i386
+```
+
+If your package manager is pacman (Arch Linux), you can achieve this by running:
+
+```bash
+pacman -Syu lib32-gcc-libs
+```
+
+If you're unsure, research how to do this on your machine!
+
+## Windows
+If you're planning to run the server on a Windows machine, you **may or may not** need to install the [MVSC runtimes.](https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/)
+
+# How to build
 
 Clone the project or download the project in a zip archive:
 
@@ -18,17 +62,31 @@ cd ./attdef
 cd .\attdef
 ```
 
-Modify the pawn.json file whether you need an `open.mp`, `0.3.7 R2`, `0.3DL` or an `UGMP` server. `open.mp` is recommended and is the default.
-
-Fetch the needed libraries/dependencies, make sure you have [sampctl version 1.11.0 installed, manual installation recommended](https://github.com/Southclaws/sampctl/wiki/Windows#installing-manually) (the following cmd will fetch plugins as well):
+Fetch the needed libraries/dependencies, the following command will fetch plugins as well:
 
 ```bash
 sampctl ensure
 ```
 
-### If using open.mp
+Compile the gamemode to generate the attdef.amx file needed to run the server:
 
-You need to delete `server.cfg` and run the following command to generate a `config.json` file:
+```bash
+#Will build with debug symbols -d3 flag (debug symbols included, development and for crashdetect to output useful info)
+sampctl build
+#or
+sampctl build dev
+```
+
+```bash
+#Will build with optimizations and no debug symbols, mainly for release builds
+sampctl build release
+```
+
+# Just before running the server
+
+## Delete server.cfg
+
+Since we are using open.mp, you need to delete the `server.cfg` file and run the following command to generate a `config.json` file:
 
 ```bash
 #linux
@@ -38,68 +96,95 @@ You need to delete `server.cfg` and run the following command to generate a `con
 .\samp-server.exe --default-config
 ```
 
-Then in the `plugins/` folder:
+## Plugins and components
+
+In the `plugins/` folder:
 
 1. Delete the `streamer` plugin, its unused.
-2. Move `pawnraket` and `sscanf` to the `components/` folder.
+2. Delete the `SKY` plugin, having it present will prevent the gamemode from working at all.
+3. Move `pawnraket` and `sscanf` to the `components/` folder.
 
-Then in the `scriptfiles/` folder:
+## Scriptfiles
+
+In the `scriptfiles/` folder:
 
 1. Make a copy of the `AttDefDatabase.db.example` file and rename it to `AttDefDatabase.db` or the server won't start properly.
 
-Then in the `config.json` file:
+## config.json
 
-1. In the `"pawn"."legacy_plugins"` array, add `"samp_bcrypt"` if you're in windows or `"samp_bcrypt.so"` if you're in linux.
+In the `config.json` file:
+
+1. In the `"pawn"."legacy_plugins"` array, add `"samp_bcrypt"` if you're in windows or `"samp_bcrypt"` if you're in linux.
 2. In the `"pawn"."main_scripts"` array, remove `"test 1"` and add `"attdef"`.
 3. In the `"rcon"."password"` property, change it from the default `changeme`.
 
-## Build
+It is recommended to use the `config.json` customizations from the [latest release](https://github.com/ZantetsukenGT/AttDef/releases/latest) 
 
-Will generate the attdef.amx file needed to run the server:
-
-```bash
-#Will build with debug symbols -d3 flag (debug symbols included, development and for crashdetect to output useful info)
-sampctl build
-#or
-sampctl build main
-```
+# Actually running the server
+Use your preferred way to start the server:
 
 ```bash
-#Will build with optimizations and no debug symbols, mainly for release builds
-sampctl build release
+#On Windows
+.\omp-server.exe
+
+#On Linux
+./omp-server
 ```
 
-## Usage
+This works fine until you need to log off, on Windows, the process will stay alive as long as the machine is turned on and in Linux the process will be terminated.
 
-Then use your preferred way to start the server and keep it alive on user logout, 'screen' for linux is recommended.
+## Setting up the server to automatically start
 
-You can also start it the old way:
+So, on Linux, using [`pm2`](https://pm2.io/) is recommended, it will help you in restarting the server upon crashes and start it automatically when you reboot your machine.
+
+Just casually follow these steps:
+
+1. Install [nvm](https://github.com/nvm-sh/nvm)
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+```
+
+2. Log off and log in again to complete the nvm installation
+
+3. Install the latest version of NodeJS
 
 ```bash
-#linux start, will persist over logouts
-screen -S mySampScreen ./samp03svr
-
-#dettach from the server output with CTRL + A, and then press D 
-
-#later that day...
-#linux cmd to return to the mySampScreen screen
-screen -R mySampScreen
-#you can kill it with CTRL + C
-
-#windows
-.\samp-server.exe
+nvm install node # "node" is an alias for the latest version
+nvm use node
 ```
 
+4. Install pm2
+```bash
+npm install pm2 -g
+```
 
-## Collaboration and Pull Requests
+5. Tell pm2 to run on boot
+```bash
+#Run as root or use sudo
+pm2 startup
+```
 
-This project is open for collaboration, following a few guidelines:
+6. Start your server with pm2
+```bash
+# very important to be inside the correct folder
+cd path/to/server
+pm2 start "./omp-server" --name myAttdef
+pm2 save
+```
 
-1. Your proposed changes must compile without any warnings, const correctness warnings caused by dependencies ensured by sampctl are fine, warnings caused by YSI includes are fine, warnings caused by legacy dependencies (basically your code) are not.
-2. Before making your pull request, delete the dependencies folder and run `sampctl ensure` and `sampctl build` and check for further warnings and functionality remains as intended.
-3. Your code *preferably* has to be formatted through [vscode](https://code.visualstudio.com/)'s `xaver.clang-format` extension, it will use the formatting rules present in the `.clang-format` file, and applying the actual formatting with `Alt + Shift + F`, for the formatting to work you need to set the file language specify in the extension's settings the path of the `clang-format.exe` file bundled in [the clang C++ compiler](https://github.com/brechtsanders/winlibs_mingw/releases/download/12.2.0-14.0.6-10.0.0-ucrt-r2/winlibs-x86_64-posix-seh-gcc-12.2.0-llvm-14.0.6-mingw-w64ucrt-10.0.0-r2.7z); obtained from [https://winlibs.com/](https://winlibs.com/) (Win64, UCRT runtime), all of this will help to keep a consistent code style throughout the project.
-4. Due to the pawn compiler's limitations, after formatting, some adjustments need to be made manually or you will find cryptic and useless compiler errors.
-5. String literals need to be modified into 1-liners.
-6. Pawn Tags cannot have a space between the `Tag` and the `:`, example: (Tag: good, Tag : bad).
-7. The formatter adds a NewLine character after the keyword `public`, remove it so that the keyword and the function name is in the same line.
-8. Macros which make use of `%0` or any number really, will be separated as `% 0` and need to be joined again.
+You're done!
+
+Other useful pm2 commands:
+
+```bash
+pm2 list
+pm2 log myAttdef
+pm2 stop myAttdef
+pm2 restart myAttdef
+pm2 delete myAttdef
+pm2 describe myAttdef
+```
+
+## Collaboration
+
+This project is open for collaboration, create a fork, start from [How to build](#how-to-build) and make a pull request!
