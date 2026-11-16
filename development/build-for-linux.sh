@@ -37,7 +37,8 @@ cd $compilerDirectory
 	-i$devDirectory/dependencies/samp-dyn-dialog-pages \
 	-i$devDirectory/dependencies/samp-geoip \
 	-i$devDirectory/dependencies/samp-weapon-config \
-	-i$devDirectory/dependencies/sscanf
+	-i$devDirectory/dependencies/sscanf \
+	-i$devDirectory/dependencies/crashdetect
 
 
 echo ""
