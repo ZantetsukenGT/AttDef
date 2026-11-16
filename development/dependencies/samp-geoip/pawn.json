@@ -1,0 +1,11 @@
+{
+	"user": "ZantetsukenGT",
+	"repo": "samp-geoip",
+	"contributors" : ["Southclaws", "ZantetsukenGT"],
+	"entry": "test.pwn",
+	"output": "test.amx",
+	"dependencies": [
+		"pawn-lang/samp-stdlib",
+		"pawn-lang/YSI-Includes@5.x"
+	]
+}

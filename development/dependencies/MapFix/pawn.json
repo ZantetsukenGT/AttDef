@@ -1,0 +1,21 @@
+{
+	"user": "NexiusTailer",
+	"repo": "MapFix",
+	"dependencies":
+	[
+		"pawn-lang/samp-stdlib",
+		"samp-incognito/samp-streamer-plugin"
+	],
+	"builds":
+	[
+		{
+			"name": "include",
+			"input": "mapfix.inc"
+		},
+		{
+			"name": "filterscript",
+			"input": "mapfix.pwn",
+			"output": "../../filterscripts/mapfix.amx"
+		}
+	]
+}

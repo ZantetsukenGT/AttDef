@@ -1,0 +1,12 @@
+[submodule "amx"]
+	path = amx
+	url = https://github.com/Zeex/amx_assembly.git
+[submodule "md-sort"]
+	path = md-sort
+	url = https://github.com/oscar-broman/md-sort.git
+[submodule "code-parse"]
+	path = code-parse
+	url = https://github.com/Y-Less/code-parse.inc.git
+[submodule "indirection"]
+	path = indirection
+	url = https://github.com/Y-Less/indirection.git

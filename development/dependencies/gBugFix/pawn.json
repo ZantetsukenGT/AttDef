@@ -1,0 +1,9 @@
+{
+	"user": "ZantetsukenGT",
+	"repo": "gBugFix",
+	"dependencies": [
+		"pawn-lang/pawn-stdlib@backported-natives",
+		"pawn-lang/samp-stdlib@consistency-overhaul",
+		"pawn-lang/YSI-Includes@5.x"
+	]
+}

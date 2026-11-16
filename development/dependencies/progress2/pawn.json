@@ -1,0 +1,14 @@
+{
+    "user": "ZantetsukenGT",
+    "repo": "progress2",
+    "entry": "test.pwn",
+    "output": "test.amx",
+    "contributors": ["Southclaws"],
+    "dependencies": [
+        "Southclaws/samp-stdlib",
+        "pawn-lang/YSI-Includes"
+    ],
+    "dev_dependencies": [
+        "Southclaws/ut_mock_players"
+    ]
+}
