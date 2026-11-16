@@ -1,0 +1,28 @@
+{
+    "user": "AmyrAhmady",
+    "repo": "samp-plugin-crashdetect",
+    "resources": [
+        {
+            "name": "^crashdetect-(.*)-linux.tar.gz$",
+            "platform": "linux",
+            "archive": true,
+            "includes": ["crashdetect-(.*)-linux"],
+            "plugins": ["crashdetect-(.*)-linux/crashdetect.so"]
+        },
+        {
+            "name": "^crashdetect-(.*)-win32.zip$",
+            "platform": "windows",
+            "archive": true,
+            "includes": ["crashdetect-(.*)-win32"],
+            "plugins": ["crashdetect-(.*)-win32/crashdetect.dll"]
+        }
+    ],
+    "runtime": {
+        "plugins": ["AmyrAhmady/samp-plugin-crashdetect"]
+    },
+    "contributors": [
+        "Zeex",
+        "Y-Less",
+        "AmyrAhmady"
+    ]
+}
